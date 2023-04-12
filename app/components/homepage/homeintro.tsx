@@ -199,7 +199,6 @@ const Market = () => {
     </>
   );
 };
-
 const PowerfullInf = () => {
   return (
     <>

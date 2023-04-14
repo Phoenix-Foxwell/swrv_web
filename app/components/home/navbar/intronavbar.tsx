@@ -14,7 +14,7 @@ export const IntroNavBar = () => {
                     <div className="mr-4 grid place-items-center md:hidden cursor-pointer" onClick={() => { changMenu(!isOpen) }}>
                         <FontAwesomeIcon className="text-lg text-primary text-center font-bold" icon={isOpen ? faRemove : faBars}></FontAwesomeIcon>
                     </div>
-                    <div className='grid place-items-center'>
+                    <div className='grid place-items-center mr-10'>
                         <NavLink to={"/"}>
                             <img src="/images/swrvlogo.png" className="w-32 lg:w-38" />
                         </NavLink>

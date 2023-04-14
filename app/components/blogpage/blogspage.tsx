@@ -16,7 +16,7 @@ const BlogsIntro = (props: BlogsIntroProps) => {
                     <BigBlogCard title="Swupnil Sahai and his co‑founder serve an ace with AI‑powered SwingVision" time="May 26, 2022" imageUrl="./images/blogs/blog4.png" ></BigBlogCard>
                     <BigBlogCard title="App Store stopped nearly $1.5 billion in fraudulent transactions in 2021" time="May 26, 2022" imageUrl="./images/blogs/blog5.png" ></BigBlogCard>
 
-                    <div className="grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 justify-center mt-32">
+                    <div className="grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 justify-center mt-32 gap-y-8">
                         {
                             props.blogdata.map((val: any, index: number) => {
                                 return (
@@ -32,7 +32,7 @@ const BlogsIntro = (props: BlogsIntroProps) => {
 
                     <BigBlogCard title="Swupnil Sahai and his co‑founder serve an ace with AI‑powered SwingVision" background="bg-[#ADADAD]" time="May 26, 2022" imageUrl="./images/blogs/blog6.png" textColor="text-white"></BigBlogCard>
                     <BigBlogCard title="App Store stopped nearly $1.5 billion in fraudulent transactions in 2021" background="bg-[#ADADAD]" time="May 26, 2022" imageUrl="./images/blogs/blog7.png" textColor="text-white"></BigBlogCard>
-                    <div className="grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 justify-center my-10">
+                    <div className="grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 justify-center my-10 gap-y-8">
                         {
                             props.blogdata.map((val: any, index: number) => {
                                 return (

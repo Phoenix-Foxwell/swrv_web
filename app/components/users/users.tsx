@@ -20,14 +20,14 @@ const UsersPage = (props: UserPageProps) => {
                 <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mb-10  py-8">
                     <h3 className="text-primary text-3xl font-bold">Some popular faces</h3>
                     <div className="h-[1px] bg-gray-600 w-full my-2"></div>
-                    <div className="grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 justify-center place-items-center">
+                    <div className="grid xl:grid-cols-3 grid-cols-1 lg:grid-cols-2 justify-center place-items-center gap-y-4">
                         {
                             props.userdata.map((val: any, index: number) => {
                                 let image = (val.pic == null || val.pic == undefined || val.pic == "" || val.pic == "0") ? "/images/avatar/user.png" : val.pic
 
                                 return (
                                     index < 6 ?
-                                        <div key={index}>
+                                        <div key={index} className="w-full h-full">
                                             <UserCard name={val.userName.toString().split("@")[0]} description={val.bio} imageUrl={image}></UserCard>
                                         </div> :
                                         <div key={index}></div>
@@ -51,8 +51,8 @@ type UserCardProps = {
 export const UserCard = (props: UserCardProps) => {
     return (
         <>
-            <div className={`w-64 text-left shadow-xl rounded-xl pb-4 m-4`}>
-                <img src={props.imageUrl} alt="err" className="w-full h-56 object-cover object-top" />
+            <div className={`w-64 text-left shadow-xl rounded-xl pb-4 m-4 h-full`}>
+                <img src={props.imageUrl} alt="err" className="w-full h-56 object-cover object-top rounded-t-md" />
                 <h1 className="text-xl font-bold text-primary text-center mt-2">{props.name}</h1>
                 <h1 className="text-xs font-semibold text-primary text-left px-4">{props.description}</h1>
             </div>

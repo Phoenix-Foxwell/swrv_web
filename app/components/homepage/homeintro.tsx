@@ -4,17 +4,22 @@ import { CategoryCard } from "../utils/categorycard";
 import { BlogsCard } from "../utils/blogscard";
 import { DownloadApp } from "../utils/downloadapp";
 import { Link } from "@remix-run/react";
-export const HomeIntro = () => (
+type HomeIntroProps = {
+  blogdata: any[];
+};
+export const HomeIntro: React.FC<HomeIntroProps> = (
+  props: HomeIntroProps
+): JSX.Element => (
   <>
     <div className="w-full px-6 sm:px-16">
       <HomeFirst></HomeFirst>
       <RelatatinoAndTrust></RelatatinoAndTrust>
       <Market></Market>
-      <Marketing></Marketing>
       <PowerfullInf></PowerfullInf>
       <ExploreCategory></ExploreCategory>
       <JoinSwrv></JoinSwrv>
-      <Blogs></Blogs>
+      <Marketing></Marketing>
+      <Blogs blogdata={props.blogdata}></Blogs>
     </div>
   </>
 );
@@ -29,7 +34,7 @@ const RelatatinoAndTrust = () => {
         <h3 className="text-secondary text-3xl font-bold">
           brands and creatives.
         </h3>
-        <p className="text-black text-md font-normal">
+        <p className="text-gray-500 text-md font-normal">
           Our mission is to Make Waves, which stems from the fact that our
           creators tell stories that foster human relationships and generate
           waves of influence. These waves of influence create our data layers,
@@ -238,10 +243,10 @@ const Marketing = () => {
     <>
       <div className="bg-[#EFEFEF] w-full my-10 rounded-xl md:p-0 p-6">
         <div className=" py-4 w-full md:w-3/5 lg:w-4/6   mx-auto">
-          <h3 className="text-primary text-4xl font-bold">
+          <h3 className="text-primary text-4xl font-bold mt-20">
             We assist the influencer marketing sector in
           </h3>
-          <h3 className="text-secondary text-4xl font-bold">
+          <h3 className="text-secondary text-4xl font-bold mb-10">
             becoming more efficient.
           </h3>
           <h3 className="text-gray-500 text-md font-normal mt-4">
@@ -266,9 +271,7 @@ const Marketing = () => {
             We learned in September 2015 that numerous firms may utilise the
             same IT platform and save a lot of money. Furthermore, unified IT
             development is a critical business enabler for the industry's
-            expansion. SWRV was conceived as an idea. SWRV has grown to include
-            members from Europe, Asia, Australia, and the United States since
-            its inception in March 2018.
+            expansion. SWRV was conceived as an idea.
           </h3>
 
           <DownloadApp></DownloadApp>
@@ -365,23 +368,28 @@ const JoinSwrv = () => {
             </Link>
           </div>
         </div>
-        <h3 className="text-gray-600 text-lg font-semibold">SWRV market</h3>
-        <h3 className="text-gray-500 text-md font-normal">
-          SWRV Market is SWRV's entire influencer marketing soluction. The whole
-          campaign flow - discorvery. activation, tracking, payouts, and more -
-          is supported by our influencer marketing platform. Users have access
-          to complete automation and a transaction-base business model that is
-          avaliable to any brand or purchasing agency for free.
-          <br />
-          SWRV is a free assistance programme that may help you grow faster and
-          get a competitver advantage.
+        <h3 className="text-gray-600 text-lg font-semibold">
+          Time and money are saved.
+        </h3>
+        <h3 className="text-gray-500 text-md font-normal w-4/5">
+          The expense of using analytic tools to find and evaluate millions of
+          influencers is prohibitive. Manual processes are significantly more
+          expensice. We can save you time and money by using automatic
+          procedures. However, Establishing in-house solutions to asssist
+          current influencer marketing it time-consuming and costly. SWRV exists
+          for this reason.
         </h3>
       </div>
     </>
   );
 };
 
-const Blogs = () => {
+type BlogIntroProps = {
+  blogdata: any[];
+};
+const Blogs: React.FC<BlogIntroProps> = (
+  props: BlogIntroProps
+): JSX.Element => {
   return (
     <>
       <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
@@ -397,8 +405,21 @@ const Blogs = () => {
         <div className="h-[1px] bg-black w-full my-2"></div>
       </div>
 
-      <div className="grid place-items-center gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6 items-start gap-y-6">
-        <BlogsCard
+      <div className="grid place-items-center gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-6 items-start gap-y-6">
+        {props.blogdata.map((val: any, index: number) => {
+          return index < 5 ? (
+            <Link key={index} to={`/blogs/bloginfo/${val.id}`}>
+              <BlogsCard
+                title={`${val.shortDesc.toString().substring(0, 50)}...`}
+                time={val.dateTime}
+                imageUrl={val.imageUrl}
+              ></BlogsCard>
+            </Link>
+          ) : (
+            <div key={index}></div>
+          );
+        })}
+        {/* <BlogsCard
           title="App Store stopped nearly $1.5 billion in fraudulent transactions in 2021"
           time="June 1, 2022"
           imageUrl="/images/blogs/blog5.png"
@@ -422,7 +443,7 @@ const Blogs = () => {
           title="From farm to sea: Conserving mangroves to protect local livelihoods and the planet"
           time="June 1, 2022"
           imageUrl="/images/blogs/blog1.png"
-        ></BlogsCard>
+        ></BlogsCard> */}
       </div>
     </>
   );

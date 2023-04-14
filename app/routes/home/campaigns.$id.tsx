@@ -15,6 +15,7 @@ import { BaseUrl } from "~/const";
 import { useLoaderData } from "@remix-run/react";
 import { UploadFile, getCampaignType } from "~/utils";
 import { userPrefs } from "~/cookies";
+import { pdf } from "remix-utils";
 
 enum AcceptRequest {
   None,
@@ -1401,25 +1402,28 @@ const CreateDraft = (props: CreateDraftProps) => {
                   setError("Write the description.");
                 }
                 const pdfurl = await UploadFile(pdfFile!);
-
-                let req = {
-                  campaignId: props.champaingId,
-                  influencerId: props.influencerId,
-                  handleId: platform,
-                  publishAt: datepicker.current?.value,
-                  attach01: pdfurl,
-                  description: descraption.current?.value,
-                };
-                const data = await axios({
-                  method: "post",
-                  url: `${BaseUrl}/api/add-draft`,
-                  data: req,
-                });
-                if (data.data.status == false) {
-                  return setError(data.data.message);
+                if (pdfurl.status) {
+                  let req = {
+                    campaignId: props.champaingId,
+                    influencerId: props.influencerId,
+                    handleId: platform,
+                    publishAt: datepicker.current?.value,
+                    attach01: pdfurl.data,
+                    description: descraption.current?.value,
+                  };
+                  const data = await axios({
+                    method: "post",
+                    url: `${BaseUrl}/api/add-draft`,
+                    data: req,
+                  });
+                  if (data.data.status == false) {
+                    return setError(data.data.message);
+                  } else {
+                    setError(null);
+                    return setCreatebox(false);
+                  }
                 } else {
-                  setError(null);
-                  return setCreatebox(false);
+                  setError(pdfurl.data);
                 }
               }}
               className="text-white bg-primary rounded-lg w-full text-center py-2 font-semibold text-md mt-2"

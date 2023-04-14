@@ -2,8 +2,10 @@ import { Link, NavLink, useNavigate } from "@remix-run/react";
 import {
   faBars,
   faBell,
+  faBinoculars,
   faCircleQuestion,
   faEnvelope,
+  faEnvelopeOpen,
   faFolder,
   faHandHoldingDollar,
   faHeart,
@@ -12,6 +14,8 @@ import {
   faRemove,
   faRightFromBracket,
   faSearch,
+  faUserGroup,
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDraft2digital } from "@fortawesome/free-brands-svg-icons";
@@ -115,7 +119,7 @@ export const MainNavBar = (props: MainNavBarProps) => {
                   title="Find campaigns"
                   isOpen={true}
                   isActive={currentPage == SideBarTabs.FindCampaigns}
-                  icon={faSearch}
+                  icon={faBinoculars}
                 ></NavTab>
               </Link>
               <Link
@@ -129,7 +133,7 @@ export const MainNavBar = (props: MainNavBarProps) => {
                   title="Inbox"
                   isOpen={true}
                   isActive={currentPage == SideBarTabs.Inbox}
-                  icon={faEnvelope}
+                  icon={faEnvelopeOpen}
                 ></NavTab>
               </Link>
               {props.isBrand ? null : (
@@ -178,7 +182,7 @@ export const MainNavBar = (props: MainNavBarProps) => {
                   title="Invite"
                   isOpen={true}
                   isActive={currentPage == SideBarTabs.Invite}
-                  icon={faPeopleLine}
+                  icon={faUserGroup}
                 ></NavTab>
               </Link>
               <Link
@@ -264,9 +268,9 @@ const MainNavRight = (props: MainNavRightProps) => {
           <Notification></Notification>
         </div>
         <div className="h-8 mx-4 bg-primary w-[2px]"> </div>
-        <div className="">
+        <div className="flex items-center">
           <p className="text-left text-md text-black font-normal">{name}</p>
-          <p className="text-left text-xs text-black font-normal">{role}</p>
+          {/* <p className="text-left text-xs text-black font-normal">{role}</p> */}
         </div>
         <div className="mx-2">
           <img

@@ -7,7 +7,7 @@ export const Footer = () => {
     return (
         <>
             <footer className="w-full grid place-items-center  bg-primary py-8 md:py-20 px-6 sm:px-16">
-                <div className="w-full md:w-4/5 lg:w-4/6 flex flex-col md:flex-row border-b-2 border-gray-200 pb-4 mb-4">
+                <div className="w-full md:w-4/5 lg:w-4/5 flex flex-col md:flex-row border-b-2 border-gray-200 pb-4 mb-4">
                     <div className="grow">
                         <h1 className="text-white text-3xl font-semibold text-center md:text-left">SWRV</h1>
                         <h3 className="text-white text-md font-normal text-center md:text-left">© {year} SWRV Licensing AB - All rights reserved.</h3>

@@ -151,41 +151,17 @@ const Step6 = () => {
     const id = data.data.data["id"];
 
     const pdfurl = await UploadFile(pdfFile[0]);
-
-    const pdfref: { [key: string]: string } = {
-      campaignId: id,
-      title: `attachemtn${id}`,
-      url: pdfurl,
-    };
-
-    await axios({
-      method: "post",
-      url: `${BaseUrl}/api/add-campaign-attachment`,
-      data: pdfref,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Options": "*",
-        "Access-Control-Allow-Methods": "*",
-        "X-Content-Type-Options": "*",
-        "Content-Type": "application/json",
-        Accept: "*",
-      },
-    });
-
-    for (let i: number = 0; i < image.length; i++) {
-      const imgurl = await UploadFile(image[i]);
-
-      const imgref: { [key: string]: string } = {
+    if (pdfurl.status) {
+      const pdfref: { [key: string]: string } = {
         campaignId: id,
-        title: `moodboard${id}${i}`,
-        url: imgurl,
+        title: `attachemtn${id}`,
+        url: pdfurl.data,
       };
 
       await axios({
         method: "post",
         url: `${BaseUrl}/api/add-campaign-attachment`,
-        data: imgref,
+        data: pdfref,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Headers": "*",
@@ -196,9 +172,38 @@ const Step6 = () => {
           Accept: "*",
         },
       });
-    }
 
-    navigator("/home");
+      for (let i: number = 0; i < image.length; i++) {
+        const imgurl = await UploadFile(image[i]);
+        if (imgurl.status) {
+          const imgref: { [key: string]: string } = {
+            campaignId: id,
+            title: `moodboard${id}${i}`,
+            url: imgurl.data,
+          };
+
+          await axios({
+            method: "post",
+            url: `${BaseUrl}/api/add-campaign-attachment`,
+            data: imgref,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Headers": "*",
+              "Access-Control-Allow-Options": "*",
+              "Access-Control-Allow-Methods": "*",
+              "X-Content-Type-Options": "*",
+              "Content-Type": "application/json",
+              Accept: "*",
+            },
+          });
+        } else {
+          setError(imgurl.data);
+        }
+      }
+      navigator("/home");
+    } else {
+      setError(pdfurl.data);
+    }
   }
   return (
     <>

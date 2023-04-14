@@ -13,7 +13,7 @@ type BrandCardProps = {
 export const BrandCard = (props: BrandCardProps) => {
     return (
         <>
-            <div className="bg-white rounded-xl shadow-xl p-4 w-64 my-2">
+            <div className="bg-white rounded-xl shadow-xl p-4 w-64">
                 <div className="flex items-end gap-x-3">
                     <div>
                         <img src={props.image} alt="error" className="object-cover w-16 h-16 rounded" />

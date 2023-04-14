@@ -165,7 +165,7 @@ const Intro = () => {
           Reach the next billion
         </h1>
       </div>
-      <ScrollContainer className="flex gap-6 items-center mb-6 overflow-x-scroll no-scrollbar">
+      <ScrollContainer className="flex gap-6 items-center mb-6 overflow-x-scroll no-scrollbar mt-6">
         {data.map((val: any, index: number) => {
           return (
             <div
@@ -213,8 +213,8 @@ const EarnSection = () => {
 const SponsoredPosts = () => {
   return (
     <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
-        <div className="w-60 shadow-xl   rounded-xl text-xl font-bold text-black p-2 my-4">
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14">
+        <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
           {" "}
           <FontAwesomeIcon
             icon={faHeart}
@@ -222,8 +222,9 @@ const SponsoredPosts = () => {
           ></FontAwesomeIcon>{" "}
           Sponsored Posts{" "}
         </div>
-        <div className="grid place-items-center md:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="flex gap-x-10 flex-wrap">
           <CampaginCard
+            title="name"
             id="55"
             weburl="www.adidas.com"
             platforms={[
@@ -238,6 +239,7 @@ const SponsoredPosts = () => {
           ></CampaginCard>
           <CampaginCard
             id="55"
+            title="name"
             weburl="www.adidas.com"
             platforms={[
               "/images/media/instagram.png",
@@ -251,6 +253,7 @@ const SponsoredPosts = () => {
           ></CampaginCard>
           <CampaginCard
             id="55"
+            title="name"
             weburl="www.adidas.com"
             platforms={[
               "/images/media/instagram.png",
@@ -264,6 +267,7 @@ const SponsoredPosts = () => {
           ></CampaginCard>
           <CampaginCard
             id="55"
+            title="name"
             weburl="www.adidas.com"
             platforms={[
               "/images/media/instagram.png",
@@ -320,12 +324,13 @@ const NewCampaign = () => {
             <div key={index}>
               <CampaginCard
                 id={val.id}
-                weburl="www.adidas.com"
+                title={val["name"]}
+                weburl={val.brand.webUrl}
                 platforms={platforms}
                 maxval={val.costPerPost.split(".")[0]}
                 category={campaignType}
                 image={image}
-                name={val.name}
+                name={val.brand.name}
                 currency={val["currency"]["code"]}
               ></CampaginCard>
             </div>
@@ -339,8 +344,8 @@ const NewCampaign = () => {
 
   return (
     <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
-        <div className="w-60 shadow-xl rounded-xl text-xl font-bold text-black p-2 my-4">
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14">
+        <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
           {" "}
           <FontAwesomeIcon
             icon={faIdBadge}
@@ -348,9 +353,7 @@ const NewCampaign = () => {
           ></FontAwesomeIcon>{" "}
           New Campaign{" "}
         </div>
-        <div className="grid grid-cols-1  place-items-center lgna khar:place-items-start  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {campaignCards}
-        </div>
+        <div className="flex gap-x-10 flex-wrap">{campaignCards}</div>
       </div>
     </>
   );
@@ -380,8 +383,8 @@ const TopBrands = () => {
   }, []);
   return (
     <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
-        <div className="w-60 shadow-xl rounded-xl text-xl font-bold text-black p-2 my-4">
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14">
+        <div className="w-60  rounded-xl text-xl font-bold text-black my-4">
           {" "}
           <FontAwesomeIcon
             icon={faStar}
@@ -389,7 +392,7 @@ const TopBrands = () => {
           ></FontAwesomeIcon>{" "}
           Top brands{" "}
         </div>
-        <div className="grid grid-cols-1 place-items-center lg:place-items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="flex gap-x-10 flex-wrap gap-y-6">
           {topBrands.map((val: any, index: number) => {
             return (
               <div key={index}>
@@ -446,7 +449,7 @@ const TopInfluencer = () => {
           ></FontAwesomeIcon>{" "}
           Top influencer{" "}
         </div>
-        <div className="grid gap-4 grid-col-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 place-items-center ">
+        <div className="flex gap-x-10 flex-wrap">
           {topInfluencer.map((val: any, index: number) => {
             const avatar =
               val["pic"] == "0" ||

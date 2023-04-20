@@ -48,7 +48,7 @@ const UserDrafts = () => {
                         <div>
                             <p className="text-md font-medium">User Created draft</p>
                             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
-                            <div className="grid mt-4 place-items-center lg:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            <div className="flex gap-8 flex-wrap">
                                 {
                                     resDarft.map((val: any, index: number) => {
                                         let image = val["brand"].length == 0 || val["brand"] == undefined || val["brand"] == null || val["brand"] == "" ? "/images/avatar/user.png" : val["brand"]["logo"] == "0" || val["brand"]["logo"] == undefined || val["brand"]["logo"] == null || val["brand"]["logo"] == "" ? "/images/avatar/user.png" : val["brand"]["logo"];

@@ -48,7 +48,7 @@ const TopInfluencerCard = (props: TopInfluencerCardProps) => {
     };
     return (
         <>
-            <div className="bg-white rounded-xl shadow-xl w-64 my-2">
+            <div className="bg-white rounded-xl shadow-xl w-64 my-2 h-full flex flex-col">
                 <img src={props.image} alt="error" className="w-full h-40 object-cover rounded-t-md" />
                 {/* <div className="flex gap-1 -translate-y-5 pl-4">
                     <div className="border p-1 bg-white border-blue-500 rounded-full">
@@ -58,6 +58,7 @@ const TopInfluencerCard = (props: TopInfluencerCardProps) => {
                         <img src="/images/media/youtube.png" alt="error" className="w-6 h-6 rounded-full" />
                     </div>
                 </div> */}
+                <div className="grow"></div>
                 <div className="px-4 pb-2">
                     <div className="flex items-start my-2 justify-between">
                         <div className="grow">

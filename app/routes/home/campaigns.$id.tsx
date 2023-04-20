@@ -12,7 +12,7 @@ import { Completed, Connection, Rating } from "./brand.$id";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import axios from "axios";
 import { BaseUrl } from "~/const";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { UploadFile, getCampaignType } from "~/utils";
 import { userPrefs } from "~/cookies";
 import { pdf } from "remix-utils";
@@ -27,6 +27,7 @@ enum AcceptRequest {
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const platform = await axios.post(`${BaseUrl}/api/getplatform`);
   const id = props.params.id;
+
   const campaigndata = await axios.post(
     `${BaseUrl}/api/campaign-search`,
     { id: id },
@@ -42,8 +43,10 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
       },
     }
   );
+
   const cookieHeader = props.request.headers.get("Cookie");
   const cookie = await userPrefs.parse(cookieHeader);
+
   return json({
     campaign: campaigndata.data.data[0],
     user: cookie.user,
@@ -76,6 +79,9 @@ const Campaigns = () => {
 
   const [requestdata, setRequestdata] = useState<any[]>([]);
 
+  const [brandConnection, setBarndConnection] = useState<number>(0);
+  const [brandComCam, setBarndComCam] = useState<number>(0);
+
   const init = async () => {
     setCategory(await getCampaignType(champaign.campaignTypeId));
 
@@ -98,15 +104,34 @@ const Campaigns = () => {
     } else {
       setAcceptreq(AcceptRequest.None);
     }
+
+    //brand connection
+    const reqdata1 = await axios.post(`${BaseUrl}/api/get-brand-connection`, {
+      brandId: champaign.brand.id,
+    });
+    if (reqdata.data.status) {
+      setBarndConnection(reqdata1.data.data.influencer_count);
+    } else {
+      setBarndConnection(0);
+    }
+
+    //brand completed compaign
+    const reqdata2 = await axios.post(`${BaseUrl}/api/get-brand-com-cam`, {
+      brandId: champaign.brand.id,
+    });
+    if (reqdata2.data.status) {
+      setBarndComCam(reqdata2.data.data.completed_campaign);
+    } else {
+      setBarndComCam(0);
+    }
   };
   useEffect(() => {
     init();
   }, []);
 
-  const [paymentBox, setPaymentBox] = useState<boolean>(false);
-  const [paymentError, setPaymentError] = useState<String>("");
-  const paymentRef = useRef<HTMLInputElement>(null);
-
+  // const [paymentBox, setPaymentBox] = useState<boolean>(false);
+  // const [paymentError, setPaymentError] = useState<String>("");
+  // const paymentRef = useRef<HTMLInputElement>(null);
   return (
     <>
       <div className="grid gap-y-4 lg:gap-4 grid-cols-1 lg:grid-cols-7 mt-4 justify-start align-top content-start place-items-start place-content-start">
@@ -115,6 +140,9 @@ const Campaigns = () => {
           name={brandname}
           website={champaign.brand.website}
           info={champaign.brand.info}
+          rate="3"
+          connection={brandConnection.toString()}
+          completed={brandComCam.toString()}
         ></BrandInfo>
         <CampaignsInfo
           dont={champaign.donts}
@@ -172,157 +200,30 @@ const Campaigns = () => {
 
       {acceptreq == AcceptRequest.Accepted ? (
         <>
-          <div className="flex gap-4 flex-col lg:flex-row mt-8">
-            <div className="grow flex-1">
+          <div className="flex gap-4 flex-col lg:flex-row mt-8 flex-wrap justify-evenly">
+            <div className="w-96">
               <CreateDraft
                 influencerId={userId}
                 champaingId={champaign.id}
                 platforms={data.platform}
               ></CreateDraft>
             </div>
-            <div className="grow flex-1">
+            <div className="w-96">
               <p className="text-md text-primary font-semibold py-1">
                 Live campaigns
               </p>
               <div className="w-full h-[1px] bg-slate-300"></div>
-              <div className="bg-white rounded-md p-4 mt-2">
-                <div className="flex">
-                  <img
-                    src="/images/media/facebook.png"
-                    alt="error"
-                    className="h-10 w-10 shrink-0"
-                  />
-                  <div className="ml-4">
-                    <p className="text-primary text-sm font-semibold text-left">
-                      Ivankbfc_Blasters
-                    </p>
-                    <p className="text-primary text-sm font-normal text-left">
-                      Publish date: Today
-                    </p>
-                  </div>
-                </div>
-                <button className="mt-4 text-md w-full text-black font-semibold bg-[#F7941D] rounded-md shadow-lg py-1">
-                  Link campaign
-                </button>
-              </div>
-              <div className="bg-white rounded-md p-4 mt-2">
-                <div className="flex">
-                  <img
-                    src="/images/media/instagram.png"
-                    alt="error"
-                    className="h-10 w-10 shrink-0"
-                  />
-                  <div className="ml-4">
-                    <p className="text-primary text-sm font-semibold text-left">
-                      Ivankbfc_Blasters
-                    </p>
-                    <p className="text-primary text-sm font-normal text-left">
-                      Publish date: 30-01-2022
-                    </p>
-                  </div>
-                </div>
-                <button className="mt-4 text-md w-full text-black font-semibold bg-[#F7941D] rounded-md shadow-lg py-1">
-                  View insight
-                </button>
-              </div>
-            </div>
-            <div className="grow flex-1">
-              <p className="text-md text-primary font-semibold py-1">
-                Payments
-              </p>
-              <div className="w-full h-[1px] bg-slate-300"></div>
-
-              <div className="rounded-xl shadow-xl bg-white p-4 w-full mt-2">
-                <div className="flex">
-                  <FontAwesomeIcon
-                    icon={faCoins}
-                    className="text-xl text-primary"
-                  ></FontAwesomeIcon>
-                  <h2 className="text-xl text-primary font-medium px-4">
-                    Budget
-                  </h2>
-                  <div className="grow"></div>
-                  <p className="text-md font-bold text-black">6420 USD</p>
-                </div>
-                <div className="h-[1px] bg-gray-500 w-full my-2 "></div>
-                <div className="flex my-2">
-                  <p className="text-md text-primary">Received</p>
-                  <div className="grow"></div>
-                  <p className="text-md font-normal text-black">2700 USD</p>
-                </div>
-                <div className="flex my-2">
-                  <p className="text-md text-primary">Pending</p>
-                  <div className="grow"></div>
-                  <p className="text-md font-normal text-black">3540 USD</p>
-                </div>
-              </div>
-              <div className="p-4 bg-white mt-2 rounded-md">
-                <p className="text-normal font-semibold py-1 text-primary text-lg">
-                  Payment request
-                </p>
-                <button
-                  onClick={() => {
-                    setPaymentBox(true);
-                  }}
-                  className={`text-black bg-[#01FFF4] rounded-lg w-full text-center py-2 font-semibold text-md mt-2 ${
-                    paymentBox ? "hidden" : ""
-                  }`}
-                >
-                  Request
-                </button>
-                <div className={`${paymentBox ? "" : "hidden"}`}>
-                  <div className="flex gap-x-4">
-                    <p>Enter Amount : </p>{" "}
-                    <div>
-                      <input
-                        ref={paymentRef}
-                        type="number"
-                        className="text-black outline-none border-none rounded-md py-1 px-2 bg-gray-300 w-full"
-                      />
-                    </div>
-                  </div>
-                  {paymentError == "" ||
-                  paymentError == null ||
-                  paymentError == undefined ? null : (
-                    <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
-                      {paymentError}
-                    </div>
-                  )}
-                  <button
-                    onClick={async () => {
-                      if (
-                        paymentRef.current?.value == null ||
-                        paymentRef.current?.value == undefined ||
-                        paymentRef.current?.value == ""
-                      ) {
-                        setPaymentError("Enter the amount");
-                      } else {
-                        let req = {
-                          userId: userId,
-                          campaignId: champaign.id,
-                          amtReq: paymentRef.current?.value,
-                        };
-                        const paymentdata = await axios.post(
-                          `${BaseUrl}/api/new-pay-request`,
-                          req
-                        );
-                        if (!paymentdata.data.status)
-                          return setPaymentError(paymentdata.data.message);
-                        return setPaymentBox(false);
-                      }
-                    }}
-                    className={`text-black bg-[#01FFF4] rounded-lg w-full text-center py-2 font-semibold text-md mt-2`}
-                  >
-                    Request Payment
-                  </button>
-                </div>
+              <div>
+                <LinkCampaign
+                  userId={userId}
+                  campaingid={champaign.id}
+                  brandId={champaign.brand.id}
+                  cpp={champaign.costPerPost}
+                />
               </div>
             </div>
           </div>
-          <UserCreatedDrafts
-            userId={userId}
-            campaingid={champaign.id}
-          ></UserCreatedDrafts>
+          <UserCreatedDrafts userId={userId} campaingid={champaign.id} />
         </>
       ) : null}
 
@@ -357,6 +258,9 @@ type BrandInfoProps = {
   name: string;
   website: string;
   info: string;
+  rate: string;
+  connection: string;
+  completed: string;
 };
 
 const BrandInfo = (props: BrandInfoProps) => {
@@ -386,11 +290,11 @@ const BrandInfo = (props: BrandInfoProps) => {
           {props.info}
         </p>
         <div className="h-4"></div>
-        <Rating />
+        <Rating rate={props.rate} />
         <div className="h-4"></div>
-        <Connection />
+        <Connection connection={props.connection} />
         <div className="h-4"></div>
-        <Completed />
+        <Completed completed={props.completed} />
       </div>
     </>
   );
@@ -890,7 +794,7 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
           <div>
             <p className="text-md font-medium">Requested Invites</p>
             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
-            <div className="grid mt-4 place-items-center md:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="flex flex-wrap gap-6">
               {resinvite.map((val: any, index: number) => {
                 return (
                   <div
@@ -1113,7 +1017,7 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
           <div>
             <p className="text-md font-medium">Requested drafts</p>
             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
-            <div className="grid mt-4 place-items-center md:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="flex flex-wrap gap-6">
               {resinvite.map((val: any, index: number) => {
                 return (
                   <div
@@ -1486,7 +1390,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
           <div>
             <p className="text-md font-medium">Requested Invites</p>
             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
-            <div className="grid mt-4 place-items-center md:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="flex flex-wrap gap-6">
               {respayment.map((val: any, index: number) => {
                 return (
                   <div
@@ -1561,7 +1465,7 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
           <div>
             <p className="text-md font-medium">User Created draft</p>
             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
-            <div className="grid mt-4 place-items-center lg:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="flex flex-wrap gap-6">
               {resDarft.map((val: any, index: number) => {
                 return (
                   <div
@@ -1612,6 +1516,153 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
           </div>
         )}
       </div>
+    </>
+  );
+};
+
+type LinkCampaignProps = {
+  campaingid: string;
+  userId: string;
+  brandId: string;
+  cpp: string;
+};
+
+const LinkCampaign: React.FC<LinkCampaignProps> = (
+  props: LinkCampaignProps
+): JSX.Element => {
+  const [resDarft, setResDarft] = useState<any[]>([]);
+  const [linkBox, setLinkBox] = useState<boolean[]>([]);
+  const [errors, setError] = useState<string[]>([]);
+  const [linkValue, setLinkValue] = useState<string[]>(
+    Array(resDarft.length).fill("")
+  );
+
+  const init = async () => {
+    let req = {
+      search: {
+        fromUser: props.userId,
+        campaign: props.campaingid,
+        influencer: props.userId,
+        status: 3,
+      },
+    };
+    const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
+    if (responseData.data.status == true) {
+      setResDarft(responseData.data.data);
+    }
+    setLinkBox(Array(responseData.data.data.length).fill(false));
+    setError(Array(responseData.data.data.length).fill(""));
+    setLinkValue(Array(responseData.data.data.length).fill(""));
+  };
+
+  const upadteLinkBox = (value: boolean, index: number) => {
+    const updatedLinkBox = [...linkBox];
+    updatedLinkBox[index] = value;
+    setLinkBox(updatedLinkBox);
+  };
+
+  const updateLink = async (index: number) => {
+    const link = linkValue[index];
+    if (link == null || link == undefined || link == "") {
+      const updatedErrors = [...errors];
+      updatedErrors[index] = "Please enter the link";
+      setError(updatedErrors);
+    } else {
+      const responseData = await axios.post(`${BaseUrl}/api/update-draft`, {
+        id: resDarft[index].id,
+        linkCampaign: link,
+      });
+      if (!responseData.data.status) {
+        const updatedErrors = [...errors];
+        updatedErrors[index] = responseData.data.message;
+        setError(updatedErrors);
+      } else {
+        window.location.reload();
+      }
+    }
+  };
+
+  const handleInputChange = (index: number, value: string) => {
+    const updatedLinkValue = [...linkValue];
+    updatedLinkValue[index] = value;
+    setLinkValue(updatedLinkValue);
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+  return (
+    <>
+      {resDarft.length == 0 ? (
+        <div className="bg-white rounded-md p-4 mt-2">
+          <h1 className="text-center font-semibold text-lg">
+            NO Draft are created
+          </h1>
+        </div>
+      ) : null}
+      {resDarft.map((val: any, index: number) => {
+        return (
+          <div className="bg-white rounded-md p-4 mt-2" key={index}>
+            <div className="flex">
+              <img
+                src={val.handle.platform.logo}
+                alt="error"
+                className="h-10 w-10 shrink-0"
+              />
+              <div className="ml-4">
+                <p className="text-primary text-sm font-semibold text-left">
+                  {val.handle.name}
+                </p>
+              </div>
+            </div>
+            {val.linkCampaign == null ||
+            val.linkCampaign == "" ||
+            val.linkCampaign == undefined ? (
+              linkBox[index] ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Enter the link"
+                    className="w-full outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400 mt-4"
+                    value={linkValue[index]}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                  />
+                  {errors[index] == "" ||
+                  errors[index] == null ||
+                  errors[index] == undefined ? null : (
+                    <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2">
+                      {errors[index]}
+                    </div>
+                  )}
+                  <button
+                    onClick={async () => {
+                      await updateLink(index);
+                    }}
+                    className="mt-4 text-md w-full text-black font-semibold bg-[#fbca8e] rounded-md shadow-lg py-1"
+                  >
+                    Link
+                  </button>
+                </>
+              ) : (
+                <button
+                  className="mt-4 text-md w-full text-black font-semibold bg-[#fbca8e] rounded-md shadow-lg py-1"
+                  onClick={() => upadteLinkBox(true, index)}
+                >
+                  Link campaign
+                </button>
+              )
+            ) : (
+              <Link
+                to={`/home/paymentreq/${props.brandId}/${props.campaingid}/${val.id}/${props.cpp}`}
+                className="text-center inline-block mt-4 text-md w-full text-black font-semibold bg-[#fbca8e] rounded-md shadow-lg py-1"
+                onClick={() => upadteLinkBox(true, index)}
+              >
+                View insight
+              </Link>
+            )}
+          </div>
+        );
+      })}
     </>
   );
 };

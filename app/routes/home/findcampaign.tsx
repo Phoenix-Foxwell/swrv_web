@@ -1167,7 +1167,6 @@ const SearchedCampaign = (props: SearchedCampaignProps) => {
               ? "/images/avatar/user.png"
               : val["brand"]["logo"];
           let campaignType = await getCampaignType(val["campaignTypeId"]);
-          console.log(val);
           return (
             <div key={val["id"]} className="h-full">
               <CampaginCard

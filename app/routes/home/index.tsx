@@ -211,81 +211,6 @@ const EarnSection = () => {
 };
 
 const SponsoredPosts = () => {
-  return (
-    <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14">
-        <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
-          {" "}
-          <FontAwesomeIcon
-            icon={faHeart}
-            className="text-md text-secondary"
-          ></FontAwesomeIcon>{" "}
-          Sponsored Posts{" "}
-        </div>
-        <div className="flex gap-x-10 flex-wrap">
-          <CampaginCard
-            title="name"
-            id="55"
-            weburl="www.adidas.com"
-            platforms={[
-              "/images/media/instagram.png",
-              "/images/media/youtube.png",
-            ]}
-            maxval="1500"
-            category="Consumer Electronics"
-            image="/images/brand/adidas.jpg"
-            name="Adidas"
-            currency="USD"
-          ></CampaginCard>
-          <CampaginCard
-            id="55"
-            title="name"
-            weburl="www.adidas.com"
-            platforms={[
-              "/images/media/instagram.png",
-              "/images/media/youtube.png",
-            ]}
-            maxval="2000"
-            category="Consumer Electronics"
-            image="/images/brand/furinicom.jpg"
-            name="Furinicom"
-            currency="USD"
-          ></CampaginCard>
-          <CampaginCard
-            id="55"
-            title="name"
-            weburl="www.adidas.com"
-            platforms={[
-              "/images/media/instagram.png",
-              "/images/media/youtube.png",
-            ]}
-            maxval="3000"
-            category="Consumer Electronics"
-            image="/images/brand/hilton.jpg"
-            name="Hilton"
-            currency="USD"
-          ></CampaginCard>
-          <CampaginCard
-            id="55"
-            title="name"
-            weburl="www.adidas.com"
-            platforms={[
-              "/images/media/instagram.png",
-              "/images/media/youtube.png",
-            ]}
-            maxval="2500"
-            category="Consumer Electronics"
-            image="/images/brand/lucent.jpg"
-            name="Lucent"
-            currency="USD"
-          ></CampaginCard>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const NewCampaign = () => {
   const [topChampaing, setTopChampaing] = useState<any[]>([]);
   const [campaignCards, setCampaignCards] = useState<React.ReactNode[]>([]);
   useEffect(() => {
@@ -332,6 +257,7 @@ const NewCampaign = () => {
                 image={image}
                 name={val.brand.name}
                 currency={val["currency"]["code"]}
+                btntext="View More & Learn"
               ></CampaginCard>
             </div>
           );
@@ -344,8 +270,86 @@ const NewCampaign = () => {
 
   return (
     <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14">
-        <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14 py-8">
+        <div className="w-60 rounded-xl text-xl font-bold text-black p-2">
+          {" "}
+          <FontAwesomeIcon
+            icon={faHeart}
+            className="text-md text-secondary"
+          ></FontAwesomeIcon>{" "}
+          Sponsored Posts{" "}
+        </div>
+        <div className="flex gap-x-10 flex-wrap gap-y-6">{campaignCards}</div>
+      </div>
+    </>
+  );
+};
+
+const NewCampaign = () => {
+  const [topChampaing, setTopChampaing] = useState<any[]>([]);
+  const [campaignCards, setCampaignCards] = useState<React.ReactNode[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const apidata = await axios({
+        method: "post",
+        url: `${BaseUrl}/api/campaign-search`,
+      });
+      setTopChampaing(apidata.data.data);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const createCampaignCards = async () => {
+      let counter = 0;
+      const cards = await Promise.all(
+        topChampaing.map(async (val: any, index: number) => {
+          if (counter >= 5) return null;
+          counter++;
+          let platforms: string[] = [];
+          for (let i: number = 0; i < val["platforms"].length; i++) {
+            platforms.push(val["platforms"][i]["platformLogoUrl"]);
+          }
+          let campaignType = await getCampaignType(val["campaignTypeId"]);
+          let image =
+            val["brand"].length == 0 ||
+            val["brand"] == undefined ||
+            val["brand"] == null ||
+            val["brand"] == ""
+              ? "/images/avatar/user.png"
+              : val["brand"]["logo"] == "0" ||
+                val["brand"]["logo"] == undefined ||
+                val["brand"]["logo"] == null ||
+                val["brand"]["logo"] == ""
+              ? "/images/avatar/user.png"
+              : val["brand"]["logo"];
+          return (
+            <div key={index}>
+              <CampaginCard
+                id={val.id}
+                title={val["campaignName"]}
+                weburl={val.brand.webUrl}
+                platforms={platforms}
+                maxval={val.costPerPost.split(".")[0]}
+                category={campaignType}
+                image={image}
+                name={val.brand.name}
+                currency={val["currency"]["code"]}
+                btntext="View More & Learn"
+              ></CampaginCard>
+            </div>
+          );
+        })
+      );
+      setCampaignCards(cards);
+    };
+    createCampaignCards();
+  }, [topChampaing]);
+
+  return (
+    <>
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14 py-8">
+        <div className="w-60 rounded-xl text-xl font-bold text-black">
           {" "}
           <FontAwesomeIcon
             icon={faIdBadge}
@@ -353,7 +357,7 @@ const NewCampaign = () => {
           ></FontAwesomeIcon>{" "}
           New Campaign{" "}
         </div>
-        <div className="flex gap-x-10 flex-wrap">{campaignCards}</div>
+        <div className="flex gap-x-10 flex-wrap gap-y-6">{campaignCards}</div>
       </div>
     </>
   );
@@ -383,7 +387,7 @@ const TopBrands = () => {
   }, []);
   return (
     <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14">
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14 py-8">
         <div className="w-60  rounded-xl text-xl font-bold text-black my-4">
           {" "}
           <FontAwesomeIcon
@@ -440,8 +444,8 @@ const TopInfluencer = () => {
 
   return (
     <>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
-        <div className="w-60 shadow-xl   rounded-xl text-xl font-bold text-black p-2 my-4">
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4 lg:px-14 py-8">
+        <div className="w-60 rounded-xl text-xl font-bold text-black p-2">
           {" "}
           <FontAwesomeIcon
             icon={faHeart}

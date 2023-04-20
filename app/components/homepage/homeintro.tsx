@@ -4,6 +4,7 @@ import { CategoryCard } from "../utils/categorycard";
 import { BlogsCard } from "../utils/blogscard";
 import { DownloadApp } from "../utils/downloadapp";
 import { Link } from "@remix-run/react";
+import { useState } from "react";
 type HomeIntroProps = {
   blogdata: any[];
 };
@@ -11,7 +12,7 @@ export const HomeIntro: React.FC<HomeIntroProps> = (
   props: HomeIntroProps
 ): JSX.Element => (
   <>
-    <div className="w-full px-6 sm:px-16">
+    <div className="w-full px-2 sm:px-16">
       <HomeFirst></HomeFirst>
       <RelatatinoAndTrust></RelatatinoAndTrust>
       <Market></Market>
@@ -47,7 +48,14 @@ const RelatatinoAndTrust = () => {
         <h3 className="text-primary text-3xl font-bold">Trusted by</h3>
         <div className="h-[1px] bg-black w-full my-2"></div>
       </div>
-      <div className="w-full grid palce-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 text-5xl text-center text-gray-600 gap-x-5 mb-10">
+      <div className="w-full my-6">
+        <img
+          src="/images/avatar/logostrip.png"
+          alt="logos"
+          className="h-[70px] w-[2640px] object-cover object-left-top hover:object-right-top transition-all duration-700"
+        />
+      </div>
+      {/* <div className="w-full grid palce-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 text-5xl text-center text-gray-600 gap-x-5 mb-10">
         <div>
           <h1>OGILVY</h1>
         </div>
@@ -63,7 +71,7 @@ const RelatatinoAndTrust = () => {
         <div>
           <h1>Starbucks</h1>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
@@ -334,6 +342,17 @@ const ExploreCategory = () => {
 };
 
 const JoinSwrv = () => {
+  const [index, setIndex] = useState<number>(0);
+  const title = [
+    "Time and money are saved.",
+    "The new standard.",
+    "SWRV market",
+  ];
+  const description = [
+    "The expense of using analytic tools to find and evaluate millions of influencers is prohibitive. Manual processes are significantly more  expensice. We can save you time and money by using automatic procedures. However, Establishing in-house solutions to asssist current influencer marketing it time-consuming and costly. SWRV exists for this reason.",
+    "Influencer marketing is becoming an important aspec of most companies' marketing strategies. Data-driven decisions are made, and identifying the proper influencers necessitates the use of advanced IT technologies. To be competitive, we need to simplify our procedures as influencer marketing takes a place at the media purchasing table.",
+    "SWRV Market is SWRV's entire influencer marketing solution. The whole campaign flow -- discovery. activation, tracking, payouts, and more - is supported by our influencer marketing platform. Users have access to complete automation and a transaction - based business model  that is available to any brand or purchasing agency for free. SWRV is a free assistance programme that may help you grow faster and get a competitive advantage.",
+  ];
   return (
     <>
       <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
@@ -342,7 +361,7 @@ const JoinSwrv = () => {
           There are no commissions or membership costs for brands or buyer
           agencies.
         </h3>
-        <div className="grid grid-cols-1 lg:grid-cols-3 place-items-center my-6">
+        {/* <div className="grid grid-cols-1 lg:grid-cols-3 place-items-center my-6">
           <div className="w-40 xl:w-60 h-40 m-4">
             <Link to={"/users"}>
               <img
@@ -367,20 +386,93 @@ const JoinSwrv = () => {
               />
             </Link>
           </div>
+        </div> */}
+
+        <div className="w-full hidden lg:block">
+          <div className="flex gap-6 my-6">
+            <img
+              onClick={() => setIndex(0)}
+              src="/images/avatar/clock.jpg"
+              alt="clock"
+              className={`w-72 object-center object-cover rounded-md transition-all ${
+                index == 0 ? "h-60 order-1" : "h-52 order-2"
+              }`}
+            />
+            <img
+              onClick={() => setIndex(1)}
+              src="/images/avatar/laptop.png"
+              alt="laptop"
+              className={`w-72 object-center object-cover rounded-md transition-all ${
+                index == 1 ? "h-60 order-1" : "h-52 order-2"
+              }`}
+            />
+            <img
+              onClick={() => setIndex(2)}
+              src="/images/avatar/media.jpg"
+              alt="media"
+              className={`w-72 object-center object-cover rounded-md transition-all ${
+                index == 2 ? "h-60 order-1" : "h-52 order-2"
+              }`}
+            />
+          </div>
+          <h3 className="text-gray-600 text-lg font-semibold">
+            {title[index]}
+          </h3>
+          <h3 className="text-gray-500 text-md font-normal w-4/5">
+            {description[index]}
+          </h3>
         </div>
-        <h3 className="text-gray-600 text-lg font-semibold">
-          Time and money are saved.
-        </h3>
-        <h3 className="text-gray-500 text-md font-normal w-4/5">
-          The expense of using analytic tools to find and evaluate millions of
+
+        <div className="lg:hidden">
+          <JoinSwrvCard
+            image="/images/avatar/clock.jpg"
+            title="Time and money are saved."
+            description="The expense of using analytic tools to find and evaluate millions of
           influencers is prohibitive. Manual processes are significantly more
           expensice. We can save you time and money by using automatic
           procedures. However, Establishing in-house solutions to asssist
           current influencer marketing it time-consuming and costly. SWRV exists
-          for this reason.
-        </h3>
+          for this reason."
+          ></JoinSwrvCard>
+
+          <JoinSwrvCard
+            image="/images/avatar/laptop.png"
+            title="The new standard."
+            description="Influencer marketing is becoming an important aspec of most companies' marketing strategies. Data-driven decisions are made, and identifying the proper influencers necessitates the use of advanced IT technologies. To be competitive, we need to simplify our procedures as influencer marketing takes a place at the media purchasing table."
+          ></JoinSwrvCard>
+
+          <JoinSwrvCard
+            image="/images/avatar/media.jpg"
+            title="SWRV market"
+            description="SWRV Market is SWRV's entire influencer marketing solution. The whole campaign flow -- discovery. activation, tracking, payouts, and more - is supported by our influencer marketing platform. Users have access to complete automation and a transaction - based business model  that is available to any brand or purchasing agency for free. SWRV is a free assistance programme that may help you grow faster and get a competitive advantage."
+          ></JoinSwrvCard>
+        </div>
       </div>
     </>
+  );
+};
+
+interface JoinSwrvCardProps {
+  title: string;
+  image: string;
+  description: string;
+}
+
+const JoinSwrvCard: React.FC<JoinSwrvCardProps> = (
+  props: JoinSwrvCardProps
+): JSX.Element => {
+  return (
+    <div className="mt-10 mb-6">
+      <img
+        src={props.image}
+        alt="join swrv image"
+        className="w-44 h-44 object-cover object-top rounded-md"
+      />
+      <h3 className="text-gray-600 text-xl font-semibold">{props.title}</h3>
+      <h3 className="text-gray-500 text-md font-normal w-4/5">
+        {props.description}
+      </h3>
+    </div>
   );
 };
 

@@ -123,7 +123,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
                                         <div className="grid place-items-center">
                                             <p className="text-black text-left font-normal text-lg  allign-center">Login with</p>
                                         </div>
-                                        <img src="/images/icons/apple.png" alt="error" className="w-10 h-10" />
+                                        {/* <img src="/images/icons/apple.png" alt="error" className="w-10 h-10" /> */}
                                         <div onClick={async () => {
                                             const googleProvider = new GoogleAuthProvider();
                                             const res = await signInWithPopup(auth, googleProvider);
@@ -147,7 +147,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
                         }
                         {props.message && <p className="w-full border-2 border-red-500 bg-red-500 bg-opacity-5  text-center my-2 rounded-md p-2 text-sm font-semibold text-red-500">{props.message}</p>}
                         <div className="h-4"></div>
-                        <button className="w-full inline black rounded-lg bg-primary shadow-lg text-center font-bold text-white text-md py-2 ">create account</button>
+                        <button className="w-full inline black rounded-lg bg-primary shadow-lg text-center font-bold text-white text-md py-2 ">Create Account</button>
                         <div className="flex gap-4 content-start mt-4">
                             <div>
                                 <input type={"checkbox"} name="check1" />

@@ -5,6 +5,7 @@ import {
   faHeart,
   faSearch,
   faAdd,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CusButton } from "~/components/utils/buttont";
@@ -155,17 +156,62 @@ const CampaignSearch = (props: CampaignSearchProps) => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const camptextsearch = async (searchtext: string) => {
-    champTextSearch!.current!.value = "";
-    if (searchtext == "" || searchtext == null || searchtext == undefined)
-      return setError("Fill the field to start searching");
-    let req = { name: searchtext };
+  const minReachSearch = useRef<HTMLInputElement>(null);
+  const maxReachSearch = useRef<HTMLInputElement>(null);
+  const cppSearch = useRef<HTMLInputElement>(null);
+  const minTargetSearch = useRef<HTMLInputElement>(null);
+  const totalTargetSearch = useRef<HTMLInputElement>(null);
+
+  const camptextsearch = async () => {
+    setError("");
+    let req: any = {
+      active: active ? "1" : "0",
+    };
+
+    if (
+      champTextSearch!.current!.value != null &&
+      champTextSearch!.current!.value != undefined &&
+      champTextSearch!.current!.value != ""
+    )
+      req.name = champTextSearch!.current!.value;
+    if (
+      minReachSearch.current?.value != null &&
+      minReachSearch.current?.value != undefined &&
+      minReachSearch.current?.value != ""
+    )
+      req.minReach = minReachSearch.current?.value;
+    if (
+      maxReachSearch.current?.value != null &&
+      maxReachSearch.current?.value != undefined &&
+      maxReachSearch.current?.value != ""
+    )
+      req.maxReach = maxReachSearch.current?.value;
+    if (
+      cppSearch.current?.value != null &&
+      cppSearch.current?.value != undefined &&
+      cppSearch.current?.value != ""
+    )
+      req.costPerPost = cppSearch.current?.value;
+    if (
+      minTargetSearch.current?.value != null &&
+      minTargetSearch.current?.value != undefined &&
+      minTargetSearch.current?.value != ""
+    )
+      req.minTarget = minTargetSearch.current?.value;
+    if (
+      totalTargetSearch.current?.value != null &&
+      totalTargetSearch.current?.value != undefined &&
+      totalTargetSearch.current?.value != ""
+    )
+      req.totalTarget = totalTargetSearch.current?.value;
+
     const data = await axios.post(`${BaseUrl}/api/campaign-search`, req);
     if (data.data.status == false) return setError(data.data.message);
     setCamSearchResult(data.data.data);
   };
 
   const campadvancesearch = async () => {
+    setError("");
     if (selcategory.length == 0) return setError("Select the category");
     if (selPlatform.length == 0) return setError("Select the pltforms");
     if (selCountry.length == 0) return setError("Select the country");
@@ -230,6 +276,15 @@ const CampaignSearch = (props: CampaignSearchProps) => {
     setFilter(false);
   };
 
+  function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+    const keyCode = event.keyCode || event.which;
+    const keyValue = String.fromCharCode(keyCode);
+    const regex = /^[0-9\b]*$/;
+    if (!regex.test(keyValue)) {
+      event.preventDefault();
+    }
+  }
+
   return (
     <>
       <div>
@@ -237,7 +292,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
           <div className="flex px-2 my-4">
             <h2 className="text-black text-xl text-left font-bold">Filter</h2>
             <div className="grow"></div>
-            {searchType == CampaignSearchMode.AdvanceSearch ? (
+            {searchType == CampaignSearchMode.TextSearch ? (
               <div className="flex gap-x-2">
                 <div className="relative">
                   <button
@@ -321,33 +376,118 @@ const CampaignSearch = (props: CampaignSearchProps) => {
             ) : null}
           </div>
           {/* campaign text search start here */}
-          {searchType == CampaignSearchMode.TextSearch ? (
-            <div className="flex flex-col lg:flex-row">
-              <div className="grid place-items-start lg:place-content-center">
-                <div className="bg-gray-200 rounded-md py-1 px-4 w-full flex items-center">
-                  <FontAwesomeIcon
-                    className="text-gray-600"
-                    icon={faSearch}
-                  ></FontAwesomeIcon>
-                  <input
-                    ref={champTextSearch}
-                    type="text"
-                    className="bg-transparent w-full outline-none py-1 px-2"
-                  />
+          {searchType == CampaignSearchMode.AdvanceSearch ? (
+            <div className="w-full">
+              {/* search options */}
+              <div className="w-full flex flex-wrap gap-6 justify-between">
+                <div className="w-80">
+                  <p className="text-xl font-semibold text-primary">Search</p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={champTextSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Start typing to search.."
+                    />
+                  </div>
+                </div>
+                <div className="w-80">
+                  <p className="text-xl font-semibold text-primary">
+                    Min Reach
+                  </p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={minReachSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Min Reach"
+                      onKeyDown={handleKeyPress}
+                    />
+                  </div>
+                </div>
+                <div className="w-80">
+                  <p className="text-xl font-semibold text-primary">
+                    Max Reach
+                  </p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={maxReachSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Max Reach"
+                      onKeyDown={handleKeyPress}
+                    />
+                  </div>
+                </div>
+                <div className="w-80">
+                  <p className="text-xl font-semibold text-primary">
+                    Cose Par Post
+                  </p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={cppSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Cost Par Post"
+                      onKeyDown={handleKeyPress}
+                    />
+                  </div>
+                </div>
+                <div className="w-80">
+                  <p className="text-xl font-semibold text-primary">
+                    Min Target
+                  </p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={minTargetSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Cost Par Post"
+                      onKeyDown={handleKeyPress}
+                    />
+                  </div>
+                </div>
+                <div className="w-80">
+                  <p className="text-xl font-semibold text-primary">
+                    Total target
+                  </p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={totalTargetSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Cost Par Post"
+                      onKeyDown={handleKeyPress}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="w-8"></div>
+
+              {/* search button */}
               <div className="flex items-center">
+                <div className="flex">
+                  <ReactSwitch
+                    onChange={() => setActive(!active)}
+                    checked={active}
+                    checkedIcon={false}
+                    uncheckedIcon={false}
+                    onColor="#03125E"
+                  ></ReactSwitch>
+                  <p className="text-primary font-bold text-ld ml-2">
+                    Show only active campaigns
+                  </p>
+                </div>
+                <div className="grow"></div>
                 <div
                   className="text-primary text-sm font-semibold cursor-pointer"
                   onClick={() => {
-                    setSearchType(CampaignSearchMode.AdvanceSearch);
+                    setSearchType(CampaignSearchMode.TextSearch);
                   }}
                 >
-                  <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Advanced
+                  <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Normal
                   filter
                 </div>
-                <div className="grow"></div>
+                <div className="w-10"></div>
                 <FontAwesomeIcon
                   onClick={delsearch}
                   className="text-primary text-2xl mx-2"
@@ -356,7 +496,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 <div className="w-4"></div>
                 <div
                   onClick={() => {
-                    camptextsearch(champTextSearch!.current!.value);
+                    camptextsearch();
                   }}
                 >
                   <CusButton
@@ -372,12 +512,12 @@ const CampaignSearch = (props: CampaignSearchProps) => {
           ) : null}
           {/* campaign text search end here */}
           {/* campaign advance search start here */}
-          {searchType == CampaignSearchMode.AdvanceSearch ? (
+          {searchType == CampaignSearchMode.TextSearch ? (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-4">
               <div className="px-2">
                 {/* category start here */}
                 <h1 className="text-primary text-lg font-bold mb">Category</h1>
-                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
+                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 w-full relative">
                   <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                     {selcategory.map((value: any, i: number) => {
                       return (
@@ -396,19 +536,19 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                   <div
                     className="grid place-items-center px-4 bg-gray-300 rounded-lg"
                     onClick={() => {
-                      setcat(true);
+                      setcat(!cat);
                     }}
                   >
-                    <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+                    <FontAwesomeIcon
+                      icon={cat ? faXmark : faAdd}
+                    ></FontAwesomeIcon>
                   </div>
-                </div>
-                <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                    cat ? "" : "hidden"
-                  } grid place-items-center`}
-                >
-                  <div className="bg-white p-10 cursor-pointer">
-                    <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
+                  <div
+                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg ${
+                      cat ? "" : "hidden"
+                    }`}
+                  >
+                    <div className="min-h-80 w-full p-4 overflow-y-scroll no-scrollbar">
                       {category.map((val: any, i: number) => {
                         return (
                           <h1
@@ -424,10 +564,10 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                               setcat(false);
                             }}
                             key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
+                            className={`text-lg text-left text-gray-600 font-semibold cursor-pointer w-full my-2 border-b-2 ${
                               selcategory.includes(val)
                                 ? "border-green-500 text-green-500"
-                                : "border-gray-800 text-black"
+                                : "border-gray-500 text-black"
                             }  no-scrollbar`}
                           >
                             {val["categoryCode"]} - {val["categoryName"]}{" "}
@@ -489,7 +629,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 <p className="text-primary text-left font-bold text-lg">
                   Country
                 </p>
-                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
+                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full relative">
                   <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                     {selCountry.map((value: any, i: number) => {
                       return (
@@ -508,19 +648,20 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                   <div
                     className="grid place-items-center px-4 bg-gray-300 rounded-lg"
                     onClick={() => {
-                      setcon(true);
+                      setcon(!con);
                     }}
                   >
-                    <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+                    <FontAwesomeIcon
+                      icon={con ? faXmark : faAdd}
+                    ></FontAwesomeIcon>
                   </div>
-                </div>
-                <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                    con ? "" : "hidden"
-                  } grid place-items-center`}
-                >
-                  <div className="bg-white p-10 cursor-pointer">
-                    <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
+                  <div
+                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg p-4 ${
+                      con ? "" : "hidden"
+                    }`}
+                  >
+                    {" "}
+                    <div className="min-h-80 overflow-y-scroll no-scrollbar">
                       {country.map((val: any, i: number) => {
                         return (
                           <h1
@@ -536,10 +677,10 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                               setcon(false);
                             }}
                             key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
+                            className={`text-lg text-gray-600 text-left font-semibold  w-full my-2 border-b-2 ${
                               selCountry.includes(val)
                                 ? "border-green-500 text-green-500"
-                                : "border-gray-800 text-black"
+                                : "border-gray-400 text-black"
                             }  no-scrollbar`}
                           >
                             {val["code"]} - {val["name"]}
@@ -554,11 +695,11 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                   <div
                     className="text-primary text-md font-semibold cursor-pointer"
                     onClick={() => {
-                      setSearchType(CampaignSearchMode.TextSearch);
+                      setSearchType(CampaignSearchMode.AdvanceSearch);
                     }}
                   >
-                    <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Text
-                    search{" "}
+                    <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon>{" "}
+                    Advanced filter
                   </div>
                   <div className="grow"></div>
                   <FontAwesomeIcon
@@ -599,7 +740,6 @@ type InfluencerSearchProps = {
   platform: any;
   category: any;
 };
-
 export const InfluencerSearch = (props: InfluencerSearchProps) => {
   const country = props.country;
   const platform = props.platform;
@@ -626,14 +766,26 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
       return setError("Fill the field to start searching");
     let req = { search: searchtext, role: 10 };
     const data = await axios.post(`${BaseUrl}/api/user-search`, req);
-    if (data.data.status == false) return setError(data.data.message);
+    if (data.data.status == false) {
+      setCamSearchResult([data.data.data]);
+      return setError(data.data.message);
+    }
     setCamSearchResult(data.data.data);
   };
 
   const campadvancesearch = async () => {
-    if (selcategory.length == 0) return setError("Select the category");
-    if (selPlatform.length == 0) return setError("Select the pltforms");
-    if (selCountry.length == 0) return setError("Select the country");
+    if (selcategory.length == 0) {
+      setCamSearchResult([]);
+      return setError("Select the category");
+    }
+    if (selPlatform.length == 0) {
+      setCamSearchResult([]);
+      return setError("Select the pltforms");
+    }
+    if (selCountry.length == 0) {
+      setCamSearchResult([]);
+      return setError("Select the country");
+    }
     let req = {
       country: selCountry[0]["id"],
       platform: selPlatform.join(","),
@@ -868,6 +1020,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
                   </div>
                 </div>
+
                 <div
                   className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
                     cat ? "" : "hidden"
@@ -1126,12 +1279,12 @@ const BrandSearch = () => {
             </div>
           </div>
           {/* brand text search end here */}
+          {error == "" || error == null || error == undefined ? null : (
+            <div className="bg-red-500 bg-opacity-10 border text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+              {error}
+            </div>
+          )}
         </div>
-        {error == "" || error == null || error == undefined ? null : (
-          <div className="bg-red-500 bg-opacity-10 border text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
-            {error}
-          </div>
-        )}
       </div>
       {brandSearchResult.length != 0 ? (
         <SearchedBrand data={brandSearchResult}></SearchedBrand>
@@ -1197,9 +1350,7 @@ const SearchedCampaign = (props: SearchedCampaignProps) => {
         <div className="w-60 text-md font-bold text-primary p-2 my-2">
           Found: {props.data.length} Campaigns{" "}
         </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-6">
-          {campaignCards}
-        </div>
+        <div className="flex flex-wrap gap-x-6 gap-y-6">{campaignCards}</div>
       </div>
     </>
   );
@@ -1216,7 +1367,7 @@ const SearchedBrand = (props: SearchedBrandProps) => {
         <div className="w-60 text-md font-bold text-primary p-2 my-2">
           Found: {props.data.length} Brand{" "}
         </div>
-        <div className="grid place-items-center lg:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="flex gap-6 flex-wrap">
           {props.data.map((val: any, index: number) => {
             const avatar = val["logo"];
             const name = val["name"];

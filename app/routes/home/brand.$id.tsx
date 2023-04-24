@@ -12,10 +12,13 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { CusButton } from "~/components/utils/buttont";
+import { CampaginCard } from "~/components/utils/campagincard";
 import ExtraBrandCard from "~/components/utils/extrabrandcard";
 import PastBrandCard from "~/components/utils/pastbrandcard";
 import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
+import { getCampaignType } from "~/utils";
+
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const id = props.params.id;
   const branddata = await axios.post(`${BaseUrl}/api/get-brand`, { id: id });
@@ -145,7 +148,7 @@ const BrandPage = () => {
                 let req = {
                   campaignDraftId: "0",
                   fromUserId: user.id,
-                  toUserId: "89",
+                  toUserId: brand.id,
                   comment: messageRef.current?.value,
                 };
 
@@ -274,9 +277,12 @@ const BrandPage = () => {
           </div>
         </div>
         {isPast ? (
-          <PastBrandAssociation></PastBrandAssociation>
+          <PastBrandAssociation
+            userId={user.id}
+            brandId={brand.id}
+          ></PastBrandAssociation>
         ) : (
-          <AvailableCampaigns></AvailableCampaigns>
+          <AvailableCampaigns brandId={brand.id}></AvailableCampaigns>
         )}
       </div>
     </>
@@ -358,27 +364,187 @@ const Completed: React.FC<CompletedProps> = (
   );
 };
 
-const AvailableCampaigns = () => {
+interface AvailableCampaignsProps {
+  brandId: string;
+}
+
+const AvailableCampaigns: React.FC<AvailableCampaignsProps> = (
+  props: AvailableCampaignsProps
+): JSX.Element => {
+  const [topChampaing, setTopChampaing] = useState<any[]>([]);
+  const [campaignCards, setCampaignCards] = useState<React.ReactNode[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const apidata = await axios({
+        method: "post",
+        url: `${BaseUrl}/api/campaign-search`,
+        data: { brand: props.brandId },
+      });
+      setTopChampaing(apidata.data.data);
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const createCampaignCards = async () => {
+      let counter = 0;
+      const cards = await Promise.all(
+        topChampaing.map(async (val: any, index: number) => {
+          if (counter >= 5) return null;
+          counter++;
+          let platforms: string[] = [];
+          for (let i: number = 0; i < val["platforms"].length; i++) {
+            platforms.push(val["platforms"][i]["platformLogoUrl"]);
+          }
+          let campaignType = await getCampaignType(val["campaignTypeId"]);
+          let image =
+            val["brand"].length == 0 ||
+            val["brand"] == undefined ||
+            val["brand"] == null ||
+            val["brand"] == ""
+              ? "/images/avatar/user.png"
+              : val["brand"]["logo"] == "0" ||
+                val["brand"]["logo"] == undefined ||
+                val["brand"]["logo"] == null ||
+                val["brand"]["logo"] == ""
+              ? "/images/avatar/user.png"
+              : val["brand"]["logo"];
+          return (
+            <div key={index}>
+              <CampaginCard
+                id={val.id}
+                title={val["campaignName"]}
+                weburl={val.brand.webUrl}
+                platforms={platforms}
+                maxval={val.costPerPost.split(".")[0]}
+                category={campaignType}
+                image={image}
+                name={val.brand.name}
+                currency={val["currency"]["code"]}
+                btntext="View More & Learn"
+              ></CampaginCard>
+            </div>
+          );
+        })
+      );
+      setCampaignCards(cards);
+    };
+    createCampaignCards();
+  }, [topChampaing]);
+
   return (
     <>
-      <div className="grid gap-4 grid-col-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-3 place-items-center">
-        <ExtraBrandCard></ExtraBrandCard>
-        <ExtraBrandCard></ExtraBrandCard>
-        <ExtraBrandCard></ExtraBrandCard>
-        <ExtraBrandCard></ExtraBrandCard>
-      </div>
+      {campaignCards.length == 0 ? (
+        <div className="text-center w-full px-4 py-8 text-2xl text-gray-600 font-semibold ">
+          This brand haven't created any campaign.
+        </div>
+      ) : (
+        <div className="flex flex-wrap gap-6 pb-8 pt-6">{campaignCards}</div>
+      )}
     </>
   );
 };
 
-const PastBrandAssociation = () => {
+interface PastBrandAssociationProps {
+  brandId: string;
+  userId: string;
+}
+const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
+  props: PastBrandAssociationProps
+): JSX.Element => {
+  const [resDarft, setResDarft] = useState<any[]>([]);
+
+  const init = async () => {
+    let req = {
+      search: {
+        fromUser: props.userId,
+        influencer: props.userId,
+        brand: props.brandId,
+      },
+    };
+
+    const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
+
+    if (responseData.data.status == true) {
+      setResDarft(responseData.data.data);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <>
-      <div className="grid gap-4 grid-col-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-3 place-items-center">
-        <PastBrandCard></PastBrandCard>
-        <PastBrandCard></PastBrandCard>
-      </div>
+      {resDarft.length == 0 ? (
+        <div className="text-center w-full px-4 py-8 text-2xl text-gray-600 font-semibold ">
+          This brand have no past associations with you.
+        </div>
+      ) : (
+        <div className="flex flex-wrap gap-6 pb-8 pt-6">
+          {resDarft.map((val: any, index: number) => {
+            let image =
+              val["brand"].length == 0 ||
+              val["brand"] == undefined ||
+              val["brand"] == null ||
+              val["brand"] == ""
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"] == "0" ||
+                  val["brand"]["logo"] == undefined ||
+                  val["brand"]["logo"] == null ||
+                  val["brand"]["logo"] == ""
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"];
+            return (
+              <div
+                key={index}
+                className="my-2 p-4 bg-white rounded-lg shadow-lg w-60"
+              >
+                <div className="flex">
+                  <img
+                    src={image}
+                    alt="influencer pic"
+                    className="w-10 h-10 shrink-0 rounded-md"
+                  />
+                  <div className="ml-2">
+                    <p className="text-md font-medium">{val.brand.name}</p>
+                    <p className="text-sm font-medium">{val.brand.email}</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-md font-medium">Description</p>
+                <p className="text-sm font-medium">{val.description}</p>
+                <p className="mt-2 text-md font-medium">Attachment</p>
+                <a
+                  target="_blank"
+                  className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
+                  href={val.attach01}
+                >
+                  View pdf
+                </a>
+                <p className="mt-2 text-md font-medium">Status</p>
+                <p
+                  className={`mt-2 text-md text-white font-medium text-center rounded-md ${
+                    val.status.name == "ACCEPTED"
+                      ? "bg-green-500"
+                      : val.status.name == "PENDING"
+                      ? "bg-yellow-500"
+                      : "bg-red-500"
+                  }`}
+                >
+                  {val.status.name}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
+    // <>
+
+    //   <div className="flex flex-wrap gap-6 px-10">
+    //     <PastBrandCard></PastBrandCard>
+    //     <PastBrandCard></PastBrandCard>
+    //   </div>
+    // </>
   );
 };
 

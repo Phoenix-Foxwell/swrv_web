@@ -72,7 +72,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
 
     return (
         <>
-            <div className="w-full px-6 sm:px-16 grid  lg:grid-cols-3  md:w-4/6 lg:w-full mx-auto mb-20">
+            <div className="w-full px-6 sm:px-16 grid  lg:grid-cols-3  md:w-4/6 lg:w-full mx-auto mb-20 mt-20">
                 <div className="hidden flex-col lg:flex">
                     <div className="grow"></div>
                     <div className="flex">

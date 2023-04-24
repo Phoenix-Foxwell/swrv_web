@@ -6,7 +6,7 @@ import { useLoaderData, useNavigate, useTransition } from "@remix-run/react";
 import axios from "axios";
 import { BaseUrl } from "~/const";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faChessBishop, faSearch } from "@fortawesome/free-solid-svg-icons";
 import SideBarNavStore, { SideBarTabs } from "~/state/navigation/sidebar";
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookieHeader = props.request.headers.get("Cookie");
@@ -31,6 +31,7 @@ const Invite = () => {
   const sidebar = SideBarNavStore((state) => state.changeTab);
 
   const [user, setUser] = useState<UserType>();
+  console.log(user);
   const init = async () => {
     let req = {
       search: { fromToUser: useId },
@@ -59,6 +60,21 @@ const Invite = () => {
   useEffect(() => {
     init();
   });
+
+  //   const avatar =
+  //   user!.avatar == undefined ||
+  //   user!.avatar == null ||
+  //   user!.avatar == "0" ||
+  //   user!.avatar == ""
+  //     ? "/images/avatar/user.png"
+  //     : user!.avatar;
+  // const useravatar =
+  //   userdata.user.pic == undefined ||
+  //   userdata.user.pic == null ||
+  //   userdata.user.pic == "0" ||
+  //   userdata.user.pic == ""
+  //     ? "/images/avatar/user.png"
+  //     : userdata.user.pic;
 
   return (
     <>
@@ -91,10 +107,13 @@ const Invite = () => {
                                 <input type="text" placeholder="Search" className="outline-none border-none w-full bg-transparent" />
                             </div> */}
                 {messages.map((val: any, index: number) => {
+                  console.log(val);
                   return (
                     <div
                       key={index}
                       onClick={() => {
+                        setMsgIds((val) => []);
+                        setMessages((val) => []);
                         setUser({
                           name:
                             val.fromUser.id == userId

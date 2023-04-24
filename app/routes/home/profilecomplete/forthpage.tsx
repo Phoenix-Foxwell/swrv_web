@@ -81,6 +81,7 @@ const ForthPage = () => {
   const handleOnChange = () => {
     setCheck(!check);
   };
+
   const nextButton = useRef<HTMLButtonElement>(null);
 
   return (
@@ -408,17 +409,19 @@ const ForthPage = () => {
                 fontwidth={"font-bold"}
               ></CusButton>
             </div>
-            <Form method="post" className="hidden">
-              <input type="hidden" name="id" value={userId.toString()} />
-              <input
-                type="hidden"
-                name="address"
-                value={isBrand ? "/home/profilecomplete/fifthpage" : "/home"}
-              />
-              <button ref={nextButton} name="submit">
-                Submit
-              </button>
-            </Form>
+            <div className="hidden">
+              <Form method="post" className="hidden">
+                <input type="hidden" name="id" value={userId.toString()} />
+                <input
+                  type="hidden"
+                  name="address"
+                  value={isBrand ? "/home/profilecomplete/fifthpage" : "/home"}
+                />
+                <button ref={nextButton} name="submit">
+                  Submit
+                </button>
+              </Form>
+            </div>
           </div>
         </div>
       </div>

@@ -58,7 +58,8 @@ const HomePage = () => {
 
   return (
     <>
-      {/* <div className="flex mt-4">
+      <div className="overflow-hidden">
+        {/* <div className="flex mt-4">
                 <div className="grow"></div>
                 <div onClick={async () => {
                     navigator("/logout");
@@ -66,27 +67,28 @@ const HomePage = () => {
                     <CusButton text="Logout" background="bg-[#f43f5e]" textColor={"text-white"}></CusButton>
                 </div>
             </div> */}
-      {isOpen ? <ProfileComplete></ProfileComplete> : null}
-      <Intro></Intro>
-      {isbrand ? (
-        <>
-          {/* brand section */}
-          <InfluencerSearch
-            platform={user.platform}
-            country={user.country}
-            category={user.category}
-          ></InfluencerSearch>
-          <TopInfluencer></TopInfluencer>
-        </>
-      ) : (
-        <>
-          {/* influencer section */}
-          <EarnSection></EarnSection>
-          <SponsoredPosts></SponsoredPosts>
-          <NewCampaign></NewCampaign>
-          <TopBrands></TopBrands>
-        </>
-      )}
+        {isOpen ? <ProfileComplete></ProfileComplete> : null}
+        <Intro isBrand={isbrand}></Intro>
+        {isbrand ? (
+          <>
+            {/* brand section */}
+            <InfluencerSearch
+              platform={user.platform}
+              country={user.country}
+              category={user.category}
+            ></InfluencerSearch>
+            <TopInfluencer></TopInfluencer>
+          </>
+        ) : (
+          <>
+            {/* influencer section */}
+            <EarnSection></EarnSection>
+            <SponsoredPosts></SponsoredPosts>
+            <NewCampaign></NewCampaign>
+            <TopBrands></TopBrands>
+          </>
+        )}
+      </div>
     </>
   );
 };
@@ -136,8 +138,13 @@ const ProfileComplete = () => {
   );
 };
 
-const Intro = () => {
+interface IntroProps {
+  isBrand: boolean;
+}
+
+const Intro: React.FC<IntroProps> = (props: IntroProps): JSX.Element => {
   const navigator = useNavigate();
+  const [brand, setBrand] = useState<any[]>([]);
   let data = [
     { image: "74.jfif", id: "74" },
     { image: "75.jfif", id: "75" },
@@ -155,35 +162,69 @@ const Intro = () => {
     { image: "87.jfif", id: "87" },
     { image: "88.jfif", id: "88" },
   ];
+  const init = async () => {
+    const apidata = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/search-brand`,
+    });
+    setBrand(apidata.data.data);
+  };
+  useEffect(() => {
+    init();
+  }, []);
   return (
     <>
-      <div className="grid place-items-center w-full mt-10">
-        <h1 className="text-4xl text-primary font-bold text-center">
-          Welcome to SWRV
-        </h1>
-        <h1 className="text-xl text-primary font-normal text-center">
-          Reach the next billion
-        </h1>
+      <div>
+        <div className="grid place-items-center w-full mt-10">
+          <h1 className="text-4xl text-primary font-bold text-center">
+            Welcome to SWRV
+          </h1>
+          <h1 className="text-xl text-primary font-normal text-center">
+            Reach the next billion
+          </h1>
+        </div>
+        {props.isBrand ? (
+          <ScrollContainer className="flex gap-6 items-center mb-6 overflow-x-scroll no-scrollbar mt-6">
+            {data.map((val: any, index: number) => {
+              return (
+                <div
+                  key={index}
+                  className="block shrink-0 cursor-pointer"
+                  onClick={() => {
+                    navigator(`/home/user/${val.id}`);
+                  }}
+                >
+                  <img
+                    src={`/images/inf/${val.image}`}
+                    alt="error"
+                    className="rounded-md w-40 h-40 object-center object-cover"
+                  />
+                </div>
+              );
+            })}
+          </ScrollContainer>
+        ) : (
+          <ScrollContainer className="flex gap-6 items-center mb-6 overflow-x-scroll no-scrollbar mt-6">
+            {brand.slice(0, 10).map((val: any, index: number) => {
+              return (
+                <div
+                  key={index}
+                  className="block shrink-0 cursor-pointer"
+                  onClick={() => {
+                    navigator(`/home/brand/${val.id}`);
+                  }}
+                >
+                  <img
+                    src={val.logo}
+                    alt="error"
+                    className="rounded-md w-40 h-40 object-center object-cover"
+                  />
+                </div>
+              );
+            })}
+          </ScrollContainer>
+        )}
       </div>
-      <ScrollContainer className="flex gap-6 items-center mb-6 overflow-x-scroll no-scrollbar mt-6">
-        {data.map((val: any, index: number) => {
-          return (
-            <div
-              key={index}
-              className="block shrink-0 cursor-pointer"
-              onClick={() => {
-                navigator(`/home/user/${val.id}`);
-              }}
-            >
-              <img
-                src={`/images/inf/${val.image}`}
-                alt="error"
-                className="rounded-md w-40 h-40"
-              />
-            </div>
-          );
-        })}
-      </ScrollContainer>
     </>
   );
 };

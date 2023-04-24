@@ -25,15 +25,16 @@ const BlogsInfo = (props: BlogInfoProps) => {
                         <>
                             <div className="md:h-[550px] w-full relative">
                                 <img src={props.image} alt="error" className="h-full w-full rounded-lg inline-block relative object-cover object-top" />
+                                {/* <div className="bg-gradient-to-b from-transparent to-gray-800 absolute top-0 left-0 w-full h-full"></div> */}
                                 <div className="w-full mx-auto absolute bottom-0 hidden md:block">
                                     <div className="w-full md:w-3/5 lg:w-4/6 mx-auto  pt-8 ">
-                                        <h1 className="text-white text-2xl font-semibold md:w-96">
+                                        <h1 className="text-white text-2xl font-semibold md:w-96 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                             {props.title}
                                         </h1>
-                                        <h1 className="text-white text-lg font-semibold md:w-96">
+                                        <h1 className="text-white text-lg font-semibold md:w-96 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                             {props.date.toString().split(" ")[0]}
                                         </h1>
-                                        <p className="text-md font-semibold text-white py-10">
+                                        <p className="text-md font-semibold text-white py-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
                                             {props.shorttitle}
                                         </p>
                                     </div>

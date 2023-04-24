@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { CusButton } from "./buttont";
+import { useEffect, useState } from "react";
 
 type CampaginCardProps = {
   id: string;
@@ -15,11 +16,23 @@ type CampaginCardProps = {
 };
 
 export const CampaginCard = (props: CampaginCardProps) => {
+  const [color, setColor] = useState<string>("text-cyan-500");
+  useEffect(() => {
+    if (props.category == "Unboxing") {
+      setColor("text-cyan-500");
+    } else if (props.category == "Paid Promotion") {
+      setColor("text-rose-500");
+    } else if (props.category == "Revealing") {
+      setColor("text-green-500");
+    } else if (props.category == "Sponsored") {
+      setColor("text-indigo-500");
+    }
+  });
   return (
     <>
       <div className="bg-white rounded-xl shadow-xl p-4 w-64 my-2 h-full">
-        <div className="flex items-end gap-x-3">
-          <div>
+        <div className="flex items-end gap-x-2">
+          <div className="shrink-0">
             <img
               src={props.image}
               alt="error"
@@ -29,11 +42,18 @@ export const CampaginCard = (props: CampaginCardProps) => {
           <p className="text-black font-semibold text-xl content-end text-left">
             {props.name}
           </p>
+          <div className="grow"></div>
+          <div className="h-full flex flex-col">
+            <p className={`font-semibold text-left ${color}`}>
+              {props.category}
+            </p>
+            <div className="h-10"></div>
+          </div>
         </div>
         <p className="text-black font-semibold text-md text-left my-4">
           {props.title}
         </p>
-        <p className="text-black font-semibold text-xs text-left mt-4">
+        <p className={`text-black font-semibold text-xs text-left mt-4`}>
           Category : {props.category}
         </p>
         <p className="text-black font-semibold text-xs text-left">

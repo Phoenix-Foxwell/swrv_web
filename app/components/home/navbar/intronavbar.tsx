@@ -9,8 +9,8 @@ export const IntroNavBar = () => {
 
   return (
     <>
-      <div className="w-full grid place-items-center px-6 sm:px-16">
-        <div className="w-full md:w-4/5 lg:w-4/6 flex flex-row  my-4">
+      <div className="w-full grid place-items-center px-6 ">
+        <div className="w-full m-2 flex flex-row bg-white rounded-md p-2 px-6 shadow-lg">
           <div
             className="mr-4 grid place-items-center md:hidden cursor-pointer"
             onClick={() => {
@@ -25,11 +25,15 @@ export const IntroNavBar = () => {
           <div className="grid place-items-center mr-10">
             <img src="/images/swrvlogo.png" className="w-32 lg:w-38" />
           </div>
+          <div className="grow"></div>
           <div className="place-content-center hidden md:grid">
             <NavLinks></NavLinks>
           </div>
           <div className="grow"></div>
+
+          <div className="grid place-items-center">
           <LoginButton></LoginButton>
+          </div>
         </div>
         <div className={`${isOpen ? "block" : "hidden"} md:hidden `}>
           <NavLinks></NavLinks>

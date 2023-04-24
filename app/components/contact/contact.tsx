@@ -11,7 +11,7 @@ const ContactPage = () => (
   <>
     <div className="w-full px-6 sm:px-16">
       <div className="bg-[#EFEFEF] rounded-2xl sm:p-0 p-4">
-        <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mb-10  py-10 ">
+        <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mb-10 pt-20 pb-40">
           <h1 className="text-5xl font-bold text-primary flex">
             Love to hear from you
           </h1>
@@ -145,9 +145,10 @@ const ContactPage = () => (
 
             <CusButton text="Send Message" background="bg-primary"></CusButton>
           </div>
-
-          <DownloadApp></DownloadApp>
         </div>
+      </div>
+      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto -translate-y-40">
+        <DownloadApp></DownloadApp>
       </div>
     </div>
   </>

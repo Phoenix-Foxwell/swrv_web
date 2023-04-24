@@ -145,6 +145,7 @@ const Campaigns = () => {
           completed={brandComCam.toString()}
         ></BrandInfo>
         <CampaignsInfo
+          title={champaign.campaignName}
           dont={champaign.donts}
           dos={champaign.dos}
           hastag={champaign.hashtags}
@@ -152,7 +153,7 @@ const Campaigns = () => {
           platform={champaign.platforms}
           moddboard={champaign.moodBoards}
           info={champaign.campaignInfo}
-          name={champaign.campaignName}
+          name={brandname}
           image={brandimage}
           website={champaign.brand.website}
           category={category}
@@ -162,7 +163,6 @@ const Campaigns = () => {
             currecny={champaign.currency.code}
             costperpost={champaign.costPerPost}
             totalbudget={champaign.totalBudget.split(".")[0]}
-            remaining={"1400"}
           ></Budget>
           <Target
             audienceloaction={champaign.audienceLocations}
@@ -312,6 +312,7 @@ type CampaignsInfoProps = {
   dont: string;
   mendtion: string;
   hastag: string;
+  title: string;
 };
 
 const CampaignsInfo = (props: CampaignsInfoProps) => {
@@ -331,6 +332,9 @@ const CampaignsInfo = (props: CampaignsInfoProps) => {
           </p>
         </div>
 
+        <p className="text-black font-semibold text-xl text-left my-4">
+          {props.title}
+        </p>
         <p className="text-black font-semibold text-xs text-left mt-4">
           Category : {props.category}
         </p>
@@ -582,7 +586,6 @@ const Apply = (props: ApplyProps) => {
 type BudgetProps = {
   costperpost: string;
   totalbudget: string;
-  remaining: string;
   currecny: string;
 };
 
@@ -610,13 +613,6 @@ const Budget = (props: BudgetProps) => {
           <div className="grow"></div>
           <p className="text-md font-bold text-black">
             {props.totalbudget} {props.currecny}
-          </p>
-        </div>
-        <div className="flex my-2">
-          <p className="text-md text-primary">Remaining</p>
-          <div className="grow"></div>
-          <p className="text-md font-bold text-black">
-            {props.remaining} {props.currecny}
           </p>
         </div>
       </div>
@@ -1388,7 +1384,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
           <div>No Invite request is pending</div>
         ) : (
           <div>
-            <p className="text-md font-medium">Requested Invites</p>
+            <p className="text-md font-medium">Requested Payment</p>
             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
             <div className="flex flex-wrap gap-6">
               {respayment.map((val: any, index: number) => {
@@ -1653,7 +1649,7 @@ const LinkCampaign: React.FC<LinkCampaignProps> = (
               )
             ) : (
               <Link
-                to={`/home/paymentreq/${props.brandId}/${props.campaingid}/${val.id}/${props.cpp}`}
+                to={`/home/paymentreq/${props.brandId}/${props.campaingid}/${val.id}`}
                 className="text-center inline-block mt-4 text-md w-full text-black font-semibold bg-[#fbca8e] rounded-md shadow-lg py-1"
                 onClick={() => upadteLinkBox(true, index)}
               >

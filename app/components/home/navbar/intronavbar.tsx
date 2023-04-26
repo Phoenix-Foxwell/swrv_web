@@ -1,4 +1,4 @@
-import { NavLink } from "@remix-run/react";
+import { Link, NavLink } from "@remix-run/react";
 import { LoginButton, NavLinks } from "./navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faRemove } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +23,9 @@ export const IntroNavBar = () => {
             ></FontAwesomeIcon>
           </div>
           <div className="grid place-items-center mr-10">
-            <img src="/images/swrvlogo.png" className="w-32 lg:w-38" />
+            <Link to={"/"}>
+              <img src="/images/swrvlogo.png" className="w-32 lg:w-38" />
+            </Link>
           </div>
           <div className="grow"></div>
           <div className="place-content-center hidden md:grid">
@@ -32,7 +34,7 @@ export const IntroNavBar = () => {
           <div className="grow"></div>
 
           <div className="grid place-items-center">
-          <LoginButton></LoginButton>
+            <LoginButton></LoginButton>
           </div>
         </div>
         <div className={`${isOpen ? "block" : "hidden"} md:hidden `}>

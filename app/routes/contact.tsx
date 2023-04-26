@@ -1,13 +1,13 @@
 import { Footer } from "~/components/home/footer/footer";
-import { IntroNavBar } from "~/components/home/navbar/intronavbar";
 import ContactPage from "~/components/contact/contact";
+import { MyNavBar } from "~/components/home/navbar/mynavbar";
 const contact = () => {
-    return (
-        <>
-            <IntroNavBar></IntroNavBar>
-            <ContactPage></ContactPage>
-            <Footer></Footer>
-        </>
-    );
-}
+  return (
+    <>
+      <MyNavBar></MyNavBar>
+      <ContactPage></ContactPage>
+      <Footer></Footer>
+    </>
+  );
+};
 export default contact;

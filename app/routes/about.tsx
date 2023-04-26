@@ -5,19 +5,20 @@ import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import axios from "axios";
 import { BaseUrl } from "~/const";
 import { useLoaderData } from "@remix-run/react";
+import { MyNavBar } from "~/components/home/navbar/mynavbar";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
-    const team = await axios.post(`${BaseUrl}/api/get-team`);
-    return json({ team: team.data.data });
-}
+  const team = await axios.post(`${BaseUrl}/api/get-team`);
+  return json({ team: team.data.data });
+};
 const about = () => {
-    let temadata = useLoaderData().team[0];
-    return (
-        <>
-            <IntroNavBar></IntroNavBar>
-            <AboutPage teamdata={temadata}></AboutPage>
-            <Footer></Footer>
-        </>
-    );
-}
+  let temadata = useLoaderData().team[0];
+  return (
+    <>
+      <MyNavBar></MyNavBar>
+      <AboutPage teamdata={temadata}></AboutPage>
+      <Footer></Footer>
+    </>
+  );
+};
 export default about;

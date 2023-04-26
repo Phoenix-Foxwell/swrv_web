@@ -5,6 +5,7 @@ import { useLoaderData } from "@remix-run/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { CusButton } from "~/components/utils/buttont";
+import MyRating from "~/components/utils/raiting";
 import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
 
@@ -29,6 +30,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     brandId: brandId,
     cpp: camp.data.data[0].costPerPost,
     currency: cookie.user.currency.code,
+    name: camp.data.data[0].campaignName,
   });
 };
 
@@ -46,10 +48,36 @@ const PaymentRequest: React.FC = (): JSX.Element => {
   const draftId = loaderdata.draftId;
   const cpp = loaderdata.cpp;
   const currency = loaderdata.currency;
+  const campaignName = loaderdata.name;
+
+  const [submit, setSubmit] = useState<boolean>(false);
 
   const [userDetails, setUserDetails] = useState<UserDetailsType>(
     UserDetailsType.insights
   );
+
+  const init = async () => {
+    const req = {
+      search: {
+        type: "3",
+        campaign: campaignId,
+        brand: brandId,
+        influencer: userId,
+      },
+    };
+    const apireq = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/search-review`,
+      data: req,
+    });
+    if (apireq.data.data.length > 0) {
+      setSubmit(true);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
 
   return (
     <>
@@ -97,7 +125,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div>
+      <div className="flex flex-wrap gap-6">
         {userDetails == UserDetailsType.insights ? (
           <div></div>
         ) : (
@@ -105,14 +133,31 @@ const PaymentRequest: React.FC = (): JSX.Element => {
           <></>
         )}
         {userDetails == UserDetailsType.payments ? (
-          <Payments
-            brandId={brandId}
-            userId={userId}
-            campaignId={campaignId}
-            draftId={draftId}
-            cpp={cpp}
-            currency={currency}
-          ></Payments>
+          <>
+            <Payments
+              brandId={brandId}
+              userId={userId}
+              campaignId={campaignId}
+              draftId={draftId}
+              cpp={cpp}
+              currency={currency}
+              campname={campaignName}
+            ></Payments>
+            {!submit ? (
+              <div>
+                <p className="text-md text-primary font-semibold py-1">
+                  Rating
+                </p>
+                <div className="w-full h-[1px] bg-slate-300"></div>
+                <MyRating
+                  campaignId={campaignId}
+                  brandId={brandId}
+                  influencerId={userId}
+                  reviewType="3"
+                ></MyRating>
+              </div>
+            ) : null}
+          </>
         ) : (
           <></>
         )}
@@ -130,6 +175,7 @@ interface PaymentProps {
   brandId: string;
   cpp: string;
   currency: string;
+  campname: string;
 }
 
 const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
@@ -169,7 +215,7 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
   }, []);
   return (
     <>
-      <div className="grow flex-1">
+      <div>
         <p className="text-md text-primary font-semibold py-1">Payments</p>
         <div className="w-full h-[1px] bg-slate-300"></div>
         <div className="rounded-xl shadow-xl bg-white p-4 mt-2 w-96">
@@ -235,7 +281,6 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
             )}
             <button
               onClick={async () => {
-                console.log(requested);
                 if (
                   paymentRef.current?.value == null ||
                   paymentRef.current?.value == undefined ||

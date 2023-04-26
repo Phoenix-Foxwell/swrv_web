@@ -66,6 +66,8 @@ const BrandPage = () => {
     id: string;
     logo: string;
     name: string;
+    email: string;
+    website: string;
   };
 
   const setFavBrand = (brand: brandData) => {
@@ -84,6 +86,38 @@ const BrandPage = () => {
     setFav(false);
   };
 
+  const [sum, setSum] = useState({
+    rowCount: 0,
+    constCount: 3,
+    rate: 0,
+  });
+
+  const init = async () => {
+    const req = {
+      search: {
+        type: "3",
+        brand: brand.id,
+      },
+    };
+    const apireq = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/search-review`,
+      data: req,
+    });
+    let myrate: number = 0;
+    for (let i: number = 0; i < apireq.data.data.length; i++) {
+      myrate +=
+        parseInt(apireq.data.data[i].rating1) +
+        parseInt(apireq.data.data[i].rating2) +
+        parseInt(apireq.data.data[i].rating3);
+    }
+    setSum((val) => ({
+      rowCount: apireq.data.data.length,
+      rate: myrate,
+      constCount: 3,
+    }));
+  };
+
   useEffect(() => {
     let res: boolean = false;
     myfavBrand.map((val: brandData, index: number) => {
@@ -94,6 +128,7 @@ const BrandPage = () => {
     } else {
       setFav(false);
     }
+    init();
   }, []);
 
   const [error, setError] = useState<string | null>(null);
@@ -189,6 +224,8 @@ const BrandPage = () => {
                   id: brand.id,
                   logo: logo,
                   name: brand.name,
+                  email: brand.email,
+                  website: brand.webUrl,
                 };
                 if (fav) return revmoceFavBrand(brandval);
                 return setFavBrand(brandval);
@@ -238,7 +275,15 @@ const BrandPage = () => {
           <div className="h-72 w-[2px] bg-gray-300 hidden lg:block mt-8"></div>
           <div className="p-8">
             <div className="flex gap-x-4 flex-col md:flex-row gap-y-2">
-              <Rating rate="3"></Rating>
+              <Rating
+                rate={
+                  isNaN(Math.round(sum.rate / sum.rowCount / sum.constCount))
+                    ? "0"
+                    : Math.round(
+                        sum.rate / sum.rowCount / sum.constCount
+                      ).toString()
+                }
+              ></Rating>
               <Completed completed={brandComCam.toString()}></Completed>
               <Connection connection={brandConnection.toString()}></Connection>
             </div>

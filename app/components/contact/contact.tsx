@@ -80,12 +80,12 @@ const ContactPage = () => (
                 <h2 className="text-left text-md font-semibold text-primary py-2">
                   Your Name
                 </h2>
-                <div className="flex gap-2 py-1 px-2 border-2 border-gray-300 focus:border-gray-300 rounded-md">
+                <div className="flex gap-2 py-1 px-2 border-2 border-gray-300 focus:border-gray-300 rounded-md h-12 items-center">
                   <svg
                     className="opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
+                    width="20"
+                    height="20"
                     viewBox="0 0 14 14"
                   >
                     <g
@@ -110,7 +110,7 @@ const ContactPage = () => (
                 <h2 className="text-left text-md font-semibold text-primary py-2">
                   Phone
                 </h2>
-                <div className="flex gap-2 py-1 px-2 border-2 border-gray-300 focus:border-gray-300 rounded-md">
+                <div className="flex gap-2 py-1 px-2 border-2 border-gray-300 focus:border-gray-300 rounded-md h-12 items-center">
                   <svg
                     className="opacity-50"
                     xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ const ContactPage = () => (
             </h2>
             <textarea
               className="p-4 w-full h-60 outline-none border-2 border-gray-300 focus:border-gray-300 rounded-md resize-none"
-              placeholder="your message"
+              placeholder="Your message"
             ></textarea>
 
             <CusButton text="Send Message" background="bg-primary"></CusButton>

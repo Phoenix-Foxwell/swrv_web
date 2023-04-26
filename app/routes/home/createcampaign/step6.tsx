@@ -77,7 +77,6 @@ const Step6 = () => {
   const [error, setError] = useState<string | null>(null);
 
   async function createCampagin() {
-    const brand_name = useLoaderData().user;
     const req: { [key: string]: string } = {
       userId: userId,
       brandUserId: userId,

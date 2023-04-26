@@ -59,6 +59,11 @@ const Campaigns = () => {
   const user = useLoaderData().user;
   const isbrand = user.role.code != 10;
   const data = useLoaderData();
+  const [sum, setSum] = useState({
+    rowCount: 0,
+    constCount: 3,
+    rate: 0,
+  });
 
   const userId = user.id;
   const brandimage =
@@ -124,6 +129,30 @@ const Campaigns = () => {
     } else {
       setBarndComCam(0);
     }
+
+    const req1 = {
+      search: {
+        type: "3",
+        brand: champaign.brand.id,
+      },
+    };
+    const apireq = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/search-review`,
+      data: req1,
+    });
+    let myrate: number = 0;
+    for (let i: number = 0; i < apireq.data.data.length; i++) {
+      myrate +=
+        parseInt(apireq.data.data[i].rating1) +
+        parseInt(apireq.data.data[i].rating2) +
+        parseInt(apireq.data.data[i].rating3);
+    }
+    setSum((val) => ({
+      rowCount: apireq.data.data.length,
+      rate: myrate,
+      constCount: 3,
+    }));
   };
   useEffect(() => {
     init();
@@ -140,7 +169,11 @@ const Campaigns = () => {
           name={brandname}
           website={champaign.brand.website}
           info={champaign.brand.info}
-          rate="3"
+          rate={
+            isNaN(Math.round(sum.rate / sum.rowCount / sum.constCount))
+              ? "0"
+              : Math.round(sum.rate / sum.rowCount / sum.constCount).toString()
+          }
           connection={brandConnection.toString()}
           completed={brandComCam.toString()}
         ></BrandInfo>
@@ -241,6 +274,7 @@ const Campaigns = () => {
             ></DraftAcceptRequest>
             <div className="h-4"></div>
             <ChampaingPaymentRequest
+              userid={user.id}
               campaingid={champaign.id}
               currency={user.currency.code}
             ></ChampaingPaymentRequest>
@@ -475,12 +509,16 @@ const Target = (props: TargetProps) => {
         <div className="flex my-2">
           <p className="text-md text-primary">Start Date</p>
           <div className="grow"></div>
-          <p className="text-md font-bold text-black">{props.startdate}</p>
+          <p className="text-md font-bold text-black">
+            {props.startdate.toString().split(" ")[0]}
+          </p>
         </div>
         <div className="flex my-2">
           <p className="text-md text-primary">End date</p>
           <div className="grow"></div>
-          <p className="text-md font-bold text-black">{props.enddate}</p>
+          <p className="text-md font-bold text-black">
+            {props.enddate.toString().split(" ")[0]}
+          </p>
         </div>
       </div>
     </>
@@ -605,7 +643,7 @@ const Budget = (props: BudgetProps) => {
           <p className="text-md text-primary">Cost per post</p>
           <div className="grow"></div>
           <p className="text-md font-bold text-primary">
-            {props.costperpost} {props.currecny}
+            {props.costperpost.toString().split(".")[0]} {props.currecny}
           </p>
         </div>
         <div className="flex my-2">
@@ -650,7 +688,6 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
       search: {
         status: "1",
         campaign: props.campaingid,
-        toUser: props.userId,
       },
     };
     const responseData = await axios.post(`${BaseUrl}/api/search-invite`, req);
@@ -805,7 +842,7 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
                       />
                       <div className="ml-2">
                         <p className="text-md font-medium">
-                          {val.influencer.name}
+                          {val.influencer.name.toString().split("@")[0]}
                         </p>
                         <p className="text-sm font-medium">
                           {val.influencer.email}
@@ -1355,11 +1392,18 @@ const CreateDraft = (props: CreateDraftProps) => {
 
 type ChampaingPaymentRequestProps = {
   campaingid: string;
+  userid: string;
   currency: string;
 };
 
 const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
   const [respayment, setRequestPayment] = useState<any[]>([]);
+
+  const [acceptbox, setAcceptbox] = useState<boolean>(false);
+  const [rejectbox, setrejectbox] = useState<boolean>(false);
+
+  const [error, setError] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
 
   const init = async () => {
     let req = {
@@ -1377,8 +1421,117 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
     init();
   }, []);
 
+  const acceptRequest = async () => {
+    let req = {
+      id: id,
+      status: "2",
+      refNo: `${new Date().toLocaleDateString()}_${props.userid}_${
+        props.campaingid
+      }`,
+    };
+    const responseData = await axios.post(`${BaseUrl}/api/update-payment`, req);
+    if (responseData.data.staus == false)
+      return setError(responseData.data.message);
+    setAcceptbox(false);
+    window.location.reload();
+  };
+
+  const rejectRequest = async () => {
+    let req = { id: id, status: "3" };
+    const responseData = await axios.post(`${BaseUrl}/api/update-payment`, req);
+    if (responseData.data.staus == false)
+      return setError(responseData.data.message);
+    setrejectbox(false);
+    window.location.reload();
+  };
+
   return (
     <>
+      <div
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
+          acceptbox ? "grid" : "hidden"
+        }`}
+      >
+        <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
+          <p className="text-center font-medium text-2xl">Accept</p>
+          <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+          <p className="text-center font-medium text-gray-800">
+            Are you sure you want to accept this payment?
+          </p>
+          {error == "" || error == null || error == undefined ? null : (
+            <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+              {error}
+            </div>
+          )}
+          <div className="flex mt-2">
+            <button
+              onClick={() => {
+                setAcceptbox(false);
+              }}
+              className="bg-white rounded-xl text-red-500 font-normal border-2 border-red-500 py-1 px-2 w-28 hover:text-white hover:bg-red-500"
+            >
+              <FontAwesomeIcon
+                className="mx-2"
+                icon={faThumbsDown}
+              ></FontAwesomeIcon>
+              Cancel
+            </button>
+            <div className="grow"></div>
+            <button
+              onClick={acceptRequest}
+              className="bg-white rounded-xl text-green-500 font-normal border-2 border-green-500 py-1 px-2 w-28 hover:text-white hover:bg-green-500"
+            >
+              <FontAwesomeIcon
+                className="mx-2"
+                icon={faThumbsUp}
+              ></FontAwesomeIcon>
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
+          rejectbox ? "grid" : "hidden"
+        }`}
+      >
+        <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
+          <p className="text-center font-medium text-2xl">Reject</p>
+          <p className="text-center font-medium text-gray-800">
+            Are you sure you want to reject this payment?
+          </p>
+          {error == "" || error == null || error == undefined ? null : (
+            <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+              {error}
+            </div>
+          )}
+          <div className="flex mt-2">
+            <button
+              onClick={() => {
+                setrejectbox(false);
+              }}
+              className="bg-white rounded-xl text-red-500 font-normal border-2 border-red-500 py-1 px-2 w-28 hover:text-white hover:bg-red-500"
+            >
+              <FontAwesomeIcon
+                className="mx-2"
+                icon={faThumbsDown}
+              ></FontAwesomeIcon>
+              Cancel
+            </button>
+            <div className="grow"></div>
+            <button
+              onClick={rejectRequest}
+              className="bg-white rounded-xl text-green-500 font-normal border-2 border-green-500 py-1 px-2 w-28 hover:text-white hover:bg-green-500"
+            >
+              <FontAwesomeIcon
+                className="mx-2"
+                icon={faThumbsUp}
+              ></FontAwesomeIcon>
+              Reject
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="p-4 rounded-xl shadow-xl bg-white">
         {respayment.length == 0 ? (
           <div>No Invite request is pending</div>
@@ -1410,10 +1563,48 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
                         </p>
                       </div>
                     </div>
-                    <p className="mt-2 text-md font-medium">Ammount</p>
+                    <p className="mt-2 text-md font-medium">Amount</p>
                     <p className="text-sm font-medium">
-                      {val.amount} {props.currency}
+                      {val.amount.toString().split(".")[0]} {props.currency}
                     </p>
+                    {parseInt(val.status.code) == 2 ? (
+                      <p className="py-1 px-4 text-center text-white bg-green-500 rounded-md my-2">
+                        Acpected
+                      </p>
+                    ) : parseInt(val.status.code) == 3 ? (
+                      <p className="py-1 px-4 text-center text-white bg-red-500 rounded-md my-2">
+                        Rejected
+                      </p>
+                    ) : (
+                      <div className="flex gap-4 mt-2">
+                        <button
+                          onClick={() => {
+                            setId(val.id);
+                            setAcceptbox(true);
+                          }}
+                          className="bg-white  text-green-500 font-normal border-2 border-green-500 py-1 px-2 w-28 hover:text-white hover:bg-green-500"
+                        >
+                          <FontAwesomeIcon
+                            className="mx-2"
+                            icon={faThumbsUp}
+                          ></FontAwesomeIcon>
+                          Accept
+                        </button>
+                        <button
+                          onClick={() => {
+                            setId(val.id);
+                            setrejectbox(true);
+                          }}
+                          className="bg-white  text-red-500 font-normal border-2 border-red-500 py-1 px-2 w-28 hover:text-white hover:bg-red-500"
+                        >
+                          <FontAwesomeIcon
+                            className="mx-2"
+                            icon={faThumbsDown}
+                          ></FontAwesomeIcon>
+                          Reject
+                        </button>
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -1466,7 +1657,7 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
                 return (
                   <div
                     key={index}
-                    className="my-2 p-4 bg-white rounded-lg shadow-lg"
+                    className="my-2 p-4 bg-white rounded-lg shadow-lg w-80"
                   >
                     <div className="flex">
                       <img

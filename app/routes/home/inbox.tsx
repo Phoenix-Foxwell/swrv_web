@@ -31,7 +31,6 @@ const Invite = () => {
   const sidebar = SideBarNavStore((state) => state.changeTab);
 
   const [user, setUser] = useState<UserType>();
-  console.log(user);
   const init = async () => {
     let req = {
       search: { fromToUser: useId },
@@ -107,7 +106,6 @@ const Invite = () => {
                                 <input type="text" placeholder="Search" className="outline-none border-none w-full bg-transparent" />
                             </div> */}
                 {messages.map((val: any, index: number) => {
-                  console.log(val);
                   return (
                     <div
                       key={index}

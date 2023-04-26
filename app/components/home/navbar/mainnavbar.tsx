@@ -57,10 +57,12 @@ export const MainNavBar = (props: MainNavBarProps) => {
             </div>
 
             <div className="flex place-items-center rounded-xl items-end mr-6 w-60 ">
-              <img
-                src="/images/swrvlogo.png"
-                className="w-28 inline-block rounded-lg"
-              />
+              <Link to={"/"}>
+                <img
+                  src="/images/swrvlogo.png"
+                  className="w-28 inline-block rounded-lg"
+                />
+              </Link>
               <p className="text-primary text-xs font-normal">
                 {props.role[0].toUpperCase() +
                   props.role.slice(1).toLowerCase()}

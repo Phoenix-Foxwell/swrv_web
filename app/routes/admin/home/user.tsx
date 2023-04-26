@@ -8,7 +8,6 @@ import { BaseUrl } from "~/const";
 import { ToastContainer, toast } from 'react-toastify';
 
 import styles from 'react-toastify/dist/ReactToastify.css';
-import { Rating } from "react-simple-star-rating";
 
 export function links() {
     return [{ rel: "stylesheet", href: styles }];

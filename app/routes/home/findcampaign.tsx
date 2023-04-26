@@ -213,7 +213,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   const campadvancesearch = async () => {
     setError("");
     if (selcategory.length == 0) return setError("Select the category");
-    if (selPlatform.length == 0) return setError("Select the pltforms");
+    if (selPlatform.length == 0) return setError("Select the platform");
     if (selCountry.length == 0) return setError("Select the country");
     let req = {
       country: selcategory[0]["id"],
@@ -249,7 +249,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
     if (name == "" || name == null || name == undefined)
       return setNameError("Enter the Filter name");
     if (selcategory.length == 0) return setNameError("Select the category");
-    if (selPlatform.length == 0) return setNameError("Select the pltforms");
+    if (selPlatform.length == 0) return setNameError("Select the platform");
     if (selCountry.length == 0) return setNameError("Select the country");
 
     for (let i: number = 0; i < localFilter.length; i++) {
@@ -421,14 +421,14 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 </div>
                 <div className="w-80">
                   <p className="text-xl font-semibold text-primary">
-                    Cose Par Post
+                    Cost Per Post
                   </p>
                   <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
                     <input
                       ref={cppSearch}
                       type="text"
                       className="bg-transparent w-full outline-none py-1 px-2"
-                      placeholder="Cost Par Post"
+                      placeholder="Cost Per Post"
                       onKeyDown={handleKeyPress}
                     />
                   </div>
@@ -442,7 +442,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                       ref={minTargetSearch}
                       type="text"
                       className="bg-transparent w-full outline-none py-1 px-2"
-                      placeholder="Cost Par Post"
+                      placeholder="Min Target"
                       onKeyDown={handleKeyPress}
                     />
                   </div>
@@ -456,7 +456,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                       ref={totalTargetSearch}
                       type="text"
                       className="bg-transparent w-full outline-none py-1 px-2"
-                      placeholder="Cost Par Post"
+                      placeholder="Total Target"
                       onKeyDown={handleKeyPress}
                     />
                   </div>
@@ -780,7 +780,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
     }
     if (selPlatform.length == 0) {
       setCamSearchResult([]);
-      return setError("Select the pltforms");
+      return setError("Select the platform");
     }
     if (selCountry.length == 0) {
       setCamSearchResult([]);
@@ -821,7 +821,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
     if (name == "" || name == null || name == undefined)
       return setNameError("Enter the Filter name");
     if (selcategory.length == 0) return setNameError("Select the category");
-    if (selPlatform.length == 0) return setNameError("Select the pltforms");
+    if (selPlatform.length == 0) return setNameError("Select the platform");
     if (selCountry.length == 0) return setNameError("Select the country");
 
     for (let i: number = 0; i < localFilter.length; i++) {
@@ -1332,7 +1332,7 @@ const SearchedCampaign = (props: SearchedCampaignProps) => {
                 image={image}
                 name={val.brand.name}
                 currency={val["currency"]["code"]}
-                btntext="View"
+                btntext="Learn More & Apply"
               ></CampaginCard>
             </div>
           );
@@ -1418,6 +1418,7 @@ const SearchedInfluencer = (props: SearchedInfluencerProps) => {
                   image={avatar}
                   name={name}
                   star={parseInt(val.rating)}
+                  bio={val.bio}
                 ></InfluencerCard>
               </div>
             );

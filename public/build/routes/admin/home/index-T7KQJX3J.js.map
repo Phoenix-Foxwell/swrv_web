@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../app/routes/admin/home/index.tsx"],
+  "sourcesContent": ["import { faEdit, faEye, faTrash } from \"@fortawesome/free-solid-svg-icons\";\r\nimport { FontAwesomeIcon } from \"@fortawesome/react-fontawesome\";\r\n\r\nconst AdminDashboard = () => {\r\n    return (\r\n        <div className=\"grow bg-[#1b2028] my-2 rounded-md p-4 w-full\">\r\n            <h1 className=\"text-white font-medium text-xl\">Dashboard</h1>\r\n            <div className=\"w-full bg-slate-400 h-[1px] my-2\"></div>\r\n            <h1 className=\"text-white font-medium\">ADMIN USER DASHBOARD</h1>\r\n        </div>\r\n    );\r\n}\r\n\r\nexport default AdminDashboard;"],
+  "mappings": ";;;;;;AAMY;AAHZ,IAAM,iBAAiB,MAAM;AACzB,SACI,mDAAC,SAAI,WAAU,gDACX;AAAA,uDAAC,QAAG,WAAU,kCAAiC,yBAA/C;AAAA;AAAA;AAAA;AAAA,WAAwD;AAAA,IACxD,mDAAC,SAAI,WAAU,sCAAf;AAAA;AAAA;AAAA;AAAA,WAAkD;AAAA,IAClD,mDAAC,QAAG,WAAU,0BAAyB,oCAAvC;AAAA;AAAA;AAAA;AAAA,WAA2D;AAAA,OAH/D;AAAA;AAAA;AAAA;AAAA,SAIA;AAER;AAEA,IAAO,eAAQ;",
+  "names": []
+}

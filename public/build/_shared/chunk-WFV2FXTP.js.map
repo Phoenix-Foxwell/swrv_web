@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/state/navigation/sidebar.ts"],
+  "sourcesContent": ["import { create } from \"zustand\";\r\n\r\n\r\nenum SideBarTabs {\r\n    None,\r\n    MyCampaigns,\r\n    FindCampaigns,\r\n    Inbox,\r\n    MyEarnings,\r\n    Drafts,\r\n    Favourite,\r\n    Invite,\r\n    Help\r\n}\r\n\r\n\r\ninterface SideBarState {\r\n    currentIndex: SideBarTabs\r\n    changeTab: (value: SideBarTabs) => void\r\n}\r\n\r\n\r\nconst SideBarNavStore = create<SideBarState>()((set) => ({\r\n    currentIndex: SideBarTabs.None,\r\n    changeTab: (value) => set((state) => ({ currentIndex: value })),\r\n}));\r\n\r\nexport default SideBarNavStore;\r\n\r\nexport { SideBarTabs };"],
+  "mappings": ";;;;;AAsBA,IAAM,kBAAkB,OAAqB,EAAE,CAAC,SAAS;AAAA,EACrD,cAAc;AAAA,EACd,WAAW,CAAC,UAAU,IAAI,CAAC,WAAW,EAAE,cAAc,MAAM,EAAE;AAClE,EAAE;AAEF,IAAO,kBAAQ;",
+  "names": []
+}

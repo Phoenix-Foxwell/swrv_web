@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/routes/adminlogout.tsx"],
+  "sourcesContent": ["import { LoaderArgs, redirect } from \"@remix-run/node\";\r\nimport { adminUser, userPrefs } from \"~/cookies\";\r\n\r\nexport async function loader({ request }: LoaderArgs) {\r\n    return redirect(\"/adminlogin\", {\r\n        headers: {\r\n            \"Set-Cookie\": await adminUser.serialize({ AdminLogin: false }),\r\n        },\r\n    });\r\n}\r\n\r\nconst Logout = () => {\r\n    return (\r\n        <>\r\n            <h1>This is admin logout page.</h1>\r\n        </>\r\n    );\r\n}\r\nexport default Logout;"],
+  "mappings": ";;;;;;AAaQ;AAFR,IAAM,SAAS,MAAM;AACjB,SACI,sFACI,6DAAC,QAAG,0CAAJ;AAAA;AAAA;AAAA;AAAA,SAA8B,KADlC;AAAA;AAAA;AAAA;AAAA,SAEA;AAER;AACA,IAAO,sBAAQ;",
+  "names": []
+}

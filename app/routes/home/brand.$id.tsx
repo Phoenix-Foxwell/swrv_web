@@ -583,13 +583,7 @@ const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
         </div>
       )}
     </>
-    // <>
-
-    //   <div className="flex flex-wrap gap-6 px-10">
-    //     <PastBrandCard></PastBrandCard>
-    //     <PastBrandCard></PastBrandCard>
-    //   </div>
-    // </>
+   
   );
 };
 

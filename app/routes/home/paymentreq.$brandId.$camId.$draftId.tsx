@@ -125,7 +125,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 mt-6">
         {userDetails == UserDetailsType.insights ? (
           <div></div>
         ) : (
@@ -157,6 +157,11 @@ const PaymentRequest: React.FC = (): JSX.Element => {
                 ></MyRating>
               </div>
             ) : null}
+            <Dispute
+              brandId={brandId}
+              userId={userId}
+              campaignId={campaignId}
+            ></Dispute>
           </>
         ) : (
           <></>
@@ -320,6 +325,105 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
             >
               Request Payment
             </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+interface DisputeProps {
+  userId: string;
+  brandId: string;
+  campaignId: string;
+}
+const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
+  const [error, setError] = useState<String | null>(null);
+  const [sus, setSus] = useState<String | null>(null);
+  const messageRef = useRef<HTMLTextAreaElement | null>(null);
+  const reasonRef = useRef<HTMLSelectElement | null>(null);
+  const submit = async () => {
+    if (
+      messageRef.current?.value == null ||
+      messageRef.current?.value == undefined ||
+      messageRef.current?.value == ""
+    ) {
+      setError("Fill the message.");
+    } else if (
+      reasonRef.current?.value == null ||
+      reasonRef.current?.value == undefined ||
+      reasonRef.current?.value == "" ||
+      reasonRef.current?.value == "0"
+    ) {
+      setError("Select one reason.");
+    } else {
+      const req = {
+        type: reasonRef.current?.value,
+        userId: props.userId,
+        brandId: props.brandId,
+        campaignId: props.campaignId,
+        isBrand: 0,
+        message: messageRef.current?.value,
+      };
+
+      const data = await axios({
+        method: "post",
+        url: `${BaseUrl}/api/add-dispute`,
+        data: req,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Options": "*",
+          "Access-Control-Allow-Methods": "*",
+          "X-Content-Type-Options": "*",
+          "Content-Type": "application/json",
+          Accept: "*",
+        },
+      });
+      if (data.data.status == false) {
+        return setError(data.data.message);
+      } else {
+        setError(null);
+        setSus("Message sent!");
+        reasonRef!.current!.value = "";
+        messageRef!.current!.value = "";
+      }
+    }
+  };
+  return (
+    <>
+      <div>
+        <p className="text-md text-primary font-semibold py-1">Dispute</p>
+        <div className="w-full h-[1px] bg-slate-300"></div>
+        <div className="rounded-xl shadow-xl bg-white p-4 mt-2 w-96">
+          <select
+            ref={reasonRef}
+            name="reason"
+            id="reason"
+            className="w-full rounded-md border-none outline-none bg-gray-100 py-2 my-2 px-2"
+          >
+            <option value="1">This is bad</option>
+            <option value="2">This is so bad</option>
+            <option value="3">This is extrimily bad</option>
+            <option value="4">I just don't want it</option>
+          </select>
+          <textarea
+            ref={messageRef}
+            className="p-4 w-full h-40 outline-none border-2 border-gray-300 focus:border-gray-300 rounded-md resize-none"
+            placeholder="Your message"
+          ></textarea>
+          {error == "" || error == null || error == undefined ? null : (
+            <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+              {error}
+            </div>
+          )}
+          {sus == "" || sus == null || sus == undefined ? null : (
+            <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
+              {sus}
+            </div>
+          )}
+          <div onClick={submit}>
+            <CusButton text="Send Message" background="bg-primary"></CusButton>
           </div>
         </div>
       </div>

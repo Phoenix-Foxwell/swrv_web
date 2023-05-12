@@ -791,6 +791,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
       platform: selPlatform.join(","),
       category: selcategory[0]["id"],
       active: active ? "1" : "0",
+      role: 10,
     };
     const data = await axios.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == false) return setError(data.data.message);

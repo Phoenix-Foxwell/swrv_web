@@ -59,6 +59,11 @@ const HomePage = () => {
   return (
     <>
       <div className="overflow-hidden">
+        {userdata.brand.length == 0 ||
+        userdata.brand == null ||
+        userdata.brand == undefined ? (
+          <BrandCreate></BrandCreate>
+        ) : null}
         {/* <div className="flex mt-4">
                 <div className="grow"></div>
                 <div onClick={async () => {
@@ -67,6 +72,7 @@ const HomePage = () => {
                     <CusButton text="Logout" background="bg-[#f43f5e]" textColor={"text-white"}></CusButton>
                 </div>
             </div> */}
+
         {isOpen ? <ProfileComplete></ProfileComplete> : null}
         <Intro isBrand={isbrand}></Intro>
         {isbrand ? (
@@ -515,6 +521,29 @@ const TopInfluencer = () => {
               </div>
             );
           })}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const BrandCreate: React.FC = (): JSX.Element => {
+  return (
+    <>
+      <div className="bg-rose-500 my-4 rounded-lg w-full p-4 py-10">
+        <p className="text-center font-semibold text-white text-2xl">
+          Your Haven't created Brand
+        </p>
+        <p className="text-center font-semibold text-white text-lg">
+          Create your brand to begin the journey
+        </p>
+        <div className="w-full text-center mt-6">
+          <Link
+            className="bg-primary text-white py-2 px-6 text-center font-semibold rounded-md"
+            to={"/createbrand"}
+          >
+            Click Here to create brand
+          </Link>
         </div>
       </div>
     </>

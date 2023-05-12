@@ -138,9 +138,20 @@ export const MainNavBar = (props: MainNavBarProps) => {
               </Link>
               {props.isBrand ? null : (
                 <>
-                  {/* <Link to={"/"} onClick={() => { sidebar(SideBarTabs.MyEarnings); changMenu(false) }}>
-                                        <NavTab title="My earnings" isOpen={true} isActive={currentPage == SideBarTabs.MyEarnings} icon={faHandHoldingDollar}></NavTab>
-                                    </Link> */}
+                  <Link
+                    to={"/home/revenues"}
+                    onClick={() => {
+                      sidebar(SideBarTabs.MyEarnings);
+                      changMenu(false);
+                    }}
+                  >
+                    <NavTab
+                      title="My earnings"
+                      isOpen={true}
+                      isActive={currentPage == SideBarTabs.MyEarnings}
+                      icon={faHandHoldingDollar}
+                    ></NavTab>
+                  </Link>
                   <Link
                     to={"/home/drafts"}
                     onClick={() => {

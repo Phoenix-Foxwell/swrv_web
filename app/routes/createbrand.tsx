@@ -1,9 +1,21 @@
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
-import { NavLink, useLoaderData, useNavigate } from "@remix-run/react";
+import {
+  ActionArgs,
+  LoaderArgs,
+  LoaderFunction,
+  json,
+  redirect,
+} from "@remix-run/node";
+import {
+  Form,
+  NavLink,
+  useActionData,
+  useLoaderData,
+  useNavigate,
+} from "@remix-run/react";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CusButton } from "~/components/utils/buttont";
 import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
@@ -17,6 +29,9 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 
 const createBarnd = () => {
   const navigator = useNavigate();
+  const data = useActionData();
+  const nextButton = useRef<HTMLButtonElement>(null);
+  const uidref = useRef<HTMLInputElement>(null);
 
   const userdata = useLoaderData();
   const userId: string = userdata.user.id;
@@ -47,6 +62,10 @@ const createBarnd = () => {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const binfoRef = useRef<HTMLTextAreaElement | null>(null);
   const cinfoRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    uidref.current!.value = userId;
+  }, []);
 
   return (
     <>
@@ -275,6 +294,12 @@ const createBarnd = () => {
               {error}
             </div>
           )}
+          {/* {data.message && ( */}
+          {data == "" || data == null || data == undefined ? null : (
+            <p className="w-full border-2 border-red-500 bg-red-500 bg-opacity-5  text-center my-2 rounded-md p-2 text-sm font-semibold text-red-500">
+              {data!.message}
+            </p>
+          )}
           <div
             onClick={async () => {
               if (img == null || img == undefined) {
@@ -320,7 +345,7 @@ const createBarnd = () => {
               } else if (!EmailValidator.validate(emailRef.current?.value)) {
                 setError("Enter valid email");
               } else if (contactnumber.toString().length != 10) {
-                setError("Enter a 10 degit valid contact number");
+                setError("Enter a 10 digit valid contact number");
               } else if (
                 binfoRef.current?.value == null ||
                 binfoRef.current?.value == undefined ||
@@ -368,7 +393,9 @@ const createBarnd = () => {
                   if (data.data.status == false) {
                     return setError(data.data.message);
                   }
-                  return navigator("/home");
+                  nextButton.current!.click();
+
+                  // return navigator("/home");
                 } else {
                   setError(imageurl.data);
                 }
@@ -384,8 +411,48 @@ const createBarnd = () => {
           </div>
         </div>
       </div>
+
+      <Form method="post">
+        <input type="hidden" name="id" ref={uidref} />
+        <button ref={nextButton} name="submit">
+          Submit
+        </button>
+      </Form>
     </>
   );
 };
 
 export default createBarnd;
+
+export async function action({ request }: ActionArgs) {
+  const formData = await request.formData();
+  const value = Object.fromEntries(formData);
+  const userdata = await axios({
+    method: "post",
+    url: `${BaseUrl}/api/getuser`,
+    data: { id: value.id },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Options": "*",
+      "Access-Control-Allow-Methods": "*",
+      "X-Content-Type-Options": "*",
+      "Content-Type": "application/json",
+      Accept: "*",
+    },
+  });
+
+
+  if (userdata.data.status == false) {
+    return { message: userdata.data.message };
+  } else {
+    return redirect("/home", {
+      headers: {
+        "Set-Cookie": await userPrefs.serialize({
+          user: userdata.data.data[0],
+          isLogin: true,
+        }),
+      },
+    });
+  }
+}

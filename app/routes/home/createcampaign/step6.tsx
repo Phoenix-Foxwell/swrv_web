@@ -73,6 +73,8 @@ const Step6 = () => {
     : "2";
   const brandinfo = CreateCampaignStore((state) => state.brandinfo);
   const campaginPurpose = CreateCampaignStore((state) => state.campaginPurpose);
+  const lat = CreateCampaignStore((state) => state.lat);
+  const long = CreateCampaignStore((state) => state.long);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -101,9 +103,9 @@ const Step6 = () => {
       donts: donts,
       totalParticipants: maxInf,
       remuneration: remunerationType,
-      geoLat: "0",
-      geoLng: "0",
-      georadiusKm: "3",
+      geoLat: lat.toString(),
+      geoLng: long.toString(),
+      geoRadiusKm: "10",
       postApproval: approval,
       audienceLocations: audience,
       inviteStartAt: startDate,
@@ -147,7 +149,7 @@ const Step6 = () => {
     if (data.data.status == false) {
       return setError(data.data.message);
     }
-    const id = data.data.data["id"];
+    const id = data.data.data.campaign.id;
 
     const pdfurl = await UploadFile(pdfFile[0]);
     if (pdfurl.status) {
@@ -199,7 +201,9 @@ const Step6 = () => {
           setError(imgurl.data);
         }
       }
-      navigator("/home");
+      return navigator(
+        `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
+      );
     } else {
       setError(pdfurl.data);
     }

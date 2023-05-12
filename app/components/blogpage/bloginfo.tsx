@@ -58,7 +58,7 @@ const BlogsInfo = (props: BlogInfoProps) => {
             <h3 className="text-primary text-3xl font-bold">Top picks</h3>
             <div className="h-[1px] bg-gray-600 w-full my-2"></div>
 
-            {props.relatedArtical.splice(2,2).map((val: any, index: number) => {
+            {props.relatedArtical.slice(2, 4).map((val: any, index: number) => {
               return (
                 <div key={index}>
                   <Link key={index} to={`/blogs/bloginfo/${val.id}`}>
@@ -71,26 +71,29 @@ const BlogsInfo = (props: BlogInfoProps) => {
                 </div>
               );
             })}
-            
           </div>
         </div>
         <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mb-10  py-8">
           <h3 className="text-primary text-3xl font-bold">Related article</h3>
           <div className="h-[1px] bg-gray-600 w-full my-2"></div>
           <div className="flex gap-6 justify-center flex-wrap">
-            {props.relatedArtical.splice(0,3).map((val: any, index: number) => {
-              return (
-                <div key={index}>
-                  <Link key={index} to={`/blogs/bloginfo/${val.id}`}>
-                    <BlogsCard
-                      title={`${val.shortDesc.toString().substring(0, 50)}...`}
-                      time={val.dateTime}
-                      imageUrl={val.imageUrl}
-                    ></BlogsCard>
-                  </Link>
-                </div>
-              );
-            })}
+            {props.relatedArtical
+              .splice(0, 3)
+              .map((val: any, index: number) => {
+                return (
+                  <div key={index}>
+                    <Link key={index} to={`/blogs/bloginfo/${val.id}`}>
+                      <BlogsCard
+                        title={`${val.shortDesc
+                          .toString()
+                          .substring(0, 50)}...`}
+                        time={val.dateTime}
+                        imageUrl={val.imageUrl}
+                      ></BlogsCard>
+                    </Link>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

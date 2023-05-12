@@ -87,6 +87,8 @@ const Campaigns = () => {
   const [brandConnection, setBarndConnection] = useState<number>(0);
   const [brandComCam, setBarndComCam] = useState<number>(0);
 
+  const [aprovedBid, setApprovedBid] = useState<any>(null);
+
   const init = async () => {
     setCategory(await getCampaignType(champaign.campaignTypeId));
 
@@ -153,14 +155,20 @@ const Campaigns = () => {
       rate: myrate,
       constCount: 3,
     }));
+
+    //get approved bid
+    const bidreq = await axios.post(`${BaseUrl}/api/get-approved-bid`, {
+      campaignId: champaign.id,
+    });
+
+    if (bidreq.data.status) {
+      setApprovedBid((val: any) => bidreq.data.data[0]);
+    }
   };
   useEffect(() => {
     init();
   }, []);
 
-  // const [paymentBox, setPaymentBox] = useState<boolean>(false);
-  // const [paymentError, setPaymentError] = useState<String>("");
-  // const paymentRef = useRef<HTMLInputElement>(null);
   return (
     <>
       <div className="grid gap-y-4 lg:gap-4 grid-cols-1 lg:grid-cols-7 mt-4 justify-start align-top content-start place-items-start place-content-start">
@@ -233,28 +241,71 @@ const Campaigns = () => {
 
       {acceptreq == AcceptRequest.Accepted ? (
         <>
-          <div className="flex gap-4 flex-col lg:flex-row mt-8 flex-wrap justify-evenly">
-            <div className="w-96">
-              <CreateDraft
-                influencerId={userId}
-                champaingId={champaign.id}
-                platforms={data.platform}
-              ></CreateDraft>
-            </div>
-            <div className="w-96">
-              <p className="text-md text-primary font-semibold py-1">
-                Live campaigns
-              </p>
-              <div className="w-full h-[1px] bg-slate-300"></div>
-              <div>
-                <LinkCampaign
-                  userId={userId}
-                  campaingid={champaign.id}
-                  brandId={champaign.brand.id}
-                  cpp={champaign.costPerPost}
-                />
+          <div className="flex gap-6 flex-col lg:flex-row mt-8 flex-wrap justify-evenly">
+            {champaign.campaignTypeId != "6" ? (
+              <>
+                <div className="shrink-0 w-96">
+                  <CreateDraft
+                    influencerId={userId}
+                    champaingId={champaign.id}
+                    platforms={data.platform}
+                  ></CreateDraft>
+                </div>
+                <div className="w-96 shrink-0">
+                  <p className="text-md text-primary font-semibold py-1">
+                    Live campaigns
+                  </p>
+                  <div className="w-full h-[1px] bg-slate-300"></div>
+                  <div>
+                    <LinkCampaign
+                      userId={userId}
+                      campaingid={champaign.id}
+                      brandId={champaign.brand.id}
+                      cpp={champaign.costPerPost}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className=" shrink-0">
+                {aprovedBid == null || aprovedBid == undefined ? (
+                  <Bidding
+                    CostPerPost={champaign.costPerPost}
+                    userId={userId}
+                    campaignId={champaign.id}
+                    brandId={champaign.brand.id}
+                  ></Bidding>
+                ) : aprovedBid.userId == userId ? (
+                  <>
+                    <div className="shrink-0 w-96">
+                      <CreateDraft
+                        influencerId={userId}
+                        champaingId={champaign.id}
+                        platforms={data.platform}
+                      ></CreateDraft>
+                    </div>
+                    <div className="w-96 shrink-0">
+                      <p className="text-md text-primary font-semibold py-1">
+                        Live campaigns
+                      </p>
+                      <div className="w-full h-[1px] bg-slate-300"></div>
+                      <div>
+                        <LinkCampaign
+                          userId={userId}
+                          campaingid={champaign.id}
+                          brandId={champaign.brand.id}
+                          cpp={champaign.costPerPost}
+                        />
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full bg-rose-500 py-4 px-10 text-white font-semibold text-2xl rounded-lg">
+                    Your bid is not acpected
+                  </div>
+                )}
               </div>
-            </div>
+            )}
           </div>
           <UserCreatedDrafts userId={userId} campaingid={champaign.id} />
         </>
@@ -278,6 +329,13 @@ const Campaigns = () => {
               campaingid={champaign.id}
               currency={user.currency.code}
             ></ChampaingPaymentRequest>
+
+            {champaign.campaignTypeId == "6" ? (
+              <ChampaingBidRequest
+                userid={user.id}
+                campaingid={champaign.id}
+              ></ChampaingBidRequest>
+            ) : null}
           </>
         ) : null}
       </div>
@@ -1534,7 +1592,9 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
       </div>
       <div className="p-4 rounded-xl shadow-xl bg-white">
         {respayment.length == 0 ? (
-          <div>No Invite request is pending</div>
+          <>
+            <div>No payment request is pending</div>
+          </>
         ) : (
           <div>
             <p className="text-md font-medium">Requested Payment</p>
@@ -1544,7 +1604,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
                 return (
                   <div
                     key={index}
-                    className="p-4 bg-white rounded-lg shadow-lg"
+                    className="p-4 bg-white rounded-lg shadow-lg w-72"
                   >
                     <p className="mt-2 text-md font-medium">Requested by</p>
                     <div className="w-full h-[2px] bg-gray-700"></div>
@@ -1850,6 +1910,286 @@ const LinkCampaign: React.FC<LinkCampaignProps> = (
           </div>
         );
       })}
+    </>
+  );
+};
+
+interface BiddingProps {
+  CostPerPost: string;
+  campaignId: string;
+  brandId: string;
+  userId: string;
+}
+
+const Bidding: React.FC<BiddingProps> = (props: BiddingProps): JSX.Element => {
+  const [error, setError] = useState<String>("");
+  const [amount, setAmount] = useState<number>(0);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+
+  const [bidamount, setBidamount] = useState<number>(0);
+  const handelcontent = (e: any) => {
+    setBidamount(e.target.value.replace(/\D/g, ""));
+  };
+
+  const init = async () => {
+    const camp = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/get-campaign-last-bid`,
+      data: { campaignId: props.campaignId },
+    });
+    if (camp.data.status == false) {
+      setAmount(0);
+    } else {
+      setAmount(camp.data.data[0].bidamount);
+    }
+  };
+  useEffect(() => {
+    init();
+  }, []);
+
+  const submit = async () => {
+    if (bidamount == undefined || bidamount == null) {
+      setError("Fill the Bid amount.");
+    } else if (Number(bidamount) % 100 !== 0) {
+      setError("Bid amount must be a multiple of 100.");
+    } else if (amount < Number(bidamount)) {
+      setError("Bid amount must be less then current bid amount.");
+    } else if (
+      messageRef.current?.value == null ||
+      messageRef.current?.value == undefined ||
+      messageRef.current?.value == ""
+    ) {
+      setError("Fill the remark.");
+    } else {
+      const req = {
+        brandId: props.brandId,
+        userId: props.userId,
+        campaignId: props.campaignId,
+        remark: messageRef.current?.value,
+        bidamount: Number(bidamount),
+      };
+
+      const data = await axios({
+        method: "post",
+        url: `${BaseUrl}/api/add-bid`,
+        data: req,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Options": "*",
+          "Access-Control-Allow-Methods": "*",
+          "X-Content-Type-Options": "*",
+          "Content-Type": "application/json",
+          Accept: "*",
+        },
+      });
+
+      if (data.data.status == false) {
+        setError(data.data.message);
+      } else {
+        window.location.reload();
+      }
+    }
+  };
+
+  return (
+    <>
+      <p className="text-md text-primary font-semibold py-1">Bidding</p>
+      <div className="w-full h-[1px] bg-slate-300"></div>
+      <div className="p-4 bg-white mt-2 rounded-md">
+        <p className="font-semibold text-xl  text-gray-800">
+          Starting price : {props.CostPerPost.split(".")[0]}
+        </p>
+        <p className="font-semibold text-xl  text-gray-800 mt-2">
+          Current price : {amount.toString().split(".")[0]}
+        </p>
+        <p className="font-semibold text-xl  text-gray-700 my-2">
+          Min Bid : 100
+        </p>
+        <div className="flex gap-x-4">
+          <p className="font-semibold text-xl text-gray-700">Enter Amount : </p>
+          <div>
+            <input
+              onChange={handelcontent}
+              value={bidamount}
+              type={"text"}
+              maxLength={10}
+              className="text-black outline-none border-none rounded-md py-1 px-2 bg-[#EEEEEE] w-full"
+            />
+          </div>
+        </div>
+        <textarea
+          ref={messageRef}
+          className="p-4 w-full h-32 outline-none border-2 bg-[#EEEEEE] focus:border-gray-300 rounded-md resize-none mt-4"
+          placeholder="Remark"
+        ></textarea>
+        {error == "" || error == null || error == undefined ? null : (
+          <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+            {error}
+          </div>
+        )}
+        <button
+          onClick={submit}
+          className={`text-black bg-[#01FFF4] rounded-lg w-full text-center py-2 font-semibold text-md mt-2`}
+        >
+          Bid Now
+        </button>
+      </div>
+    </>
+  );
+};
+
+type ChampaingBidRequestProps = {
+  campaingid: string;
+  userid: string;
+};
+
+const ChampaingBidRequest = (props: ChampaingBidRequestProps) => {
+  const [resbid, setResbid] = useState<any[]>([]);
+
+  const [acceptbox, setAcceptbox] = useState<boolean>(false);
+
+  const [error, setError] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
+
+  const init = async () => {
+    let req = {
+      campaignId: props.campaingid,
+    };
+    const responseData = await axios.post(
+      `${BaseUrl}/api/get-campaign-bid`,
+      req
+    );
+    if (responseData.data.status) {
+      setResbid(responseData.data.data);
+    } else {
+      setError(responseData.data.message);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  const acceptRequest = async () => {
+    let req = {
+      id: id,
+    };
+    const responseData = await axios.post(`${BaseUrl}/api/approve-bid`, req);
+    if (responseData.data.staus == false)
+      return setError(responseData.data.message);
+    setAcceptbox(false);
+    window.location.reload();
+  };
+
+  return (
+    <>
+      <div
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
+          acceptbox ? "grid" : "hidden"
+        }`}
+      >
+        <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
+          <p className="text-center font-medium text-2xl">Accept</p>
+          <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+          <p className="text-center font-medium text-gray-800">
+            Are you sure you want to accept this payment?
+          </p>
+          {error == "" || error == null || error == undefined ? null : (
+            <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+              {error}
+            </div>
+          )}
+          <div className="flex mt-2">
+            <button
+              onClick={() => {
+                setAcceptbox(false);
+              }}
+              className="bg-white rounded-xl text-red-500 font-normal border-2 border-red-500 py-1 px-2 w-28 hover:text-white hover:bg-red-500"
+            >
+              <FontAwesomeIcon
+                className="mx-2"
+                icon={faThumbsDown}
+              ></FontAwesomeIcon>
+              Cancel
+            </button>
+            <div className="grow"></div>
+            <button
+              onClick={acceptRequest}
+              className="bg-white rounded-xl text-green-500 font-normal border-2 border-green-500 py-1 px-2 w-28 hover:text-white hover:bg-green-500"
+            >
+              <FontAwesomeIcon
+                className="mx-2"
+                icon={faThumbsUp}
+              ></FontAwesomeIcon>
+              Accept
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 rounded-xl shadow-xl bg-white mt-4">
+        {resbid.length == 0 ? (
+          <>
+            <div>No bid request is pending</div>
+          </>
+        ) : (
+          <div>
+            <p className="text-md font-medium">Requested Bid</p>
+            <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+            <div className="flex flex-wrap gap-6">
+              {resbid.map((val: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="p-4 bg-white rounded-lg shadow-lg"
+                  >
+                    <p className="mt-2 text-md font-medium">Requested by</p>
+                    <div className="w-full h-[2px] bg-gray-700"></div>
+                    <div className="flex mt-4">
+                      <img
+                        src={val.userPicUrl}
+                        alt="influencer pic"
+                        className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                      />
+                      <div className="ml-2">
+                        <p className="text-md font-medium">
+                          {val.userName.split("@")[0]}
+                        </p>
+                        <p className="text-sm font-medium">{val.userEmail}</p>
+                      </div>
+                    </div>
+                    <p className="text-lg font-medium">Amount</p>
+                    <p className="text-md font-semibold">{val.bidamount}</p>
+                    <p className="text-lg font-medium mt-2">Remark</p>
+                    <p className="text-md font-semibold">{val.remark}</p>
+                    <div className="flex gap-4 mt-2">
+                      <button
+                        onClick={() => {
+                          setId(val.id);
+                          setAcceptbox(true);
+                        }}
+                        className="bg-white  text-green-500 font-normal border-2 border-green-500 py-1 px-2 w-28 hover:text-white hover:bg-green-500"
+                      >
+                        <FontAwesomeIcon
+                          className="mx-2"
+                          icon={faThumbsUp}
+                        ></FontAwesomeIcon>
+                        Accept
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {error == "" || error == null || error == undefined ? null : (
+          <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+            {error}
+          </div>
+        )}
+      </div>
     </>
   );
 };

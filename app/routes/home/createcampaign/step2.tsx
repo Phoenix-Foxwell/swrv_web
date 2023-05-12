@@ -513,7 +513,7 @@ const Step2 = () => {
 
                             if (campaginType == "2") {
                                 if (rating == 0) {
-                                    setError("Seleect minimun rating");
+                                    setError("Select minimun rating");
                                 } else {
                                     setrating(rating)
                                     navigator("/home/createcampaign/step3");

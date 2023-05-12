@@ -12,7 +12,10 @@ import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import axios from "axios";
 import isbot from "isbot";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Bar } from "react-chartjs-2";
+import { Rating } from "react-simple-star-rating";
+import { format } from "timeago.js";
 import useLocalStorageState from "use-local-storage-state";
 import { CusButton } from "~/components/utils/buttont";
 import MyRating from "~/components/utils/raiting";
@@ -23,6 +26,11 @@ enum UserDetailsType {
   insights,
   payments,
   camapaign,
+  channels,
+  personalInfo,
+  pastAssociations,
+  reviews,
+  dispute,
 }
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
@@ -72,7 +80,6 @@ const BrandPage = () => {
 
   const campaign = useLoaderData().campaign;
 
-
   const isBrand = curUser.role.code == "50" ? true : false;
   const invitetocamp = async (id: number) => {
     let req1 = {
@@ -108,7 +115,7 @@ const BrandPage = () => {
   const init = async () => {
     const req = {
       search: {
-        type:"1",
+        type: "1",
         brand: curUser.brand.id,
         influencer: user.id,
       },
@@ -136,7 +143,7 @@ const BrandPage = () => {
         }`}
         style={{ zIndex: 100 }}
       >
-        <div className="p-6 bg-white rounded-xl shadow-xl w-96 h-80 min-h-min">
+        <div className="p-6 bg-white rounded-xl shadow-xl w-96 h-80 min-h-min flex flex-col">
           <div className="flex">
             <div className="grow"></div>
             <div
@@ -158,6 +165,11 @@ const BrandPage = () => {
               {error}
             </div>
           )}
+          {campaign.length == 0 ? (
+            <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2">
+              You don't have any campaign
+            </div>
+          ) : null}
           <div className="overflow-y-scroll no-scrollbar">
             {campaign.map((val: any, index: number) => {
               return (
@@ -319,73 +331,641 @@ const BrandPage = () => {
           </div>
         </div>
       </div>
+      {/* tabs start here */}
+      <div className="w-full mt-4 shadow-xl bg-white rounded-xl flex gap-4 overflow-x-scroll px-4">
+        <UserPageTabs
+          text="Insights"
+          currentTab={userDetails}
+          tab={UserDetailsType.insights}
+          click={() => {
+            setUserDetails(UserDetailsType.insights);
+          }}
+        ></UserPageTabs>
 
-      <div className="w-full mt-4 shadow-xl bg-white rounded-xl">
-        <div className="flex mx-4 gap-4">
-          <div
-            onClick={() => {
-              setUserDetails(UserDetailsType.insights);
-            }}
-          >
-            <CusButton
-              text="Insights"
-              background={`${
-                userDetails == UserDetailsType.insights
-                  ? "bg-[#01FFF4]"
-                  : "bg-gray-100"
-              }`}
-              fontwidth="font-bold"
-              textColor={`${
-                userDetails == UserDetailsType.insights
-                  ? "text-black"
-                  : "text-gray-600"
-              }`}
-            ></CusButton>
-          </div>
-          <div
-            onClick={() => {
-              setUserDetails(UserDetailsType.payments);
-            }}
-          >
-            <CusButton
-              text="Payments"
-              background={`${
-                userDetails == UserDetailsType.payments
-                  ? "bg-[#01FFF4]"
-                  : "bg-gray-100"
-              }`}
-              fontwidth="font-bold"
-              textColor={`${
-                userDetails == UserDetailsType.payments
-                  ? "text-black"
-                  : "text-gray-600"
-              }`}
-            ></CusButton>
-          </div>
-        </div>
+        <UserPageTabs
+          text="Payments"
+          currentTab={userDetails}
+          tab={UserDetailsType.payments}
+          click={() => {
+            setUserDetails(UserDetailsType.payments);
+          }}
+        ></UserPageTabs>
+
+        <UserPageTabs
+          text="Channels"
+          currentTab={userDetails}
+          tab={UserDetailsType.channels}
+          click={() => {
+            setUserDetails(UserDetailsType.channels);
+          }}
+        ></UserPageTabs>
+
+        <UserPageTabs
+          text="Personal Info"
+          currentTab={userDetails}
+          tab={UserDetailsType.personalInfo}
+          click={() => {
+            setUserDetails(UserDetailsType.personalInfo);
+          }}
+        ></UserPageTabs>
+
+        <UserPageTabs
+          text="Past Associations"
+          currentTab={userDetails}
+          tab={UserDetailsType.pastAssociations}
+          click={() => {
+            setUserDetails(UserDetailsType.pastAssociations);
+          }}
+        ></UserPageTabs>
+
+        <UserPageTabs
+          text="Reviews"
+          currentTab={userDetails}
+          tab={UserDetailsType.reviews}
+          click={() => {
+            setUserDetails(UserDetailsType.reviews);
+          }}
+        ></UserPageTabs>
+        <UserPageTabs
+          text="Dispute"
+          currentTab={userDetails}
+          tab={UserDetailsType.dispute}
+          click={() => {
+            setUserDetails(UserDetailsType.dispute);
+          }}
+        ></UserPageTabs>
       </div>
-      <div className="w-full mt-4 flex flex-wrap gap-4 rounded-xl">
+      {/* tabs end here */}
+
+      {/* tab details start herer */}
+      <div>
         {userDetails == UserDetailsType.payments ? (
           <div>
-            {!submit ? (
-              <>
-                <p className="text-md text-primary font-semibold py-1">
-                  Rating
-                </p>
-                <div className="w-full h-[1px] bg-slate-300"></div>
-                <MyRating
-                  campaignId="0"
-                  brandId={curUser.brand.id}
-                  influencerId={user.id}
-                  reviewType="1"
-                ></MyRating>
-              </>
-            ) : null}
+            <Payment userId={user.id}></Payment>
           </div>
         ) : null}
       </div>
+
+      {userDetails == UserDetailsType.channels ? (
+        <Channels userId={user.id}></Channels>
+      ) : null}
+      {userDetails == UserDetailsType.personalInfo ? (
+        <PersonalInfo
+          name={user.userName.toString().split("@")[0]}
+          bio={user.bio}
+          career={user.careerHistory}
+          personal={user.personalHistory}
+          external={user.externalLinks}
+        ></PersonalInfo>
+      ) : null}
+
+      {userDetails == UserDetailsType.pastAssociations ? (
+        <PastBrandAssociation
+          userId={user.id}
+          brandId={curUser.brand.id}
+        ></PastBrandAssociation>
+      ) : null}
+      {userDetails == UserDetailsType.reviews ? (
+        <>
+          {!submit ? (
+            <>
+              <p className="text-md text-primary font-semibold py-1">Rating</p>
+              <div className="w-full h-[1px] bg-slate-300"></div>
+
+              <MyRating
+                campaignId="0"
+                brandId={curUser.brand.id}
+                influencerId={user.id}
+                reviewType="1"
+              ></MyRating>
+            </>
+          ) : null}
+
+          <p className="text-md text-primary font-semibold py-1">
+            Your Reviews
+          </p>
+          <div className="w-full h-[1px] bg-slate-300"></div>
+          <Review userId={user.id} brandId={curUser.brand.id}></Review>
+        </>
+      ) : null}
+
+      {userDetails == UserDetailsType.dispute ? (
+        <Dispute brandId={curUser.brand.id} userId={user.id}></Dispute>
+      ) : null}
+      {/* tab detals end here */}
     </>
   );
 };
 
 export default BrandPage;
+
+interface UserPageTabsProps {
+  tab: UserDetailsType;
+  currentTab: UserDetailsType;
+  text: string;
+  click: () => void;
+}
+const UserPageTabs: React.FC<UserPageTabsProps> = (
+  props: UserPageTabsProps
+): JSX.Element => {
+  return (
+    <>
+      <div onClick={props.click}>
+        <CusButton
+          text={props.text}
+          background={`${
+            props.currentTab == props.tab ? "bg-[#01FFF4]" : "bg-gray-100"
+          }`}
+          fontwidth="font-bold"
+          textColor={`${
+            props.currentTab == props.tab ? "text-black" : "text-gray-600"
+          }`}
+        ></CusButton>
+      </div>
+    </>
+  );
+};
+
+interface ChannelsProps {
+  userId: string;
+}
+
+const Channels: React.FC<ChannelsProps> = (
+  props: ChannelsProps
+): JSX.Element => {
+  const [handles, setHandles] = useState<any[]>([]);
+
+  const init = async () => {
+    const datahandles = await axios.post(
+      `${BaseUrl}/api/get-user-handles`,
+      { userId: props.userId },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Options": "*",
+          "Access-Control-Allow-Methods": "*",
+          "X-Content-Type-Options": "*",
+          "Content-Type": "application/json",
+          Accept: "*",
+        },
+      }
+    );
+
+    setHandles((val) => datahandles.data.data);
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <>
+      <div className="bg-white p-4 w-full mt-4 flex flex-wrap gap-4 rounded-xl">
+        <table className="md:w-full md:table-auto border-separate border-spacing-y-3 w-[700px]">
+          <thead className="w-full bg-gray-100 rounded-xl p-2">
+            <tr>
+              <th scope="col" className="mt-2 font-normal p-2 text-left">
+                Media
+              </th>
+              <th scope="col" className="mt-2 font-normal p-2 text-left">
+                Platform Name
+              </th>
+              <th scope="col" className="mt-2 font-normal p-2 text-left">
+                Account
+              </th>
+              <th scope="col" className="mt-2 font-normal p-2 text-left">
+                Followers
+              </th>
+            </tr>
+          </thead>
+          <tbody className="gap-y-4">
+            {handles.map((val: any, index: number) => (
+              <tr key={index}>
+                <td>
+                  <img
+                    src={val.platformLogoUrl}
+                    alt="error"
+                    className="w-12 h-12 rounded-md object-cover"
+                  />
+                </td>
+                <td>{val.platformName}</td>
+                <td>{val.handleName}</td>
+                <td>{val.follower.toString().split(".")[0]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+};
+
+interface PersonalInfoProps {
+  name: string;
+  bio: string;
+  personal: string;
+  career: string;
+  external: string;
+}
+
+const PersonalInfo: React.FC<PersonalInfoProps> = (
+  props: PersonalInfoProps
+): JSX.Element => {
+  const bio =
+    props.bio == null || props.bio == undefined || props.bio == ""
+      ? "User bio is empty."
+      : props.bio;
+  const personal =
+    props.personal == null ||
+    props.personal == undefined ||
+    props.personal == ""
+      ? "User personal history is empty."
+      : props.personal;
+  const career =
+    props.career == null || props.career == undefined || props.career == ""
+      ? "User career history is empty."
+      : props.career;
+  const external =
+    props.external == null ||
+    props.external == undefined ||
+    props.external == ""
+      ? "User external links is empty."
+      : props.external;
+  return (
+    <>
+      <div className="bg-white p-4 w-full mt-4 rounded-xl">
+        <h3 className="text-primary text-xl font-semibold mt-4">
+          {props.name}
+        </h3>
+        <p className="text-left font-normal text-gray-700">{bio}</p>
+        <h3 className="text-primary text-xl font-semibold mt-4">
+          Personal Life
+        </h3>
+        <p className="text-left font-normal text-gray-700">{personal}</p>
+        <h3 className="text-primary text-xl font-semibold mt-4">Career</h3>
+        <p className="text-left font-normal text-gray-700">{career}</p>
+        <h3 className="text-primary text-xl font-semibold mt-4">
+          External Links
+        </h3>
+        <p className="text-left font-normal text-gray-700">{external}</p>
+      </div>
+    </>
+  );
+};
+
+interface PastBrandAssociationProps {
+  brandId: string;
+  userId: string;
+}
+const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
+  props: PastBrandAssociationProps
+): JSX.Element => {
+  const [resDarft, setResDarft] = useState<any[]>([]);
+
+  const init = async () => {
+    let req = {
+      search: {
+        fromUser: props.userId,
+        influencer: props.userId,
+        brand: props.brandId,
+      },
+    };
+
+    const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
+
+    if (responseData.data.status == true) {
+      setResDarft(responseData.data.data);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <>
+      <div className="bg-white p-4 w-full mt-4 rounded-xl">
+        {resDarft.length == 0 ? (
+          <div className="text-center w-full px-4 py-8 text-2xl text-gray-600 font-semibold ">
+            This brand have no past associations with you.
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-6 pb-8 pt-6">
+            {resDarft.map((val: any, index: number) => {
+              let image =
+                val["brand"].length == 0 ||
+                val["brand"] == undefined ||
+                val["brand"] == null ||
+                val["brand"] == ""
+                  ? "/images/avatar/user.png"
+                  : val["brand"]["logo"] == "0" ||
+                    val["brand"]["logo"] == undefined ||
+                    val["brand"]["logo"] == null ||
+                    val["brand"]["logo"] == ""
+                  ? "/images/avatar/user.png"
+                  : val["brand"]["logo"];
+              return (
+                <div
+                  key={index}
+                  className="my-2 p-4 bg-white rounded-lg shadow-lg w-60"
+                >
+                  <div className="flex">
+                    <img
+                      src={image}
+                      alt="influencer pic"
+                      className="w-10 h-10 shrink-0 rounded-md"
+                    />
+                    <div className="ml-2">
+                      <p className="text-md font-medium">{val.brand.name}</p>
+                      <p className="text-sm font-medium">{val.brand.email}</p>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-md font-medium">Description</p>
+                  <p className="text-sm font-medium">{val.description}</p>
+                  <p className="mt-2 text-md font-medium">Attachment</p>
+                  <a
+                    target="_blank"
+                    className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
+                    href={val.attach01}
+                  >
+                    View pdf
+                  </a>
+                  <p className="mt-2 text-md font-medium">Status</p>
+                  <p
+                    className={`mt-2 text-md text-white font-medium text-center rounded-md ${
+                      val.status.name == "ACCEPTED"
+                        ? "bg-green-500"
+                        : val.status.name == "PENDING"
+                        ? "bg-yellow-500"
+                        : "bg-red-500"
+                    }`}
+                  >
+                    {val.status.name}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+interface RreviewProps {
+  brandId: string;
+  userId: string;
+}
+const Review: React.FC<RreviewProps> = (props: RreviewProps): JSX.Element => {
+  const [review, setReview] = useState<any[]>([]);
+
+  const init = async () => {
+    const datareview = await axios.post(
+      `${BaseUrl}/api/get-user-review`,
+      { userId: props.userId },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Options": "*",
+          "Access-Control-Allow-Methods": "*",
+          "X-Content-Type-Options": "*",
+          "Content-Type": "application/json",
+          Accept: "*",
+        },
+      }
+    );
+
+    setReview((val) => datareview.data.data);
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+  return (
+    <>
+      <div className="bg-white p-4 w-full mt-4 rounded-xl flex-wrap flex gap-6">
+        {review.map((val: any, index: number) => {
+          return (
+            <div className="rounded-md shadow-lg p-6 w-80" key={index}>
+              <div className="flex gap-4">
+                <img
+                  src={val.brandLogoUrl}
+                  alt="brand logo"
+                  className="w-20 h-20 rounded-md object-cover object-center"
+                />
+                <div className="h-full">
+                  <p className="text-xl font-medium">{val.brandName}</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-lg text-gray-600 font-medium mt-4">
+                  Campaign Rating
+                </p>
+                <Rating
+                  initialValue={Math.floor(
+                    (Number(val.avg_rating1) +
+                      Number(val.avg_rating2) +
+                      Number(val.avg_rating3)) /
+                      3
+                  )}
+                  size={35}
+                ></Rating>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+interface PaymentProps {
+  userId: string;
+}
+
+const Payment: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
+  const [status, setStatus] = useState<any[]>([]);
+
+  const init = async () => {
+    const status = await axios.post(
+      `${BaseUrl}/api/payment-status`,
+      { userId: props.userId },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Options": "*",
+          "Access-Control-Allow-Methods": "*",
+          "X-Content-Type-Options": "*",
+          "Content-Type": "application/json",
+          Accept: "*",
+        },
+      }
+    );
+
+    setStatus((val) => status.data.data);
+  };
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <>
+      <div>
+        <div className="bg-white py-2 rounded-md p-6 mt-10 overflow-x-scroll">
+          <p className="text-left font-semibold text-2xl text-gray-800 my-4">
+            Brand wise revenue
+          </p>
+          {status.length == 0 ? (
+            <p className="text-center font-semibold text-gray-600 text-2xl">
+              There is nothing to show
+            </p>
+          ) : (
+            <table className="md:w-full md:table-auto border-separate border-spacing-y-3 w-[700px]">
+              <thead className="w-full bg-gray-100 rounded-xl p-2">
+                <tr>
+                  <th scope="col" className="mt-2 font-normal p-2 text-left">
+                    Brand
+                  </th>
+                  <th scope="col" className="mt-2 font-normal p-2 text-left">
+                    Campaign Name
+                  </th>
+                  <th scope="col" className="mt-2 font-normal p-2 text-left">
+                    Earning
+                  </th>
+                  <th scope="col" className="mt-2 font-normal p-2 text-left">
+                    Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="gap-y-4">
+                {status.map((val: any, index: number) => (
+                  <tr key={index}>
+                    <td>
+                      <img
+                        src={val.brandLogoUrl}
+                        alt="error"
+                        className="w-12 h-12 rounded-md object-cover"
+                      />
+                    </td>
+                    <td>{val.campaign_name}</td>
+                    <td>
+                      {" "}
+                      {val.total_amount_requested.toString().split(".")[0]}
+                    </td>
+                    <td>
+                      {format(
+                        new Date(
+                          Date.now() -
+                            val.days_since_payment_made * 24 * 60 * 60 * 1000
+                        )
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
+
+interface DisputeProps {
+  userId: string;
+  brandId: string;
+}
+const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
+  const [error, setError] = useState<String | null>(null);
+  const [sus, setSus] = useState<String | null>(null);
+  const messageRef = useRef<HTMLTextAreaElement | null>(null);
+  const reasonRef = useRef<HTMLSelectElement | null>(null);
+  const submit = async () => {
+    if (
+      messageRef.current?.value == null ||
+      messageRef.current?.value == undefined ||
+      messageRef.current?.value == ""
+    ) {
+      setError("Fill the message.");
+    } else if (
+      reasonRef.current?.value == null ||
+      reasonRef.current?.value == undefined ||
+      reasonRef.current?.value == "" ||
+      reasonRef.current?.value == "0"
+    ) {
+      setError("Select one reason.");
+    } else {
+      const req = {
+        type: reasonRef.current?.value,
+        userId: props.userId,
+        brandId: props.brandId,
+        isBrand: 0,
+        message: messageRef.current?.value,
+      };
+
+      const data = await axios({
+        method: "post",
+        url: `${BaseUrl}/api/add-dispute`,
+        data: req,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Options": "*",
+          "Access-Control-Allow-Methods": "*",
+          "X-Content-Type-Options": "*",
+          "Content-Type": "application/json",
+          Accept: "*",
+        },
+      });
+      if (data.data.status == false) {
+        return setError(data.data.message);
+      } else {
+        setError(null);
+        setSus("Message sent!");
+        reasonRef!.current!.value = "";
+        messageRef!.current!.value = "";
+      }
+    }
+  };
+  return (
+    <>
+      <div>
+        <p className="text-md text-primary font-semibold py-1">Dispute</p>
+        <div className="w-full h-[1px] bg-slate-300"></div>
+        <div className="rounded-xl shadow-xl bg-white p-4 mt-2 w-96">
+          <select
+            ref={reasonRef}
+            name="reason"
+            id="reason"
+            className="w-full rounded-md border-none outline-none bg-gray-100 py-2 my-2 px-2"
+          >
+            <option value="1">This is bad</option>
+            <option value="2">This is so bad</option>
+            <option value="3">This is extrimily bad</option>
+            <option value="4">I just don't want it</option>
+          </select>
+          <textarea
+            ref={messageRef}
+            className="p-4 w-full h-40 outline-none border-2 border-gray-300 focus:border-gray-300 rounded-md resize-none"
+            placeholder="Your message"
+          ></textarea>
+          {error == "" || error == null || error == undefined ? null : (
+            <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+              {error}
+            </div>
+          )}
+          {sus == "" || sus == null || sus == undefined ? null : (
+            <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
+              {sus}
+            </div>
+          )}
+          <div onClick={submit}>
+            <CusButton text="Send Message" background="bg-primary"></CusButton>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};

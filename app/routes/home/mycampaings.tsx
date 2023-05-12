@@ -226,7 +226,6 @@ const UserDrafts = (props: UserDraftsProps) => {
       search: {
         status: "3",
         influencer: props.userid,
-        // fromUser: props.userid,
       },
     };
     const apidata = await axios({
@@ -258,7 +257,7 @@ const UserDrafts = (props: UserDraftsProps) => {
           icon={faIdBadge}
           className="text-md text-secondary"
         ></FontAwesomeIcon>{" "}
-        Your Campaign{" "}
+        Active Campaign{" "}
       </div>
       {userDraft.length == 0 ? (
         <h1 className="text-black font-medium text-xl text-center">

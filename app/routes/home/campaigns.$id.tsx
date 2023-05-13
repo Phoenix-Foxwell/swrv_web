@@ -301,7 +301,7 @@ const Campaigns = () => {
                   </>
                 ) : (
                   <div className="w-full bg-rose-500 py-4 px-10 text-white font-semibold text-2xl rounded-lg">
-                    Your bid is not acpected
+                    Your bid is not accepted
                   </div>
                 )}
               </div>
@@ -1629,7 +1629,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
                     </p>
                     {parseInt(val.status.code) == 2 ? (
                       <p className="py-1 px-4 text-center text-white bg-green-500 rounded-md my-2">
-                        Acpected
+                        Accepted
                       </p>
                     ) : parseInt(val.status.code) == 3 ? (
                       <p className="py-1 px-4 text-center text-white bg-red-500 rounded-md my-2">

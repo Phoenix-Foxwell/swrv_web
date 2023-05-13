@@ -59,10 +59,12 @@ const HomePage = () => {
   return (
     <>
       <div className="overflow-hidden">
-        {userdata.brand.length == 0 ||
-        userdata.brand == null ||
-        userdata.brand == undefined ? (
-          <BrandCreate></BrandCreate>
+        {isbrand ? (
+          userdata.brand.length == 0 ||
+          userdata.brand == null ||
+          userdata.brand == undefined ? (
+            <BrandCreate></BrandCreate>
+          ) : null
         ) : null}
         {/* <div className="flex mt-4">
                 <div className="grow"></div>

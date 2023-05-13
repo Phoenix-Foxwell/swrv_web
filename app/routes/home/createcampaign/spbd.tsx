@@ -249,9 +249,6 @@ const Spbd = () => {
               <div
                 className="w-full"
                 onClick={async () => {
-                  const x = new Date(StartDate!.current!.value);
-                  const y = new Date(EndDate!.current!.value);
-                  const pass_date: boolean = x > y;
                   if (
                     platform == null ||
                     platform.length == 0 ||
@@ -286,6 +283,9 @@ const Spbd = () => {
                     setError("Fill the cost per post");
                   } else {
                     if (campaginType == "6") {
+                      const x = new Date(StartDate!.current!.value);
+                      const y = new Date(EndDate!.current!.value);
+                      const pass_date: boolean = x > y;
                       if (
                         StartDate.current?.value == null ||
                         StartDate.current?.value == undefined ||

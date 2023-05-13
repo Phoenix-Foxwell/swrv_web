@@ -18,20 +18,30 @@ export const loader = async ({ request }: LoaderArgs) => {
   const cookieHeader = request.headers.get("Cookie");
   const cookie = await userPrefs.parse(cookieHeader);
   const userid = cookie.user.id;
+
   const campdata = await axios({
     method: "post",
     url: `${BaseUrl}/api/get-my-campaigns`,
     data: { id: userid },
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*",
-      "Access-Control-Allow-Options": "*",
-      "Access-Control-Allow-Methods": "*",
-      "X-Content-Type-Options": "*",
-      "Content-Type": "application/json",
-      Accept: "*",
-    },
   });
+
+  // const req1 = { id: userid };
+
+  // const campdata = await axios({
+  //   method: "post",
+  //   url: `${BaseUrl}/api/get-my-campaigns`,
+  //   data: req1,
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Headers": "*",
+  //     "Access-Control-Allow-Options": "*",
+  //     "Access-Control-Allow-Methods": "*",
+  //     "X-Content-Type-Options": "*",
+  //     "Content-Type": "application/json",
+  //     Accept: "*",
+  //   },
+  // });
+  // console.log(campdata.data);
 
   let req = {
     search: {
@@ -54,6 +64,7 @@ export const loader = async ({ request }: LoaderArgs) => {
       Accept: "*",
     },
   });
+
   return json({
     userdata: cookie.user,
     camp: campdata.data.data,

@@ -451,6 +451,8 @@ var Payments = (props) => {
           {
             onClick: async () => {
               var _a, _b, _c, _d, _e;
+              console.log(props.cpp);
+              console.log(requested);
               if (((_a = paymentRef.current) == null ? void 0 : _a.value) == null || ((_b = paymentRef.current) == null ? void 0 : _b.value) == void 0 || ((_c = paymentRef.current) == null ? void 0 : _c.value) == "") {
                 setPaymentError("Enter the amount");
               } else if (parseInt((_d = paymentRef.current) == null ? void 0 : _d.value) > parseInt(props.cpp) - requested) {
@@ -478,6 +480,7 @@ var Payments = (props) => {
                 }
                 return setPaymentBox(false);
               }
+              window.location.reload();
             },
             className: `text-black bg-[#01FFF4] rounded-lg w-full text-center py-2 font-semibold text-md mt-2`,
             children: "Request Payment"
@@ -558,12 +561,12 @@ var Dispute = (props) => {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { className: "text-md text-primary font-semibold py-1", children: "Dispute" }, void 0, false, {
       fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-      lineNumber: 396,
+      lineNumber: 399,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "w-full h-[1px] bg-slate-300" }, void 0, false, {
       fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-      lineNumber: 397,
+      lineNumber: 400,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "rounded-xl shadow-xl bg-white p-4 mt-2 w-96", children: [
@@ -577,22 +580,22 @@ var Dispute = (props) => {
           children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "1", children: "This is bad" }, void 0, false, {
               fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-              lineNumber: 405,
+              lineNumber: 408,
               columnNumber: 13
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "2", children: "This is so bad" }, void 0, false, {
               fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-              lineNumber: 406,
+              lineNumber: 409,
               columnNumber: 13
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "3", children: "This is extrimily bad" }, void 0, false, {
               fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-              lineNumber: 407,
+              lineNumber: 410,
               columnNumber: 13
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("option", { value: "4", children: "I just don't want it" }, void 0, false, {
               fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-              lineNumber: 408,
+              lineNumber: 411,
               columnNumber: 13
             }, this)
           ]
@@ -601,7 +604,7 @@ var Dispute = (props) => {
         true,
         {
           fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-          lineNumber: 399,
+          lineNumber: 402,
           columnNumber: 11
         },
         this
@@ -617,46 +620,46 @@ var Dispute = (props) => {
         false,
         {
           fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-          lineNumber: 410,
+          lineNumber: 413,
           columnNumber: 11
         },
         this
       ),
       error == "" || error == null || error == void 0 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, false, {
         fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-        lineNumber: 416,
+        lineNumber: 419,
         columnNumber: 13
       }, this),
       sus == "" || sus == null || sus == void 0 ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4", children: sus }, void 0, false, {
         fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-        lineNumber: 421,
+        lineNumber: 424,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { onClick: submit, children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CusButton, { text: "Send Message", background: "bg-primary" }, void 0, false, {
         fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-        lineNumber: 426,
+        lineNumber: 429,
         columnNumber: 13
       }, this) }, void 0, false, {
         fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-        lineNumber: 425,
+        lineNumber: 428,
         columnNumber: 11
       }, this)
     ] }, void 0, true, {
       fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-      lineNumber: 398,
+      lineNumber: 401,
       columnNumber: 9
     }, this)
   ] }, void 0, true, {
     fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-    lineNumber: 395,
+    lineNumber: 398,
     columnNumber: 7
   }, this) }, void 0, false, {
     fileName: "app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx",
-    lineNumber: 394,
+    lineNumber: 397,
     columnNumber: 5
   }, this);
 };
 export {
   paymentreq_brandId_camId_draftId_default as default
 };
-//# sourceMappingURL=/build/routes/home/paymentreq.$brandId.$camId.$draftId-LWWUF4KU.js.map
+//# sourceMappingURL=/build/routes/home/paymentreq.$brandId.$camId.$draftId-MGMUWRIT.js.map

@@ -286,6 +286,8 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
             )}
             <button
               onClick={async () => {
+                console.log(props.cpp);
+                console.log(requested);
                 if (
                   paymentRef.current?.value == null ||
                   paymentRef.current?.value == undefined ||
@@ -313,13 +315,14 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
                     req
                   );
                   if (!paymentdata.data.status)
-                    return setPaymentError(paymentdata.data.message);
+                    setPaymentError(paymentdata.data.message);
                   else {
                     setPaymentError("");
                     paymentRef.current.value = "";
                   }
-                  return setPaymentBox(false);
+                  setPaymentBox(false);
                 }
+                window.location.reload();
               }}
               className={`text-black bg-[#01FFF4] rounded-lg w-full text-center py-2 font-semibold text-md mt-2`}
             >

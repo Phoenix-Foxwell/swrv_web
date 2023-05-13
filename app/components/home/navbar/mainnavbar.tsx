@@ -57,7 +57,7 @@ export const MainNavBar = (props: MainNavBarProps) => {
             </div>
 
             <div className="flex place-items-center rounded-xl items-end mr-6 w-60 ">
-              <Link to={"/"}>
+              <Link to={"/home/"}>
                 <img
                   src="/images/swrvlogo.png"
                   className="w-28 inline-block rounded-lg"

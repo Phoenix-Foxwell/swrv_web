@@ -628,7 +628,7 @@ var MainNavBar = (props) => {
         this
       ),
       /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)("div", { className: "flex place-items-center rounded-xl items-end mr-6 w-60 ", children: [
-        /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(Link, { to: "/", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
+        /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(Link, { to: "/home/", children: /* @__PURE__ */ (0, import_jsx_dev_runtime4.jsxDEV)(
           "img",
           {
             src: "/images/swrvlogo.png",
@@ -1263,4 +1263,4 @@ var home_default = HomePage;
 export {
   home_default as default
 };
-//# sourceMappingURL=/build/routes/home-ZPANUSM4.js.map
+//# sourceMappingURL=/build/routes/home-S7ABAPPU.js.map

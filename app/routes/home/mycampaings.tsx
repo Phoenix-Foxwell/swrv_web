@@ -41,7 +41,6 @@ export const loader = async ({ request }: LoaderArgs) => {
   //     Accept: "*",
   //   },
   // });
-  // console.log(campdata.data);
 
   let req = {
     search: {

@@ -102,12 +102,12 @@ export const LoginBox = (props: LoginBoxState) => {
         </div>
       </div>
       <div className="relative">
-        <div className=" text-center text-[70px] -translate-y-4 font-black text-stroke text-white absolute top-0 w-full md:-translate-y-10 md:text-[150px]">
+        <div className=" text-center text-[150px] -translate-y-4 font-black text-stroke absolute top-0 w-full md:-translate-y-20 md:text-[200px] text-[#eeeeee]">
           Welcome
         </div>
         <div className="w-full px-6 sm:px-16 grid  lg:grid-cols-3 md:w-4/6 lg:w-full mx-auto mb-20">
           <div className="hidden lg:flex"></div>
-          <div className="bg-white rounded-xl shadow-xl py-6 px-10 relative mt-20">
+          <div className="bg-white rounded-xl shadow-xl py-6 px-10 relative mt-28">
             <Form method="post">
               {props.message && (
                 <p className="w-full border-2 border-red-500 bg-red-500 bg-opacity-5  text-center my-2 rounded-md p-2 text-sm font-semibold text-red-500">

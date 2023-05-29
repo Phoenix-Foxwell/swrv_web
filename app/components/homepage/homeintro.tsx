@@ -5,6 +5,7 @@ import { BlogsCard } from "../utils/blogscard";
 import { DownloadApp } from "../utils/downloadapp";
 import { Link } from "@remix-run/react";
 import { useState } from "react";
+import ProgressBar from "../progressbr";
 type HomeIntroProps = {
   blogdata: any[];
 };
@@ -21,6 +22,8 @@ export const HomeIntro: React.FC<HomeIntroProps> = (
       <JoinSwrv></JoinSwrv>
       <Marketing></Marketing>
       <Blogs blogdata={props.blogdata}></Blogs>
+      <SocialMedai></SocialMedai>
+      <TopCategory></TopCategory>
     </div>
   </>
 );
@@ -52,7 +55,7 @@ const RelatatinoAndTrust = () => {
         <img
           src="/images/avatar/logostrip.png"
           alt="logos"
-          className="h-[70px] w-[2640px] object-cover object-left-top hover:object-right-top transition-all duration-700"
+          className="h-[70px] w-[2640px] object-cover object-left-top hover:object-right-top transition-all duration-[4s]"
         />
       </div>
       {/* <div className="w-full grid palce-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 text-5xl text-center text-gray-600 gap-x-5 mb-10">
@@ -215,7 +218,7 @@ const Market = () => {
 const PowerfullInf = () => {
   return (
     <>
-      <div className="w-full my-10 bg-[#0000004C] py-4 rounded-xl">
+      <div className="w-full my-10 bg-[#b3b3b3] py-4 rounded-xl">
         <div className=" w-full md:w-3/5 lg:w-4/6 mx-auto md:p-0 p-6">
           <h3 className="text-white text-4xl font-bold">
             ARE YOU A POWERFUL
@@ -235,8 +238,10 @@ const PowerfullInf = () => {
             <div className="w-10"></div>
             <Link to={"/whatyouget"}>
               <CusButton
+                background="bg-transparent"
                 text="Read More"
-                borderColor={"border-primary"}
+                textColor={"text-white"}
+                borderColor={"border-white"}
               ></CusButton>
             </Link>
           </div>
@@ -283,6 +288,7 @@ const Marketing = () => {
           </h3>
 
           <DownloadApp></DownloadApp>
+          <div className="h-20"></div>
         </div>
       </div>
     </>
@@ -355,7 +361,7 @@ const JoinSwrv = () => {
   ];
   return (
     <>
-      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
+      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-14 mb-4">
         <h3 className="text-primary text-3xl font-bold">Join SWRV</h3>
         <h3 className="text-gray-600 text-md font-normal">
           There are no commissions or membership costs for brands or buyer
@@ -394,25 +400,22 @@ const JoinSwrv = () => {
               onClick={() => setIndex(0)}
               src="/images/avatar/clock.jpg"
               alt="clock"
-              className={`w-72 object-center object-cover rounded-md transition-all ${
-                index == 0 ? "h-60 order-1" : "h-52 order-2"
-              }`}
+              className={`w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 0 ? "h-60 order-1" : "h-52 order-2"
+                }`}
             />
             <img
               onClick={() => setIndex(1)}
               src="/images/avatar/laptop.png"
               alt="laptop"
-              className={`w-72 object-center object-cover rounded-md transition-all ${
-                index == 1 ? "h-60 order-1" : "h-52 order-2"
-              }`}
+              className={`w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 1 ? "h-60 order-1" : "h-52 order-2"
+                }`}
             />
             <img
               onClick={() => setIndex(2)}
               src="/images/avatar/media.jpg"
               alt="media"
-              className={`w-72 object-center object-cover rounded-md transition-all ${
-                index == 2 ? "h-60 order-1" : "h-52 order-2"
-              }`}
+              className={`w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 2 ? "h-60 order-1" : "h-52 order-2"
+                }`}
             />
           </div>
           <h3 className="text-gray-600 text-lg font-semibold">
@@ -484,14 +487,20 @@ const Blogs: React.FC<BlogIntroProps> = (
 ): JSX.Element => {
   return (
     <>
-      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
+      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-14 mb-4">
         <div className="flex">
           <h3 className="text-primary text-3xl font-bold grid place-items-center">
             Blogs
           </h3>
           <div className="grow"></div>
           <Link to={"/blogs"}>
-            <CusButton text={"Read More"} textColor="text-white"></CusButton>
+            <CusButton
+              text={"Read More"}
+              textColor="text-primary"
+              background="bg-transparent"
+              border="border-2"
+              borderColor={"border-secondary"}
+            ></CusButton>
           </Link>
         </div>
         <div className="h-[1px] bg-black w-full my-2"></div>
@@ -536,6 +545,110 @@ const Blogs: React.FC<BlogIntroProps> = (
           time="June 1, 2022"
           imageUrl="/images/blogs/blog1.png"
         ></BlogsCard> */}
+      </div>
+    </>
+  );
+};
+
+const SocialMedai = (): JSX.Element => {
+  return (
+    <>
+      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
+        <div className="flex">
+          <h3 className="text-primary text-3xl font-bold grid place-items-center">
+            Notable topics
+          </h3>
+          <div className="grow"></div>
+        </div>
+        {/* <div className="flex gap-4 flex-wrap justify-center mt-6"> */}
+      </div>
+      <div className="grid place-items-center gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-6 items-start gap-y-6">
+        <Link
+          to={"/media/5"}
+          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+        >
+          <img
+            src={"/images/media/facebook.png"}
+            alt="err"
+            className="w-full rounded-md object-fill object-center h-44"
+          />
+          <h1 className="text-xl font-bold text-primary text-center mt-2">
+            Facebook
+          </h1>
+        </Link>
+        <Link
+          to={"/media/1"}
+          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+        >
+          <img
+            src={"/images/media/instagram.png"}
+            alt="err"
+            className="w-full rounded-md object-fill object-center h-44"
+          />
+          <h1 className="text-xl font-bold text-primary text-center mt-2">
+            Instagram
+          </h1>
+        </Link>
+        <Link
+          to={"/media/8"}
+          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+        >
+          <img
+            src={"/images/media/twitter.png"}
+            alt="err"
+            className="w-full rounded-md object-fill object-center h-44"
+          />
+          <h1 className="text-xl font-bold text-primary text-center mt-2">
+            Twitter
+          </h1>
+        </Link>
+        <Link
+          to={"/media/3"}
+          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+        >
+          <img
+            src={"/images/media/snapchat.png"}
+            alt="err"
+            className="w-full rounded-md object-fill object-center h-44"
+          />
+          <h1 className="text-xl font-bold text-primary text-center mt-2">
+            Snapchat
+          </h1>
+        </Link>
+        <Link
+          to={"/media/4"}
+          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+        >
+          <img
+            src={"/images/media/youtube.png"}
+            alt="err"
+            className="w-full rounded-md object-fill object-center h-44"
+          />
+          <h1 className="text-xl font-bold text-primary text-center mt-2">
+            Youtube
+          </h1>
+        </Link>
+      </div>
+    </>
+  );
+};
+
+const TopCategory = (): JSX.Element => {
+  return (
+    <>
+      <div className="flex flex-wrap justify-around w-full py-4">
+        <Link
+          to={"/notableinf"}
+          className="text-white rounded-md py-2 px-4 bg-blue-500 text-xl font-semibold"
+        >
+          Notable influencer
+        </Link>
+        <Link
+          to={"/notablebrand"}
+          className="text-white rounded-md py-2 px-4 bg-blue-500 text-xl font-semibold"
+        >
+          Notable brand
+        </Link>
       </div>
     </>
   );

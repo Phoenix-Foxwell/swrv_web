@@ -77,7 +77,7 @@ const InfluencerCard = (props: InfluencerCardProps) => {
           <div className="flex items-start justify-between">
             <div className="grow">
               <p className="text-black font-semibold text-lg text-left">
-                {props.name.split("@")[0]}
+                {props.name == undefined || props.name == null ? "" : props.name.split("@")[0]}
               </p>
               <p className="text-black font-semibold text-sm text-left mt-2">
                 {props.bio}

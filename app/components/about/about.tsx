@@ -31,7 +31,6 @@ const AboutPage = (props: AboutPageProps) => {
                     </div>
                     <div>
                         <img src="/images/inf/inf12.png" alt="error" />
-
                     </div>
                     <div className="flex gap-2 flex-col">
                         <div>
@@ -44,7 +43,6 @@ const AboutPage = (props: AboutPageProps) => {
                         <img src="/images/inf/inf9.png" alt="error" />
                     </div>
                 </div>
-
                 <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mb-10  py-8">
                     <h3 className="text-primary text-3xl font-bold">We assist the influencer marketing sector in</h3>
                     <h3 className="text-secondary text-3xl font-bold">becoming more efficient.</h3>

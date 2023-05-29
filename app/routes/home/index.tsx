@@ -49,7 +49,7 @@ const HomePage = () => {
   const isOpen = ProfileComleteStore((state) => state.isOpen);
   const isOpenChange = ProfileComleteStore((state) => state.change);
   const navigator = useNavigate();
-  const init = async () => {};
+  const init = async () => { };
 
   useEffect(() => {
     isOpenChange(profilecomplted == "1" ? false : true);
@@ -61,8 +61,8 @@ const HomePage = () => {
       <div className="overflow-hidden">
         {isbrand ? (
           userdata.brand.length == 0 ||
-          userdata.brand == null ||
-          userdata.brand == undefined ? (
+            userdata.brand == null ||
+            userdata.brand == undefined ? (
             <BrandCreate></BrandCreate>
           ) : null
         ) : null}
@@ -284,16 +284,16 @@ const SponsoredPosts = () => {
           let campaignType = await getCampaignType(val["campaignTypeId"]);
           let image =
             val["brand"].length == 0 ||
-            val["brand"] == undefined ||
-            val["brand"] == null ||
-            val["brand"] == ""
+              val["brand"] == undefined ||
+              val["brand"] == null ||
+              val["brand"] == ""
               ? "/images/avatar/user.png"
               : val["brand"]["logo"] == "0" ||
                 val["brand"]["logo"] == undefined ||
                 val["brand"]["logo"] == null ||
                 val["brand"]["logo"] == ""
-              ? "/images/avatar/user.png"
-              : val["brand"]["logo"];
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"];
           return (
             <div key={index}>
               <CampaginCard
@@ -362,16 +362,16 @@ const NewCampaign = () => {
           let campaignType = await getCampaignType(val["campaignTypeId"]);
           let image =
             val["brand"].length == 0 ||
-            val["brand"] == undefined ||
-            val["brand"] == null ||
-            val["brand"] == ""
+              val["brand"] == undefined ||
+              val["brand"] == null ||
+              val["brand"] == ""
               ? "/images/avatar/user.png"
               : val["brand"]["logo"] == "0" ||
                 val["brand"]["logo"] == undefined ||
                 val["brand"]["logo"] == null ||
                 val["brand"]["logo"] == ""
-              ? "/images/avatar/user.png"
-              : val["brand"]["logo"];
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"];
           return (
             <div key={index}>
               <CampaginCard
@@ -502,17 +502,17 @@ const TopInfluencer = () => {
           ></FontAwesomeIcon>{" "}
           Top influencer{" "}
         </div>
-        <div className="flex gap-x-10 flex-wrap">
+        <div className="flex gap-10 flex-wrap">
           {topInfluencer.map((val: any, index: number) => {
             const avatar =
               val["pic"] == "0" ||
-              val["pic"] == null ||
-              val["pic"] == undefined ||
-              val["pic"] == ""
+                val["pic"] == null ||
+                val["pic"] == undefined ||
+                val["pic"] == ""
                 ? "/images/avatar/user.png"
                 : val["pic"];
             return (
-              <div key={index}>
+              <Link to={`/home/myuser/${val.id}`} key={index}>
                 <TopInfluencerCard
                   star={parseInt(val.rating)}
                   image={avatar}
@@ -520,7 +520,7 @@ const TopInfluencer = () => {
                   currency={val.currency.code}
                   dob={val.dob}
                 ></TopInfluencerCard>
-              </div>
+              </Link>
             );
           })}
         </div>

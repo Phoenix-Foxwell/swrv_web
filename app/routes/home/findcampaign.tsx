@@ -163,7 +163,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   const totalTargetSearch = useRef<HTMLInputElement>(null);
 
   const camptextsearch = async () => {
-    setError("");
+    setError(null);
     let req: any = {
       active: active ? "1" : "0",
     };
@@ -211,16 +211,32 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   };
 
   const campadvancesearch = async () => {
-    setError("");
-    if (selcategory.length == 0) return setError("Select the category");
-    if (selPlatform.length == 0) return setError("Select the platform");
-    if (selCountry.length == 0) return setError("Select the country");
-    let req = {
-      country: selcategory[0]["id"],
-      platform: selPlatform.join(","),
-      category: selcategory[0]["id"],
+    setError(null);
+    // if (selcategory.length == 0) return setError("Select the category");
+    // if (selPlatform.length == 0) return setError("Select the platform");
+    // if (selCountry.length == 0) return setError("Select the country");
+    let req: any = {
+      // country: selcategory[0]["id"],
+      // platform: selPlatform.join(","),
+      // category: selCountry[0]["id"],
       active: active ? "1" : "0",
     };
+
+    if (
+      selcategory.length != 0
+    )
+      req.category = selcategory[0]["id"];
+
+    if (
+      selPlatform.length != 0
+    )
+      req.platform = selPlatform.join(",");
+    if (
+      selCountry.length != 0
+    )
+      req.country = selCountry[0]["id"];
+
+
     const data = await axios.post(`${BaseUrl}/api/campaign-search`, req);
     if (data.data.status == false) return setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -257,6 +273,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
         return setNameError("Filter name already exist.");
       }
     }
+
     const filter = {
       name: name,
       country: selCountry,
@@ -304,9 +321,8 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                     Save filter
                   </button>
                   <div
-                    className={`w-80 right-0 max-h-56 overflow-y-scroll no-scrollbar p-2 bg-gray-100 shadow-xl absolute translate-y-2 rounded-lg ${
-                      filterName ? "" : "hidden"
-                    }`}
+                    className={`w-80 right-0 max-h-56 overflow-y-scroll no-scrollbar p-2 bg-gray-100 shadow-xl absolute translate-y-2 rounded-lg ${filterName ? "" : "hidden"
+                      }`}
                   >
                     <p className="text-center text-sm text-slate-900 font-semibold my-2">
                       Filter name
@@ -317,8 +333,8 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                       className="bg-transparent w-full outline-none border-2 rounded-md my-2 border-green-500 px-2 py-1"
                     />
                     {nameError == "" ||
-                    nameError == null ||
-                    nameError == undefined ? null : (
+                      nameError == null ||
+                      nameError == undefined ? null : (
                       <div className="bg-red-500 bg-opacity-10 border text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2">
                         {nameError}
                       </div>
@@ -353,9 +369,8 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                     <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon>{" "}
                   </button>
                   <div
-                    className={`w-full max-h-56 overflow-y-scroll no-scrollbar p-2 bg-white shadow-xl absolute translate-y-2 rounded-lg ${
-                      showFilter ? "" : "hidden"
-                    }`}
+                    className={`w-full max-h-56 overflow-y-scroll no-scrollbar p-2 bg-white shadow-xl absolute translate-y-2 rounded-lg ${showFilter ? "" : "hidden"
+                      }`}
                   >
                     {localFilter.map((val: any, index: number) => {
                       return (
@@ -544,9 +559,8 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                     ></FontAwesomeIcon>
                   </div>
                   <div
-                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg ${
-                      cat ? "" : "hidden"
-                    }`}
+                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg ${cat ? "" : "hidden"
+                      }`}
                   >
                     <div className="min-h-80 w-full p-4 overflow-y-scroll no-scrollbar">
                       {category.map((val: any, i: number) => {
@@ -564,11 +578,10 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                               setcat(false);
                             }}
                             key={i}
-                            className={`text-lg text-left text-gray-600 font-semibold cursor-pointer w-full my-2 border-b-2 ${
-                              selcategory.includes(val)
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-500 text-black"
-                            }  no-scrollbar`}
+                            className={`text-lg text-left text-gray-600 font-semibold cursor-pointer w-full my-2 border-b-2 ${selcategory.includes(val)
+                              ? "border-green-500 text-green-500"
+                              : "border-gray-500 text-black"
+                              }  no-scrollbar`}
                           >
                             {val["categoryCode"]} - {val["categoryName"]}{" "}
                           </h1>
@@ -593,16 +606,15 @@ const CampaignSearch = (props: CampaignSearchProps) => {
               </div>
               <div className="ml-2">
                 <h1 className="text-primary text-lg font-bold mb">Platforms</h1>
-                <div className="gap-2 flex  overflow-x-scroll flex-nowrap no-scrollbar py-2">
+                <div className="gap-2 flex  overflow-x-scroll flex-nowrap no-scrollbar pb-4">
                   {platform.map((val: any, i: number) => {
                     return (
                       <div
                         key={i}
-                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${
-                          selPlatform.includes(val.id)
-                            ? "bg-white "
-                            : "bg-gray-200"
-                        } `}
+                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${selPlatform.includes(val.id)
+                          ? "bg-white "
+                          : "bg-gray-200"
+                          } `}
                         onClick={() => {
                           if (selPlatform.includes(val.id)) {
                             let setdata = selPlatform.filter(
@@ -656,9 +668,8 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                     ></FontAwesomeIcon>
                   </div>
                   <div
-                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg p-4 ${
-                      con ? "" : "hidden"
-                    }`}
+                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg p-4 ${con ? "" : "hidden"
+                      }`}
                   >
                     {" "}
                     <div className="min-h-80 overflow-y-scroll no-scrollbar">
@@ -677,11 +688,10 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                               setcon(false);
                             }}
                             key={i}
-                            className={`text-lg text-gray-600 text-left font-semibold  w-full my-2 border-b-2 ${
-                              selCountry.includes(val)
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-400 text-black"
-                            }  no-scrollbar`}
+                            className={`text-lg text-gray-600 text-left font-semibold  w-full my-2 border-b-2 ${selCountry.includes(val)
+                              ? "border-green-500 text-green-500"
+                              : "border-gray-400 text-black"
+                              }  no-scrollbar`}
                           >
                             {val["code"]} - {val["name"]}
                           </h1>
@@ -761,19 +771,23 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
   const [error, setError] = useState<string | null>(null);
 
   const camptextsearch = async (searchtext: string) => {
+    setError(null);
+
     champTextSearch!.current!.value = "";
     if (searchtext == "" || searchtext == null || searchtext == undefined)
       return setError("Fill the field to start searching");
     let req = { search: searchtext, role: 10 };
     const data = await axios.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == false) {
-      setCamSearchResult([data.data.data]);
+      setCamSearchResult([]);
       return setError(data.data.message);
     }
     setCamSearchResult(data.data.data);
   };
 
   const campadvancesearch = async () => {
+    setError(null);
+
     if (selcategory.length == 0) {
       setCamSearchResult([]);
       return setError("Select the category");
@@ -786,13 +800,30 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
       setCamSearchResult([]);
       return setError("Select the country");
     }
-    let req = {
-      country: selCountry[0]["id"],
-      platform: selPlatform.join(","),
-      category: selcategory[0]["id"],
+    let req: any = {
+      // country: selCountry[0]["id"],
+      // platform: selPlatform.join(","),
+      // category: selcategory[0]["id"],
       active: active ? "1" : "0",
       role: 10,
     };
+
+
+    if (
+      selcategory.length != 0
+    )
+      req.category = selcategory[0]["id"];
+
+    if (
+      selPlatform.length != 0
+    )
+      req.platform = selPlatform.join(",");
+    if (
+      selCountry.length != 0
+    )
+      req.country = selCountry[0]["id"];
+
+
     const data = await axios.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == false) return setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -841,6 +872,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
     nameFilterRef!.current!.value = "";
     setFilterName(false);
   };
+
   const loadFilter = (filterdata: any) => {
     setSelcategory(filterdata["category"]);
     setSelectedPlatform(filterdata["platform"]);
@@ -868,9 +900,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     Save filter
                   </button>
                   <div
-                    className={`w-80 right-0 max-h-56 overflow-y-scroll no-scrollbar p-2 bg-gray-100 shadow-xl absolute translate-y-2 rounded-lg ${
-                      filterName ? "" : "hidden"
-                    }`}
+                    className={`w-80 right-0 max-h-56 overflow-y-scroll no-scrollbar p-2 bg-gray-100 shadow-xl absolute translate-y-2 rounded-lg ${filterName ? "" : "hidden"
+                      }`}
                   >
                     <p className="text-center text-sm text-slate-900 font-semibold my-2">
                       Filter name
@@ -881,8 +912,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                       className="bg-transparent w-full outline-none border-2 rounded-md my-2 border-green-500 px-2 py-1"
                     />
                     {nameError == "" ||
-                    nameError == null ||
-                    nameError == undefined ? null : (
+                      nameError == null ||
+                      nameError == undefined ? null : (
                       <div className="bg-red-500 bg-opacity-10 border text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2">
                         {nameError}
                       </div>
@@ -917,9 +948,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon>{" "}
                   </button>
                   <div
-                    className={`w-full max-h-56 overflow-y-scroll no-scrollbar p-2 bg-white shadow-xl absolute translate-y-2 rounded-lg ${
-                      showFilter ? "" : "hidden"
-                    }`}
+                    className={`w-full max-h-56 overflow-y-scroll no-scrollbar p-2 bg-white shadow-xl absolute translate-y-2 rounded-lg ${showFilter ? "" : "hidden"
+                      }`}
                   >
                     {localFilter.map((val: any, index: number) => {
                       return (
@@ -1023,9 +1053,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                 </div>
 
                 <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                    cat ? "" : "hidden"
-                  } grid place-items-center`}
+                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"
+                    } grid place-items-center`}
                 >
                   <div className="bg-white p-10 cursor-pointer">
                     <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
@@ -1044,11 +1073,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                               setcat(false);
                             }}
                             key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
-                              selcategory.includes(val)
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-800 text-black"
-                            }  no-scrollbar`}
+                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selcategory.includes(val)
+                              ? "border-green-500 text-green-500"
+                              : "border-gray-800 text-black"
+                              }  no-scrollbar`}
                           >
                             {val["categoryCode"]} - {val["categoryName"]}{" "}
                           </h1>
@@ -1073,16 +1101,15 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
               </div>
               <div className="ml-2">
                 <h1 className="text-primary text-lg font-bold mb">Platforms</h1>
-                <div className="gap-2 flex  overflow-x-scroll flex-nowrap no-scrollbar py-2">
+                <div className="gap-2 flex  overflow-x-scroll flex-nowrap no-scrollbar pb-2">
                   {platform.map((val: any, i: number) => {
                     return (
                       <div
                         key={i}
-                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${
-                          selPlatform.includes(val.id)
-                            ? "bg-white "
-                            : "bg-gray-200"
-                        } `}
+                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${selPlatform.includes(val.id)
+                          ? "bg-white "
+                          : "bg-gray-200"
+                          } `}
                         onClick={() => {
                           if (selPlatform.includes(val.id)) {
                             let setdata = selPlatform.filter(
@@ -1135,9 +1162,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                   </div>
                 </div>
                 <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                    con ? "" : "hidden"
-                  } grid place-items-center`}
+                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
+                    } grid place-items-center`}
                 >
                   <div className="bg-white p-10 cursor-pointer">
                     <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
@@ -1156,11 +1182,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                               setcon(false);
                             }}
                             key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
-                              selCountry.includes(val)
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-800 text-black"
-                            }  no-scrollbar`}
+                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
+                              ? "border-green-500 text-green-500"
+                              : "border-gray-800 text-black"
+                              }  no-scrollbar`}
                           >
                             {val["code"]} - {val["name"]}
                           </h1>
@@ -1224,9 +1249,9 @@ const BrandSearch = () => {
 
   const brandTextSearch = useRef<HTMLInputElement>(null);
   const brandtextsearch = async (searchtext: string) => {
+    setError(null);
     brandTextSearch!.current!.value = "";
-    if (searchtext == "" || searchtext == null || searchtext == undefined)
-      return setError("Fill the field to start searching");
+    if (searchtext == "" || searchtext == null || searchtext == undefined) return setError("Fill the field to start searching");
     let req = { search: searchtext };
     const data = await axios.post(`${BaseUrl}/api/search-brand`, req);
     if (data.data.status == false) return setError(data.data.message);
@@ -1310,16 +1335,16 @@ const SearchedCampaign = (props: SearchedCampaignProps) => {
           }
           let image =
             val["brand"].length == 0 ||
-            val["brand"] == undefined ||
-            val["brand"] == null ||
-            val["brand"] == ""
+              val["brand"] == undefined ||
+              val["brand"] == null ||
+              val["brand"] == ""
               ? "/images/avatar/user.png"
               : val["brand"]["logo"] == "0" ||
                 val["brand"]["logo"] == undefined ||
                 val["brand"]["logo"] == null ||
                 val["brand"]["logo"] == ""
-              ? "/images/avatar/user.png"
-              : val["brand"]["logo"];
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"];
           let campaignType = await getCampaignType(val["campaignTypeId"]);
           return (
             <div key={val["id"]} className="h-full">
@@ -1406,9 +1431,9 @@ const SearchedInfluencer = (props: SearchedInfluencerProps) => {
           {props.data.map((val: any, index: number) => {
             const avatar =
               val["pic"] == "0" ||
-              val["pic"] == null ||
-              val["pic"] == undefined ||
-              val["pic"] == ""
+                val["pic"] == null ||
+                val["pic"] == undefined ||
+                val["pic"] == ""
                 ? "/images/inf/inf14.png"
                 : val["pic"];
             const name = val["userName"];

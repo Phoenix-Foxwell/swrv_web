@@ -79,7 +79,7 @@ const MyCampaigns = () => {
 
   const isProfileCompleted =
     userdata.userdata.profileCompleteness == 1 ||
-    userdata.userdata.profileCompleteness == "1"
+      userdata.userdata.profileCompleteness == "1"
       ? true
       : false;
   const [error, setError] = useState<string | null>(null);
@@ -112,7 +112,7 @@ const MyCampaigns = () => {
         {isBrand ? (
           <div className="bg-white shadow-xl rounded-xl p-6">
             <h1 className="text-black text-center font-bold text-2xl">
-              Would you like to collaborate ?
+              Would you like to create new campaign ?
             </h1>
             <div className="w-full text-center bg-red">
               <div onClick={handelclick}>
@@ -181,16 +181,16 @@ const ActiveCampaign = (props: ActiveCampaignProps) => {
             }
             let image =
               val["brand"].length == 0 ||
-              val["brand"] == undefined ||
-              val["brand"] == null ||
-              val["brand"] == ""
+                val["brand"] == undefined ||
+                val["brand"] == null ||
+                val["brand"] == ""
                 ? "/images/avatar/user.png"
                 : val["brand"]["logo"] == "0" ||
                   val["brand"]["logo"] == undefined ||
                   val["brand"]["logo"] == null ||
                   val["brand"]["logo"] == ""
-                ? "/images/avatar/user.png"
-                : val["brand"]["logo"];
+                  ? "/images/avatar/user.png"
+                  : val["brand"]["logo"];
             return (
               <div key={i}>
                 <CampaginCard
@@ -278,16 +278,16 @@ const UserDrafts = (props: UserDraftsProps) => {
         {userDraft.map((val: any, i: number) => {
           let image =
             val["brand"].length == 0 ||
-            val["brand"] == undefined ||
-            val["brand"] == null ||
-            val["brand"] == ""
+              val["brand"] == undefined ||
+              val["brand"] == null ||
+              val["brand"] == ""
               ? "/images/avatar/user.png"
               : val["brand"]["logo"] == "0" ||
                 val["brand"]["logo"] == undefined ||
                 val["brand"]["logo"] == null ||
                 val["brand"]["logo"] == ""
-              ? "/images/avatar/user.png"
-              : val["brand"]["logo"];
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"];
           return (
             <div
               className="bg-white rounded-xl shadow-xl p-4 w-64 my-2 h-full"
@@ -394,9 +394,8 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
   return (
     <>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          acceptbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${acceptbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Accept</p>
@@ -437,9 +436,8 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
         </div>
       </div>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          rejectbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${rejectbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Reject</p>

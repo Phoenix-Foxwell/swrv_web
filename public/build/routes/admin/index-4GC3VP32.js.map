@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../app/routes/admin/index.tsx"],
-  "sourcesContent": ["import { LoaderArgs, redirect } from \"@remix-run/node\";\r\nimport { userPrefs } from \"~/cookies\";\r\n\r\nexport async function loader({ request }: LoaderArgs) {\r\n    return redirect(\"/admin/home\");\r\n}\r\n\r\nconst Logout = () => {\r\n    return (\r\n        <>\r\n            <h1>This is admin main page</h1>\r\n        </>\r\n    );\r\n}\r\nexport default Logout;"],
-  "mappings": ";;;;;;AASQ;AAFR,IAAM,SAAS,MAAM;AACjB,SACI,sFACI,6DAAC,QAAG,uCAAJ;AAAA;AAAA;AAAA;AAAA,SAA2B,KAD/B;AAAA;AAAA;AAAA;AAAA,SAEA;AAER;AACA,IAAO,gBAAQ;",
-  "names": []
-}

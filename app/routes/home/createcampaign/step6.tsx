@@ -201,6 +201,9 @@ const Step6 = () => {
           setError(imgurl.data);
         }
       }
+
+
+
       return navigator(
         `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
       );
@@ -225,13 +228,13 @@ const Step6 = () => {
           <p className="text-lg mt-2 font-semibold">{campaignName}</p>
           <h3 className="text-black font-bold text-md text-left mt-4">Info</h3>
           <p className="text-black font-semibold text-xs text-left">
-            {campaignInfo}
+            {brandinfo}
           </p>
           <h3 className="text-black font-bold text-md text-left mt-4">
             campaign Information
           </h3>
+          {campaignInfo}
           <p className="text-black font-semibold text-xs text-left">
-            {brandinfo}
           </p>
           <h3 className="text-black font-bold text-md text-left mt-4">
             Mood boards
@@ -344,11 +347,7 @@ const Step6 = () => {
               Congratulations
             </h3>
             <p className="text-black font-semibold text-xs text-left">
-              The Jaquar Group, established in 1960, is a growing
-              multi-diversified bathroom and lighting solutions company with 17%
-              CAGR over 10 years in a row, offers faucets, showers, shower
-              enclosures, sanitary ware, flushing systems, wellness products,
-              concealed cisterns, water heaters, and varied lighting products.
+              {campaignInfo}
             </p>
             {error == "" || error == null || error == undefined ? null : (
               <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">

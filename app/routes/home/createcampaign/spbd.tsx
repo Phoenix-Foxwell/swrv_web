@@ -27,6 +27,8 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 const Spbd = () => {
+  const [backbox, setBackBox] = useState<boolean>(false);
+
   const userdata = useLoaderData();
   const userId: string = userdata.userdata.id;
   const brandId: string = userdata.userdata.brandId;
@@ -68,6 +70,16 @@ const Spbd = () => {
   const [cpp, setcpp] = useState<string>("");
   return (
     <>
+
+      <div className={`h-screen w-full grid place-items-center bg-black bg-opacity-25 fixed top-0 left-0 ${backbox ? "grid" : "hidden"}`}>
+        <div className="w-80 bg-white rounded-xl shadow-xl p-4">
+          <h1 className="text-center text-xl font-semibold">Are you sure you want to go back.</h1>
+          <div className="flex justify-around">
+            <button onClick={() => { navigator(-1) }} className="bg-green-500 py-2 px-4 text-xl font-medium rounded-md text-white">Yes</button>
+            <button onClick={() => setBackBox(false)} className="bg-red-500 py-2 px-4 text-xl font-medium rounded-md text-white">NO</button>
+          </div>
+        </div>
+      </div>
       <div className="flex gap-x-4 flex-col lg:flex-row">
         <div className="bg-white shadow-xl rounded-xl px-8 py-4 mt-4 grow">
           <h2 className="text-black tect-xl font-medium text-left my-4">
@@ -78,11 +90,10 @@ const Spbd = () => {
               return (
                 <div
                   key={i}
-                  className={` p-2 rounded-lg shrink-0 ${
-                    platform.includes(val.id)
-                      ? "bg-white shadow-xl "
-                      : "bg-gray-200"
-                  } `}
+                  className={` p-2 rounded-lg shrink-0 ${platform.includes(val.id)
+                    ? "bg-white shadow-xl "
+                    : "bg-gray-200"
+                    } `}
                   onClick={() => {
                     setPlatform(val.id);
                   }}
@@ -101,9 +112,8 @@ const Spbd = () => {
               return (
                 <div
                   key={i}
-                  className={`shrink-0 cursor-pointer text-primary text-lg text-center font-normal w-28 py-1  rounded-xl ${
-                    val == media ? "bg-white shadow-xl" : "bg-gray-100"
-                  }`}
+                  className={`shrink-0 cursor-pointer text-primary text-lg text-center font-normal w-28 py-1  rounded-xl ${val == media ? "bg-white shadow-xl" : "bg-gray-100"
+                    }`}
                   onClick={() => {
                     setMedia(val);
                   }}
@@ -202,11 +212,11 @@ const Spbd = () => {
                     {sd == ""
                       ? "--------"
                       : new Date(sd).toLocaleDateString("en-US", {
-                          weekday: "short",
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
+                        weekday: "short",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                   </p>
                 </div>
                 <div className="flex my-4">
@@ -216,11 +226,11 @@ const Spbd = () => {
                     {ed == ""
                       ? "--------"
                       : new Date(ed).toLocaleDateString("en-US", {
-                          weekday: "short",
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
+                        weekday: "short",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                   </p>
                 </div>
               </>
@@ -233,7 +243,7 @@ const Spbd = () => {
             <div className="flex w-full">
               <div
                 onClick={() => {
-                  navigator(-1);
+                  setBackBox(false);
                 }}
                 className="w-full"
               >

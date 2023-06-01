@@ -17,6 +17,13 @@ import { UploadFile, getCampaignType } from "~/utils";
 import { userPrefs } from "~/cookies";
 import { pdf } from "remix-utils";
 
+import Stripe from "stripe";
+
+const stripe = new Stripe(
+  "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",
+  { apiVersion: "2022-11-15" }
+);
+
 enum AcceptRequest {
   None,
   Panding,
@@ -59,6 +66,7 @@ const Campaigns = () => {
   const user = useLoaderData().user;
   const isbrand = user.role.code != 10;
   const data = useLoaderData();
+
   const [sum, setSum] = useState({
     rowCount: 0,
     constCount: 3,
@@ -67,17 +75,17 @@ const Campaigns = () => {
 
   const userId = user.id;
   const brandimage =
-    champaign.brand == null ||
-    champaign.brand.length == 0 ||
-    champaign.brand == undefined ||
-    champaign.brand == ""
+    champaign == undefined || champaign == null ? "/images/avatar/user.png" : champaign.brand == null ||
+      champaign.brand.length == 0 ||
+      champaign.brand == undefined ||
+      champaign.brand == ""
       ? "/images/avatar/user.png"
       : champaign.brand.logo == "" ||
         champaign.brand.logo == null ||
         champaign.brand.logo == "0" ||
         champaign.brand.logo == undefined
-      ? "/images/avatar/user.png"
-      : champaign.brand.logo;
+        ? "/images/avatar/user.png"
+        : champaign.brand.logo;
   const brandname = champaign.brand.name;
   const [category, setCategory] = useState<string>("");
   const [acceptreq, setAcceptreq] = useState<AcceptRequest>(AcceptRequest.None);
@@ -212,7 +220,10 @@ const Campaigns = () => {
             startdate={champaign.startAt}
             enddate={champaign.endAt}
           ></Target>
-          {isbrand ? null : (
+
+          {isbrand ? <>
+            <InviteInf champaignId={champaign.id}></InviteInf>
+          </> : (
             <>
               {acceptreq == AcceptRequest.None ? (
                 <Apply
@@ -583,6 +594,34 @@ const Target = (props: TargetProps) => {
   );
 };
 
+type InviteInfProps = {
+  champaignId: string;
+};
+
+
+const InviteInf = (props: InviteInfProps) => {
+  return (
+    <>
+      <div className="p-4 rounded-xl shadow-xl bg-primary">
+        <h1 className="text-white text-xl text-left font-normal">
+          Invite influencer to campaign?
+        </h1>
+        <div className="w-full grid place-items-center">
+          <Link to={`/home/createcampaign/inviteinf/${props.champaignId}`}>
+            <CusButton
+              text="Invite"
+              textColor={"text-white"}
+              background={"bg-secondary"}
+            ></CusButton>
+          </Link>
+        </div>
+      </div>
+
+    </>
+  );
+};
+
+
 type ApplyProps = {
   userId: string;
   influencerId: string;
@@ -637,9 +676,8 @@ const Apply = (props: ApplyProps) => {
         </div>
       </div>
       <div
-        className={`w-full h-screen bg-gray-500 fixed top-0 left-0 bg-opacity-30 grid place-items-center ${
-          open ? "fixed" : "hidden"
-        } `}
+        className={`w-full h-screen bg-gray-500 fixed top-0 left-0 bg-opacity-30 grid place-items-center ${open ? "fixed" : "hidden"
+          } `}
       >
         <div className="p-6 bg-white rounded-xl shadow-xl w-96">
           <div className="flex">
@@ -790,9 +828,8 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          acceptbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${acceptbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Accept</p>
@@ -833,9 +870,8 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
         </div>
       </div>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          rejectbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${rejectbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Reject</p>
@@ -1013,9 +1049,8 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          acceptbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${acceptbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Accept</p>
@@ -1056,9 +1091,8 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
         </div>
       </div>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          rejectbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${rejectbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Reject</p>
@@ -1238,9 +1272,8 @@ const Rejected = (props: RejectedProps) => {
         </div>
       </div>
       <div
-        className={`w-full h-screen bg-gray-500 fixed top-0 left-0 bg-opacity-30 grid place-items-center ${
-          open ? "fixed" : "hidden"
-        } `}
+        className={`w-full h-screen bg-gray-500 fixed top-0 left-0 bg-opacity-30 grid place-items-center ${open ? "fixed" : "hidden"
+          } `}
       >
         <div className="p-6 bg-white rounded-xl shadow-xl w-96">
           <div className="flex">
@@ -1309,9 +1342,8 @@ const CreateDraft = (props: CreateDraftProps) => {
                 return (
                   <div
                     key={i}
-                    className={`shrink-0  p-2 rounded-lg ${
-                      platform == val.id ? "bg-white shadow-xl " : "bg-gray-200"
-                    } `}
+                    className={`shrink-0  p-2 rounded-lg ${platform == val.id ? "bg-white shadow-xl " : "bg-gray-200"
+                      } `}
                     onClick={() => {
                       setPlatform(val.id);
                     }}
@@ -1348,7 +1380,7 @@ const CreateDraft = (props: CreateDraftProps) => {
                   let file_size = parseInt(
                     (value!.target.files![0].size / 1024 / 1024).toString()
                   );
-                  if (file_size < 2) {
+                  if (file_size < 4) {
                     setError(null);
                     setPdfFile(value!.target.files![0]);
                   } else {
@@ -1483,9 +1515,8 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
     let req = {
       id: id,
       status: "2",
-      refNo: `${new Date().toLocaleDateString()}_${props.userid}_${
-        props.campaingid
-      }`,
+      refNo: `${new Date().toLocaleDateString()}_${props.userid}_${props.campaingid
+        }`,
     };
     const responseData = await axios.post(`${BaseUrl}/api/update-payment`, req);
     if (responseData.data.staus == false)
@@ -1503,12 +1534,43 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
     window.location.reload();
   };
 
+  const handlepayment = async () => {
+    // stripe.customers
+    //   .create({
+    //     email: "customer@example.com",
+    //   })
+    //   .then((customer) => console.log(customer))
+    //   .catch((error) => console.error(error));
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: [
+        {
+          price_data: {
+            currency: "inr",
+            product_data: {
+              name: "Example Product",
+              images: [
+                "https://plus.unsplash.com/premium_photo-1684952849219-5a0d76012ed2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80",
+              ],
+            },
+            unit_amount: 4200, // Amount in cents
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: "https://your-website.com/success",
+      cancel_url: "https://your-website.com/cancel",
+    });
+    window.location.assign(session.url == null ? "" : session.url);
+    // navigator(session.url == null ? "" : session.url);
+  };
+
   return (
     <>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          acceptbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${acceptbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Accept</p>
@@ -1536,7 +1598,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
             </button>
             <div className="grow"></div>
             <button
-              onClick={acceptRequest}
+              onClick={handlepayment}
               className="bg-white rounded-xl text-green-500 font-normal border-2 border-green-500 py-1 px-2 w-28 hover:text-white hover:bg-green-500"
             >
               <FontAwesomeIcon
@@ -1549,9 +1611,8 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
         </div>
       </div>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          rejectbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${rejectbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Reject</p>
@@ -1746,13 +1807,12 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
                     </a>
                     <p className="mt-2 text-md font-medium">Status</p>
                     <p
-                      className={`mt-2 text-md text-white font-medium text-center rounded-md ${
-                        val.status.name == "ACCEPTED"
-                          ? "bg-green-500"
-                          : val.status.name == "PENDING"
+                      className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
+                        ? "bg-green-500"
+                        : val.status.name == "PENDING"
                           ? "bg-yellow-500"
                           : "bg-red-500"
-                      }`}
+                        }`}
                     >
                       {val.status.name}
                     </p>
@@ -1863,8 +1923,8 @@ const LinkCampaign: React.FC<LinkCampaignProps> = (
               </div>
             </div>
             {val.linkCampaign == null ||
-            val.linkCampaign == "" ||
-            val.linkCampaign == undefined ? (
+              val.linkCampaign == "" ||
+              val.linkCampaign == undefined ? (
               linkBox[index] ? (
                 <>
                   <input
@@ -1875,8 +1935,8 @@ const LinkCampaign: React.FC<LinkCampaignProps> = (
                     onChange={(e) => handleInputChange(index, e.target.value)}
                   />
                   {errors[index] == "" ||
-                  errors[index] == null ||
-                  errors[index] == undefined ? null : (
+                    errors[index] == null ||
+                    errors[index] == undefined ? null : (
                     <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2">
                       {errors[index]}
                     </div>
@@ -2085,9 +2145,8 @@ const ChampaingBidRequest = (props: ChampaingBidRequestProps) => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${
-          acceptbox ? "grid" : "hidden"
-        }`}
+        className={`fixed top-0 left-0  h-screen w-full bg-slate-900 bg-opacity-10 place-items-center ${acceptbox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white w-72 shadow-lg p-4 rounded-lg">
           <p className="text-center font-medium text-2xl">Accept</p>

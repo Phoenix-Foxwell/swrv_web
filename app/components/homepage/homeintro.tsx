@@ -400,21 +400,21 @@ const JoinSwrv = () => {
               onClick={() => setIndex(0)}
               src="/images/avatar/clock.jpg"
               alt="clock"
-              className={`w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 0 ? "h-60 order-1" : "h-52 order-2"
+              className={`cursor-pointer w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 0 ? "h-60 order-1" : "h-52 order-2"
                 }`}
             />
             <img
               onClick={() => setIndex(1)}
               src="/images/avatar/laptop.png"
               alt="laptop"
-              className={`w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 1 ? "h-60 order-1" : "h-52 order-2"
+              className={`cursor-pointer w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 1 ? "h-60 order-1" : "h-52 order-2"
                 }`}
             />
             <img
               onClick={() => setIndex(2)}
               src="/images/avatar/media.jpg"
               alt="media"
-              className={`w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 2 ? "h-60 order-1" : "h-52 order-2"
+              className={`cursor-pointer w-72 object-center object-cover rounded-md transition-all duration-1000 ${index == 2 ? "h-60 order-1" : "h-52 order-2"
                 }`}
             />
           </div>

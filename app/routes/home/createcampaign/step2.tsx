@@ -15,6 +15,8 @@ export const loader = async () => {
 }
 const Step2 = () => {
 
+    const [backbox, setBackBox] = useState<boolean>(false);
+
     const mediatype = ["Post", "Story", "Reel", "Video", "Audio"];
 
     const data = useLoaderData();
@@ -129,6 +131,15 @@ const Step2 = () => {
 
     return (
         <>
+            <div className={`h-screen w-full grid place-items-center bg-black bg-opacity-25 fixed top-0 left-0 ${backbox ? "grid" : "hidden"}`}>
+                <div className="w-80 bg-white rounded-xl shadow-xl p-4">
+                    <h1 className="text-center text-xl font-semibold">Are you sure you want to go back.</h1>
+                    <div className="flex justify-around">
+                        <button onClick={() => { navigator(-1) }} className="bg-green-500 py-2 px-4 text-xl font-medium rounded-md text-white">Yes</button>
+                        <button onClick={() => setBackBox(false)} className="bg-red-500 py-2 px-4 text-xl font-medium rounded-md text-white">NO</button>
+                    </div>
+                </div>
+            </div>
             <div className="bg-white shadow-xl rounded-xl px-8 py-4 mt-4">
                 <h2 className="text-black tect-xl font-medium text-left">
                     {(campaginType == "1") ? "Sponsored post" : (campaginType == "2") ? "Review post" : (campaginType == "3") ? "Discount and Affiliated post" : "Contest post"}
@@ -479,7 +490,7 @@ const Step2 = () => {
                 }
 
                 <div className="flex w-full">
-                    <div onClick={() => { navigator(-1) }} className="w-full">
+                    <div onClick={() => { setBackBox(true) }} className="w-full">
                         <CusButton text="Back" textColor={"text-black"} background="bg-gray-100" width={"w-full"}></CusButton>
                     </div>
                     <div className="w-10"></div>

@@ -587,6 +587,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                           </h1>
                         );
                       })}
+                      <div onClick={() => setcat(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20">Close</div>
                     </div>
                   </div>
                 </div>
@@ -611,9 +612,9 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                     return (
                       <div
                         key={i}
-                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${selPlatform.includes(val.id)
-                          ? "bg-white "
-                          : "bg-gray-200"
+                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-full ${selPlatform.includes(val.id)
+                          ? "border-2 border-blue-500"
+                          : ""
                           } `}
                         onClick={() => {
                           if (selPlatform.includes(val.id)) {
@@ -629,7 +630,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                         <img
                           src={platform[i]["platformLogoUrl"]}
                           alt="error"
-                          className="object-cover w-full h-full inline-block"
+                          className="object-cover rounded-full w-full h-full inline-block"
                         />
                       </div>
                     );
@@ -1082,6 +1083,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                           </h1>
                         );
                       })}
+                      <div onClick={() => setcat(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
                     </div>
                   </div>
                 </div>
@@ -1106,9 +1108,9 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     return (
                       <div
                         key={i}
-                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${selPlatform.includes(val.id)
-                          ? "bg-white "
-                          : "bg-gray-200"
+                        className={`p-1 shrink-0 w-10 h-10 rounded-full  ${selPlatform.includes(val.id)
+                          ? " border-2 border-blue-500"
+                          : ""
                           } `}
                         onClick={() => {
                           if (selPlatform.includes(val.id)) {
@@ -1124,7 +1126,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                         <img
                           src={platform[i]["platformLogoUrl"]}
                           alt="error"
-                          className="object-cover w-full h-full inline-block"
+                          className="object-cover w-full h-full inline-block rounded-full"
                         />
                       </div>
                     );

@@ -2,8 +2,9 @@ import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import axios from "axios";
 import { useState } from "react";
-import { BaseUrl } from "~/const";
+import { BaseUrl, ModeshApi } from "~/const";
 import { adminUser, userPrefs } from "~/cookies";
+import moment from 'moment';
 
 export const loader: LoaderFunction = async ({
   request,
@@ -35,39 +36,30 @@ const UserHandel = (): JSX.Element => {
     });
     setPlatformData((val) => userdata.data.data[0]);
   };
+  const [error, setError] = useState<string | null>();
+  const [sus, setSus] = useState<string | null>();
 
-  const handeladdupdate = async (handle_id: string) => {
+  const handeladdupdate = async (handle_id: string, handle_name: string) => {
+    setError(null);
     const modashdata = await axios({
-      method: "get",
-      url: `https://api.modash.io/v1/instagram/profile/nusr_et/report?access_token=8PVJbSqOpTYwQ90B3sMMji0u05vhpOhN`,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Options": "*",
-        "Access-Control-Allow-Methods": "*",
-        "X-Content-Type-Options": "*",
-        "Content-Type": "application/json",
-        Authorization: "Bearer 8PVJbSqOpTYwQ90B3sMMji0u05vhpOhN",
-        Accept: "*",
-      },
+      method: "post",
+      url: `${ModeshApi}${handle_name}`
     });
 
-    console.log(modashdata.data);
-
-    const data = modashdata.data;
-    if (!data.error) {
+    const data = modashdata.data.data;
+    if (modashdata.data.status) {
       const userdata = await axios.post(`${BaseUrl}/api/add-insta-handel`, {
         userId: userId,
         handleId: handle_id,
         userName: data.profile.profile.username,
         followers: data.profile.profile.followers,
-        pictureurl: data.profile.profile.picture,
-        postsCount: data.profile.postsCount,
+        picUrl: data.profile.profile.picture,
+        postCount: data.profile.postsCount,
         engagementRate: data.profile.profile.engagementRate,
         engagements: data.profile.profile.engagements,
         city: data.profile.city,
         country: data.profile.country,
-        language: data.profile.langauage.name,
+        language: data.profile.language.name,
         isVerified: data.profile.isVerified,
         isPrivate: data.profile.isPrivate,
         avgReelsPlays: data.profile.avgReelsPlays,
@@ -75,24 +67,24 @@ const UserHandel = (): JSX.Element => {
         avgComments: data.profile.avgComments,
         avgViews: data.profile.avgViews,
         paidPostPerformance: data.profile.paidPostPerformance,
-        genderMale: data.profile.genders[1].weight,
-        genderFemale: data.profile.genders[0].weight,
-        geoCities1: data.profile.geoCities[0].name,
-        geoCities2: data.profile.geoCities[1].name,
-        geoCities3: data.profile.geoCities[2].name,
-        geoCities4: data.profile.geoCities[3].name,
-        geoCities5: data.profile.geoCities[4].name,
-        geoCountries1: data.profile.geoCountries[0].name,
-        geoCountries2: data.profile.geoCountries[1].name,
-        geoCountries3: data.profile.geoCountries[2].name,
-        geoCountries4: data.profile.geoCountries[3].name,
-        geoCountries5: data.profile.geoCountries[4].name,
-        ages13_17: data.profile.ages[0].weight,
-        ages18_24: data.profile.ages[1].weight,
-        ages25_34: data.profile.ages[2].weight,
-        ages35_44: data.profile.ages[3].weight,
-        ages45_64: data.profile.ages[4].weight,
-        ages65_: data.profile.ages[5].weight,
+        genderMale: data.profile.audience.genders[1].weight,
+        genderFemale: data.profile.audience.genders[0].weight,
+        geoCities1: data.profile.audience.geoCities[0].name,
+        geoCities2: data.profile.audience.geoCities[1].name,
+        geoCities3: data.profile.audience.geoCities[2].name,
+        geoCities4: data.profile.audience.geoCities[3].name,
+        geoCities5: data.profile.audience.geoCities[4].name,
+        geoCountries1: data.profile.audience.geoCountries[0].name,
+        geoCountries2: data.profile.audience.geoCountries[1].name,
+        geoCountries3: data.profile.audience.geoCountries[2].name,
+        geoCountries4: data.profile.audience.geoCountries[3].name,
+        geoCountries5: data.profile.audience.geoCountries[4].name,
+        ages13_17: data.profile.audience.ages[0].weight,
+        ages18_24: data.profile.audience.ages[1].weight,
+        ages25_34: data.profile.audience.ages[2].weight,
+        ages35_44: data.profile.audience.ages[3].weight,
+        ages45_64: data.profile.audience.ages[4].weight,
+        ages65_: data.profile.audience.ages[5].weight,
         likedPost1Url: data.profile.popularPosts[0].url,
         likedPost1CreatedAt: data.profile.popularPosts[0].created,
         likedPost1Likes: data.profile.popularPosts[0].likes,
@@ -110,33 +102,39 @@ const UserHandel = (): JSX.Element => {
         likedPost3Image: data.profile.popularPosts[2].thumbnail,
         recentPost1Url: data.profile.recentPosts[0].url,
         recentPost1CreatedAt: data.profile.recentPosts[0].created,
-        recentPost1Like: data.profile.recentPosts[0].likes,
+        recentPost1Likes: data.profile.recentPosts[0].likes,
         recentPost1Comments: data.profile.recentPosts[0].comments,
         recentPost2Url: data.profile.recentPosts[1].url,
         recentPost2CreatedAt: data.profile.recentPosts[1].created,
-        recentPost2Like: data.profile.recentPosts[1].likes,
+        recentPost2Likes: data.profile.recentPosts[1].likes,
         recentPost2Comments: data.profile.recentPosts[1].comments,
         recentPost3Url: data.profile.recentPosts[2].url,
         recentPost3CreatedAt: data.profile.recentPosts[2].created,
-        recentPost3Like: data.profile.recentPosts[2].likes,
+        recentPost3Likes: data.profile.recentPosts[2].likes,
         recentPost3Comments: data.profile.recentPosts[2].comments,
-        oneMonthagoFollower: data.profile.statHistory[7].followers,
-        oneMonthagoAvgLike: data.profile.statHistory[7].avgLikes,
-        oneMonthAgoFollowing: data.profile.statHistory[7].following,
-        twoMonthagoFollower: data.profile.statHistory[6].followers,
-        twoMonthagoAvgLike: data.profile.statHistory[6].avgLikes,
-        twoMonthAgoFollowing: data.profile.statHistory[6].following,
-        threeMonthagoFollower: data.profile.statHistory[5].followers,
-        threeMonthagoAvgLike: data.profile.statHistory[5].avgLikes,
-        threeMonthAgoFollowing: data.profile.statHistory[5].following,
-        fourMonthagoFollower: data.profile.statHistory[4].followers,
-        fourMonthagoAvgLike: data.profile.statHistory[4].avgLikes,
-        fourMonthAgoFollowing: data.profile.statHistory[4].following,
-        fiveMonthagoFollower: data.profile.statHistory[3].followers,
-        fiveMonthagoAvgLike: data.profile.statHistory[3].avgLikes,
-        fiveMonthAgoFollowing: data.profile.statHistory[3].following,
+        oneMonthAgoFollower: data.profile.statHistory[6].followers,
+        oneMonthAgoAvgLike: data.profile.statHistory[6].avgLikes,
+        oneMonthAgoFollowing: data.profile.statHistory[6].following,
+        twoMonthAgoFollower: data.profile.statHistory[5].followers,
+        twoMonthAgoAvgLike: data.profile.statHistory[5].avgLikes,
+        twoMonthAgoFollowing: data.profile.statHistory[5].following,
+        threeMonthAgoFollower: data.profile.statHistory[4].followers,
+        threeMonthAgoAvgLike: data.profile.statHistory[4].avgLikes,
+        threeMonthAgoFollowing: data.profile.statHistory[4].following,
+        fourMonthAgoFollower: data.profile.statHistory[3].followers,
+        fourMonthAgoAvgLike: data.profile.statHistory[3].avgLikes,
+        fourMonthAgoFollowing: data.profile.statHistory[3].following,
+        fiveMonthAgoFollower: data.profile.statHistory[2].followers,
+        fiveMonthAgoAvgLike: data.profile.statHistory[2].avgLikes,
+        fiveMonthAgoFollowing: data.profile.statHistory[2].following,
       });
+      if (userdata.data.status) {
+        setSus("Successful Updated the data")
+      } else {
+        setError("Unable to get user with this username");
+      }
     } else {
+      setError("Unable to get user with this username");
     }
   };
 
@@ -146,60 +144,72 @@ const UserHandel = (): JSX.Element => {
         <h1 className="text-white font-medium text-xl">User State</h1>
         <div className="w-full bg-slate-400 h-[1px] my-2"></div>
         {platformdata.length == 0 ||
-        platformdata == null ||
-        platformdata == undefined ? (
+          platformdata == null ||
+          platformdata == undefined ? (
           <div
             className={`my-6 flex gap-2 items-center b  py-1 px-2 rounded-md border border-rose-400 bg-rose-500 bg-opacity-10 text-rose-500 cursor-pointer text-center text-xl`}
           >
             <p>User does not have any channel</p>
           </div>
         ) : (
-          <div className="flex gap-4 flex-wrap">
-            {platformdata.map((val: any, index: number) => {
-              return (
-                <div
-                  key={index}
-                  className="bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-60"
-                >
-                  <div className="flex gap-4 w-full">
-                    <img
-                      src={val.platformLogoUrl}
-                      alt="platform logo"
-                      className="w-14 h-14 rounded-md"
-                    />
-                    <div>
-                      <div className="text-xl">{val.platformName}</div>
-                      <div className="text-md">{val.handleName}</div>
-                    </div>
-                    <div className="grow"></div>
-                  </div>
+          <>
+            {sus == "" || sus == null || sus == undefined ? null : (
+              <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
+                {sus}
+              </div>
+            )}
+            {error == "" || error == null || error == undefined ? null : (
+              <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+                {error}
+              </div>
+            )}
+            <div className="flex gap-4 flex-wrap">
+              {platformdata.map((val: any, index: number) => {
+                return (
                   <div
-                    onClick={() => getPlatform(val.handle_id)}
-                    className={`mt-6 flex gap-2 items-center py-1 px-2 rounded-md border border-cyan-400 bg-cyan-500 bg-opacity-10 text-cyan-500 cursor-pointer text-center text-xl`}
+                    key={index}
+                    className="bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-60"
                   >
-                    View Info
+                    <div className="flex gap-4 w-full">
+                      <img
+                        src={val.platformLogoUrl}
+                        alt="platform logo"
+                        className="w-14 h-14 rounded-md"
+                      />
+                      <div>
+                        <div className="text-xl">{val.platformName}</div>
+                        <div className="text-md">{val.handleName}</div>
+                      </div>
+                      <div className="grow"></div>
+                    </div>
+                    <div
+                      onClick={() => getPlatform(val.handle_id)}
+                      className={`mt-6 flex gap-2 items-center py-1 px-2 rounded-md border border-cyan-400 bg-cyan-500 bg-opacity-10 text-cyan-500 cursor-pointer text-center text-xl`}
+                    >
+                      View Info
+                    </div>
+                    {val.lastUpdatedAt == null ||
+                      val.lastUpdatedAt == undefined ||
+                      val.lastUpdatedAt == "" ? (
+                      <p className="mt-2 py-1 px-2 rounded-md border border-rose-400 bg-rose-500 bg-opacity-10 text-rose-500 cursor-pointer text-center text-sm">
+                        There is no record
+                      </p>
+                    ) : (
+                      <p className="mt-2 py-1 px-2 rounded-md border border-green-400 bg-green-500 bg-opacity-10 text-green-500 cursor-pointer text-center text-sm">
+                        Last Update : {moment(val.lastUpdatedAt).fromNow()}
+                      </p>
+                    )}
+                    <button
+                      onClick={() => handeladdupdate(val.handle_id, val.handleName)}
+                      className="w-full mt-2 py-1 px-2 rounded-md border border-cyan-400 bg-cyan-500 bg-opacity-10 text-cyan-500 cursor-pointer text-center text-sm"
+                    >
+                      ADD/UPDATE
+                    </button>
                   </div>
-                  {val.lastUpdatedAt == null ||
-                  val.lastUpdatedAt == undefined ||
-                  val.lastUpdatedAt == "" ? (
-                    <p className="mt-2 py-1 px-2 rounded-md border border-rose-400 bg-rose-500 bg-opacity-10 text-rose-500 cursor-pointer text-center text-sm">
-                      There is no record
-                    </p>
-                  ) : (
-                    <p className="mt-2 py-1 px-2 rounded-md border border-green-400 bg-green-500 bg-opacity-10 text-green-500 cursor-pointer text-center text-sm">
-                      Last Update : {val.lastUpdatedAt.toString().split(" ")[0]}
-                    </p>
-                  )}
-                  <button
-                    onClick={() => handeladdupdate(val.handle_id)}
-                    className="w-full mt-2 py-1 px-2 rounded-md border border-cyan-400 bg-cyan-500 bg-opacity-10 text-cyan-500 cursor-pointer text-center text-sm"
-                  >
-                    ADD/UPDATE
-                  </button>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </>
         )}
         <div className="bg-gray-400 w-full h-[2px] my-4"></div>
         {platformData == null || platformData == undefined ? (

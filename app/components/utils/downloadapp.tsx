@@ -1,5 +1,7 @@
 import { Link } from "@remix-run/react";
 import { CusButton } from "./buttont";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAndroid, faAppStore, faApple } from "@fortawesome/free-brands-svg-icons";
 
 export const DownloadApp = () => {
   return (
@@ -16,17 +18,11 @@ export const DownloadApp = () => {
         <div className="grow"></div>
         <div className="flex flex-col md:h-36 lg:pr-20">
           <Link to={"/login"}>
-            <CusButton
-              text="Download Android App"
-              background={"bg-green-500"}
-            ></CusButton>
+            <button className="py-2 px-4 text-white rounded-lg bg-black">Download <FontAwesomeIcon icon={faAndroid}></FontAwesomeIcon> App</button>
           </Link>
           <div className="grow"></div>
           <Link to={"/login"}>
-            <CusButton
-              text="Download IOS App"
-              background={"bg-black"}
-            ></CusButton>
+            <button className="py-2 px-4 text-white rounded-lg bg-black">Download  <FontAwesomeIcon icon={faApple}></FontAwesomeIcon> App</button>
           </Link>
         </div>
       </div>

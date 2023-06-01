@@ -174,6 +174,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
   return (
     <>
       <div>
+        <div className="flex w-full my-4">
+          <div className="grow"></div>
+          <Link to={"/home"} className="rounded-lg py-1 px-2 text-white bg-secondary text-lg">Skip This Step</Link>
+        </div>
         <div className="rounded-xl shadow-xl p-6 bg-white mt-6">
           <div className="flex px-2 my-4">
             <h2 className="text-black text-xl text-left font-bold">Filter</h2>
@@ -190,9 +194,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     Save filter
                   </button>
                   <div
-                    className={`w-80 right-0 max-h-56 overflow-y-scroll no-scrollbar p-2 bg-gray-100 shadow-xl absolute translate-y-2 rounded-lg ${
-                      filterName ? "" : "hidden"
-                    }`}
+                    className={`w-80 right-0 max-h-56 overflow-y-scroll no-scrollbar p-2 bg-gray-100 shadow-xl absolute translate-y-2 rounded-lg ${filterName ? "" : "hidden"
+                      }`}
                   >
                     <p className="text-center text-sm text-slate-900 font-semibold my-2">
                       Filter name
@@ -203,8 +206,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                       className="bg-transparent w-full outline-none border-2 rounded-md my-2 border-green-500 px-2 py-1"
                     />
                     {nameError == "" ||
-                    nameError == null ||
-                    nameError == undefined ? null : (
+                      nameError == null ||
+                      nameError == undefined ? null : (
                       <div className="bg-red-500 bg-opacity-10 border text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2">
                         {nameError}
                       </div>
@@ -239,9 +242,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon>{" "}
                   </button>
                   <div
-                    className={`w-full max-h-56 overflow-y-scroll no-scrollbar p-2 bg-white shadow-xl absolute translate-y-2 rounded-lg ${
-                      showFilter ? "" : "hidden"
-                    }`}
+                    className={`w-full max-h-56 overflow-y-scroll no-scrollbar p-2 bg-white shadow-xl absolute translate-y-2 rounded-lg ${showFilter ? "" : "hidden"
+                      }`}
                   >
                     {localFilter.map((val: any, index: number) => {
                       return (
@@ -345,9 +347,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                 </div>
 
                 <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                    cat ? "" : "hidden"
-                  } grid place-items-center`}
+                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"
+                    } grid place-items-center`}
                 >
                   <div className="bg-white p-10 cursor-pointer">
                     <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
@@ -366,11 +367,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                               setcat(false);
                             }}
                             key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
-                              selcategory.includes(val)
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-800 text-black"
-                            }  no-scrollbar`}
+                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selcategory.includes(val)
+                              ? "border-green-500 text-green-500"
+                              : "border-gray-800 text-black"
+                              }  no-scrollbar`}
                           >
                             {val["categoryCode"]} - {val["categoryName"]}{" "}
                           </h1>
@@ -400,11 +400,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     return (
                       <div
                         key={i}
-                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${
-                          selPlatform.includes(val.id)
-                            ? "bg-white "
-                            : "bg-gray-200"
-                        } `}
+                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${selPlatform.includes(val.id)
+                          ? "bg-white "
+                          : "bg-gray-200"
+                          } `}
                         onClick={() => {
                           if (selPlatform.includes(val.id)) {
                             let setdata = selPlatform.filter(
@@ -457,9 +456,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                   </div>
                 </div>
                 <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                    con ? "" : "hidden"
-                  } grid place-items-center`}
+                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
+                    } grid place-items-center`}
                 >
                   <div className="bg-white p-10 cursor-pointer">
                     <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
@@ -478,11 +476,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                               setcon(false);
                             }}
                             key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
-                              selCountry.includes(val)
-                                ? "border-green-500 text-green-500"
-                                : "border-gray-800 text-black"
-                            }  no-scrollbar`}
+                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
+                              ? "border-green-500 text-green-500"
+                              : "border-gray-800 text-black"
+                              }  no-scrollbar`}
                           >
                             {val["code"]} - {val["name"]}
                           </h1>
@@ -557,9 +554,9 @@ const SearchedInfluencer = (props: SearchedInfluencerProps) => {
           {props.data.map((val: any, index: number) => {
             const avatar =
               val["pic"] == "0" ||
-              val["pic"] == null ||
-              val["pic"] == undefined ||
-              val["pic"] == ""
+                val["pic"] == null ||
+                val["pic"] == undefined ||
+                val["pic"] == ""
                 ? "/images/inf/inf14.png"
                 : val["pic"];
             const name = val["userName"];
@@ -594,6 +591,7 @@ type InfluencerCardProps = {
 };
 const InfluencerCard = (props: InfluencerCardProps) => {
   const [error, setError] = useState<string | null>(null);
+  const [sus, setSus] = useState<string | null>(null);
 
   const Star = () => {
     const fullStars = Math.floor(props.star);
@@ -647,7 +645,9 @@ const InfluencerCard = (props: InfluencerCardProps) => {
     if (data.data.status == false) {
       setError(data.data.message);
     } else {
+      setSus("Request has been sent.");
     }
+
   };
   return (
     <>
@@ -712,6 +712,11 @@ const InfluencerCard = (props: InfluencerCardProps) => {
               fontwidth={"font-bold"}
             ></CusButton>
           </Link>
+          {sus == "" || sus == null || sus == undefined ? null : (
+            <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
+              {sus}
+            </div>
+          )}
         </div>
       </div>
     </>

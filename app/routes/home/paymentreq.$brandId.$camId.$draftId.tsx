@@ -8,11 +8,7 @@ import { CusButton } from "~/components/utils/buttont";
 import MyRating from "~/components/utils/raiting";
 import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
-import Stripe from "stripe";
-const stripe = new Stripe(
-  "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",
-  { apiVersion: "2022-11-15" }
-);
+
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const camId = props.params.camId;
@@ -221,37 +217,7 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
   }, []);
 
 
-  const handlepayment = async () => {
-    // stripe.customers
-    //   .create({
-    //     email: "customer@example.com",
-    //   })
-    //   .then((customer) => console.log(customer))
-    //   .catch((error) => console.error(error));
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: "Example Product",
-              images: [
-                "https://plus.unsplash.com/premium_photo-1684952849219-5a0d76012ed2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80",
-              ],
-            },
-            unit_amount: 4200, // Amount in cents
-          },
-          quantity: 1,
-        },
-      ],
-      success_url: "https://your-website.com/success",
-      cancel_url: "https://your-website.com/cancel",
-    });
-    window.location.assign(session.url == null ? "" : session.url);
-    // navigator(session.url == null ? "" : session.url);
-  };
+
 
   const sendpayment = async () => {
     if (
@@ -357,7 +323,7 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
               </div>
             )}
             <button
-              onClick={handlepayment}
+              onClick={sendpayment}
               className={`text-black bg-[#01FFF4] rounded-lg w-full text-center py-2 font-semibold text-md mt-2`}
             >
               Request Payment

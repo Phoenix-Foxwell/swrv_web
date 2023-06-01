@@ -136,9 +136,8 @@ const Invite = () => {
                             ? val.toUser.name.toString().split("@")[0]
                             : val.fromUser.name.toString().split("@")[0]
                         }
-                        message={`${val.fromUser.id == userId ? "you: " : ""} ${
-                          val.comment
-                        }`}
+                        message={`${val.fromUser.id == userId ? "you: " : ""} ${val.comment
+                          }`}
                         url={
                           val.fromUser.id == userId
                             ? val.toUser.pic
@@ -179,17 +178,16 @@ type UserMessageProps = {
 const UserMessage = (props: UserMessageProps) => {
   const avatar =
     props.url == "" ||
-    props.url == "0" ||
-    props.url == null ||
-    props.url == undefined
+      props.url == "0" ||
+      props.url == null ||
+      props.url == undefined
       ? "/images/avatar/user.png"
       : props.url;
   return (
     <>
       <div
-        className={`flex w-full py-2 my-1 border-b-2 rounded-md ${
-          props.active ? "bg-gray-200 px-4" : "border-slate-200"
-        }`}
+        className={`flex w-full py-2 my-1 border-b-2 rounded-md ${props.active ? "bg-gray-200 px-4" : "border-slate-200"
+          }`}
       >
         <img
           src={avatar}
@@ -230,16 +228,14 @@ const Message = (props: MessageProps) => {
         <div className={`w-4 ${props.user ? "order-2" : ""}`}></div>
         <div className="max-w-4/5 bg-gray-200 rounded-md p-2 order-1">
           <p
-            className={`text-xs text-gray-700 font-normal ${
-              props.user ? "text-right" : "text-left"
-            }`}
+            className={`text-xs text-gray-700 font-normal ${props.user ? "text-right" : "text-left"
+              }`}
           >
             {props.time}
           </p>
           <p
-            className={`text-md text-gray-900 font-normal text-left ${
-              props.user ? "text-right" : "text-left"
-            }`}
+            className={`text-md text-gray-900 font-normal text-left ${props.user ? "text-right" : "text-left"
+              }`}
           >
             {props.message}
           </p>
@@ -299,7 +295,7 @@ const UserCard = (props: UserCardProps) => {
 
             <button
               onClick={() => {
-                navigator(`/home/branduser`);
+                navigator(`/home/myuser/${userdata.id}`);
               }}
               className=" mt-2 w-full py-2 text-center text-primary font-semibold text-lg bg-[#01FFF4] rounded-md"
             >

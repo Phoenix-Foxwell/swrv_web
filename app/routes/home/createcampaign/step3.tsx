@@ -282,7 +282,15 @@ const Step3 = () => {
           onChange={(value) => {
             setRemunerationType(value.target.value);
           }}
+          defaultValue={"0"}
         >
+          <option
+            value="0"
+            className="border-none outline-none font-normal text-lg"
+            disabled
+          >
+            Select a remuneration option
+          </option>
           <option
             value="1"
             className="border-none outline-none font-normal text-lg"

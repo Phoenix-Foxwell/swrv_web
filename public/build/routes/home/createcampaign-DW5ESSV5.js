@@ -1,1 +1,0 @@
-import{c as o}from"/build/_shared/chunk-Q24O5NQK.js";import{d as e,g as r}from"/build/_shared/chunk-EO7COENX.js";var t=e(r()),a=()=>(0,t.jsx)(t.Fragment,{children:(0,t.jsx)(o,{})}),f=a;export{f as default};

@@ -22,6 +22,8 @@ const ContactPage = () => {
     setContactnumber(e.target.value.replace(/\D/g, ""));
   };
   const submit = async () => {
+    setSus(null);
+    setError(null);
     if (
       nameRef.current?.value == null ||
       nameRef.current?.value == undefined ||
@@ -67,6 +69,9 @@ const ContactPage = () => {
       if (data.data.status == false) {
         return setError(data.data.message);
       } else {
+        nameRef.current!.value = "";
+        messageRef.current!.value = "";
+        setContactnumber(undefined);
         setError(null);
         setSus("Message sent!");
       }
@@ -132,20 +137,18 @@ const ContactPage = () => {
               <div className="flex">
                 <button
                   onClick={() => setIsBrand(true)}
-                  className={`w-40 rounded-md font-semibold text-lg border-2 border-primary py-1 ${
-                    isBrand ? "text-white bg-primary" : "text-primary bg-white"
-                  }`}
+                  className={`w-40 rounded-md font-semibold text-lg border-2 border-primary py-1 ${isBrand ? "text-white bg-primary" : "text-primary bg-white"
+                    }`}
                 >
                   I'm a brand
                 </button>
                 <div className="w-10"></div>
                 <button
                   onClick={() => setIsBrand(false)}
-                  className={`w-40 rounded-md font-semibold text-lg border-secondary border-2 py-2 ${
-                    isBrand
-                      ? "text-secondary bg-white"
-                      : "text-white bg-secondary"
-                  }`}
+                  className={`w-40 rounded-md font-semibold text-lg border-secondary border-2 py-2 ${isBrand
+                    ? "text-secondary bg-white"
+                    : "text-white bg-secondary"
+                    }`}
                 >
                   I'm a Influencer
                 </button>

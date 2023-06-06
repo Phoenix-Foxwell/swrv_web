@@ -32,7 +32,6 @@ enum AcceptRequest {
 }
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
-  const platform = await axios.post(`${BaseUrl}/api/getplatform`);
   const id = props.params.id;
 
   const campaigndata = await axios.post(
@@ -57,7 +56,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
   return json({
     campaign: campaigndata.data.data[0],
     user: cookie.user,
-    platform: platform.data.data,
+    platform: cookie.user.platforms,
   });
 };
 
@@ -173,6 +172,7 @@ const Campaigns = () => {
       setApprovedBid((val: any) => bidreq.data.data[0]);
     }
   };
+
   useEffect(() => {
     init();
   }, []);
@@ -325,6 +325,7 @@ const Campaigns = () => {
       <div className="my-6">
         {isbrand ? (
           <>
+            <ListCreatedDrafts campaingid={champaign.id} brandid={userId}  ></ListCreatedDrafts>
             <ChampaingAcceptRequest
               userId={userId}
               campaingid={champaign.id}
@@ -1320,6 +1321,7 @@ type CreateDraftProps = {
 };
 
 const CreateDraft = (props: CreateDraftProps) => {
+
   const datepicker = useRef<HTMLInputElement | null>(null);
   const inputFile = useRef<HTMLInputElement | null>(null);
   const descraption = useRef<HTMLTextAreaElement | null>(null);
@@ -1349,7 +1351,7 @@ const CreateDraft = (props: CreateDraftProps) => {
                     }}
                   >
                     <img
-                      src={props.platforms[i]["platformLogoUrl"]}
+                      src={props.platforms[i]["platform"]["logo"]}
                       alt="error"
                       className="w-10 h-10 object-center object-cover"
                     />
@@ -1427,30 +1429,33 @@ const CreateDraft = (props: CreateDraftProps) => {
                   descraption.current?.value == ""
                 ) {
                   setError("Write the description.");
-                }
-                const pdfurl = await UploadFile(pdfFile!);
-                if (pdfurl.status) {
-                  let req = {
-                    campaignId: props.champaingId,
-                    influencerId: props.influencerId,
-                    handleId: platform,
-                    publishAt: datepicker.current?.value,
-                    attach01: pdfurl.data,
-                    description: descraption.current?.value,
-                  };
-                  const data = await axios({
-                    method: "post",
-                    url: `${BaseUrl}/api/add-draft`,
-                    data: req,
-                  });
-                  if (data.data.status == false) {
-                    return setError(data.data.message);
-                  } else {
-                    setError(null);
-                    return setCreatebox(false);
-                  }
                 } else {
-                  setError(pdfurl.data);
+
+
+
+                  const pdfurl = await UploadFile(pdfFile!);
+                  if (pdfurl.status) {
+                    let req = {
+                      campaignId: props.champaingId,
+                      influencerId: props.influencerId,
+                      handleId: platform,
+                      publishAt: datepicker.current?.value,
+                      attach01: pdfurl.data,
+                      description: descraption.current?.value,
+                    };
+                    const data = await axios({
+                      method: "post",
+                      url: `${BaseUrl}/api/add-draft`,
+                      data: req,
+                    });
+                    if (data.data.status == false) {
+                      return setError(data.data.message);
+                    } else {
+                      window.location.reload();
+                    }
+                  } else {
+                    setError(pdfurl.data);
+                  }
                 }
               }}
               className="text-white bg-primary rounded-lg w-full text-center py-2 font-semibold text-md mt-2"
@@ -1827,6 +1832,97 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
   );
 };
 
+type ListCreatedDraftsProps = {
+  campaingid: string;
+  brandid: string;
+};
+
+const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
+  const [resDarft, setResDarft] = useState<any[]>([]);
+
+  const init = async () => {
+    let req = {
+      search: {
+        campaign: props.campaingid,
+      },
+    };
+
+    const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
+    if (responseData.data.status == true) {
+      setResDarft(responseData.data.data);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <>
+      <div className="p-4 rounded-xl shadow-xl bg-white my-4">
+        {resDarft.length == 0 ? (
+          <div>No one created any drafts yet.</div>
+        ) : (
+          <div>
+            <p className="text-md font-medium">All Created draft</p>
+            <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+            <div className="flex flex-wrap gap-6">
+              {resDarft.map((val: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="my-2 p-4 bg-white rounded-lg shadow-lg w-80"
+                  >
+                    <div className="flex">
+                      <img
+                        src={val.influencer.pic}
+                        alt="influencer pic"
+                        className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                      />
+                      <div className="ml-2">
+                        <p className="text-md font-medium">
+                          {val.influencer.name.split("@")[0]}
+                        </p>
+                        <p className="text-sm font-medium">
+                          {val.influencer.email}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-md font-medium">Description</p>
+                    <p className="text-sm font-medium">{val.description}</p>
+                    <p className="mt-2 text-md font-medium">Attachment</p>
+                    <a
+                      target="_blank"
+                      className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
+                      href={val.attach01}
+                    >
+                      View pdf
+                    </a>
+                    <p className="mt-2 text-md font-medium">Status</p>
+                    <p
+                      className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
+                        ? "bg-green-500"
+                        : val.status.name == "PENDING"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                        }`}
+                    >
+                      {val.status.name}
+                    </p>
+                    {val.status.name == "ACCEPTED" ?
+                      <Link className="text-white py-1 w-full bg-cyan-500 cursor-pointer inline-block text-center mt-4 rounded-md" to={`/home/brandpay/${props.brandid}/${props.campaingid}/${val.id}`}>View Details</Link>
+                      : null}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
 type LinkCampaignProps = {
   campaingid: string;
   userId: string;
@@ -1903,7 +1999,7 @@ const LinkCampaign: React.FC<LinkCampaignProps> = (
       {resDarft.length == 0 ? (
         <div className="bg-white rounded-md p-4 mt-2">
           <h1 className="text-center font-semibold text-lg">
-            NO Draft are created
+            No campaign is live
           </h1>
         </div>
       ) : null}
@@ -2058,10 +2154,10 @@ const Bidding: React.FC<BiddingProps> = (props: BiddingProps): JSX.Element => {
       <div className="w-full h-[1px] bg-slate-300"></div>
       <div className="p-4 bg-white mt-2 rounded-md">
         <p className="font-semibold text-xl  text-gray-800">
-          Starting price : {props.CostPerPost.split(".")[0]}
+          Starting bid : {props.CostPerPost.split(".")[0]}
         </p>
         <p className="font-semibold text-xl  text-gray-800 mt-2">
-          Current price : {amount.toString().split(".")[0]}
+          Current bid : {amount.toString().split(".")[0]}
         </p>
         <p className="font-semibold text-xl  text-gray-700 my-2">
           Min Bid : 100

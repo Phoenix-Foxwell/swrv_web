@@ -26,8 +26,12 @@ export const CampaginCard = (props: CampaginCardProps) => {
       setColor("text-green-500");
     } else if (props.category == "Sponsored") {
       setColor("text-indigo-500");
+    } else if (props.category == "Campaign") {
+      setColor("text-yellow-500");
+    } else if (props.category == "Bidding") {
+      setColor("text-blue-500");
     }
-  });
+  }, []);
   return (
     <>
       <div className="bg-white rounded-xl shadow-xl p-4 w-64 my-2 h-full">

@@ -10,7 +10,6 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { CusButton } from "~/components/utils/buttont";
 import { CampaginCard } from "~/components/utils/campagincard";
-import PastBrandCard from "~/components/utils/pastbrandcard";
 import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
 
@@ -72,7 +71,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 const MyCampaigns = () => {
-  const [completed, setCompleted] = useState(false);
   const userdata = useLoaderData();
   const isBrand = userdata.userdata.role["code"] == "50" ? true : false;
   const campdata = userdata.camp.campaigns;
@@ -97,46 +95,10 @@ const MyCampaigns = () => {
   return (
     <>
       <div>
-        <div className="flex my-6 md:flex-row flex-col">
-          <div>
-            <h1 className="text-2xl font-bold text-black text-left mt-4">
-              My campaigns
-            </h1>
-            <p className="text-md font-normal text-black text-left">
-              Here you can manage all the campaigns that you are participating
-              in.
-            </p>
-          </div>
-          <div className="hidden md:block md:grow"></div>
-        </div>
-        {isBrand ? (
-          <div className="bg-white shadow-xl rounded-xl p-6">
-            <h1 className="text-black text-center font-bold text-2xl">
-              Would you like to create new campaign ?
-            </h1>
-            <div className="w-full text-center bg-red">
-              <div onClick={handelclick}>
-                <CusButton
-                  text="Create Campaign"
-                  textColor={"text-white"}
-                  background="bg-secondary"
-                ></CusButton>
-              </div>
-            </div>
-            {error == "" || error == null || error == undefined ? null : (
-              <div className="bg-rose-500 bg-opacity-10 border-2 text-center border-rose-500 rounded-md text-rose-500 text-lg font-normal text-md my-4">
-                {error}
-              </div>
-            )}
-          </div>
-        ) : null}
         {isBrand ? (
           <div>
-            {completed ? (
-              <CompletedCampaigns></CompletedCampaigns>
-            ) : (
-              <ActiveCampaign camp={campdata}></ActiveCampaign>
-            )}
+
+            <ActiveCampaign camp={campdata}></ActiveCampaign>
           </div>
         ) : (
           <>
@@ -144,6 +106,31 @@ const MyCampaigns = () => {
             <RequestedInvite userId={userdata.userdata.id}></RequestedInvite>
           </>
         )}
+
+        {/* create a new campaign only from brand */}
+        {isBrand ? (
+          <>
+            <div className="bg-white shadow-xl rounded-xl p-6">
+              <h1 className="text-black text-center font-bold text-2xl">
+                Would you like to create new campaign ?
+              </h1>
+              <div className="w-full text-center bg-red">
+                <div onClick={handelclick}>
+                  <CusButton
+                    text="Create Campaign"
+                    textColor={"text-white"}
+                    background="bg-secondary"
+                  ></CusButton>
+                </div>
+              </div>
+              {error == "" || error == null || error == undefined ? null : (
+                <div className="bg-rose-500 bg-opacity-10 border-2 text-center border-rose-500 rounded-md text-rose-500 text-lg font-normal text-md my-4">
+                  {error}
+                </div>
+              )}
+            </div>
+          </>
+        ) : null}
       </div>
     </>
   );
@@ -157,8 +144,70 @@ type ActiveCampaignProps = {
 
 const ActiveCampaign = (props: ActiveCampaignProps) => {
   const campdata = props.camp;
+
+  const [campaign, setCampaign] = useState<any[]>([]);
+  const [isActive, setIsActive] = useState<boolean>(true);
+
+  const init = async () => {
+    if (isActive) {
+      let data = campdata.filter((val: any) => new Date(val["endAt"]) > new Date());
+      setCampaign((val) => data);
+    } else {
+      let data = campdata.filter((val: any) => new Date(val["endAt"]) < new Date());
+      setCampaign((val) => data);
+    }
+  }
+
+  useEffect(() => { init(); }, [isActive]);
+
+  const setActive = () => {
+    setIsActive(true);
+  }
+  const setInactive = () => {
+    setIsActive(false);
+  }
+
   return (
     <>
+      <div className="flex my-6 md:flex-row flex-col flex-wrap items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-black text-left mt-4">
+            My campaigns
+          </h1>
+          <p className="text-md font-normal text-black text-left">
+            Here you can manage all the campaigns that you are participating
+            in.
+          </p>
+        </div>
+        <div className="grow"></div>
+        <div className="flex">
+          <div
+            className="w-full"
+            onClick={setActive}
+          >
+            <CusButton
+              width={"w-60"}
+              text="Active campaigns"
+              background={`${isActive ? "bg-[#bdff80]" : "bg-white"}`}
+              textColor={"text-black"}
+              fontwidth="font-bold"
+            ></CusButton>
+          </div>
+          <div className="w-6"></div>
+          <div
+            className="w-full"
+            onClick={setInactive}
+          >
+            <CusButton
+              width={"w-60"}
+              text="Finished campaigns"
+              textColor={"text-black"}
+              background={`${isActive ? "bg-white" : "bg-[#bdff80]"}`}
+              fontwidth="font-bold"
+            ></CusButton>
+          </div>
+        </div>
+      </div>
       <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
         <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
           {" "}
@@ -168,13 +217,13 @@ const ActiveCampaign = (props: ActiveCampaignProps) => {
           ></FontAwesomeIcon>{" "}
           Your Campaign{" "}
         </div>
-        {campdata.length == 0 ? (
+        {campaign.length == 0 ? (
           <h1 className="text-black font-medium text-xl text-center">
             Here is no campaign created..
           </h1>
         ) : null}
         <div className="flex gap-6 flex-wrap">
-          {campdata.map((val: any, i: number) => {
+          {campaign.map((val: any, i: number) => {
             const platforms: string[] = [];
             for (let i: number = 0; i < val.platforms.length; i++) {
               platforms.push(val.platforms[i]["platformLogoUrl"]);
@@ -214,16 +263,6 @@ const ActiveCampaign = (props: ActiveCampaignProps) => {
   );
 };
 
-const CompletedCampaigns = () => {
-  return (
-    <>
-      <div className="grid gap-4 grid-col-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-3 place-items-center">
-        <PastBrandCard></PastBrandCard>
-        <PastBrandCard></PastBrandCard>
-      </div>
-    </>
-  );
-};
 
 type UserDraftsProps = {
   userid: string;
@@ -231,6 +270,9 @@ type UserDraftsProps = {
 
 const UserDrafts = (props: UserDraftsProps) => {
   const [userDraft, setUserDraft] = useState<any[]>([]);
+
+  const [isActive, setIsActive] = useState<boolean>(true);
+
   const init = async () => {
     let req = {
       search: {
@@ -252,80 +294,137 @@ const UserDrafts = (props: UserDraftsProps) => {
         Accept: "*",
       },
     });
-    setUserDraft(apidata.data.data);
+
+    if (isActive) {
+      let data = apidata.data.data.filter((val: any) => new Date(val["campaign"]["endAt"]) > new Date());
+      setUserDraft((val) => data);
+    } else {
+      let data = apidata.data.data.filter((val: any) => new Date(val["campaign"]["endAt"]) < new Date());
+      setUserDraft((val) => data);
+    }
   };
 
   useEffect(() => {
     init();
-  }, []);
+  }, [isActive]);
+
+
+  const setActive = () => {
+    setIsActive(true);
+  }
+  const setInactive = () => {
+    setIsActive(false);
+  }
 
   return (
-    <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
-      <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
-        {" "}
-        <FontAwesomeIcon
-          icon={faIdBadge}
-          className="text-md text-secondary"
-        ></FontAwesomeIcon>{" "}
-        Active Campaign{" "}
+
+    <>
+      <div className="flex my-6 md:flex-row flex-col flex-wrap items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-black text-left mt-4">
+            My campaigns
+          </h1>
+          <p className="text-md font-normal text-black text-left">
+            Here you can manage all the campaigns that you are participating
+            in.
+          </p>
+        </div>
+        <div className="grow"></div>
+        <div className="flex">
+          <div
+            className="w-full"
+            onClick={setActive}
+          >
+            <CusButton
+              width={"w-60"}
+              text="Active campaigns"
+              background={`${isActive ? "bg-[#bdff80]" : "bg-white"}`}
+              textColor={"text-black"}
+              fontwidth="font-bold"
+            ></CusButton>
+          </div>
+          <div className="w-6"></div>
+          <div
+            className="w-full"
+            onClick={setInactive}
+          >
+            <CusButton
+              width={"w-60"}
+              text="Finished campaigns"
+              textColor={"text-black"}
+              background={`${isActive ? "bg-white" : "bg-[#bdff80]"}`}
+              fontwidth="font-bold"
+            ></CusButton>
+          </div>
+        </div>
       </div>
-      {userDraft.length == 0 ? (
-        <h1 className="text-black font-medium text-xl text-center">
-          You haven't collaborated in any campaign.
-        </h1>
-      ) : null}
-      <div className="flex flex-wrap gap-6">
-        {userDraft.map((val: any, i: number) => {
-          let image =
-            val["brand"].length == 0 ||
-              val["brand"] == undefined ||
-              val["brand"] == null ||
-              val["brand"] == ""
-              ? "/images/avatar/user.png"
-              : val["brand"]["logo"] == "0" ||
-                val["brand"]["logo"] == undefined ||
-                val["brand"]["logo"] == null ||
-                val["brand"]["logo"] == ""
+      <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
+        <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
+          {" "}
+          <FontAwesomeIcon
+            icon={faIdBadge}
+            className="text-md text-secondary"
+          ></FontAwesomeIcon>{" "}
+          Active Campaign{" "}
+        </div>
+        {userDraft.length == 0 ? (
+          <h1 className="text-black font-medium text-xl text-center">
+            You haven't collaborated in any campaign.
+          </h1>
+        ) : null}
+        <div className="flex flex-wrap gap-6 items-stretch">
+          {userDraft.map((val: any, i: number) => {
+            let image =
+              val["brand"].length == 0 ||
+                val["brand"] == undefined ||
+                val["brand"] == null ||
+                val["brand"] == ""
                 ? "/images/avatar/user.png"
-                : val["brand"]["logo"];
-          return (
-            <div
-              className="bg-white rounded-xl shadow-xl p-4 w-64 my-2 h-full"
-              key={i}
-            >
-              <div className="flex items-end gap-x-3 h-full">
-                <div>
-                  <img
-                    src={image}
-                    alt="error"
-                    className="object-cover w-16 h-16 rounded"
-                  />
+                : val["brand"]["logo"] == "0" ||
+                  val["brand"]["logo"] == undefined ||
+                  val["brand"]["logo"] == null ||
+                  val["brand"]["logo"] == ""
+                  ? "/images/avatar/user.png"
+                  : val["brand"]["logo"];
+            return (
+              <div
+                className="rounded-xl shadow-xl p-4 w-72 my-2 h-full bg-white "
+                key={i}
+              >
+                <div className="flex items-end gap-x-3 h-full">
+                  <div>
+                    <img
+                      src={image}
+                      alt="error"
+                      className="object-cover w-16 h-16 rounded"
+                    />
+                  </div>
+                  <p className="text-black font-semibold text-xl content-end text-left">
+                    {val.brand.name}
+                  </p>
                 </div>
-                <p className="text-black font-semibold text-xl content-end text-left">
-                  {val.brand.name}
+                <p className="text-gray-700 font-semibold text-xl text-left mt-2">
+                  {val.campaign.name}
                 </p>
+                <p className="text-black font-semibold text-xs text-left mt-2">
+                  email : {val.brand.email}
+                </p>
+                <Link to={`/home/campaigns/${val.campaign.id}`}>
+                  <CusButton
+                    text="View"
+                    textColor={"text-black"}
+                    background={"bg-[#01FFF4]"}
+                    width={"w-full"}
+                    margin={"my-2"}
+                    fontwidth={"font-bold"}
+                  ></CusButton>
+                </Link>
               </div>
-              <p className="text-gray-700 font-semibold text-xl text-left mt-2">
-                {val.campaign.name}
-              </p>
-              <p className="text-black font-semibold text-xs text-left mt-2">
-                email : {val.brand.email}
-              </p>
-              <Link to={`/home/campaigns/${val.campaign.id}`}>
-                <CusButton
-                  text="View"
-                  textColor={"text-black"}
-                  background={"bg-[#01FFF4]"}
-                  width={"w-full"}
-                  margin={"my-2"}
-                  fontwidth={"font-bold"}
-                ></CusButton>
-              </Link>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

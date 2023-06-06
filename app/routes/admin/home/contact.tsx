@@ -163,9 +163,8 @@ const Contact = () => {
     <>
       {/* view box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          viewBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${viewBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4">
           <div className="mx-auto">
@@ -187,9 +186,8 @@ const Contact = () => {
       </div>
       {/* del box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          delBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${delBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4">
           <div className="mx-auto">
@@ -224,9 +222,8 @@ const Contact = () => {
       </div>
       {/* edit box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          editBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${editBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4 w-80">
           <div className="mx-auto">
@@ -295,9 +292,8 @@ const Contact = () => {
       </div>
       {/* add box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          newBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${newBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4 w-80">
           <div className="mx-auto">
@@ -352,7 +348,7 @@ const Contact = () => {
       </div>
       <div className="grow bg-[#1b2028] my-2 rounded-md p-4 w-full">
         <div className="flex">
-          <h1 className="text-white font-medium text-xl">Campaign Type</h1>
+          <h1 className="text-white font-medium text-xl">Contact</h1>
           <div className="grow"></div>
           {/* <button onClick={() => setNewBox(true)} className="bg-green-600 py-1 px-2 text-sm text-white rounded-md">ADD NEW</button> */}
         </div>
@@ -369,14 +365,15 @@ const Contact = () => {
                   <div>{val.name}</div>
                   <div className="grow"></div>
                   <div>
-                    {Number(val.isbrand) ? (
-                      <div className="w-16 py-1 text-white text-xs bg-green-500 text-center rounded-md font-medium">
-                        Influencer
-                      </div>
-                    ) : (
+                    {Number(val.isbrand) === 1 ? (
                       <div className="w-16 py-1 text-white text-xs bg-rose-500 text-center rounded-md font-medium">
                         Brand
                       </div>
+                    ) : (
+                      <div className="w-16 py-1 text-white text-xs bg-green-500 text-center rounded-md font-medium">
+                        Influencer
+                      </div>
+
                     )}
                   </div>
                 </div>

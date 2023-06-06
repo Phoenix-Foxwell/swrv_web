@@ -341,6 +341,7 @@ interface DisputeProps {
   campaignId: string;
 }
 const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
+  
   const [error, setError] = useState<String | null>(null);
   const [sus, setSus] = useState<String | null>(null);
   const messageRef = useRef<HTMLTextAreaElement | null>(null);
@@ -360,6 +361,7 @@ const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
     ) {
       setError("Select one reason.");
     } else {
+      
       const req = {
         type: reasonRef.current?.value,
         userId: props.userId,

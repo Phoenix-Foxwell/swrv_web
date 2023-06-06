@@ -10,6 +10,22 @@ import ProgressBar from "~/components/progressbr";
 
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
+
+  // const blog = await axios({
+  //   method: "post",
+  //   url: `${BaseUrl}/api/get-neb-bytype`,
+  //   data: { type: 1 },
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Headers": "*",
+  //     "Access-Control-Allow-Options": "*",
+  //     "Access-Control-Allow-Methods": "*",
+  //     "X-Content-Type-Options": "*",
+  //     "Content-Type": "application/json",
+  //     "Accept": "*",
+  //   },
+  // });
+
   const blog = await axios.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
   return json({ blog: blog.data.data });
 };

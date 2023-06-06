@@ -1,8 +1,6 @@
 import {
   faSortDown,
-  faRemove,
   faTrash,
-  faHeart,
   faSearch,
   faAdd,
   faXmark,
@@ -28,11 +26,15 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const platformRes = await axios.post(`${BaseUrl}/api/getplatform`);
   const categoryRes = await axios.post(`${BaseUrl}/api/getcategory`);
   const countryRes = await axios.post(`${BaseUrl}/api/getcountry`);
+  const type = await axios.post(`${BaseUrl}/api/get-campaign-type`);
+
+
   return json({
     user: cookie.user,
     platform: platformRes.data.data,
     category: categoryRes.data.data,
     country: countryRes.data.data,
+    type: type.data.data,
   });
 };
 
@@ -118,6 +120,7 @@ const FindCampaign = () => {
                 platform={loader.platform}
                 country={loader.country}
                 category={loader.category}
+                type={loader.type}
               ></CampaignSearch>
             )}
           </div>
@@ -134,12 +137,14 @@ type CampaignSearchProps = {
   country: any;
   platform: any;
   category: any;
+  type: any;
 };
 
 const CampaignSearch = (props: CampaignSearchProps) => {
   const country = props.country;
   const platform = props.platform;
   const category = props.category;
+  const champtype = props.type;
   const [searchType, setSearchType] = useState<CampaignSearchMode>(
     CampaignSearchMode.TextSearch
   );
@@ -154,13 +159,17 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   const [selcategory, setSelcategory] = useState<any[]>([]);
   const [cat, setcat] = useState<boolean>(false);
 
+
+  const [selchamptype, setSelchamptype] = useState<any[]>([]);
+  const [type, setType] = useState<boolean>(false);
+
   const [error, setError] = useState<string | null>(null);
 
   const minReachSearch = useRef<HTMLInputElement>(null);
-  const maxReachSearch = useRef<HTMLInputElement>(null);
+  const endDateSearch = useRef<HTMLInputElement>(null);
   const cppSearch = useRef<HTMLInputElement>(null);
   const minTargetSearch = useRef<HTMLInputElement>(null);
-  const totalTargetSearch = useRef<HTMLInputElement>(null);
+  const minRatingSearch = useRef<HTMLInputElement>(null);
 
   const camptextsearch = async () => {
     setError(null);
@@ -181,11 +190,11 @@ const CampaignSearch = (props: CampaignSearchProps) => {
     )
       req.minReach = minReachSearch.current?.value;
     if (
-      maxReachSearch.current?.value != null &&
-      maxReachSearch.current?.value != undefined &&
-      maxReachSearch.current?.value != ""
+      endDateSearch.current?.value != null &&
+      endDateSearch.current?.value != undefined &&
+      endDateSearch.current?.value != ""
     )
-      req.maxReach = maxReachSearch.current?.value;
+      req.endDate = endDateSearch.current?.value;
     if (
       cppSearch.current?.value != null &&
       cppSearch.current?.value != undefined &&
@@ -198,12 +207,17 @@ const CampaignSearch = (props: CampaignSearchProps) => {
       minTargetSearch.current?.value != ""
     )
       req.minTarget = minTargetSearch.current?.value;
+
     if (
-      totalTargetSearch.current?.value != null &&
-      totalTargetSearch.current?.value != undefined &&
-      totalTargetSearch.current?.value != ""
+      selcategory.length != 0
     )
-      req.totalTarget = totalTargetSearch.current?.value;
+      req.category = selcategory[0]["id"];
+    if (
+      minRatingSearch.current?.value != null &&
+      minRatingSearch.current?.value != undefined &&
+      minRatingSearch.current?.value != ""
+    )
+      req.minRating = minRatingSearch.current?.value;
 
     const data = await axios.post(`${BaseUrl}/api/campaign-search`, req);
     if (data.data.status == false) return setError(data.data.message);
@@ -223,9 +237,9 @@ const CampaignSearch = (props: CampaignSearchProps) => {
     };
 
     if (
-      selcategory.length != 0
+      selchamptype.length != 0
     )
-      req.category = selcategory[0]["id"];
+      req.type = selchamptype[0]["id"];
 
     if (
       selPlatform.length != 0
@@ -243,7 +257,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   };
 
   const delsearch = () => {
-    setCamSearchResult([]);
+    window.location.reload();
   };
   //all filter box
   const [showFilter, setFilter] = useState<boolean>(false);
@@ -264,7 +278,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   const saveFilter = (name: string) => {
     if (name == "" || name == null || name == undefined)
       return setNameError("Enter the Filter name");
-    if (selcategory.length == 0) return setNameError("Select the category");
+    if (selchamptype.length == 0) return setNameError("Select the champaign type");
     if (selPlatform.length == 0) return setNameError("Select the platform");
     if (selCountry.length == 0) return setNameError("Select the country");
 
@@ -278,7 +292,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
       name: name,
       country: selCountry,
       platform: selPlatform,
-      category: selcategory,
+      type: selchamptype,
       active: active,
     };
     setLocalFilter([...localFilter, filter]);
@@ -286,7 +300,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
     setFilterName(false);
   };
   const loadFilter = (filterdata: any) => {
-    setSelcategory(filterdata["category"]);
+    setSelchamptype(filterdata["type"]);
     setSelectedPlatform(filterdata["platform"]);
     setSelCountry(filterdata["country"]);
     setActive(filterdata["active"]);
@@ -408,7 +422,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 </div>
                 <div className="w-80">
                   <p className="text-xl font-semibold text-primary">
-                    Min Reach
+                    Min. Brand Reach
                   </p>
                   <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
                     <input
@@ -422,21 +436,20 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 </div>
                 <div className="w-80">
                   <p className="text-xl font-semibold text-primary">
-                    Max Reach
+                    Min. Campaign End Date
                   </p>
                   <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
                     <input
-                      ref={maxReachSearch}
-                      type="text"
+                      ref={endDateSearch}
+                      type="date"
                       className="bg-transparent w-full outline-none py-1 px-2"
-                      placeholder="Max Reach"
-                      onKeyDown={handleKeyPress}
+                      placeholder="End Date"
                     />
                   </div>
                 </div>
                 <div className="w-80">
                   <p className="text-xl font-semibold text-primary">
-                    Cost Per Post
+                    Min. Price Per Post
                   </p>
                   <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
                     <input
@@ -464,6 +477,84 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 </div>
                 <div className="w-80">
                   <p className="text-xl font-semibold text-primary">
+                    Min. Brand Rating
+                  </p>
+                  <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
+                    <input
+                      ref={minRatingSearch}
+                      type="text"
+                      className="bg-transparent w-full outline-none py-1 px-2"
+                      placeholder="Min Target"
+                      onKeyDown={handleKeyPress}
+                    />
+                  </div>
+                </div>
+                <div className="w-80">
+                  {/* category search start here */}
+                  <p className="text-xl font-semibold text-primary">
+                    Category
+                  </p>
+                  <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 w-full relative">
+                    <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
+                      {selcategory.map((value: any, i: number) => {
+                        return (
+                          <div
+                            key={i}
+                            className="flex bg-white my-1 rounded-md py-1 px-2 items-center gap-x-4"
+                          >
+                            <h1 className=" text-black font-semibold text-center w-40">
+                              {`${value["categoryName"]} - [${value["categoryCode"]}]`}
+                            </h1>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="grow"></div>
+                    <div
+                      className="grid place-items-center px-4 bg-gray-300 rounded-lg"
+                      onClick={() => {
+                        setcat(!cat);
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={cat ? faXmark : faAdd}
+                      ></FontAwesomeIcon>
+                    </div>
+                    <div
+                      className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg ${cat ? "" : "hidden"
+                        }`}
+                    >
+                      <div className="min-h-80 w-full p-4 overflow-y-scroll no-scrollbar">
+                        {category.map((val: any, i: number) => {
+                          return (
+                            <h1
+                              onClick={() => {
+                                if (selcategory.includes(val)) {
+                                  let addcur = selcategory.filter(
+                                    (data) => data != val
+                                  );
+                                  setSelcategory(addcur);
+                                } else {
+                                  setSelcategory([val]);
+                                }
+                                setcat(false);
+                              }}
+                              key={i}
+                              className={`text-lg text-left text-gray-600 font-semibold cursor-pointer w-full my-2 border-b-2 ${selcategory.includes(val)
+                                ? "border-green-500 text-green-500"
+                                : "border-gray-500 text-black"
+                                }  no-scrollbar`}
+                            >
+                              {val["categoryCode"]} - {val["categoryName"]}{" "}
+                            </h1>
+                          );
+                        })}
+                        <div onClick={() => setcat(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20">Close</div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* category search end here */}
+                  {/* <p className="text-xl font-semibold text-primary">
                     Total target
                   </p>
                   <div className="bg-gray-200 rounded-md py-1 px-4 flex items-center">
@@ -474,7 +565,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                       placeholder="Total Target"
                       onKeyDown={handleKeyPress}
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -531,10 +622,10 @@ const CampaignSearch = (props: CampaignSearchProps) => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-y-4">
               <div className="px-2">
                 {/* category start here */}
-                <h1 className="text-primary text-lg font-bold mb">Category</h1>
+                <h1 className="text-primary text-lg font-bold mb">Campaign Type</h1>
                 <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 w-full relative">
                   <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
-                    {selcategory.map((value: any, i: number) => {
+                    {selchamptype.map((value: any, i: number) => {
                       return (
                         <div
                           key={i}
@@ -551,34 +642,34 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                   <div
                     className="grid place-items-center px-4 bg-gray-300 rounded-lg"
                     onClick={() => {
-                      setcat(!cat);
+                      setType(!type);
                     }}
                   >
                     <FontAwesomeIcon
-                      icon={cat ? faXmark : faAdd}
+                      icon={type ? faXmark : faAdd}
                     ></FontAwesomeIcon>
                   </div>
                   <div
-                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg ${cat ? "" : "hidden"
+                    className={`bg-gray-200 w-full h-80 overflow-y-scroll no-scrollbar absolute top-12 z-50 rounded-lg ${type ? "" : "hidden"
                       }`}
                   >
                     <div className="min-h-80 w-full p-4 overflow-y-scroll no-scrollbar">
-                      {category.map((val: any, i: number) => {
+                      {champtype.map((val: any, i: number) => {
                         return (
                           <h1
                             onClick={() => {
-                              if (selcategory.includes(val)) {
-                                let addcur = selcategory.filter(
+                              if (selchamptype.includes(val)) {
+                                let addcur = selchamptype.filter(
                                   (data) => data != val
                                 );
-                                setSelcategory(addcur);
+                                setSelchamptype(addcur);
                               } else {
-                                setSelcategory([val]);
+                                setSelchamptype([val]);
                               }
-                              setcat(false);
+                              setType(false);
                             }}
                             key={i}
-                            className={`text-lg text-left text-gray-600 font-semibold cursor-pointer w-full my-2 border-b-2 ${selcategory.includes(val)
+                            className={`text-lg text-left text-gray-600 font-semibold cursor-pointer w-full my-2 border-b-2 ${selchamptype.includes(val)
                               ? "border-green-500 text-green-500"
                               : "border-gray-500 text-black"
                               }  no-scrollbar`}
@@ -831,7 +922,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
   };
 
   const delsearch = () => {
-    setCamSearchResult([]);
+    window.location.reload();
+
   };
 
   //all filter box
@@ -994,8 +1086,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     setSearchType(CampaignSearchMode.AdvanceSearch);
                   }}
                 >
-                  <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Advanced
-                  filter
+                  <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Normal filter
                 </div>
                 <div className="grow"></div>
                 <FontAwesomeIcon
@@ -1204,8 +1295,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                       setSearchType(CampaignSearchMode.TextSearch);
                     }}
                   >
-                    <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Text
-                    search{" "}
+                    <FontAwesomeIcon icon={faSortDown}></FontAwesomeIcon> Advanced filter
                   </div>
                   <div className="grow"></div>
                   <FontAwesomeIcon
@@ -1246,7 +1336,7 @@ const BrandSearch = () => {
   const [error, setError] = useState<string | null>(null);
 
   const delsearch = () => {
-    setBrandSearchResult([]);
+    window.location.reload();
   };
 
   const brandTextSearch = useRef<HTMLInputElement>(null);

@@ -992,7 +992,6 @@ const UserInsights: React.FC<UserInsightsProps> = (props: UserInsightsProps): JS
     });
     if (userdata.data.status) {
       setAllPlatformData((val) => userdata.data.data)
-      console.log()
     }
 
 
@@ -1028,7 +1027,6 @@ const UserInsights: React.FC<UserInsightsProps> = (props: UserInsightsProps): JS
       },
     });
 
-    console.log(modashdata.data);
 
     const data = modashdata.data;
     if (!data.error) {
@@ -1119,7 +1117,7 @@ const UserInsights: React.FC<UserInsightsProps> = (props: UserInsightsProps): JS
   return (
     <>
       <div className="grow bg-[#eeeeee] my-2 rounded-md p-4 w-full">
-        <h1 className="font-medium text-xl text-black">User State</h1>
+        <h1 className="font-medium text-xl text-black">User Insights</h1>
         <div className="w-full bg-slate-400 h-[1px] my-2"></div>
         {allPlatformData.length == 0 ||
           allPlatformData == null ||

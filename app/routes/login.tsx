@@ -13,7 +13,9 @@ const login = () => {
   return (
     <>
       <div className="flex flex-col min-h-screen bg-[#eeeeee]">
-        <IntroNavBar></IntroNavBar>
+        <div className="z-50">
+          <IntroNavBar></IntroNavBar>
+        </div>
         <LoginBox message={data?.message}></LoginBox>
         <div className="grow"></div>
         <MainFooter></MainFooter>

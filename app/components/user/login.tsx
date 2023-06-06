@@ -54,9 +54,8 @@ export const LoginBox = (props: LoginBoxState) => {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 bg-gray-600 bg-opacity-20 h-screen w-full grid place-items-center shadow-xl ${
-          forgetPasswordBox ? "" : "hidden"
-        } `}
+        className={`fixed top-0 left-0 bg-gray-600 bg-opacity-20 h-screen w-full grid place-items-center shadow-xl ${forgetPasswordBox ? "" : "hidden"
+          }`}
         style={{ zIndex: 100 }}
       >
         <div className="bg-white rounded-lg p-8 w-96">
@@ -84,8 +83,8 @@ export const LoginBox = (props: LoginBoxState) => {
             placeholder="example@mail.com"
           />
           {emailError == "" ||
-          emailError == null ||
-          emailError == undefined ? null : (
+            emailError == null ||
+            emailError == undefined ? null : (
             <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
               {emailError}
             </div>
@@ -102,7 +101,7 @@ export const LoginBox = (props: LoginBoxState) => {
         </div>
       </div>
       <div className="relative">
-        <div className=" text-center text-[150px] -translate-y-4 font-black text-stroke absolute top-0 w-full md:-translate-y-20 md:text-[200px] text-[#eeeeee]">
+        <div className=" text-center text-[180px] -translate-y-4 font-black text-stroke absolute top-0 w-full md:-translate-y-20 md:text-[180px] text-[#eeeeee]">
           Welcome
         </div>
         <div className="w-full px-6 sm:px-16 grid  lg:grid-cols-3 md:w-4/6 lg:w-full mx-auto mb-20">
@@ -190,17 +189,24 @@ export const LoginBox = (props: LoginBoxState) => {
                   />
                 </div>
               </div>
-              <p className="text-black text-left font-normal text-sm mt-4 mb-10">
-                CAN'T LOG IN?{" "}
-                <span
-                  onClick={() => {
-                    setForgetPasswordBox(true);
-                  }}
-                  className="font-bold cursor-pointer"
-                >
-                  RESTORE PASSWORD
-                </span>
-              </p>
+              <div className="flex items-center mt-4 mb-10">
+                <input type="checkbox" />
+                <div className="w-2"></div>
+                <p className="text-black text-left font-normal text-xs">Keep me logged in</p>
+                <div className="grow"></div>
+                <p className="text-black text-left font-normal text-xs">
+                  CAN'T LOG IN?{" "}
+                  <span
+                    onClick={() => {
+                      setForgetPasswordBox(true);
+                    }}
+                    className="font-bold cursor-pointer"
+                  >
+                    RESTORE PASSWORD
+                  </span>
+                </p>
+              </div>
+
               <p className="text-black text-left font-bold text-sm mt-6">
                 Don't have an account?
               </p>

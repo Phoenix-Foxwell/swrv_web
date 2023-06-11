@@ -83,6 +83,9 @@ interface CreateCampaignState {
   long: number;
   setLong: (value: number) => void;
 
+  radius: number;
+  setRadius: (value: number) => void;
+
   // step 4
   campaignName: string;
   setCampaignName: (value: string) => void;
@@ -240,6 +243,9 @@ const CreateCampaignStore = create<CreateCampaignState>()((set) => ({
 
   long: 0,
   setLong: (value) => set((state) => ({ long: value })),
+
+  radius: 0,
+  setRadius: (value) => set((state) => ({ radius: value })),
 
   // step 4
   campaignName: "",

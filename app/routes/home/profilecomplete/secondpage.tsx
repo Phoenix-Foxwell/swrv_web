@@ -135,7 +135,7 @@ const SecondPage = () => {
                     </div>
                     <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${mar ? "" : "hidden"} grid place-items-center`}>
                         <div className="bg-white p-10 cursor-pointer">
-                            <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
+                            <div className="overflow-y-scroll no-scrollbar w-80 h-[350px]">
                                 {market.map((val: any, i: number) => {
                                     return (
                                         <h1 onClick={() => {
@@ -151,7 +151,7 @@ const SecondPage = () => {
                             </div>
                             <div onClick={() => {
                                 setmar(false);
-                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center">Close</div>
+                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer">Close</div>
                         </div>
                     </div>
                     {/* main market end here */}
@@ -180,7 +180,7 @@ const SecondPage = () => {
                     </div>
                     <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${ort ? "" : "hidden"} grid place-items-center`}>
                         <div className="bg-white p-10 cursor-pointer">
-                            <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
+                            <div className="w-80 overflow-y-scroll no-scrollbar h-[350px]">
                                 {market.map((val: any, i: number) => {
                                     return (
                                         <h1 onClick={() => {
@@ -196,7 +196,7 @@ const SecondPage = () => {
                             </div>
                             <div onClick={() => {
                                 setort(false);
-                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center">Close</div>
+                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer">Close</div>
                         </div>
                     </div>
                     {/* other market end here */}
@@ -224,7 +224,7 @@ const SecondPage = () => {
                     </div>
                     <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"} grid place-items-center`}>
                         <div className="bg-white p-10 cursor-pointer">
-                            <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
+                            <div className="w-80 overflow-y-scroll no-scrollbar h-[350px]">
                                 {category.map((val: any, i: number) => {
                                     return (
                                         <h1 onClick={() => {
@@ -240,7 +240,7 @@ const SecondPage = () => {
                             </div>
                             <div onClick={() => {
                                 setcat(false);
-                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center">Close</div>
+                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer">Close</div>
                         </div>
                     </div>
                     {/* category end here */}
@@ -268,7 +268,7 @@ const SecondPage = () => {
                     </div>
                     <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cur ? "" : "hidden"} grid place-items-center`}>
                         <div className="bg-white p-10 cursor-pointer">
-                            <div className="min-h-80 overflow-y-scroll no-scrollbar">
+                            <div className="overflow-y-scroll no-scrollbar h-[350px]">
                                 {currency.map((val: any, i: number) => {
                                     return (
                                         <h1 onClick={() => {
@@ -284,7 +284,7 @@ const SecondPage = () => {
                             </div>
                             <div onClick={() => {
                                 setcur(false);
-                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center">Close</div>
+                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer">Close</div>
                         </div>
                     </div>
                     {/* currency end here */}
@@ -311,7 +311,7 @@ const SecondPage = () => {
                     </div>
                     <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${lan ? "" : "hidden"} grid place-items-center`}>
                         <div className="bg-white p-10 cursor-pointer">
-                            <div className="h-80 overflow-y-scroll no-scrollbar">
+                            <div className="w-80 overflow-y-scroll no-scrollbar h-[350px]">
                                 {languages.map((val: any, i: number) => {
                                     return (
                                         <h1 onClick={() => {
@@ -327,7 +327,7 @@ const SecondPage = () => {
                             </div>
                             <div onClick={() => {
                                 setlan(false);
-                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center">Close</div>
+                            }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer">Close</div>
                         </div>
                     </div>
                     {/* languages end here */}

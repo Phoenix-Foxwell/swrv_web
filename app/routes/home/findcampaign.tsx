@@ -175,6 +175,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
     setError(null);
     let req: any = {
       active: active ? "1" : "0",
+      complete: true,
     };
 
     if (
@@ -233,6 +234,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
       // country: selcategory[0]["id"],
       // platform: selPlatform.join(","),
       // category: selCountry[0]["id"],
+      complete: true,
       active: active ? "1" : "0",
     };
 
@@ -880,18 +882,19 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
   const campadvancesearch = async () => {
     setError(null);
 
-    if (selcategory.length == 0) {
-      setCamSearchResult([]);
-      return setError("Select the category");
-    }
-    if (selPlatform.length == 0) {
-      setCamSearchResult([]);
-      return setError("Select the platform");
-    }
-    if (selCountry.length == 0) {
-      setCamSearchResult([]);
-      return setError("Select the country");
-    }
+    // if (selcategory.length == 0) {
+    //   setCamSearchResult([]);
+    //   return setError("Select the category");
+    // }
+    // if (selPlatform.length == 0) {
+    //   setCamSearchResult([]);
+    //   return setError("Select the platform");
+    // }
+    // if (selCountry.length == 0) {
+    //   setCamSearchResult([]);
+    //   return setError("Select the country");
+    // }
+
     let req: any = {
       // country: selCountry[0]["id"],
       // platform: selPlatform.join(","),
@@ -1449,7 +1452,8 @@ const SearchedCampaign = (props: SearchedCampaignProps) => {
                 category={campaignType}
                 image={image}
                 name={val.brand.name}
-                currency={val["currency"]["code"]}
+                // currency={val["currency"]["code"]}
+                currency={"USD"}
                 btntext="Learn More & Apply"
               ></CampaginCard>
             </div>

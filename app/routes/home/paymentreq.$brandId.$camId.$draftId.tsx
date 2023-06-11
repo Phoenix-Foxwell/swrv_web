@@ -30,7 +30,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     draftId: draftId,
     brandId: brandId,
     cpp: camp.data.data[0].costPerPost,
-    currency: cookie.user.currency.code,
+    // currency: cookie.user.currency.code,
+    currency: "USD",
     name: camp.data.data[0].campaignName,
   });
 };
@@ -186,6 +187,11 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
   const paymentRef = useRef<HTMLInputElement>(null);
   const [recived, setRecived] = useState<number>(0);
   const [requested, serRequested] = useState<number>(0);
+
+
+  const [sus, setSus] = useState<string | null>(null);
+
+
   const init = async () => {
     const reqdata = await axios.post(`${BaseUrl}/api/get-received-payment`, {
       userId: props.userId,
@@ -220,6 +226,8 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
 
 
   const sendpayment = async () => {
+    setPaymentError("");
+    setSus(null);
     if (
       paymentRef.current?.value == null ||
       paymentRef.current?.value == undefined ||
@@ -242,19 +250,27 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
         brandId: props.brandId,
         paymentType: "1",
       };
+
+
       const paymentdata = await axios.post(
         `${BaseUrl}/api/new-pay-request`,
         req
       );
-      if (!paymentdata.data.status)
+      if (!paymentdata.data.status) {
         setPaymentError(paymentdata.data.message);
+
+
+      }
       else {
         setPaymentError("");
         paymentRef.current.value = "";
+        setSus("Payment Request Sent Successfully");
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }
       setPaymentBox(false);
     }
-    window.location.reload();
   }
 
   return (
@@ -329,6 +345,13 @@ const Payments: React.FC<PaymentProps> = (props: PaymentProps): JSX.Element => {
               Request Payment
             </button>
           </div>
+          {sus == "" ||
+            sus == null ||
+            sus == undefined ? null : (
+            <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
+              {sus}
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -341,7 +364,7 @@ interface DisputeProps {
   campaignId: string;
 }
 const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
-  
+
   const [error, setError] = useState<String | null>(null);
   const [sus, setSus] = useState<String | null>(null);
   const messageRef = useRef<HTMLTextAreaElement | null>(null);
@@ -361,7 +384,7 @@ const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
     ) {
       setError("Select one reason.");
     } else {
-      
+
       const req = {
         type: reasonRef.current?.value,
         userId: props.userId,

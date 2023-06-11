@@ -23,7 +23,7 @@ export const HomeIntro: React.FC<HomeIntroProps> = (
       <Marketing></Marketing>
       <Blogs blogdata={props.blogdata}></Blogs>
       <SocialMedai></SocialMedai>
-      <TopCategory></TopCategory>
+      {/* <TopCategory></TopCategory> */}
     </div>
   </>
 );
@@ -552,104 +552,123 @@ const Blogs: React.FC<BlogIntroProps> = (
 
 const SocialMedai = (): JSX.Element => {
   return (
-    <>
-      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
+    <div className=" bg-[#eeeeee] rounded-md py-4 mb-6">
+      <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-2 mb-4">
         <div className="flex">
-          <h3 className="text-primary text-3xl font-bold grid place-items-center">
-            Notable topics
+          <h3 className="text-primary text-3xl font-bold grid place-items-center rounded-md bg-white border-b-4 border-blue-500 py-1 px-4">
+            Notable Influencers
           </h3>
           <div className="grow"></div>
+          <div className="h-10 bg-gray-500 w-[6px]"></div>
+          <div className="grow"></div>
+          <Link
+            to={"/notablebrand"}
+            className="text-primary text-3xl font-bold grid place-items-center rounded-md bg-white border-b-4 border-blue-500 py-1 px-4"
+          >
+            Notable brand
+          </Link>
         </div>
         {/* <div className="flex gap-4 flex-wrap justify-center mt-6"> */}
       </div>
+      <div className="h-[2px] w-full bg-gray-500"></div>
       <div className="grid place-items-center gird-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 my-6 items-start gap-y-6">
         <Link
           to={"/media/5"}
-          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+          className={`text-left shadow-xl rounded-xl bg-white`}
         >
-          <img
-            src={"/images/media/facebook.png"}
-            alt="err"
-            className="w-full rounded-md object-fill object-center h-44"
-          />
-          <h1 className="text-xl font-bold text-primary text-center mt-2">
-            Facebook
-          </h1>
+          <div className="flex p-4 gap-4 items-center">
+            <img
+              src={"/images/media/facebook.png"}
+              alt="err"
+              className="w-full rounded-md object-fill object-center h-10"
+            />
+            <h1 className="text-xl font-bold text-primary text-center">
+              Facebook
+            </h1>
+          </div>
         </Link>
         <Link
           to={"/media/1"}
-          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+          className={`w-44 text-left shadow-xl rounded-xl  bg-white`}
         >
-          <img
-            src={"/images/media/instagram.png"}
-            alt="err"
-            className="w-full rounded-md object-fill object-center h-44"
-          />
-          <h1 className="text-xl font-bold text-primary text-center mt-2">
-            Instagram
-          </h1>
+          <div className="flex p-4 gap-4 items-center">
+            <img
+              src={"/images/media/instagram.png"}
+              alt="err"
+              className="w-full rounded-md object-fill object-center h-10"
+            />
+            <h1 className="text-xl font-bold text-primary text-center">
+              Instagram
+            </h1>
+          </div>
         </Link>
         <Link
           to={"/media/8"}
-          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+          className={`w-44 text-left shadow-xl rounded-xl bg-white`}
         >
-          <img
-            src={"/images/media/twitter.png"}
-            alt="err"
-            className="w-full rounded-md object-fill object-center h-44"
-          />
-          <h1 className="text-xl font-bold text-primary text-center mt-2">
-            Twitter
-          </h1>
+          <div className="flex p-4 gap-4 items-center">
+            <img
+              src={"/images/media/twitter.png"}
+              alt="err"
+              className="w-full rounded-md object-fill object-center h-10"
+            />
+            <h1 className="text-xl font-bold text-primary text-center">
+              Twitter
+            </h1>
+          </div>
         </Link>
         <Link
           to={"/media/3"}
-          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+          className={`w-44 text-left shadow-xl rounded-xl bg-white`}
         >
-          <img
-            src={"/images/media/snapchat.png"}
-            alt="err"
-            className="w-full rounded-md object-fill object-center h-44"
-          />
-          <h1 className="text-xl font-bold text-primary text-center mt-2">
-            Snapchat
-          </h1>
+          <div className="flex p-4 gap-4 items-center">
+            <img
+              src={"/images/media/snapchat.png"}
+              alt="err"
+              className="w-full rounded-md object-fill object-center h-10"
+            />
+            <h1 className="text-xl font-bold text-primary text-center">
+              Snapchat
+            </h1>
+          </div>
         </Link>
         <Link
           to={"/media/4"}
-          className={`w-44 text-left shadow-xl rounded-xl pb-4`}
+          className={`w-44 text-left shadow-xl rounded-xl bg-white`}
         >
-          <img
-            src={"/images/media/youtube.png"}
-            alt="err"
-            className="w-full rounded-md object-fill object-center h-44"
-          />
-          <h1 className="text-xl font-bold text-primary text-center mt-2">
-            Youtube
-          </h1>
+          <div className="flex p-4 gap-4 items-center">
+            <img
+              src={"/images/media/youtube.png"}
+              alt="err"
+              className="w-full rounded-md object-fill object-center h-10"
+            />
+            <h1 className="text-xl font-bold text-primary text-center">
+              Youtube
+            </h1>
+          </div>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 
-const TopCategory = (): JSX.Element => {
-  return (
-    <>
-      <div className="flex flex-wrap justify-around w-full py-4">
-        <Link
-          to={"/notableinf"}
-          className="text-white rounded-md py-2 px-4 bg-blue-500 text-xl font-semibold"
-        >
-          Notable influencer
-        </Link>
-        <Link
-          to={"/notablebrand"}
-          className="text-white rounded-md py-2 px-4 bg-blue-500 text-xl font-semibold"
-        >
-          Notable brand
-        </Link>
-      </div>
-    </>
-  );
-};
+// const TopCategory = (): JSX.Element => {
+//   return (
+//     <>
+//       <div className="flex flex-wrap justify-around w-full py-4">
+//         <Link
+//           to={"/notableinf"}
+//           className="text-white rounded-md py-2 px-4 bg-blue-500 text-xl font-semibold"
+//         >
+//           Notable influencer
+//         </Link>
+//         <Link
+//           to={"/notablebrand"}
+//           className="text-white rounded-md py-2 px-4 bg-blue-500 text-xl font-semibold"
+//         >
+//           Notable brand
+//         </Link>
+//       </div>
+//     </>
+//   );
+// };

@@ -36,7 +36,8 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
     draftId: draftId,
     brandId: brandId,
     cpp: camp.data.data[0].costPerPost,
-    currency: cookie.user.currency.code,
+    // currency: cookie.user.currency.code,
+    currency: "USD",
     name: camp.data.data[0].campaignName,
   });
 };
@@ -251,7 +252,7 @@ const UserPaymentRequest = (props: UserPaymentRequestProps) => {
       line_items: [
         {
           price_data: {
-            currency: "inr",
+            currency: "USD",
             product_data: {
               name: "Example Product",
               images: [
@@ -486,7 +487,7 @@ const Schedule: React.FC<ScheduleProps> = (props: ScheduleProps): JSX.Element =>
       date.current?.value == undefined ||
       date.current?.value == ""
     ) {
-      setError("Fill the draft approval deadline");
+      setError("Fill the publication date");
     } else {
 
       const responseData = await axios.post(`${BaseUrl}/api/update-draft`, {
@@ -539,7 +540,7 @@ const Schedule: React.FC<ScheduleProps> = (props: ScheduleProps): JSX.Element =>
             />
           </div>
           <div>
-            <p className="text-lg font-semibold text-primary">Draft approval deadline</p>
+            <p className="text-lg font-semibold text-primary">Publication Date</p>
             <input
               ref={date}
               type="date"

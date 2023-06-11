@@ -75,6 +75,7 @@ const Step6 = () => {
   const campaginPurpose = CreateCampaignStore((state) => state.campaginPurpose);
   const lat = CreateCampaignStore((state) => state.lat);
   const long = CreateCampaignStore((state) => state.long);
+  const radius = CreateCampaignStore((state) => state.radius);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -94,7 +95,7 @@ const Step6 = () => {
       costPerPost: costPerPost,
       totalBudget: planedBudget,
       minEligibleRating: rating,
-      currencyId: "1",
+      currencyId: "3",
       categories: infLocation,
       platforms: platform,
       mentions: mendtion,
@@ -105,13 +106,14 @@ const Step6 = () => {
       remuneration: remunerationType,
       geoLat: lat.toString(),
       geoLng: long.toString(),
-      geoRadiusKm: "10",
+      geoRadiusKm: radius.toString(),
       postApproval: approval,
       audienceLocations: audience,
       inviteStartAt: startDate,
       inviteEndAt: tilldate,
       purpose: campaginPurpose,
       isPublic: publicGlobally,
+      campaignStatus: "1"
     };
     if (remunerationType == "1") {
       req["remunerationCash"] = remuneration;
@@ -202,7 +204,15 @@ const Step6 = () => {
         }
       }
 
-
+      await axios({
+        method: "post",
+        url: `http://bluelemontech.in:5563/notification/send`,
+        data: {
+          title: "New Campaign Created",
+          body: campaignName,
+          to: "/topics/influencer"
+        },
+      });
 
       return navigator(
         `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`

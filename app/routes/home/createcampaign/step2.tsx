@@ -142,7 +142,7 @@ const Step2 = () => {
             </div>
             <div className="bg-white shadow-xl rounded-xl px-8 py-4 mt-4">
                 <h2 className="text-black tect-xl font-medium text-left">
-                    {(campaginType == "1") ? "Sponsored post" : (campaginType == "2") ? "Review post" : (campaginType == "3") ? "Discount and Affiliated post" : "Contest post"}
+                    {(campaginType == "1") ? "Unboxing post" : (campaginType == "2") ? "Sponsored post" : (campaginType == "3") ? "Discount and Affiliated post" : "Review post"}
                 </h2>
                 <div className="md:flex gap-2 mt-2 grid place-items-center grid-cols-4">
                     {data.platform.map((val: any, i: number) => {

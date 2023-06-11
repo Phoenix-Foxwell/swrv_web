@@ -47,6 +47,7 @@ const ThirdPage = () => {
     number: string;
   };
   const [invitedUser, setInvitedUser] = useState<InvitedUser[]>([]);
+  const [isSending, setIsSending] = useState<boolean>(false);
 
   return (
     <>
@@ -84,67 +85,78 @@ const ThirdPage = () => {
             </div>
             <div className="flex my-4">
               <div className="grow"></div>
-              <button
-                onClick={async () => {
-                  if (
-                    nameRef.current?.value == null ||
-                    nameRef.current?.value == undefined ||
-                    nameRef.current?.value == ""
-                  ) {
-                    setError("Enter the user ");
-                  } else if (
-                    emailRef.current?.value == null ||
-                    emailRef.current?.value == undefined ||
-                    emailRef.current?.value == ""
-                  ) {
-                    setError("Fill the Brand info");
-                  } else if (
-                    !EmailValidator.validate(emailRef.current?.value)
-                  ) {
-                    setError("Enter valid email");
-                  } else if (
-                    contactnumber == null ||
-                    contactnumber == undefined ||
-                    contactnumber == 0
-                  ) {
-                    setError("Fill the contact number");
-                  } else if (contactnumber.toString().length != 10) {
-                    setError("Enter a 10 degit valid contact number");
-                  } else {
-                    let req = {
-                      userId: userId,
-                      brandId: brandId,
-                      name: nameRef.current?.value,
-                      email: emailRef.current?.value,
-                      contact: contactnumber,
-                    };
 
-                    const data = await axios({
-                      method: "post",
-                      url: `${BaseUrl}/api/send-brand-invite`,
-                      data: req,
-                    });
-                    if (data.data.status == false) {
-                      return setError(data.data.message);
+              {isSending ?
+                <button
+                  className="text-white rounded-lg bg-secondary py-1 px-4 font-semibold text-lg"
+                >
+                  Sending...
+                </button>
+                :
+                <button
+                  onClick={async () => {
+                    setIsSending(true);
+                    setError(null);
+                    if (
+                      nameRef.current?.value == null ||
+                      nameRef.current?.value == undefined ||
+                      nameRef.current?.value == ""
+                    ) {
+                      setError("Enter the user ");
+                    } else if (
+                      emailRef.current?.value == null ||
+                      emailRef.current?.value == undefined ||
+                      emailRef.current?.value == ""
+                    ) {
+                      setError("Fill the Brand info");
+                    } else if (
+                      !EmailValidator.validate(emailRef.current?.value)
+                    ) {
+                      setError("Enter valid email");
+                    } else if (
+                      contactnumber == null ||
+                      contactnumber == undefined ||
+                      contactnumber == 0
+                    ) {
+                      setError("Fill the contact number");
+                    } else if (contactnumber.toString().length != 10) {
+                      setError("Enter a 10 degit valid contact number");
                     } else {
-                      let user: InvitedUser = {
+                      let req = {
+                        userId: userId,
+                        brandId: brandId,
                         name: nameRef.current?.value,
                         email: emailRef.current?.value,
-                        number: contactnumber.toString(),
+                        contact: contactnumber,
                       };
-                      setInvitedUser([...invitedUser, user]);
-                      setError(null);
-                      setContactnumber(0);
-                      nameRef.current!.value = "";
-                      emailRef.current!.value = "";
-                      return setSus("User invited successfully");
+
+                      const data = await axios({
+                        method: "post",
+                        url: `${BaseUrl}/api/send-brand-invite`,
+                        data: req,
+                      });
+                      if (data.data.status == false) {
+                        return setError(data.data.message);
+                      } else {
+                        let user: InvitedUser = {
+                          name: nameRef.current?.value,
+                          email: emailRef.current?.value,
+                          number: contactnumber.toString(),
+                        };
+                        setInvitedUser([...invitedUser, user]);
+                        setError(null);
+                        setContactnumber(0);
+                        nameRef.current!.value = "";
+                        emailRef.current!.value = "";
+                        setIsSending(false);
+                        return setSus("User invited successfully");
+                      }
                     }
-                  }
-                }}
-                className="text-white rounded-lg bg-secondary py-1 px-4 font-semibold text-lg"
-              >
-                Invite
-              </button>
+                  }}
+                  className="text-white rounded-lg bg-secondary py-1 px-4 font-semibold text-lg"
+                >
+                  Invite
+                </button>}
             </div>
             {error == "" || error == null || error == undefined ? null : (
               <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">

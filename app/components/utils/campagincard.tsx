@@ -35,7 +35,7 @@ export const CampaginCard = (props: CampaginCardProps) => {
   return (
     <>
       <div className="bg-white rounded-xl shadow-xl p-4 w-64 my-2 h-full">
-        <div className="flex items-end gap-x-2">
+        <div className="flex items-stretch gap-x-2">
           <div className="shrink-0">
             <img
               src={props.image}
@@ -43,15 +43,17 @@ export const CampaginCard = (props: CampaginCardProps) => {
               className="object-cover w-16 h-16 rounded"
             />
           </div>
-          <p className="text-black font-semibold text-xl content-end text-left">
-            {props.name}
-          </p>
-          <div className="grow"></div>
-          <div className="h-full flex flex-col">
-            <p className={`font-semibold text-left ${color}`}>
-              {props.category}
+          <div className="grow h-full">
+            <div className="flex">
+              <div className="grow"></div>
+              <p className={`font-semibold text-left ${color}`}>
+                {props.category}
+              </p>
+            </div>
+            <div className="h-4"></div>
+            <p className="text-black font-semibold text-xl content-end text-left">
+              {props.name}
             </p>
-            <div className="h-10"></div>
           </div>
         </div>
         <p className="text-black font-semibold text-md text-left my-4">

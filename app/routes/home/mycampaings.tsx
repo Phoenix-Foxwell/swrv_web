@@ -48,6 +48,9 @@ export const loader = async ({ request }: LoaderArgs) => {
       fromUser: userid,
     },
   };
+
+  console.log("one");
+
   const usercamp = await axios({
     method: "post",
     url: `${BaseUrl}/api/search-invite`,
@@ -219,7 +222,7 @@ const ActiveCampaign = (props: ActiveCampaignProps) => {
         </div>
         {campaign.length == 0 ? (
           <h1 className="text-black font-medium text-xl text-center">
-            Here is no campaign created..
+            You haven't created any campaign yet.
           </h1>
         ) : null}
         <div className="flex gap-6 flex-wrap">
@@ -228,6 +231,7 @@ const ActiveCampaign = (props: ActiveCampaignProps) => {
             for (let i: number = 0; i < val.platforms.length; i++) {
               platforms.push(val.platforms[i]["platformLogoUrl"]);
             }
+
             let image =
               val["brand"].length == 0 ||
                 val["brand"] == undefined ||
@@ -240,11 +244,14 @@ const ActiveCampaign = (props: ActiveCampaignProps) => {
                   val["brand"]["logo"] == ""
                   ? "/images/avatar/user.png"
                   : val["brand"]["logo"];
+
+
             return (
               <div key={i}>
                 <CampaginCard
                   id={val.id}
-                  currency={val.currency.code}
+                  // currency={val.currency.code}
+                  currency={"USD"}
                   platforms={platforms}
                   maxval={val.costPerPost.split(".")[0]}
                   weburl={val.brand.webUrl}
@@ -447,6 +454,7 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
       search: {
         status: "1",
         influencer: props.userId,
+        toUser: props.userId
       },
     };
     const apidata = await axios({
@@ -579,14 +587,14 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
           </div>
         </div>
       </div>
-      <div className="bg-white rounded-2xl my-3 shadow-xl p-4">
-        <div className="w-60 rounded-xl text-xl font-bold text-black p-2 my-4">
+      <div className="bg-white rounded-2xl my-4 shadow-xl p-4">
+        <div className=" rounded-xl text-xl font-bold text-black p-2 my-4">
           {" "}
           <FontAwesomeIcon
             icon={faIdBadge}
             className="text-md text-secondary"
           ></FontAwesomeIcon>{" "}
-          Your Campaign{" "}
+          Requested brand champaign
         </div>
         {userInvite.length == 0 ? (
           <h1 className="text-black font-medium text-xl text-center">

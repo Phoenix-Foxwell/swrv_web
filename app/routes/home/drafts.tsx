@@ -63,11 +63,10 @@ const UserDrafts = () => {
                                             <p className="mt-2 text-md font-medium">Description</p>
                                             <p className="text-sm font-medium">{val.description}</p>
                                             <p className="mt-2 text-md font-medium">Attachment</p>
-                                            <a target="_blank" className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500" href={val.attach01}>View pdf</a>
+                                            <a target="_blank" className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500" href={val.attach01}>View Doc</a>
                                             <p className="mt-2 text-md font-medium">Status</p>
                                             <p className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED" ? "bg-green-500" : val.status.name == "PENDING" ? "bg-yellow-500" : "bg-red-500"}`}>{val.status.name}</p>
                                         </div>
-
                                     })
                                 }
                             </div>

@@ -1,9 +1,9 @@
 import { ActionArgs, ActionFunction, LoaderArgs, LoaderFunction, json, redirect } from "@remix-run/node";
 import { Form, Link, useLoaderData, useNavigate } from "@remix-run/react";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { CusButton } from "~/components/utils/buttont";
-import { BaseUrl, instaUrl } from "~/const";
+import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
 import UserInputStore from "~/state/user/firstinput";
 
@@ -127,7 +127,7 @@ const ThirdPage = () => {
                                                         }
                                                         else {
                                                             setError(null);
-                                                            setSus("Successfully added the user handel");
+                                                            setSus("Successfully added the user handle");
                                                             let adddata = addedPlatfrom.filter((data) => data != val);
                                                             setAddPlatform([...adddata, { val: val["val"], status: true, text: val["text"] }]);
                                                         }
@@ -149,7 +149,7 @@ const ThirdPage = () => {
                         <div onClick={() => {
                             if (addedPlatfrom.length == 0) {
                                 setSus(null);
-                                setError("Add at least one handel");
+                                setError("Add at least one handle");
                             }
                             else {
                                 if (addedPlatfrom[0]["status"]) {
@@ -157,7 +157,7 @@ const ThirdPage = () => {
                                     nextButton.current!.click();
                                 } else {
                                     setSus(null);
-                                    setError("Add at least one handel");
+                                    setError("Add at least one handle");
                                 }
                             }
                         }}>

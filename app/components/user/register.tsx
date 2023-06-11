@@ -143,7 +143,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
                 placeholder="8 character"
               />
               <div
-                className="text-gray-600 text-center px-1 rounded-md shadow-lg text-md"
+                className="text-gray-600 text-center px-1 rounded-md shadow-lg text-md cursor-pointer"
                 onClick={changePassVisabelone}
               >
                 <FontAwesomeIcon
@@ -162,7 +162,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
                 placeholder="8 character"
               />
               <div
-                className="text-gray-600 text-center px-1 rounded-md shadow-lg text-md"
+                className="text-gray-600 text-center px-1 rounded-md shadow-lg text-md cursor-pointer"
                 onClick={changePassVisabeltwo}
               >
                 <FontAwesomeIcon
@@ -201,7 +201,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
                       <img
                         src="/images/icons/google.png"
                         alt="error"
-                        className="w-10 h-10"
+                        className="w-10 h-10 cursor-pointer"
                       />
                     </div>
                   </div>
@@ -240,13 +240,14 @@ export const RegisterBox = (props: RegisterBoxState) => {
                 Also, I confirm I am of eligible age
               </p>
             </div>
-            <p className="text-black text-left font-normal text-lg mt-8">
-              I’m already registered.
-              <Link to={"/login"}>
-                {" "}
-                <span className="font-bold"> Let me Log in</span>
+            <div className="text-black text-left font-normal text-lg mt-8 flex flex-wrap gap-x-4 w-full">
+              <p className=" whitespace-nowrap">
+                I’m already registered.
+              </p>
+              <Link to={"/login"} className="block  whitespace-nowrap">
+                <span className="font-bold">Let me Log in</span>
               </Link>
-            </p>
+            </div>
           </Form>
         </div>
         <div className="hidden lg:block"></div>

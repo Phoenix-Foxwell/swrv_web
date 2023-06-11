@@ -13,8 +13,6 @@ import { useEffect, useRef, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import { CusButton } from "~/components/utils/buttont";
 import { CampaginCard } from "~/components/utils/campagincard";
-import ExtraBrandCard from "~/components/utils/extrabrandcard";
-import PastBrandCard from "~/components/utils/pastbrandcard";
 import { BaseUrl } from "~/const";
 import { userPrefs } from "~/cookies";
 import { getCampaignType } from "~/utils";
@@ -563,7 +561,7 @@ const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
                   className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
                   href={val.attach01}
                 >
-                  View pdf
+                  View Doc
                 </a>
                 <p className="mt-2 text-md font-medium">Status</p>
                 <p

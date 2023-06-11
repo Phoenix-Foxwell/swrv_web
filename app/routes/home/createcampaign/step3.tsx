@@ -5,7 +5,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { json } from "@remix-run/node";
-import { useLoaderData, useNavigate } from "@remix-run/react";
+import { NavigateFunction, useLoaderData, useNavigate } from "@remix-run/react";
 import axios from "axios";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CusButton } from "~/components/utils/buttont";
@@ -13,6 +13,8 @@ import { BaseUrl } from "~/const";
 import CreateCampaignStore from "~/state/campaign/createcampaign";
 import "react-datepicker/dist/react-datepicker.css";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import useGeoLocation from "~/location";
+
 
 export const loader = async () => {
   const data = await axios.post(`${BaseUrl}/api/getcategory`);
@@ -23,8 +25,9 @@ const Step3 = () => {
   const navigator = useNavigate();
   const data = useLoaderData();
 
-  const [error, setError] = useState<string | null>(null);
+  const location = useGeoLocation();
 
+  const [error, setError] = useState<string | null>(null);
   const audienceText = useRef<HTMLInputElement>(null);
   const [auderror, setAudError] = useState<string | null>(null);
   const [addaudience, setAddAudience] = useState<boolean>(false);
@@ -55,8 +58,19 @@ const Step3 = () => {
     (state) => state.setRemunerationType
   );
 
+  const lat = CreateCampaignStore((state) => state.lat);
   const setLat = CreateCampaignStore((state) => state.setLat);
+  const long = CreateCampaignStore((state) => state.long);
   const setLong = CreateCampaignStore((state) => state.setLong);
+
+  interface LatLong {
+    lat: number;
+    long: number;
+  }
+
+  const [latlong, setLatlong] = useState<LatLong>({ lat: 28.7041, long: 77.1025 })
+
+
 
   useEffect(() => {
     if (datepicker.current?.value != null) {
@@ -68,19 +82,29 @@ const Step3 = () => {
     if (remuneration.current?.value != null) {
       remuneration!.current!.value = Remuneration;
     }
+    if (Radius.current?.value != null) {
+      Radius!.current!.value = radius.toString();
+    }
+    if (lat != 0 && long != 0) {
+      setLatlong({ lat: lat, long: long });
+    }
+
   }, []);
 
   // map settings start here
-
   const containerStyle = {
     width: "100%",
     height: "100%",
   };
 
   const [marker, setMarker] = useState<{ lat: number; lng: number }>({
-    lat: -3.745,
-    lng: -38.523,
+    lat: latlong.lat,
+    lng: latlong.lat,
   });
+
+  const Radius = useRef<HTMLInputElement | null>(null);
+  const radius = CreateCampaignStore((state) => state.radius);
+  const setRadius = CreateCampaignStore((state) => state.setRadius);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -88,7 +112,6 @@ const Step3 = () => {
   });
 
   const [map, setMap] = useState(null);
-
   const onLoad = useCallback(function callback(map: any) {
     const bounds = new window.google.maps.LatLngBounds(marker);
     map.fitBounds(bounds);
@@ -108,13 +131,38 @@ const Step3 = () => {
     setLong(event.latLng.lng());
   };
 
-  //   map setting end here
+  const getCurrentLocation = () => {
+    if (!location.loaded) {
+      setError("Kindly Give permission to browswer for location");
+      return;
+    }
 
+    if (location.coordinates == null || location.coordinates == undefined) {
+      setError("Kindly Give permission to browswer for location");
+      return;
+    }
+
+    setMarker({
+      lat: location.coordinates.lat,
+      lng: location.coordinates.lng,
+    });
+    setLat(location.coordinates.lat);
+    setLong(location.coordinates.lng);
+  }
+
+
+
+
+
+
+
+
+  //map setting end here
   return (
     <>
       <div className="bg-white shadow-xl rounded-xl px-8 py-4 mt-4">
         <h2 className="text-black tect-xl font-medium text-left">
-          Audience & demeography
+          Audience & Demography
         </h2>
         {/* audience start here */}
         <h2 className="text-primary tect-xl font-medium text-left my-1">
@@ -218,7 +266,13 @@ const Step3 = () => {
             const setdata = data.split(" ");
             setInfLocation(setdata[0], setdata[1], setdata[2]);
           }}
+          defaultValue={"0"}
         >
+          <option
+            value={"0"}
+            className="border-none outline-none font-normal text-lg"
+            disabled
+          >Select the Influencer category</option>
           {data.data.map((value: any, i: number) => {
             if (value.id == infLocation.id) {
               return (
@@ -246,7 +300,7 @@ const Step3 = () => {
         <input
           ref={maxInf}
           type={"number"}
-          className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 mt-4 w-full p-2"
+          className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 w-full p-2"
         ></input>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
           Geo restriction ( Optional only applicable for influencer filtering )
@@ -261,11 +315,21 @@ const Step3 = () => {
               onLoad={onLoad}
               onUnmount={onUnmount}
               onClick={handleClick}
+
             >
               {marker && <Marker position={marker} />}
             </GoogleMap>
           ) : null}
         </div>
+        <div className="mt-4 w-full grid place-items-center"><button className="py-1 px-4 rounded-md bg-green-500 text-white font-semibold text-lg" onClick={getCurrentLocation}>Get Current Location</button></div>
+        <h2 className="text-primary tect-xl font-medium text-left my-1">
+          Maximum radius of the campaign [in KM.]
+        </h2>
+        <input
+          ref={Radius}
+          type={"number"}
+          className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 mt-4 w-full p-2"
+        ></input>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
           Accept participation / invite till
         </h2>
@@ -379,14 +443,24 @@ const Step3 = () => {
                 infLocation.id == ""
               ) {
                 setError("Select Influencer category");
-              } else if (
+              }
+              else if (
                 maxInf.current?.value == null ||
                 maxInf.current.value == undefined ||
                 maxInf.current?.value == "" ||
                 parseInt(maxInf.current?.value) == 0
               ) {
                 setError("Select maximum influencer no. ");
-              } else if (
+              }
+              else if (
+                Radius.current?.value == null ||
+                Radius.current.value == undefined ||
+                Radius.current?.value == "" ||
+                parseInt(Radius.current?.value) == 0
+              ) {
+                setError("Select maximum radius of the influencer.");
+              }
+              else if (
                 datepicker.current?.value == null ||
                 datepicker.current?.value == undefined ||
                 datepicker.current?.value == ""
@@ -402,6 +476,7 @@ const Step3 = () => {
                 setTillDate(datepicker.current?.value);
                 setMaxInf(parseInt(maxInf.current?.value));
                 setRemuneration(remuneration.current?.value);
+                setRadius(parseInt(Radius.current?.value));
                 navigator("/home/createcampaign/step4");
               }
             }}

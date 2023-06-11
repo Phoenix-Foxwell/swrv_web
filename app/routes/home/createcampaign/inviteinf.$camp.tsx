@@ -176,7 +176,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
       <div>
         <div className="flex w-full my-4">
           <div className="grow"></div>
-          <Link to={"/home"} className="rounded-lg py-1 px-2 text-white bg-secondary text-lg">Skip This Step</Link>
+          <Link to={"/home/mycampaings"} className="rounded-lg py-1 px-2 text-white bg-secondary text-lg">Skip This Step</Link>
         </div>
         <div className="rounded-xl shadow-xl p-6 bg-white mt-6">
           <div className="flex px-2 my-4">

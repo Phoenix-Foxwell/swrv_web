@@ -103,10 +103,10 @@ const Campaigns = () => {
       search: {
         campaign: champaign.id,
         influencer: userId,
-        fromUser: userId,
       },
     };
     const reqdata = await axios.post(`${BaseUrl}/api/search-invite`, req);
+
     if (reqdata.data.status == true) {
       if (reqdata.data.data[0].status.code == "1")
         setAcceptreq(AcceptRequest.Panding);
@@ -209,7 +209,8 @@ const Campaigns = () => {
         ></CampaignsInfo>
         <div className="lg:col-start-6 lg:col-end-8 grid gap-y-4 w-full">
           <Budget
-            currecny={champaign.currency.code}
+            // currecny={champaign.currency.code}
+            currecny={"USD"}
             costperpost={champaign.costPerPost}
             totalbudget={champaign.totalBudget.split(".")[0]}
           ></Budget>
@@ -232,6 +233,8 @@ const Campaigns = () => {
                   userId={userId}
                   influencerId={userId}
                   fromuserId={userId}
+                  endAt={champaign.endAt}
+                  maxinf={champaign.totalParticipants}
                 ></Apply>
               ) : null}
               {acceptreq == AcceptRequest.Panding ? <Panding></Panding> : null}
@@ -325,7 +328,6 @@ const Campaigns = () => {
       <div className="my-6">
         {isbrand ? (
           <>
-            <ListCreatedDrafts campaingid={champaign.id} brandid={userId}  ></ListCreatedDrafts>
             <ChampaingAcceptRequest
               userId={userId}
               campaingid={champaign.id}
@@ -339,7 +341,8 @@ const Campaigns = () => {
             <ChampaingPaymentRequest
               userid={user.id}
               campaingid={champaign.id}
-              currency={user.currency.code}
+              // currency={user.currency.code}
+              currency={"USD"}
             ></ChampaingPaymentRequest>
 
             {champaign.campaignTypeId == "6" ? (
@@ -348,6 +351,7 @@ const Campaigns = () => {
                 campaingid={champaign.id}
               ></ChampaingBidRequest>
             ) : null}
+            <ListCreatedDrafts campaingid={champaign.id} brandid={userId}  ></ListCreatedDrafts>
           </>
         ) : null}
       </div>
@@ -629,14 +633,38 @@ type ApplyProps = {
   fromuserId: string;
   touserId: string;
   champaignId: string;
+  endAt: string;
+  maxinf: number
 };
 
 const Apply = (props: ApplyProps) => {
   const [open, setOpen] = useState(false);
-  const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const [error, setError] = useState<string | null>(null);
+  const [error1, setError1] = useState<string | null>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
+  const onOpenModal = async () => {
+    let invites = 0;
+    let req = {
+      search: {
+        status: "3",
+        campaign: props.champaignId,
+      },
+    };
+    const responseData = await axios.post(`${BaseUrl}/api/search-invite`, req);
+    if (responseData.data.status == true) {
+      invites = responseData.data.data.length;
+    }
+
+    if (new Date() >= new Date(props.endAt)) {
+      return setError1("Campaign already ended.")
+    } else if (invites > props.maxinf) {
+      return setError1("Campaign is already full.")
+    } else {
+      setOpen(true);
+    }
+  };
+
 
   const applyChampaign = async () => {
     if (
@@ -669,6 +697,11 @@ const Apply = (props: ApplyProps) => {
           Would you like to participate in this campaign?
         </h1>
         <div className="w-full grid place-items-center" onClick={onOpenModal}>
+          {error1 == "" || error1 == null || error1 == undefined ? null : (
+            <div className="w-full py-1 bg-red-500 text-center rounded-md text-white text-md font-normal text-md my-2">
+              {error1}
+            </div>
+          )}
           <CusButton
             text="Apply"
             textColor={"text-white"}
@@ -1173,7 +1206,7 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
                       className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
                       href={val.attach01}
                     >
-                      View pdf
+                      View Doc
                     </a>
                     <div className="flex gap-4 mt-2">
                       <button
@@ -1329,6 +1362,9 @@ const CreateDraft = (props: CreateDraftProps) => {
   const [platform, setPlatform] = useState<any>(null);
   const [createbox, setCreatebox] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [isCreating, setIsCreating] = useState<boolean>(false);
+
   return (
     <>
       <p className="text-md text-primary font-semibold py-1">Campaign draft</p>
@@ -1361,7 +1397,7 @@ const CreateDraft = (props: CreateDraftProps) => {
             </div>
             <div className="bg-[#EEEEEE] w-full h-10 rounded-lg flex items-center pl-4">
               <h3 className="text-black font-semibold  text-md">
-                {pdfFile == null ? "" : pdfFile.name}
+                {pdfFile == null ? "" : pdfFile.name.length >= 25 ? `${pdfFile.name.toString().slice(0, 25)}...` : pdfFile.name}
               </h3>
               <div className="grow"></div>
               <div
@@ -1406,62 +1442,72 @@ const CreateDraft = (props: CreateDraftProps) => {
                 {error}
               </div>
             )}
-            <button
-              onClick={async () => {
-                if (
-                  platform == null ||
-                  platform == undefined ||
-                  platform == 0 ||
-                  platform == ""
-                ) {
-                  setError("Select the platform.");
-                } else if (pdfFile == null || pdfFile == undefined) {
-                  setError("Select the pdf file.");
-                } else if (
-                  datepicker.current?.value == null ||
-                  datepicker.current?.value == undefined ||
-                  datepicker.current?.value == ""
-                ) {
-                  setError("Select the date.");
-                } else if (
-                  descraption.current?.value == null ||
-                  descraption.current?.value == undefined ||
-                  descraption.current?.value == ""
-                ) {
-                  setError("Write the description.");
-                } else {
+            {isCreating ?
 
+              <div
+                className="text-white bg-primary rounded-lg w-full text-center py-2 font-semibold text-md mt-2"
+              >
+                Creating...
+              </div>
+              :
 
-
-                  const pdfurl = await UploadFile(pdfFile!);
-                  if (pdfurl.status) {
-                    let req = {
-                      campaignId: props.champaingId,
-                      influencerId: props.influencerId,
-                      handleId: platform,
-                      publishAt: datepicker.current?.value,
-                      attach01: pdfurl.data,
-                      description: descraption.current?.value,
-                    };
-                    const data = await axios({
-                      method: "post",
-                      url: `${BaseUrl}/api/add-draft`,
-                      data: req,
-                    });
-                    if (data.data.status == false) {
-                      return setError(data.data.message);
-                    } else {
-                      window.location.reload();
-                    }
+              <button
+                onClick={async () => {
+                  setIsCreating((vla) => true);
+                  if (
+                    platform == null ||
+                    platform == undefined ||
+                    platform == 0 ||
+                    platform == ""
+                  ) {
+                    setError("Select the platform.");
+                  } else if (pdfFile == null || pdfFile == undefined) {
+                    setError("Select the pdf file.");
+                  } else if (
+                    datepicker.current?.value == null ||
+                    datepicker.current?.value == undefined ||
+                    datepicker.current?.value == ""
+                  ) {
+                    setError("Select the date.");
+                  } else if (
+                    descraption.current?.value == null ||
+                    descraption.current?.value == undefined ||
+                    descraption.current?.value == ""
+                  ) {
+                    setError("Write the description.");
                   } else {
-                    setError(pdfurl.data);
+
+                    const pdfurl = await UploadFile(pdfFile!);
+                    if (pdfurl.status) {
+                      let req = {
+                        campaignId: props.champaingId,
+                        influencerId: props.influencerId,
+                        handleId: platform,
+                        publishAt: datepicker.current?.value,
+                        attach01: pdfurl.data,
+                        description: descraption.current?.value,
+                      };
+                      const data = await axios({
+                        method: "post",
+                        url: `${BaseUrl}/api/add-draft`,
+                        data: req,
+                      });
+                      if (data.data.status == false) {
+                        return setError(data.data.message);
+                      } else {
+                        window.location.reload();
+                      }
+                    } else {
+                      setError(pdfurl.data);
+                    }
                   }
-                }
-              }}
-              className="text-white bg-primary rounded-lg w-full text-center py-2 font-semibold text-md mt-2"
-            >
-              Submit
-            </button>
+                  setIsCreating((vla) => false);
+                }}
+                className="text-white bg-primary rounded-lg w-full text-center py-2 font-semibold text-md mt-2"
+              >
+                Submit
+              </button>
+            }
           </div>
         </>
       ) : (
@@ -1808,7 +1854,7 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
                       className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
                       href={val.attach01}
                     >
-                      View pdf
+                      View Doc
                     </a>
                     <p className="mt-2 text-md font-medium">Status</p>
                     <p
@@ -1864,7 +1910,7 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
           <div>No one created any drafts yet.</div>
         ) : (
           <div>
-            <p className="text-md font-medium">All Created draft</p>
+            <p className="text-md font-medium">Draft snapshot</p>
             <div className="w-full bg-gray-400 h-[1px] my-2"></div>
             <div className="flex flex-wrap gap-6">
               {resDarft.map((val: any, index: number) => {
@@ -1896,8 +1942,16 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
                       className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
                       href={val.attach01}
                     >
-                      View pdf
+                      View Doc
                     </a>
+                    {val.status.name == "REJECTED" ?
+                      <>
+                        <p className="mt-2 text-md font-medium">Rejection Reason</p>
+                        <p className="text-sm font-medium">{val.status.message}</p>
+                      </>
+                      : null}
+
+
                     <p className="mt-2 text-md font-medium">Status</p>
                     <p
                       className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
@@ -1909,9 +1963,12 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
                     >
                       {val.status.name}
                     </p>
+
                     {val.status.name == "ACCEPTED" ?
                       <Link className="text-white py-1 w-full bg-cyan-500 cursor-pointer inline-block text-center mt-4 rounded-md" to={`/home/brandpay/${props.brandid}/${props.campaingid}/${val.id}`}>View Details</Link>
                       : null}
+
+
                   </div>
                 );
               })}

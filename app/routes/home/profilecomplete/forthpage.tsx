@@ -87,9 +87,8 @@ const ForthPage = () => {
   return (
     <>
       <div
-        className={`w-full h-screen bg-black bg-opacity-25 fixed top-0 left-0  place-items-center ${
-          citybox ? "grid" : "hidden"
-        }`}
+        className={`w-full h-screen bg-black bg-opacity-25 fixed top-0 left-0  place-items-center ${citybox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-white shadow-md w-80 rounded-lg p-4">
           {searchcity.length == 0 ? (
@@ -98,7 +97,7 @@ const ForthPage = () => {
                 No city found with this name
               </div>
               <button
-                className="px-2 mx-auto bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4"
+                className="px-2 mx-auto bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4 cursor-pointer"
                 onClick={() => {
                   setCitybox(false);
                 }}
@@ -107,7 +106,7 @@ const ForthPage = () => {
               </button>
             </div>
           ) : (
-            <div className="h-72 overflow-y-scroll no-scrollbar">
+            <div className="h-[350px] overflow-y-scroll no-scrollbar">
               {searchcity.map((value: any, index: number) => {
                 return (
                   <>
@@ -125,6 +124,11 @@ const ForthPage = () => {
                   </>
                 );
               })}
+
+              <div onClick={() => {
+                setCitybox(false);
+              }} className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer">Close</div>
+
             </div>
           )}
         </div>
@@ -162,12 +166,11 @@ const ForthPage = () => {
               </div>
             </div>
             <div
-              className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                con ? "" : "hidden"
-              } grid place-items-center`}
+              className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
+                } grid place-items-center`}
             >
               <div className="bg-white p-10 cursor-pointer">
-                <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
+                <div className="overflow-y-scroll no-scrollbar w-80 h-[350px]">
                   {country.map((val: any, i: number) => {
                     return (
                       <h1
@@ -175,11 +178,10 @@ const ForthPage = () => {
                           setSelCountry((value) => [val]);
                         }}
                         key={i}
-                        className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
-                          selCountry.includes(val)
-                            ? "border-green-500 text-green-500"
-                            : "border-gray-800 text-black"
-                        }  no-scrollbar`}
+                        className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
+                          ? "border-green-500 text-green-500"
+                          : "border-gray-800 text-black"
+                          }  no-scrollbar`}
                       >
                         {val["code"]} - {val["name"]}
                       </h1>
@@ -190,7 +192,7 @@ const ForthPage = () => {
                   onClick={() => {
                     setcon(false);
                   }}
-                  className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center"
+                  className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer"
                 >
                   Close
                 </div>
@@ -228,9 +230,8 @@ const ForthPage = () => {
               </div>
             </div>
             <div
-              className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${
-                gen ? "" : "hidden"
-              } grid place-items-center`}
+              className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${gen ? "" : "hidden"
+                } grid place-items-center`}
             >
               <div className="bg-white p-10 cursor-pointer">
                 <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
@@ -248,11 +249,10 @@ const ForthPage = () => {
                           }
                         }}
                         key={i}
-                        className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${
-                          selGender.includes(val)
-                            ? "border-green-500 text-green-500"
-                            : "border-gray-800 text-black"
-                        }  no-scrollbar`}
+                        className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selGender.includes(val)
+                          ? "border-green-500 text-green-500"
+                          : "border-gray-800 text-black"
+                          }  no-scrollbar`}
                       >
                         {val}
                       </h1>
@@ -263,7 +263,7 @@ const ForthPage = () => {
                   onClick={() => {
                     setgen(false);
                   }}
-                  className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center"
+                  className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer"
                 >
                   Close
                 </div>
@@ -301,15 +301,15 @@ const ForthPage = () => {
               </div>
             </div>
             {cityerror == "" ||
-            cityerror == null ||
-            cityerror == undefined ? null : (
+              cityerror == null ||
+              cityerror == undefined ? null : (
               <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
                 {cityerror}
               </div>
             )}
             {selectedcity == "" ||
-            selectedcity == null ||
-            selectedcity == undefined ? null : (
+              selectedcity == null ||
+              selectedcity == undefined ? null : (
               <div className="bg-white bg-opacity-10 border-2 text-center border-black rounded-md text-black text-md font-normal text-md my-4">
                 {selectedcity["name"]} - {selectedcity["code"]}
               </div>
@@ -363,7 +363,7 @@ const ForthPage = () => {
                 ) {
                   setError("Fill the contact number");
                 } else if (contactnumber.toString().length != 10) {
-                  setError("Enter a 10 degit valid contact number");
+                  setError("Enter a 10 digit valid contact number");
                 } else if (!check) {
                   setError("Check the box in order to procide");
                 } else {
@@ -375,8 +375,8 @@ const ForthPage = () => {
                       selGender[0] == "MALE"
                         ? "1"
                         : selGender[0] == "FEMALE"
-                        ? "2"
-                        : "3",
+                          ? "2"
+                          : "3",
                   };
 
                   const data = await axios({

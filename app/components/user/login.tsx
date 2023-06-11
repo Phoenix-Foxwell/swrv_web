@@ -134,7 +134,7 @@ export const LoginBox = (props: LoginBoxState) => {
                   placeholder="8 character"
                 />
                 <div
-                  className="text-gray-600 text-center px-1 text-md"
+                  className="text-gray-600 text-center px-1 text-md cursor-pointer"
                   onClick={changePassVisabel}
                 >
                   <FontAwesomeIcon
@@ -185,25 +185,26 @@ export const LoginBox = (props: LoginBoxState) => {
                   <img
                     src="/images/icons/google.png"
                     alt="error"
-                    className="w-10 h-10"
+                    className="w-10 h-10 cursor-pointer"
                   />
                 </div>
               </div>
-              <div className="flex items-center mt-4 mb-10">
+              <div className="flex items-center mt-4">
                 <input type="checkbox" />
-                <div className="w-2"></div>
-                <p className="text-black text-left font-normal text-xs">Keep me logged in</p>
-                <div className="grow"></div>
-                <p className="text-black text-left font-normal text-xs">
-                  CAN'T LOG IN?{" "}
-                  <span
-                    onClick={() => {
-                      setForgetPasswordBox(true);
-                    }}
-                    className="font-bold cursor-pointer"
-                  >
-                    RESTORE PASSWORD
-                  </span>
+                <p className="mx-2 text-black text-left font-normal text-lg">Keep me logged in</p>
+
+              </div>
+              <div className="text-black text-left font-normal text-lg gap-x-4 flex flex-wrap mt-4  mb-10">
+                <p className="whitespace-nowrap">
+                  CAN'T LOG IN?
+                </p>
+                <p
+                  onClick={() => {
+                    setForgetPasswordBox(true);
+                  }}
+                  className="font-bold cursor-pointer whitespace-nowrap"
+                >
+                  RESTORE PASSWORD
                 </p>
               </div>
 

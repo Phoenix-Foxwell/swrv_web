@@ -305,7 +305,8 @@ const SponsoredPosts = () => {
                 category={campaignType}
                 image={image}
                 name={val.brand.name}
-                currency={val["currency"]["code"]}
+                // currency={val["currency"]["code"]}
+                currency={"USD"}
                 btntext="View More & Learn"
               ></CampaginCard>
             </div>
@@ -383,7 +384,8 @@ const NewCampaign = () => {
                 category={campaignType}
                 image={image}
                 name={val.brand.name}
-                currency={val["currency"]["code"]}
+                // currency={val["currency"]["code"]}
+                currency={"USD"}
                 btntext="View More & Learn"
               ></CampaginCard>
             </div>
@@ -517,7 +519,8 @@ const TopInfluencer = () => {
                   star={parseInt(val.rating)}
                   image={avatar}
                   name={val.userName}
-                  currency={val.currency.code}
+                  // currency={val.currency.code}
+                  currency={"USD"}
                   dob={val.dob}
                 ></TopInfluencerCard>
               </Link>

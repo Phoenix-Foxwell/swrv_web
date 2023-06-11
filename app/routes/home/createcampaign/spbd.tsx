@@ -316,7 +316,7 @@ const Spbd = () => {
                           brandUserId: userId,
                           brandId: brandId,
                           cityId: "0",
-                          currencyId: "0",
+                          currencyId: "3",
                           categories: "0",
                           minEligibleRating: "0",
                           maxEligibleRating: "0",
@@ -378,6 +378,17 @@ const Spbd = () => {
                           if (data1.data.status == false) {
                             setError(data1.data.message);
                           } else {
+
+                            await axios({
+                              method: "post",
+                              url: `http://bluelemontech.in:5563/notification/send`,
+                              data: {
+                                title: "New Campaign Created",
+                                body: CampaignName.current?.value,
+                                to: "/topics/influencer"
+                              },
+                            });
+
                             return navigator(
                               `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
                             );
@@ -390,7 +401,7 @@ const Spbd = () => {
                         brandUserId: userId,
                         brandId: brandId,
                         cityId: "0",
-                        currencyId: "0",
+                        currencyId: "3",
                         categories: "0",
                         minEligibleRating: "0",
                         maxEligibleRating: "0",
@@ -426,6 +437,16 @@ const Spbd = () => {
                       if (data.data.status == false) {
                         setError(data.data.message);
                       } else {
+
+                        await axios({
+                          method: "post",
+                          url: `http://bluelemontech.in:5563/notification/send`,
+                          data: {
+                            title: "New Campaign Created",
+                            body: CampaignName.current?.value,
+                            to: "/topics/influencer"
+                          },
+                        });
                         return navigator(
                           `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
                         );

@@ -645,6 +645,11 @@ input[type="number"]::-webkit-inner-spin-button,
   margin-right: 2.5rem;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mx-1 {
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -653,11 +658,6 @@ input[type="number"]::-webkit-inner-spin-button,
 .my-0 {
   margin-top: 0px;
   margin-bottom: 0px;
-}
-
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .mx-3 {
@@ -857,6 +857,10 @@ input[type="number"]::-webkit-inner-spin-button,
   height: 11rem;
 }
 
+.h-\[2px\] {
+  height: 2px;
+}
+
 .h-\[400px\] {
   height: 400px;
 }
@@ -875,10 +879,6 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .h-6 {
   height: 1.5rem;
-}
-
-.h-\[2px\] {
-  height: 2px;
 }
 
 .h-auto {
@@ -986,8 +986,8 @@ input[type="number"]::-webkit-inner-spin-button,
   width: 11rem;
 }
 
-.w-2 {
-  width: 0.5rem;
+.w-\[6px\] {
+  width: 6px;
 }
 
 .w-32 {
@@ -1020,6 +1020,10 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .w-\[50\%\] {
   width: 50%;
+}
+
+.w-2 {
+  width: 0.5rem;
 }
 
 .w-6 {
@@ -1330,6 +1334,10 @@ input[type="number"]::-webkit-inner-spin-button,
   overflow-y: scroll;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .rounded-md {
   border-radius: 0.375rem;
 }
@@ -1395,6 +1403,10 @@ input[type="number"]::-webkit-inner-spin-button,
   border-bottom-width: 2px;
 }
 
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+
 .border-l-2 {
   border-left-width: 2px;
 }
@@ -1448,13 +1460,13 @@ input[type="number"]::-webkit-inner-spin-button,
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
-.border-transparent {
-  border-color: transparent;
-}
-
 .border-blue-500 {
   --tw-border-opacity: 1;
   border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+.border-transparent {
+  border-color: transparent;
 }
 
 .border-green-400 {
@@ -1610,6 +1622,11 @@ input[type="number"]::-webkit-inner-spin-button,
   background-color: rgb(179 179 179 / var(--tw-bg-opacity));
 }
 
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity));
@@ -1633,11 +1650,6 @@ input[type="number"]::-webkit-inner-spin-button,
 .bg-\[\#adadad\] {
   --tw-bg-opacity: 1;
   background-color: rgb(173 173 173 / var(--tw-bg-opacity));
-}
-
-.bg-gray-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
 .bg-gray-300 {

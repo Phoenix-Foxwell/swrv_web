@@ -59,7 +59,7 @@ const Step1 = () => {
             </h1>
           </div>
         ) : null}
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <h1 className="text-black font-normal text-lg text-center">
             Select one below
           </h1>
@@ -73,16 +73,25 @@ const Step1 = () => {
               fontwidth={"font-bold"}
             ></CusButton>
           </div>
-        </div>
+        </div> */}
         <div className="grid place-items-center grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-start gap-4">
           {catdata.map((val: unknown, i: number) => {
             return (
               <div
                 key={i}
-                className={`shadow-xl rounded-xl w-72 bg-white my-4 ${
-                  camptype == catdata[i]["id"] ? "border-2 border-gray-400" : ""
-                } h-[350px]`}
-                onClick={() => setCamptype(catdata[i]["id"])}
+                className={`shadow-xl rounded-xl w-72 bg-white my-4 h-[350px]`}
+                onClick={() => {
+                  setCamptype(catdata[i]["id"]);
+                  if (catdata[i]["id"] === "0") {
+                    setError(true);
+                  } else if (catdata[i]["id"] === "5" || catdata[i]["id"] === "6") {
+                    setCampaginType(catdata[i]["id"]);
+                    return navigate("/home/createcampaign/spbd");
+                  } else {
+                    setCampaginType(catdata[i]["id"]);
+                    return navigate("/home/createcampaign/step2");
+                  }
+                }}
               >
                 <img
                   src={catdata[i]["categoryPicUrl"]}

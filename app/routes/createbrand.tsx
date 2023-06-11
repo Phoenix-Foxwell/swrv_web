@@ -70,18 +70,17 @@ const createBarnd = () => {
   return (
     <>
       <div
-        className={`w-full h-screen bg-black bg-opacity-25 fixed top-0 left-0  place-items-center ${
-          citybox ? "grid" : "hidden"
-        }`}
+        className={`w-full h-screen bg-black bg-opacity-25 fixed top-0 left-0  place-items-center ${citybox ? "grid" : "hidden"
+          }`}
       >
-        <div className="bg-white shadow-md w-80 rounded-lg p-4">
+        <div className="bg-white shadow-md w-80 rounded-lg p-4 overflow-y-scroll">
           {searchcity.length == 0 ? (
-            <div className="w-80 h-96">
-              <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+            <div className="w-full h-96">
+              <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal  my-4">
                 No city found with this name
               </div>
               <button
-                className="px-5 mx-auto bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4"
+                className="px-5 mx-auto bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 font-normal text-md my-4"
                 onClick={() => {
                   setCitybox(false);
                 }}
@@ -161,8 +160,8 @@ const createBarnd = () => {
               </p>
               <div className="mt-4">
                 {imgerror == "" ||
-                imgerror == null ||
-                imgerror == undefined ? null : (
+                  imgerror == null ||
+                  imgerror == undefined ? null : (
                   <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
                     {imgerror}
                   </div>
@@ -240,15 +239,15 @@ const createBarnd = () => {
             </div>
           </div>
           {cityerror == "" ||
-          cityerror == null ||
-          cityerror == undefined ? null : (
+            cityerror == null ||
+            cityerror == undefined ? null : (
             <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
               {cityerror}
             </div>
           )}
           {selectedcity == "" ||
-          selectedcity == null ||
-          selectedcity == undefined ? null : (
+            selectedcity == null ||
+            selectedcity == undefined ? null : (
             <div className="bg-white bg-opacity-10 border-2 text-center border-black rounded-md text-black text-md font-normal text-md my-4">
               {selectedcity["name"]} - {selectedcity["code"]}
             </div>
@@ -411,13 +410,14 @@ const createBarnd = () => {
           </div>
         </div>
       </div>
-
-      <Form method="post">
-        <input type="hidden" name="id" ref={uidref} />
-        <button ref={nextButton} name="submit">
-          Submit
-        </button>
-      </Form>
+      <div className="hidden">
+        <Form method="post">
+          <input type="hidden" name="id" ref={uidref} />
+          <button ref={nextButton} name="submit">
+            Submit
+          </button>
+        </Form>
+      </div>
     </>
   );
 };

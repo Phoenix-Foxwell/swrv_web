@@ -66,7 +66,7 @@ export const action = async ({ request }: ActionArgs) => {
     return { message: "Enter the repassword" };
   }
   if (value.check1 != "on" || value.check2 != "on") {
-    return { message: "Check the all checkbox" };
+    return { message: "Check and Confirm the agreement(s)" };
   }
   if (value.password != value.repassword) {
     return { message: "Password and Re-password should be same" };

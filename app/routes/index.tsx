@@ -7,6 +7,7 @@ import axios from "axios";
 import { useLoaderData, useNavigate, useNavigation } from "@remix-run/react";
 import { MyNavBar } from "~/components/home/navbar/mynavbar";
 import ProgressBar from "~/components/progressbr";
+import { useEffect } from "react";
 
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
@@ -34,6 +35,18 @@ const index = () => {
   let blogdata = useLoaderData().blog[0];
 
 
+  // useEffect(() => {
+
+  //   if ("geolocation" in navigator) {
+  //     console.log("Available");
+  //     navigator.geolocation.getCurrentPosition(function (position) {
+  //       console.log("Latitude is :", position.coords.latitude);
+  //       console.log("Longitude is :", position.coords.longitude);
+  //     });
+  //   } else {
+  //     console.log("Not Available");
+  //   }
+  // }, []);
 
   return (
     <>

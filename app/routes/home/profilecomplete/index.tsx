@@ -95,8 +95,8 @@ const UserInputBoxOne = () => {
                   maximum size of 5 MB
                 </p>
                 {imgerror == "" ||
-                imgerror == null ||
-                imgerror == undefined ? null : (
+                  imgerror == null ||
+                  imgerror == undefined ? null : (
                   <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
                     {imgerror}
                   </div>
@@ -110,7 +110,7 @@ const UserInputBoxOne = () => {
                     text="Upload"
                     textColor={"text-white"}
                     width={"w-full"}
-                    background={"bg-gray-400"}
+                    background={"bg-primary"}
                   ></CusButton>
                 </div>
               </div>

@@ -133,8 +133,8 @@ const SecondPage = () => {
                             <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${mar ? "" : "hidden"} grid place-items-center`}>
-                        <div className="bg-white p-10 cursor-pointer">
+                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${mar ? "" : "hidden"} grid place-items-center bg-red-500`} onClick={(val) => setmar(false)}>
+                        <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                             <div className="overflow-y-scroll no-scrollbar w-80 h-[350px]">
                                 {market.map((val: any, i: number) => {
                                     return (
@@ -178,8 +178,8 @@ const SecondPage = () => {
                             <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${ort ? "" : "hidden"} grid place-items-center`}>
-                        <div className="bg-white p-10 cursor-pointer">
+                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${ort ? "" : "hidden"} grid place-items-center`} onClick={val => setort(false)}>
+                        <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                             <div className="w-80 overflow-y-scroll no-scrollbar h-[350px]">
                                 {market.map((val: any, i: number) => {
                                     return (
@@ -222,8 +222,8 @@ const SecondPage = () => {
                             <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"} grid place-items-center`}>
-                        <div className="bg-white p-10 cursor-pointer">
+                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"} grid place-items-center`} onClick={val => setcat(false)}>
+                        <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                             <div className="w-80 overflow-y-scroll no-scrollbar h-[350px]">
                                 {category.map((val: any, i: number) => {
                                     return (
@@ -266,8 +266,8 @@ const SecondPage = () => {
                             <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cur ? "" : "hidden"} grid place-items-center`}>
-                        <div className="bg-white p-10 cursor-pointer">
+                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cur ? "" : "hidden"} grid place-items-center`} onClick={val => setcur(false)}>
+                        <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                             <div className="overflow-y-scroll no-scrollbar h-[350px]">
                                 {currency.map((val: any, i: number) => {
                                     return (
@@ -309,8 +309,8 @@ const SecondPage = () => {
                             <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
                         </div>
                     </div>
-                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${lan ? "" : "hidden"} grid place-items-center`}>
-                        <div className="bg-white p-10 cursor-pointer">
+                    <div className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${lan ? "" : "hidden"} grid place-items-center`} onClick={val => setlan(false)}>
+                        <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                             <div className="w-80 overflow-y-scroll no-scrollbar h-[350px]">
                                 {languages.map((val: any, i: number) => {
                                     return (

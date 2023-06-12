@@ -89,8 +89,9 @@ const ForthPage = () => {
       <div
         className={`w-full h-screen bg-black bg-opacity-25 fixed top-0 left-0  place-items-center ${citybox ? "grid" : "hidden"
           }`}
+        onClick={val => setCitybox(false)}
       >
-        <div className="bg-white shadow-md w-80 rounded-lg p-4">
+        <div className="bg-white shadow-md w-80 rounded-lg p-4" onClick={(e) => e.stopPropagation()}>
           {searchcity.length == 0 ? (
             <div className="min-h-96">
               <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
@@ -168,8 +169,9 @@ const ForthPage = () => {
             <div
               className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
                 } grid place-items-center`}
+              onClick={val => setcon(false)}
             >
-              <div className="bg-white p-10 cursor-pointer">
+              <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                 <div className="overflow-y-scroll no-scrollbar w-80 h-[350px]">
                   {country.map((val: any, i: number) => {
                     return (
@@ -232,8 +234,9 @@ const ForthPage = () => {
             <div
               className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${gen ? "" : "hidden"
                 } grid place-items-center`}
+              onClick={val => setgen(false)}
             >
-              <div className="bg-white p-10 cursor-pointer">
+              <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                 <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
                   {gender.map((val: any, i: number) => {
                     return (
@@ -284,7 +287,10 @@ const ForthPage = () => {
               <div
                 className="bg-white text-bold p-2 rounded-md grid place-items-center w-8 h-8 cursor-pointer"
                 onClick={() => {
-                  if (
+
+                  if (selCountry.length == 0) {
+                    setError("Select the country first");
+                  } else if (
                     cityref.current?.value == null ||
                     cityref.current?.value == undefined ||
                     cityref.current?.value == ""
@@ -396,7 +402,7 @@ const ForthPage = () => {
                   if (data.data.status == false) {
                     return setError(data.data.message);
                   }
-                  setIndex(4);
+                  setIndex(5);
                   nextButton.current!.click();
                 }
               }}
@@ -428,6 +434,7 @@ const ForthPage = () => {
     </>
   );
 };
+
 export default ForthPage;
 
 export const action: ActionFunction = async ({ request }: ActionArgs) => {

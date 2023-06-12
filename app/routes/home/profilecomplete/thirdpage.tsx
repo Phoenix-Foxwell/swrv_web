@@ -200,7 +200,7 @@ export const action: ActionFunction = async ({ request }: ActionArgs) => {
     if (userdata.data.status == false) {
         return { message: userdata.data.message };
     } else {
-        return redirect("/home/profilecomplete/forthpage", {
+        return redirect("/home/profilecomplete/extrapage", {
             headers: {
                 "Set-Cookie": await userPrefs.serialize({ user: userdata.data.data[0], isLogin: true }),
             },

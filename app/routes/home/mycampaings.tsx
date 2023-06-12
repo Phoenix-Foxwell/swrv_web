@@ -49,7 +49,6 @@ export const loader = async ({ request }: LoaderArgs) => {
     },
   };
 
-  console.log("one");
 
   const usercamp = await axios({
     method: "post",

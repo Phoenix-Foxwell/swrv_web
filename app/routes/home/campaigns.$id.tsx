@@ -1200,6 +1200,11 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
                     </div>
                     <p className="mt-2 text-md font-medium">Description</p>
                     <p className="text-sm font-medium">{val.description}</p>
+                    <p className="mt-2 text-md font-medium">Handel Info</p>
+                    <div className="flex gap-4">
+                      <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                      <p className="text-xl font-semibold text-center">{val.handle.name}</p>
+                    </div>
                     <p className="mt-2 text-md font-medium">Attachment</p>
                     <a
                       target="_blank"
@@ -1848,6 +1853,13 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
                     </div>
                     <p className="mt-2 text-md font-medium">Description</p>
                     <p className="text-sm font-medium">{val.description}</p>
+
+                    <p className="mt-2 text-md font-medium">Handel Info</p>
+                    <div className="flex gap-4">
+                      <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                      <p className="text-xl font-semibold text-center">{val.handle.name}</p>
+                    </div>
+
                     <p className="mt-2 text-md font-medium">Attachment</p>
                     <a
                       target="_blank"
@@ -1896,6 +1908,7 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
     const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
     if (responseData.data.status == true) {
       setResDarft(responseData.data.data);
+      console.log(responseData.data.data);
     }
   };
 
@@ -1936,6 +1949,17 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
                     </div>
                     <p className="mt-2 text-md font-medium">Description</p>
                     <p className="text-sm font-medium">{val.description}</p>
+
+                    <p className="mt-2 text-md font-medium">Handle Info</p>
+                    <div className="flex gap-4">
+                      <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                      <p className="text-xl font-semibold text-center">{val.handle.name}</p>
+                    </div>
+
+                    <p className="mt-2 text-md font-medium">Publication Time</p>
+                    <p className="text-sm font-medium">{new Date(val.draft_approval.toString()).toLocaleString()}</p>
+
+
                     <p className="mt-2 text-md font-medium">Attachment</p>
                     <a
                       target="_blank"

@@ -17,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import SideBarStore from "~/state/home/sidebarstate";
 import SideBarNavStore, { SideBarTabs } from "~/state/navigation/sidebar";
 type SideBarProps = {
@@ -28,16 +29,21 @@ export const SideBar = (props: SideBarProps) => {
   const sidebar = SideBarNavStore((state) => state.changeTab);
   const isOpen = SideBarStore((state) => state.isOpen);
   const changeSidebar = SideBarStore((state) => state.change);
+
+  useEffect(() => {
+    changeSidebar(true);
+  }, []);
   return (
     <>
       <div
-        className={` ${
-          isOpen ? "w-60" : "w-20"
-        } h-screen p-2 fixed top-0 left-0 md:block hidden`}
+        className={` ${isOpen ? "w-60" : "w-20"
+          } h-screen p-2 fixed top-0 left-0 md:block hidden`}
       >
         <div className="w-full h-full bg-primary rounded-2xl flex flex-col py-8 px-3">
           <div
             onClick={() => {
+              // console.log(!isOpen);
+              // changeSidebar(!isOpen);
               changeSidebar(!isOpen);
             }}
             className="w-full flex cursor-pointer"
@@ -198,11 +204,9 @@ export const NavTab = (props: NavTabProps) => {
   return (
     <>
       <div
-        className={`${props.isOpen ? "w-full" : "w-10"} h-10 rounded-xl ${
-          props.isOpen ? "flex items-center " : "grid place-items-center"
-        }  text-white text-lg font-bold my-1 ${
-          props.isActive ? "bg-[#053497]" : ""
-        } ${props.isOpen ? "px-4" : ""}`}
+        className={`${props.isOpen ? "w-full" : "w-10"} h-10 rounded-xl ${props.isOpen ? "flex items-center " : "grid place-items-center"
+          }  text-white text-lg font-bold my-1 ${props.isActive ? "bg-[#053497]" : ""
+          } ${props.isOpen ? "px-4" : ""}`}
       >
         {" "}
         <FontAwesomeIcon icon={props.icon}></FontAwesomeIcon>{" "}

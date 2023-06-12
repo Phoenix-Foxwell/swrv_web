@@ -551,7 +551,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                             </h1>
                           );
                         })}
-                        <div onClick={() => setcat(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20">Close</div>
+                        <div onClick={() => setcat(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 cursor-pointer">Close</div>
                       </div>
                     </div>
                   </div>
@@ -680,7 +680,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                           </h1>
                         );
                       })}
-                      <div onClick={() => setcat(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20">Close</div>
+                      <div onClick={() => setType(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 cursor-pointer">Close</div>
                     </div>
                   </div>
                 </div>
@@ -735,13 +735,13 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 <p className="text-primary text-left font-bold text-lg">
                   Country
                 </p>
-                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full relative">
+                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 w-full relative">
                   <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                     {selCountry.map((value: any, i: number) => {
                       return (
                         <div
                           key={i}
-                          className="flex bg-white my-1 rounded-md py-1 px-2 items-center gap-x-4"
+                          className="flex bg-white my-1 rounded-md py-1 px-2 items-center gap-x-4 cursor-pointer"
                         >
                           <h1 className=" text-black font-semibold text-center w-40">
                             {`${value["name"]} - [${value["code"]}]`}
@@ -791,6 +791,8 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                           </h1>
                         );
                       })}
+
+                      <div onClick={() => setcon(false)} className="text-rose-500 text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 cursor-pointer">Close</div>
                     </div>
                   </div>
                 </div>
@@ -1121,7 +1123,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
               <div className="px-2">
                 {/* category start here */}
                 <h1 className="text-primary text-lg font-bold mb">Category</h1>
-                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
+                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 w-full relative" >
                   <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                     {selcategory.map((value: any, i: number) => {
                       return (
@@ -1140,47 +1142,49 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                   <div
                     className="grid place-items-center px-4 bg-gray-300 rounded-lg"
                     onClick={() => {
-                      setcat(true);
+                      setcat(val => !val);
                     }}
                   >
-                    <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={cat ? faXmark : faAdd}></FontAwesomeIcon>
                   </div>
-                </div>
 
-                <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"
-                    } grid place-items-center`}
-                >
-                  <div className="bg-white p-10 cursor-pointer">
-                    <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
-                      {category.map((val: any, i: number) => {
-                        return (
-                          <h1
-                            onClick={() => {
-                              if (selcategory.includes(val)) {
-                                let addcur = selcategory.filter(
-                                  (data) => data != val
-                                );
-                                setSelcategory(addcur);
-                              } else {
-                                setSelcategory([val]);
-                              }
-                              setcat(false);
-                            }}
-                            key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selcategory.includes(val)
-                              ? "border-green-500 text-green-500"
-                              : "border-gray-800 text-black"
-                              }  no-scrollbar`}
-                          >
-                            {val["categoryCode"]} - {val["categoryName"]}{" "}
-                          </h1>
-                        );
-                      })}
-                      <div onClick={() => setcat(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
+                  <div
+                    className={`w-full bg-gray-300 bg-opacity-20 absolute top-12 left-0 ${cat ? "" : "hidden"
+                      } grid place-items-center z-20`}
+                  >
+                    <div className="bg-white shadow-lg p-4 cursor-pointer rounded-md">
+                      <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
+                        {category.map((val: any, i: number) => {
+                          return (
+                            <h1
+                              onClick={() => {
+                                if (selcategory.includes(val)) {
+                                  let addcur = selcategory.filter(
+                                    (data) => data != val
+                                  );
+                                  setSelcategory(addcur);
+                                } else {
+                                  setSelcategory([val]);
+                                }
+                                setcat(false);
+                              }}
+                              key={i}
+                              className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selcategory.includes(val)
+                                ? "border-green-500 text-green-500"
+                                : "border-gray-800 text-black"
+                                }  no-scrollbar`}
+                            >
+                              {val["categoryCode"]} - {val["categoryName"]}{" "}
+                            </h1>
+                          );
+                        })}
+                        <div onClick={() => setcat(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+
                 {/* category end here */}
                 <div className="flex mt-8">
                   <ReactSwitch
@@ -1232,7 +1236,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                 <p className="text-primary text-left font-bold text-lg">
                   Country
                 </p>
-                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
+                <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full relative">
                   <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                     {selCountry.map((value: any, i: number) => {
                       return (
@@ -1247,21 +1251,67 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                       );
                     })}
                   </div>
+
                   <div className="grow"></div>
                   <div
                     className="grid place-items-center px-4 bg-gray-300 rounded-lg"
                     onClick={() => {
-                      setcon(true);
+                      setcon(val => !val);
                     }}
                   >
-                    <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={con ? faXmark : faAdd}></FontAwesomeIcon>
+                  </div>
+
+
+                  <div
+                    className={`w-full  absolute top-12 left-0 ${con ? "" : "hidden"
+                      } grid place-items-center`}
+                    onClick={val => setcon(false)}
+                  >
+                    <div className="bg-white rounded-md p-4 cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                      <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
+                        {country.map((val: any, i: number) => {
+                          return (
+                            <h1
+                              onClick={() => {
+                                if (selCountry.includes(val)) {
+                                  let addcur = selCountry.filter(
+                                    (data) => data != val
+                                  );
+                                  setSelCountry(addcur);
+                                } else {
+                                  setSelCountry([val]);
+                                }
+                                setcon(false);
+                              }}
+                              key={i}
+                              className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
+                                ? "border-green-500 text-green-500"
+                                : "border-gray-800 text-black"
+                                }  no-scrollbar`}
+                            >
+                              {val["code"]} - {val["name"]}
+                            </h1>
+                          );
+                        })}
+                        <div onClick={() => setcon(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
+                      </div>
+
+
+                    </div>
+
+
+
                   </div>
                 </div>
+
+                {/* 
                 <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
+                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-12 left-0 ${con ? "" : "hidden"
                     } grid place-items-center`}
+                  onClick={val => setcon(false)}
                 >
-                  <div className="bg-white p-10 cursor-pointer">
+                  <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
                     <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
                       {country.map((val: any, i: number) => {
                         return (
@@ -1287,9 +1337,12 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                           </h1>
                         );
                       })}
+                      <div onClick={() => setcon(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
                     </div>
+
+
                   </div>
-                </div>
+                </div> */}
                 {/* country end here */}
                 <div className="flex mt-4 items-center">
                   <div

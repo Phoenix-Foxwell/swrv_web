@@ -56,11 +56,9 @@ const UserEditBox = () => {
       <div className="w-full bg-white rounded-xl p-4 shadow-xl mt-6">
         <div className="w-full  rounded-lg flex shadow-lg my-4">
           <div
-            className={`text-lg text-center font-medium p-2 bg-secondary text-white  ${
-              index == 1 ? "w-2/5" : ""
-            } ${index == 2 ? "w-3/5" : ""} ${index == 3 ? "w-4/5" : ""} ${
-              index == 4 ? "w-full" : ""
-            } rounded-xl`}
+            className={`text-lg text-center font-medium p-2 bg-secondary text-white  ${index == 1 ? "w-2/5" : ""
+              } ${index == 2 ? "w-3/5" : ""} ${index == 3 ? "w-4/5" : ""} ${index == 4 ? "w-full" : ""
+              } rounded-xl`}
           >
             {index == 1 ? "0% Completed" : ""}
             {index == 2 ? "25% Completed" : ""}
@@ -96,17 +94,22 @@ const UserEditBox = () => {
               <ProfileCompleteBox
                 isActive={index == 3 ? true : false}
                 positionumber={"03"}
-                title={"Connect"}
+                title={"Social"}
               ></ProfileCompleteBox>
               <ProfileCompleteBox
                 isActive={index == 4 ? true : false}
                 positionumber={"04"}
+                title={"Document"}
+              ></ProfileCompleteBox>
+              <ProfileCompleteBox
+                isActive={index == 5 ? true : false}
+                positionumber={"05"}
                 title={"Contact"}
               ></ProfileCompleteBox>
               {isBrand ? (
                 <ProfileCompleteBox
-                  isActive={index == 5 ? true : false}
-                  positionumber={"05"}
+                  isActive={index == 6 ? true : false}
+                  positionumber={"06"}
                   title={"Users"}
                 ></ProfileCompleteBox>
               ) : null}
@@ -131,22 +134,19 @@ const ProfileCompleteBox = (props: ProfileCompleteBoxProps) => {
     <>
       <div className="px-3 py-2">
         <div
-          className={`grid place-items-center h-14 w-14 shadow-md rounded-md ${
-            props.isActive ? "bg-secondary" : "bg-gray-200"
-          }`}
+          className={`grid place-items-center h-16 w-16 shadow-md rounded-md ${props.isActive ? "bg-secondary" : "bg-gray-200"
+            }`}
         >
           <p
-            className={`font-medium text-xl ${
-              props.isActive ? "text-white" : "text-black"
-            }`}
+            className={`font-medium text-xl ${props.isActive ? "text-white" : "text-black"
+              }`}
           >
             {props.positionumber}
           </p>
         </div>
         <h4
-          className={`text-sm text-center ${
-            props.isActive ? "text-black" : "text-gray-500"
-          } mt-2`}
+          className={`text-sm text-center ${props.isActive ? "text-black" : "text-gray-500"
+            } mt-2`}
         >
           {props.title}
         </h4>

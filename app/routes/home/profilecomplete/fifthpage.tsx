@@ -186,7 +186,7 @@ const ThirdPage = () => {
                   setSus(null);
                   setError("Invite at least one user");
                 } else {
-                  setIndex(5);
+                  setIndex(6);
                   nextButton.current!.click();
                 }
               }}

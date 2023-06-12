@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoaderArgs, LoaderFunction, json, redirect } from "@remix-run/node";
-import { Link, useLoaderData, useNavigate } from "@remix-run/react";
+import { Link, useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BrandCard } from "~/components/utils/brandcard";
@@ -66,14 +66,6 @@ const HomePage = () => {
             <BrandCreate></BrandCreate>
           ) : null
         ) : null}
-        {/* <div className="flex mt-4">
-                <div className="grow"></div>
-                <div onClick={async () => {
-                    navigator("/logout");
-                }}>
-                    <CusButton text="Logout" background="bg-[#f43f5e]" textColor={"text-white"}></CusButton>
-                </div>
-            </div> */}
 
         {isOpen ? <ProfileComplete></ProfileComplete> : null}
         <Intro isBrand={isbrand}></Intro>

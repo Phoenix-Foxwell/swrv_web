@@ -26,9 +26,13 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
   //     "Accept": "*",
   //   },
   // });
+  console.log("working");
 
   const blog = await axios.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
+
+  console.log("not working");
   return json({ blog: blog.data.data });
+
 };
 
 const index = () => {

@@ -1957,9 +1957,10 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
                     </div>
 
                     <p className="mt-2 text-md font-medium">Publication Time</p>
-                    <p className="text-sm font-medium">{new Date(val.draft_approval.toString()).toLocaleString()}</p>
-
-
+                    {val.draft_approval != null ?
+                      <p className="text-sm font-medium">{new Date(val.draft_approval.toString()).toLocaleString()}</p> :
+                      <p className="text-sm font-medium">No Publication Time is set</p>
+                    }
                     <p className="mt-2 text-md font-medium">Attachment</p>
                     <a
                       target="_blank"

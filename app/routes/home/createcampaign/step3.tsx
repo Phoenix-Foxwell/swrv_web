@@ -232,7 +232,7 @@ const Step3 = () => {
                 } else if (audience.includes(audienceText!.current!.value)) {
                   setAudError("Audience already exist add a diffrent one");
                 } else if (audienceText!.current!.value.indexOf(" ") >= 0) {
-                  setAudError("Audience cannot containt space");
+                  setAudError("Audience cannot contains space");
                 } else {
                   addAudience(audienceText!.current!.value);
                   audienceText!.current!.value = "";

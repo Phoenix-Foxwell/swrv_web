@@ -371,7 +371,7 @@ const ForthPage = () => {
                 } else if (contactnumber.toString().length != 10) {
                   setError("Enter a 10 digit valid contact number");
                 } else if (!check) {
-                  setError("Check the box in order to procide");
+                  setError("Check the box in order to proceed");
                 } else {
                   let req = {
                     id: userId,
@@ -408,7 +408,7 @@ const ForthPage = () => {
               }}
             >
               <CusButton
-                text="Next"
+                text={isBrand ? "Next" : "Finish"}
                 textColor={"text-white"}
                 width={"w-full"}
                 background={"bg-primary"}

@@ -92,7 +92,7 @@ const ThirdPage = () => {
                                                     }
                                                     else if (val["text"].indexOf(" ") >= 0) {
                                                         setSus(null);
-                                                        setError("Hashtag cannot containt space");
+                                                        setError("Hashtag cannot contains space");
                                                     }
                                                     else {
 

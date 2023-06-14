@@ -26,11 +26,9 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
   //     "Accept": "*",
   //   },
   // });
-  console.log("working");
 
   const blog = await axios.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
 
-  console.log("not working");
   return json({ blog: blog.data.data });
 
 };
@@ -58,7 +56,7 @@ const index = () => {
         <div className="fixed top-0 left-0 w-full z-50 bg-white">
           <MyNavBar></MyNavBar>
         </div>
-        <div className="h-14"></div>
+        <div className="h-16"></div>
         <HomeIntro blogdata={blogdata}></HomeIntro>
         <Footer></Footer>
       </div>

@@ -207,7 +207,7 @@ const Step2 = () => {
                                     setMenError("Mention already exist add a diffrent one");
                                 } else if (mendtionText!.current!.value.indexOf(" ") >= 0) {
 
-                                    setMenError("Mention cannot containt space");
+                                    setMenError("Mention cannot contains space");
                                 }
                                 else {
                                     addMendtion(mendtionText!.current!.value);
@@ -265,7 +265,7 @@ const Step2 = () => {
                                 } else if (hashtag.includes(hashtagText!.current!.value)) {
                                     setHashError("Hashtag already exist add a diffrent one");
                                 } else if (hashtagText!.current!.value.indexOf(" ") >= 0) {
-                                    setHashError("Hashtag cannot containt space");
+                                    setHashError("Hashtag cannot contains space");
                                 }
                                 else {
                                     addHashtag(hashtagText!.current!.value);

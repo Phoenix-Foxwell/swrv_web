@@ -14,7 +14,10 @@ const blogs = () => {
   let blogdata = useLoaderData().blog[0];
   return (
     <>
-      <MyNavBar></MyNavBar>
+      <div className="fixed top-0 left-0 w-full z-50 bg-white">
+        <MyNavBar></MyNavBar>
+      </div>
+      <div className="h-16"></div>
       <BlogsIntro blogdata={blogdata}></BlogsIntro>
       <Footer></Footer>
     </>

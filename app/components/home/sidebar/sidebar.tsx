@@ -37,7 +37,7 @@ export const SideBar = (props: SideBarProps) => {
     <>
       <div
         className={` ${isOpen ? "w-60" : "w-20"
-          } h-screen p-2 fixed top-0 left-0 md:block hidden`}
+          } h-screen p-2 fixed top-0 left-0 md:block hidden z-30`}
       >
         <div className="w-full h-full bg-primary rounded-2xl flex flex-col py-8 px-3">
           <div

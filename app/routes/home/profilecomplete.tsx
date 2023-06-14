@@ -54,18 +54,44 @@ const UserEditBox = () => {
   return (
     <>
       <div className="w-full bg-white rounded-xl p-4 shadow-xl mt-6">
-        <div className="w-full  rounded-lg flex shadow-lg my-4">
-          <div
-            className={`text-lg text-center font-medium p-2 bg-secondary text-white  ${index == 1 ? "w-2/5" : ""
-              } ${index == 2 ? "w-3/5" : ""} ${index == 3 ? "w-4/5" : ""} ${index == 4 ? "w-full" : ""
-              } rounded-xl`}
-          >
-            {index == 1 ? "0% Completed" : ""}
-            {index == 2 ? "25% Completed" : ""}
-            {index == 3 ? "50% Completed" : ""}
-            {index == 4 ? "75% Completed" : ""}
-          </div>
-        </div>
+
+        {
+          index == 1 ?
+
+            <div className="w-full  rounded-lg text-center shadow-lg my-4 text-lg font-medium p-2 ">
+              0% Completed
+            </div>
+            : isBrand ?
+              <div className="w-full  rounded-lg flex shadow-lg my-4">
+                <div
+                  className={`text-lg text-center font-medium p-2 bg-secondary text-white  ${index == 1 ? "w-0" : ""
+                    } ${index == 2 ? "w-1/5" : ""} ${index == 3 ? "w-2/5" : ""} ${index == 4 ? "w-3/5" : ""} ${index == 5 ? "w-4/5" : ""} ${index == 6 ? "w-full" : ""
+                    } rounded-xl`}
+                >
+                  {/* {index == 1 ? "0% Completed" : ""} */}
+                  {index == 2 ? "20% Completed" : ""}
+                  {index == 3 ? "40% Completed" : ""}
+                  {index == 4 ? "60% Completed" : ""}
+                  {index == 5 ? "80% Completed" : ""}
+                  {index == 6 ? "100% Completed" : ""}
+                </div>
+              </div>
+              :
+              <div className="w-full  rounded-lg flex shadow-lg my-4">
+                <div
+                  className={`text-lg text-center font-medium p-2 bg-secondary text-white  ${index == 1 ? "w-0" : ""
+                    } ${index == 2 ? "w-1/4" : ""} ${index == 3 ? "w-2/4" : ""} ${index == 4 ? "w-3/4" : ""} ${index == 5 ? "w-full" : ""
+                    } rounded-xl`}
+                >
+                  {/* {index == 1 ? "0% Completed" : ""} */}
+                  {index == 2 ? "25% Completed" : ""}
+                  {index == 3 ? "50% Completed" : ""}
+                  {index == 4 ? "75% Completed" : ""}
+                  {index == 5 ? "100% Completed" : ""}
+                </div>
+              </div>
+        }
+
         <div className="flex lg:flex-row flex-col">
           <div className="p-6  w-full hidden md:block">
             <div className="hidden place-items-center lg:grid ">

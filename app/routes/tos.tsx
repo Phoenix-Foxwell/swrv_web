@@ -5,7 +5,11 @@ import Tos from "~/components/about/tos";
 const tos = () => {
     return (
         <>
-            <IntroNavBar></IntroNavBar>
+
+            <div className="fixed top-0 left-0 w-full z-50 bg-white">
+                <IntroNavBar></IntroNavBar>
+            </div>
+            <div className="h-16"></div>
             <Tos></Tos>
             <Footer></Footer>
         </>

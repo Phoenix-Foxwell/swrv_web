@@ -5,7 +5,10 @@ import PP from "~/components/about/pp";
 const pp = () => {
     return (
         <>
-            <IntroNavBar></IntroNavBar>
+            <div className="fixed top-0 left-0 w-full z-50 bg-white">
+                <IntroNavBar></IntroNavBar>
+            </div>
+            <div className="h-16"></div>
             <PP></PP>
             <Footer></Footer>
         </>

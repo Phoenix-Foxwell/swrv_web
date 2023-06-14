@@ -572,6 +572,10 @@ input[type="number"]::-webkit-inner-spin-button,
   z-index: 20;
 }
 
+.z-30 {
+  z-index: 30;
+}
+
 .order-1 {
   order: 1;
 }
@@ -634,6 +638,11 @@ input[type="number"]::-webkit-inner-spin-button,
   margin-bottom: 0.25rem;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .my-10 {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
@@ -647,11 +656,6 @@ input[type="number"]::-webkit-inner-spin-button,
 .mx-10 {
   margin-left: 2.5rem;
   margin-right: 2.5rem;
-}
-
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .mx-1 {
@@ -793,6 +797,10 @@ input[type="number"]::-webkit-inner-spin-button,
   height: 100%;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-96 {
   height: 24rem;
 }
@@ -875,10 +883,6 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .h-48 {
   height: 12rem;
-}
-
-.h-16 {
-  height: 4rem;
 }
 
 .h-6 {
@@ -1042,12 +1046,32 @@ input[type="number"]::-webkit-inner-spin-button,
   width: 700px;
 }
 
+.w-0 {
+  width: 0px;
+}
+
+.w-1\/5 {
+  width: 20%;
+}
+
 .w-2\/5 {
   width: 40%;
 }
 
 .w-3\/5 {
   width: 60%;
+}
+
+.w-1\/4 {
+  width: 25%;
+}
+
+.w-2\/4 {
+  width: 50%;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .w-24 {
@@ -1528,6 +1552,11 @@ input[type="number"]::-webkit-inner-spin-button,
   background-color: rgb(6 182 212 / var(--tw-bg-opacity));
 }
 
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#1b2028\] {
   --tw-bg-opacity: 1;
   background-color: rgb(27 32 40 / var(--tw-bg-opacity));
@@ -1545,11 +1574,6 @@ input[type="number"]::-webkit-inner-spin-button,
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-background {
@@ -1897,6 +1921,18 @@ input[type="number"]::-webkit-inner-spin-button,
   padding-right: 1rem;
 }
 
+.pr-6 {
+  padding-right: 1.5rem;
+}
+
+.pl-60 {
+  padding-left: 15rem;
+}
+
+.pl-20 {
+  padding-left: 5rem;
+}
+
 .pb-40 {
   padding-bottom: 10rem;
 }
@@ -1943,10 +1979,6 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .pl-2 {
   padding-left: 0.5rem;
-}
-
-.pr-6 {
-  padding-right: 1.5rem;
 }
 
 .pl-8 {

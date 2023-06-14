@@ -301,6 +301,8 @@ const UserDrafts = (props: UserDraftsProps) => {
       },
     });
 
+    console.log(apidata.data);
+
     if (isActive) {
       let data = apidata.data.data.filter((val: any) => new Date(val["campaign"]["endAt"]) > new Date());
       setUserDraft((val) => data);
@@ -593,7 +595,7 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
             icon={faIdBadge}
             className="text-md text-secondary"
           ></FontAwesomeIcon>{" "}
-          Requested brand champaign
+          Requested brand campaign
         </div>
         {userInvite.length == 0 ? (
           <h1 className="text-black font-medium text-xl text-center">

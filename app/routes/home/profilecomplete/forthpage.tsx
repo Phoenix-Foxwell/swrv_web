@@ -139,7 +139,7 @@ const ForthPage = () => {
           <div className="w-full">
             {/* country start here */}
             <p className="text-black text-left font-normal text-lg mt-4">
-              Country
+              Country  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
               <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
@@ -204,7 +204,7 @@ const ForthPage = () => {
 
             {/* Gender start here */}
             <p className="text-black text-left font-normal text-lg  mt-4">
-              Gender
+              Gender  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
               <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
@@ -275,7 +275,7 @@ const ForthPage = () => {
 
             {/* Gender end here */}
             <p className="text-black text-left font-normal text-lg  mt-4">
-              City
+              City  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <div className="w-full bg-[#EEEEEE] rounded-md flex p-2">
               <div className="grow">
@@ -321,7 +321,7 @@ const ForthPage = () => {
               </div>
             )}
             <p className="text-black text-left font-normal text-lg  mt-4">
-              Phone number
+              Phone number  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <div className="p-2 w-full outline-none bg-[#EEEEEE] focus:border-gray-300 rounded-md flex">
               <div className="text-center text-black font-normal text-md mr-4">
@@ -331,7 +331,6 @@ const ForthPage = () => {
                 onChange={handelcontent}
                 value={contactnumber}
                 type={"text"}
-                maxLength={10}
                 className="w-full outline-none bg-transparent focus:border-gray-300 rounded-md resize-none"
               />
             </div>
@@ -368,9 +367,11 @@ const ForthPage = () => {
                   contactnumber == 0
                 ) {
                   setError("Fill the contact number");
-                } else if (contactnumber.toString().length != 10) {
-                  setError("Enter a 10 digit valid contact number");
-                } else if (!check) {
+                }
+                // else if (contactnumber.toString().length != 10) {
+                //   setError("Enter a 10 digit valid contact number");
+                // } 
+                else if (!check) {
                   setError("Check the box in order to proceed");
                 } else {
                   let req = {

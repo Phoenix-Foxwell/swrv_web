@@ -22,7 +22,7 @@ const HomePage = () => {
       <div className="flex md:relative bg-background">
         <SideBar isBrand={isbrand}></SideBar>
         <div
-          className={`w-full transition-all  relative md:relative ${isOpen ? "md:ml-60" : "md:ml-20"
+          className={`w-full min-h-screen transition-all  relative md:relative ${isOpen ? "md:ml-60" : "md:ml-20"
             }  p-2 pr-4`}
         >
           <div className={`fixed top-0 left-0 w-full my-4 mx-2 pr-6 z-20 ${isOpen ? "pl-60" : "pl-20"}`}>
@@ -33,9 +33,17 @@ const HomePage = () => {
               avatar={userdata.user.pic}
             ></MainNavBar>
           </div>
-          <div className="h-14"></div>
-          <Outlet />
-          <HomeFooter></HomeFooter>
+          {/* main section start here */}
+          <div className="relative min-h-full">
+            <div className="pb-16">
+              <div className="h-16"></div>
+              <Outlet />
+            </div>
+            <div className="w-full absolute bottom-0 left-0 h-16">
+              <HomeFooter></HomeFooter>
+            </div>
+          </div>
+          {/* main section end here */}
         </div>
       </div>
     </>

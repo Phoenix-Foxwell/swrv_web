@@ -166,7 +166,7 @@ const Step3 = () => {
         </h2>
         {/* audience start here */}
         <h2 className="text-primary tect-xl font-medium text-left my-1">
-          Audience location
+          Audience location  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <div className="flex">
           <div className="bg-[#EEEEEE]  h-10 rounded-lg  flex gap-1 pl-2 sm:w-96 w-72">
@@ -257,7 +257,7 @@ const Step3 = () => {
 
         {/* audience end here */}
         <h2 className="text-primary tect-xl font-medium text-left my-1">
-          Influencer category
+          Influencer category  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <select
           className="w-full p-2 bg-[#EEEEEE] rounded-lg outline-none border-none pr-6"
@@ -295,7 +295,7 @@ const Step3 = () => {
           })}
         </select>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
-          Maximum no of influencers that can join the campaign
+          Maximum no of influencers that can join the campaign  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <input
           ref={maxInf}
@@ -304,7 +304,7 @@ const Step3 = () => {
         ></input>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
           Geo restriction ( Optional only applicable for influencer filtering )
-          radius in kilometers
+          radius in kilometers  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <div className="w-full h-96">
           {isLoaded ? (
@@ -323,7 +323,7 @@ const Step3 = () => {
         </div>
         <div className="mt-4 w-full grid place-items-center"><button className="py-1 px-4 rounded-md bg-green-500 text-white font-semibold text-lg" onClick={getCurrentLocation}>Get Current Location</button></div>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
-          Maximum radius of the campaign [in KM.]
+          Maximum radius of the campaign [in KM.]  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <input
           ref={Radius}
@@ -331,7 +331,7 @@ const Step3 = () => {
           className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 mt-4 w-full p-2"
         ></input>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
-          Accept participation / invite till
+          Accept participation / invite till  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <input
           type={"date"}
@@ -339,7 +339,7 @@ const Step3 = () => {
           className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 mt-4 w-full p-2"
         ></input>
         <h2 className="text-primary tect-xl font-medium text-left my-1">
-          Remuneration
+          Remuneration  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
         <select
           className="w-full p-2 bg-[#EEEEEE] rounded-lg outline-none border-none pr-6"

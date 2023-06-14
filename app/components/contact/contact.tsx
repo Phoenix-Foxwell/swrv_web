@@ -36,9 +36,11 @@ const ContactPage = () => {
       contactnumber == 0
     ) {
       setError("Fill the contact number");
-    } else if (contactnumber.toString().length != 10) {
-      setError("Enter a 10 digit valid contact number");
-    } else if (
+    }
+    // else if (contactnumber.toString().length != 10) {
+    //   setError("Enter a 10 digit valid contact number");
+    // }
+    else if (
       messageRef.current?.value == null ||
       messageRef.current?.value == undefined ||
       messageRef.current?.value == ""
@@ -221,7 +223,6 @@ const ContactPage = () => {
                       onChange={handelcontent}
                       value={contactnumber}
                       type={"text"}
-                      maxLength={10}
                       className="outline-none w-full"
                       placeholder="Enter your phone number"
                     />

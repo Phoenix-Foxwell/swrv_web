@@ -45,9 +45,6 @@ const ThirdPage = () => {
 
     const nextButton = useRef<HTMLButtonElement>(null);
 
-
-
-
     return (
         <>
             <div className="p-8 w-full">
@@ -66,8 +63,24 @@ const ThirdPage = () => {
                     </div>
                     <div className="grow hidden md:block"></div>
                     <div onClick={() => {
-                        setAddPlatform([...addedPlatfrom, { val: selPlatform[0], status: false, text: "" }]);
-                        setSelPlatfome([]);
+                        setError(null);
+                        setSus(null);
+                        if (selPlatform.length == 0) {
+                            return setError("Select any platform first.");
+                        }
+
+                        if (addedPlatfrom.length > 0) {
+                            if (addedPlatfrom[addedPlatfrom.length - 1]["status"] == true) {
+                                setAddPlatform(val => [...val, { val: selPlatform[0], status: false, text: "" }]);
+                                setSelPlatfome([]);
+                            } else {
+                                return setError("Complete you last handle first.");
+                            }
+                        }
+                        if (addedPlatfrom.length == 0) {
+                            setAddPlatform(val => [...val, { val: selPlatform[0], status: false, text: "" }]);
+                            setSelPlatfome([]);
+                        }
                     }}>
                         <CusButton text="Add new Channel" textColor={"text-white"} width={'w-36'} background={"bg-primary"} fontwidth={"font-normal"} textSize={"text-md"}></CusButton>
                     </div>

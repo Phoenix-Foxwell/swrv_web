@@ -62,7 +62,7 @@ const Invite = () => {
                         <p className="text-black text-left font-normal text-md mt-4">Email</p>
                         <input ref={emailRef} type={"text"} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
                         <p className="text-black text-left font-normal text-md mt-4">Contact Number</p>
-                        <input onChange={handelcontent} value={contactnumber} type={"text"} maxLength={10} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
+                        <input onChange={handelcontent} value={contactnumber} type={"text"} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
                         {(error == "" || error == null || error == undefined) ? null :
                             <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">{error}</div>
                         }
@@ -82,9 +82,10 @@ const Invite = () => {
                             else if (contactnumber == null || contactnumber == undefined || contactnumber == 0) {
                                 setError("Fill the contact number");
                             }
-                            else if (contactnumber.toString().length != 10) {
-                                setError("Enter a 10 degit valid contact number");
-                            } else {
+                            // else if (contactnumber.toString().length != 10) {
+                            //     setError("Enter a 10 degit valid contact number");
+                            // } 
+                            else {
                                 let req = {
                                     "userId": userId,
                                     "name": nameRef.current?.value,

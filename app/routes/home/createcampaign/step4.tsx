@@ -104,7 +104,7 @@ const Step4 = () => {
             population.
           </p>
           <h2 className="text-primary tect-xl font-medium text-left my-1">
-            Campaign name
+            Campaign name  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
           </h2>
           <input
             ref={CampaignName}
@@ -116,7 +116,7 @@ const Step4 = () => {
           <div className="flex flex-col lg:flex-row">
             <div>
               <h2 className="text-primary tect-xl font-medium text-left my-1">
-                Planed budget
+                Planed budget  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </h2>
               <input
                 ref={PlanedBudget}
@@ -128,7 +128,7 @@ const Step4 = () => {
             <div className="w-8"></div>
             <div>
               <h2 className="text-primary tect-xl font-medium text-left my-1">
-                Cost per post
+                Cost per post  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </h2>
               <input
                 ref={CostPerPost}
@@ -141,7 +141,7 @@ const Step4 = () => {
           <div className="flex flex-col lg:flex-row">
             <div>
               <h2 className="text-primary tect-xl font-medium text-left my-1">
-                Start date
+                Start date  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </h2>
               <input
                 type={"date"}
@@ -153,7 +153,7 @@ const Step4 = () => {
             <div className="w-8"></div>
             <div>
               <h2 className="text-primary tect-xl font-medium text-left my-1">
-                End date
+                End date  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </h2>
               <input
                 ref={EndDate}
@@ -166,7 +166,7 @@ const Step4 = () => {
           <div className="flex flex-col lg:flex-row">
             <div>
               <h2 className="text-primary tect-xl font-medium text-left my-1">
-                Min reach
+                Min reach  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </h2>
               <input
                 ref={MinReach}
@@ -178,7 +178,7 @@ const Step4 = () => {
             <div className="w-8"></div>
             <div>
               <h2 className="text-primary tect-xl font-medium text-left my-1">
-                Max reach
+                Max reach  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </h2>
               <input
                 ref={MaxReact}
@@ -246,11 +246,11 @@ const Step4 = () => {
                 {sd == ""
                   ? "--------"
                   : new Date(sd).toLocaleDateString("en-US", {
-                      weekday: "short",
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    weekday: "short",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
               </p>
             </div>
             <div className="flex my-4">
@@ -260,11 +260,11 @@ const Step4 = () => {
                 {ed == ""
                   ? "--------"
                   : new Date(ed).toLocaleDateString("en-US", {
-                      weekday: "short",
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+                    weekday: "short",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
               </p>
             </div>
             <div className="flex my-4">

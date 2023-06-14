@@ -124,7 +124,7 @@ const Spbd = () => {
             })}
           </div>
           <h2 className="text-primary tect-xl font-medium text-left my-1">
-            Campaign name
+            Campaign name <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
           </h2>
           <input
             ref={CampaignName}
@@ -133,42 +133,40 @@ const Spbd = () => {
             onChange={(val) => setcn(val.target.value)}
           />
           <h2 className="text-primary tect-xl font-medium text-left my-1">
-            Campaign info
+            Campaign info <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
           </h2>
           <textarea
             ref={campinfo}
             className="p-4 w-full h-40 outline-none bg-[#EEEEEE] focus:border-gray-300 rounded-md resize-none"
           ></textarea>
-          {campaginType == "6" ? (
-            <div className="flex flex-col lg:flex-row">
-              <div className="grow">
-                <h2 className="text-primary tect-xl font-medium text-left my-1">
-                  Start date
-                </h2>
-                <input
-                  type={"date"}
-                  ref={StartDate}
-                  className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 w-full p-2"
-                  onChange={(val) => setsd(val.target.value)}
-                ></input>
-              </div>
-              <div className="w-8"></div>
-              <div className="grow">
-                <h2 className="text-primary tect-xl font-medium text-left my-1">
-                  End date
-                </h2>
-                <input
-                  ref={EndDate}
-                  type={"date"}
-                  className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
-                  onChange={(val) => seted(val.target.value)}
-                />
-              </div>
+          <div className="flex flex-col lg:flex-row">
+            <div className="grow">
+              <h2 className="text-primary tect-xl font-medium text-left my-1">
+                Start date <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
+              </h2>
+              <input
+                type={"date"}
+                ref={StartDate}
+                className="bg-[#EEEEEE] outline-none border-none rounded-lg focus:border-gray-300 w-full p-2"
+                onChange={(val) => setsd(val.target.value)}
+              ></input>
             </div>
-          ) : null}
+            <div className="w-8"></div>
+            <div className="grow">
+              <h2 className="text-primary tect-xl font-medium text-left my-1">
+                End date <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
+              </h2>
+              <input
+                ref={EndDate}
+                type={"date"}
+                className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
+                onChange={(val) => seted(val.target.value)}
+              />
+            </div>
+          </div>
           <div>
             <h2 className="text-primary tect-xl font-medium text-left my-1">
-              Cost per post
+              Cost per post <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </h2>
             <input
               ref={CostPerPost}
@@ -292,109 +290,23 @@ const Spbd = () => {
                   ) {
                     setError("Fill the cost per post");
                   } else {
-                    if (campaginType == "6") {
-                      const x = new Date(StartDate!.current!.value);
-                      const y = new Date(EndDate!.current!.value);
-                      const pass_date: boolean = x > y;
-                      if (
-                        StartDate.current?.value == null ||
-                        StartDate.current?.value == undefined ||
-                        StartDate.current?.value == ""
-                      ) {
-                        setError("Enter planed starting date");
-                      } else if (pass_date) {
-                        setError("Start date should be less then end date");
-                      } else if (
-                        EndDate.current?.value == null ||
-                        EndDate.current?.value == undefined ||
-                        EndDate.current?.value == ""
-                      ) {
-                        setError("Enter planed end date");
-                      } else {
-                        const req = {
-                          userId: userId,
-                          brandUserId: userId,
-                          brandId: brandId,
-                          cityId: "0",
-                          currencyId: "3",
-                          categories: "0",
-                          minEligibleRating: "0",
-                          maxEligibleRating: "0",
-                          minReach: "0",
-                          maxReach: "0",
-                          costPerPost: CostPerPost.current?.value,
-                          totalBudget: "0",
-                          dos: "0",
-                          donts: "0",
-                          mentions: "0",
-                          hashtags: "0",
-                          campaignTypeId: campaignTypeId,
-                          campaignName: CampaignName.current?.value,
-                          campaignInfo: campinfo.current?.value,
-                          platforms: platform.join(),
-                          startAt: StartDate.current?.value,
-                          endAt: EndDate.current?.value,
-                        };
-
-                        const data = await axios({
-                          method: "post",
-                          url: `${BaseUrl}/api/add-campaign`,
-                          data: req,
-                          headers: {
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Headers": "*",
-                            "Access-Control-Allow-Options": "*",
-                            "Access-Control-Allow-Methods": "*",
-                            "X-Content-Type-Options": "*",
-                            "Content-Type": "application/json",
-                            Accept: "*",
-                          },
-                        });
-                        if (data.data.status == false) {
-                          setError(data.data.message);
-                        } else {
-                          const req1 = {
-                            brandId: brandId,
-                            campaignId: data.data.data.campaign.id,
-                            remark: "init bid",
-                            bidamount: CostPerPost.current?.value,
-                          };
-
-                          const data1 = await axios({
-                            method: "post",
-                            url: `${BaseUrl}/api/add-bid`,
-                            data: req1,
-                            headers: {
-                              "Access-Control-Allow-Origin": "*",
-                              "Access-Control-Allow-Headers": "*",
-                              "Access-Control-Allow-Options": "*",
-                              "Access-Control-Allow-Methods": "*",
-                              "X-Content-Type-Options": "*",
-                              "Content-Type": "application/json",
-                              Accept: "*",
-                            },
-                          });
-
-                          if (data1.data.status == false) {
-                            setError(data1.data.message);
-                          } else {
-
-                            await axios({
-                              method: "post",
-                              url: `http://bluelemontech.in:5563/notification/send`,
-                              data: {
-                                title: "New Campaign Created",
-                                body: CampaignName.current?.value,
-                                to: "/topics/influencer"
-                              },
-                            });
-
-                            return navigator(
-                              `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
-                            );
-                          }
-                        }
-                      }
+                    const x = new Date(StartDate!.current!.value);
+                    const y = new Date(EndDate!.current!.value);
+                    const pass_date: boolean = x > y;
+                    if (
+                      StartDate.current?.value == null ||
+                      StartDate.current?.value == undefined ||
+                      StartDate.current?.value == ""
+                    ) {
+                      setError("Enter planed starting date");
+                    } else if (pass_date) {
+                      setError("Start date should be less then end date");
+                    } else if (
+                      EndDate.current?.value == null ||
+                      EndDate.current?.value == undefined ||
+                      EndDate.current?.value == ""
+                    ) {
+                      setError("Enter planed end date");
                     } else {
                       const req = {
                         userId: userId,
@@ -417,9 +329,10 @@ const Spbd = () => {
                         campaignName: CampaignName.current?.value,
                         campaignInfo: campinfo.current?.value,
                         platforms: platform.join(),
-                        startAt: new Date().toLocaleDateString(),
-                        endAt: new Date().toLocaleDateString(),
+                        startAt: StartDate.current?.value,
+                        endAt: EndDate.current?.value,
                       };
+
                       const data = await axios({
                         method: "post",
                         url: `${BaseUrl}/api/add-campaign`,
@@ -437,21 +350,49 @@ const Spbd = () => {
                       if (data.data.status == false) {
                         setError(data.data.message);
                       } else {
+                        const req1 = {
+                          brandId: brandId,
+                          campaignId: data.data.data.campaign.id,
+                          remark: "init bid",
+                          bidamount: CostPerPost.current?.value,
+                        };
 
-                        await axios({
+                        const data1 = await axios({
                           method: "post",
-                          url: `http://bluelemontech.in:5563/notification/send`,
-                          data: {
-                            title: "New Campaign Created",
-                            body: CampaignName.current?.value,
-                            to: "/topics/influencer"
+                          url: `${BaseUrl}/api/add-bid`,
+                          data: req1,
+                          headers: {
+                            "Access-Control-Allow-Origin": "*",
+                            "Access-Control-Allow-Headers": "*",
+                            "Access-Control-Allow-Options": "*",
+                            "Access-Control-Allow-Methods": "*",
+                            "X-Content-Type-Options": "*",
+                            "Content-Type": "application/json",
+                            Accept: "*",
                           },
                         });
-                        return navigator(
-                          `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
-                        );
+
+                        if (data1.data.status == false) {
+                          setError(data1.data.message);
+                        } else {
+
+                          await axios({
+                            method: "post",
+                            url: `http://bluelemontech.in:5563/notification/send`,
+                            data: {
+                              title: "New Campaign Created",
+                              body: CampaignName.current?.value,
+                              to: "/topics/influencer"
+                            },
+                          });
+
+                          return navigator(
+                            `/home/createcampaign/inviteinf/${data.data.data.campaign.id}`
+                          );
+                        }
                       }
                     }
+
                   }
                 }}
               >

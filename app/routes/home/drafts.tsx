@@ -62,8 +62,24 @@ const UserDrafts = () => {
                                             </div>
                                             <p className="mt-2 text-md font-medium">Description</p>
                                             <p className="text-sm font-medium">{val.description}</p>
+                                            <p className="mt-2 text-md font-medium">Handle Info</p>
+                                            <div className="flex gap-4">
+                                                <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                                                <p className="text-xl font-semibold text-center">{val.handle.name}</p>
+                                            </div>
+                                            <p className="mt-2 text-md font-medium">Publication Time</p>
+                                            {val.draft_approval != null ?
+                                                <p className="text-sm font-medium">{new Date(val.draft_approval.toString()).toLocaleString()}</p> :
+                                                <p className="text-sm font-medium">No Publication Time is set</p>
+                                            }
                                             <p className="mt-2 text-md font-medium">Attachment</p>
                                             <a target="_blank" className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500" href={val.attach01}>View Doc</a>
+                                            {val.status.name == "REJECTED" ?
+                                                <>
+                                                    <p className="mt-2 text-md font-medium">Rejection Reason</p>
+                                                    <p className="text-sm font-medium">{val.status.message}</p>
+                                                </>
+                                                : null}
                                             <p className="mt-2 text-md font-medium">Status</p>
                                             <p className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED" ? "bg-green-500" : val.status.name == "PENDING" ? "bg-yellow-500" : "bg-red-500"}`}>{val.status.name}</p>
                                         </div>

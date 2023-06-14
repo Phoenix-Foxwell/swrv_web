@@ -263,7 +263,6 @@ const createBarnd = () => {
               onChange={handelcontent}
               value={contactnumber}
               type={"text"}
-              maxLength={10}
               className="w-full outline-none bg-transparent focus:border-gray-300 rounded-md resize-none"
             />
           </div>
@@ -343,9 +342,11 @@ const createBarnd = () => {
                 setError("Fill the Brand info");
               } else if (!EmailValidator.validate(emailRef.current?.value)) {
                 setError("Enter valid email");
-              } else if (contactnumber.toString().length != 10) {
-                setError("Enter a 10 digit valid contact number");
-              } else if (
+              }
+              // else if (contactnumber.toString().length != 10) {
+              //   setError("Enter a 10 digit valid contact number");
+              // } 
+              else if (
                 binfoRef.current?.value == null ||
                 binfoRef.current?.value == undefined ||
                 binfoRef.current?.value == ""

@@ -556,7 +556,7 @@ const SocialMedai = (): JSX.Element => {
       <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-2 mb-4">
         <div className="flex">
           <h3 className="text-primary text-3xl font-bold grid place-items-center rounded-md bg-white border-b-4 border-blue-500 py-1 px-4">
-            Notable Influencers
+            Our Influencers
           </h3>
           <div className="grow"></div>
           <div className="h-10 bg-gray-500 w-[6px]"></div>
@@ -565,7 +565,7 @@ const SocialMedai = (): JSX.Element => {
             to={"/notablebrand"}
             className="text-primary text-3xl font-bold grid place-items-center rounded-md bg-white border-b-4 border-blue-500 py-1 px-4"
           >
-            Notable brand
+            Our Brands
           </Link>
         </div>
         {/* <div className="flex gap-4 flex-wrap justify-center mt-6"> */}

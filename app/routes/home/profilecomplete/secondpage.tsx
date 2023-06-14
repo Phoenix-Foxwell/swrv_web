@@ -113,7 +113,7 @@ const SecondPage = () => {
             <div className="p-8 w-full mx-auto">
                 <div className="w-full max-w-[400px] mx-auto">
                     {/* main market start here */}
-                    <p className="text-black text-left font-normal text-lg mt-4">Main market</p>
+                    <p className="text-black text-left font-normal text-lg mt-4">Main market <span className="text-rose-500 text-2xl font-semibold">&#42;</span></p>
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
                         <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                             {selmarket.map((value: any, i: number) => {
@@ -157,7 +157,7 @@ const SecondPage = () => {
                     {/* main market end here */}
 
                     {/* other market start here */}
-                    <p className="text-black text-left font-normal text-lg  mt-4">Other markets</p>
+                    <p className="text-black text-left font-normal text-lg  mt-4">Other markets <span className="text-rose-500 text-2xl font-semibold">&#42;</span></p>
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
                         <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                             {selorthermarket.map((value: any, i: number) => {
@@ -202,7 +202,7 @@ const SecondPage = () => {
                     {/* other market end here */}
 
                     {/* category start here */}
-                    <p className="text-black text-left font-normal text-lg  mt-4">Category</p>
+                    <p className="text-black text-left font-normal text-lg  mt-4">Category <span className="text-rose-500 text-2xl font-semibold">&#42;</span></p>
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
                         <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                             {selcategory.map((value: any, i: number) => {
@@ -245,7 +245,7 @@ const SecondPage = () => {
                     </div>
                     {/* category end here */}
                     {/* currency start here */}
-                    <p className="text-black text-left font-normal text-lg  mt-4">Account currency</p>
+                    <p className="text-black text-left font-normal text-lg  mt-4">Account currency <span className="text-rose-500 text-2xl font-semibold">&#42;</span></p>
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
                         <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                             {selcurrency.map((value: any, i: number) => {
@@ -289,7 +289,7 @@ const SecondPage = () => {
                     </div>
                     {/* currency end here */}
                     {/* languages start here */}
-                    <p className="text-black text-left font-normal text-lg  mt-4">Languages</p>
+                    <p className="text-black text-left font-normal text-lg  mt-4">Languages <span className="text-rose-500 text-2xl font-semibold">&#42;</span></p>
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
                         <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                             {sellanguages.map((value: any, i: number) => {

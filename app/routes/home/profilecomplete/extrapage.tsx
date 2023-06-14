@@ -159,10 +159,10 @@ const ExtraPage = () => {
                     </div>
                     <div className="w-full h-[2px] bg-gray-400 my-4"></div>
                 </>
-                <h1 className="text-2xl text-black font-bold">Documents</h1>
+                <h1 className="text-2xl text-black font-bold">Bank Information</h1>
 
                 <p className="text-black text-left font-normal text-lg  mt-4">
-                    Bank Name
+                    Bank Name <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
                 </p>
                 <input
                     ref={bankName}
@@ -170,7 +170,7 @@ const ExtraPage = () => {
                     className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
                 />
                 <p className="text-black text-left font-normal text-lg  mt-4">
-                    Branch Name
+                    Branch Name <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
                 </p>
                 <input
                     ref={branchName}
@@ -178,7 +178,7 @@ const ExtraPage = () => {
                     className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
                 />
                 <p className="text-black text-left font-normal text-lg  mt-4">
-                    IFSC
+                    IFSC/SWIFT/RTN CODE <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
                 </p>
                 <input
                     ref={ifsc}
@@ -186,7 +186,7 @@ const ExtraPage = () => {
                     className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
                 />
                 <p className="text-black text-left font-normal text-lg  mt-4">
-                    Account Number
+                    Account Number <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
                 </p>
                 <input
                     ref={accountNumber}
@@ -249,7 +249,6 @@ const ExtraPage = () => {
                         if (updoc3.status) {
                             req["doc3"] = updoc3.data;
                         }
-                        console.log(req);
                         const data = await axios({
                             method: "post",
                             url: `${BaseUrl}/api/updateuser`,

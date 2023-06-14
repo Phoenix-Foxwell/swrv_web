@@ -15,7 +15,6 @@ import { BaseUrl } from "~/const";
 import { Link, useLoaderData } from "@remix-run/react";
 import { UploadFile, getCampaignType } from "~/utils";
 import { userPrefs } from "~/cookies";
-import { pdf } from "remix-utils";
 
 import Stripe from "stripe";
 
@@ -476,7 +475,7 @@ const CampaignsInfo = (props: CampaignsInfoProps) => {
         <p className="text-black text-left text-md font-medium mt-2">
           Platforms
         </p>
-        <div className="flex items-center w-32 overflow-x-scroll no-scrollbar">
+        <div className="flex items-center w-full overflow-x-scroll no-scrollbar">
           {props.platform.map((val: any, index: number) => {
             return (
               <div key={index} className="p-1 shrink-0 mx-1 ">
@@ -1200,7 +1199,7 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
                     </div>
                     <p className="mt-2 text-md font-medium">Description</p>
                     <p className="text-sm font-medium">{val.description}</p>
-                    <p className="mt-2 text-md font-medium">Handel Info</p>
+                    <p className="mt-2 text-md font-medium">Handle Info</p>
                     <div className="flex gap-4">
                       <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
                       <p className="text-xl font-semibold text-center">{val.handle.name}</p>
@@ -1854,9 +1853,9 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
                     <p className="mt-2 text-md font-medium">Description</p>
                     <p className="text-sm font-medium">{val.description}</p>
 
-                    <p className="mt-2 text-md font-medium">Handel Info</p>
+                    <p className="mt-2 text-md font-medium">Handle Info</p>
                     <div className="flex gap-4">
-                      <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                      <img src={val.handle.platform.logo} alt="platform" className="w-12 h-12 shrink-0 rounded-md object-fill object-center" />
                       <p className="text-xl font-semibold text-center">{val.handle.name}</p>
                     </div>
 
@@ -1908,7 +1907,6 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
     const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
     if (responseData.data.status == true) {
       setResDarft(responseData.data.data);
-      console.log(responseData.data.data);
     }
   };
 
@@ -2251,7 +2249,6 @@ const Bidding: React.FC<BiddingProps> = (props: BiddingProps): JSX.Element => {
               onChange={handelcontent}
               value={bidamount}
               type={"text"}
-              maxLength={10}
               className="text-black outline-none border-none rounded-md py-1 px-2 bg-[#EEEEEE] w-full"
             />
           </div>

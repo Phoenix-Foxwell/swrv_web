@@ -40,6 +40,7 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 
 const FindCampaign = () => {
   const loader = useLoaderData();
+  const isCompleted = loader.user.profileCompleteness == 1 ? true : false;
   const isbrand = loader.user.role.code != 10;
   const [searchBrand, setSearchBrand] = useState<boolean>(false);
   return (
@@ -63,6 +64,7 @@ const FindCampaign = () => {
               platform={loader.platform}
               country={loader.country}
               category={loader.category}
+              isCompleted={isCompleted}
             ></InfluencerSearch>
           </div>
           {/* brand search options start here */}
@@ -114,13 +116,14 @@ const FindCampaign = () => {
               </div>
             </div>
             {searchBrand ? (
-              <BrandSearch></BrandSearch>
+              <BrandSearch isCompleted={isCompleted}></BrandSearch>
             ) : (
               <CampaignSearch
                 platform={loader.platform}
                 country={loader.country}
                 category={loader.category}
                 type={loader.type}
+                isCompleted={isCompleted}
               ></CampaignSearch>
             )}
           </div>
@@ -138,6 +141,7 @@ type CampaignSearchProps = {
   platform: any;
   category: any;
   type: any;
+  isCompleted: boolean;
 };
 
 const CampaignSearch = (props: CampaignSearchProps) => {
@@ -145,6 +149,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   const platform = props.platform;
   const category = props.category;
   const champtype = props.type;
+
   const [searchType, setSearchType] = useState<CampaignSearchMode>(
     CampaignSearchMode.TextSearch
   );
@@ -280,7 +285,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
   const saveFilter = (name: string) => {
     if (name == "" || name == null || name == undefined)
       return setNameError("Enter the Filter name");
-    if (selchamptype.length == 0) return setNameError("Select the champaign type");
+    if (selchamptype.length == 0) return setNameError("Select the campaign type");
     if (selPlatform.length == 0) return setNameError("Select the platform");
     if (selCountry.length == 0) return setNameError("Select the country");
 
@@ -604,6 +609,7 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                 <div className="w-4"></div>
                 <div
                   onClick={() => {
+                    if (!props.isCompleted) return setError("Complete your profile in order to search.");
                     camptextsearch();
                   }}
                 >
@@ -814,7 +820,10 @@ const CampaignSearch = (props: CampaignSearchProps) => {
                     icon={faTrash}
                   ></FontAwesomeIcon>
                   <div className="w-4"></div>
-                  <div onClick={campadvancesearch}>
+                  <div onClick={() => {
+                    if (!props.isCompleted) return setError("Complete your profile in order to search.");
+                    campadvancesearch();
+                  }}>
                     <CusButton
                       text="Search"
                       textColor={"text-white"}
@@ -845,6 +854,7 @@ type InfluencerSearchProps = {
   country: any;
   platform: any;
   category: any;
+  isCompleted: boolean;
 };
 export const InfluencerSearch = (props: InfluencerSearchProps) => {
   const country = props.country;
@@ -1102,6 +1112,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                 <div className="w-4"></div>
                 <div
                   onClick={() => {
+                    if (!props.isCompleted) return setError("Complete your profile in order to search.");
                     camptextsearch(champTextSearch!.current!.value);
                   }}
                 >
@@ -1296,53 +1307,11 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                         })}
                         <div onClick={() => setcon(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
                       </div>
-
-
                     </div>
-
-
-
                   </div>
                 </div>
 
-                {/* 
-                <div
-                  className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-12 left-0 ${con ? "" : "hidden"
-                    } grid place-items-center`}
-                  onClick={val => setcon(false)}
-                >
-                  <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
-                    <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
-                      {country.map((val: any, i: number) => {
-                        return (
-                          <h1
-                            onClick={() => {
-                              if (selCountry.includes(val)) {
-                                let addcur = selCountry.filter(
-                                  (data) => data != val
-                                );
-                                setSelCountry(addcur);
-                              } else {
-                                setSelCountry([val]);
-                              }
-                              setcon(false);
-                            }}
-                            key={i}
-                            className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
-                              ? "border-green-500 text-green-500"
-                              : "border-gray-800 text-black"
-                              }  no-scrollbar`}
-                          >
-                            {val["code"]} - {val["name"]}
-                          </h1>
-                        );
-                      })}
-                      <div onClick={() => setcon(false)} className="text-center font-semibold text-lg bg border-2 border-rose-500 rounded-md bg-rose-500 bg-opacity-20 text-rose-500">Close</div>
-                    </div>
 
-
-                  </div>
-                </div> */}
                 {/* country end here */}
                 <div className="flex mt-4 items-center">
                   <div
@@ -1360,7 +1329,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                     icon={faTrash}
                   ></FontAwesomeIcon>
                   <div className="w-4"></div>
-                  <div onClick={campadvancesearch}>
+                  <div onClick={() => {
+                    if (!props.isCompleted) return setError("Complete your profile in order to search.");
+                    campadvancesearch();
+                  }}>
                     <CusButton
                       text="Search"
                       textColor={"text-white"}
@@ -1387,7 +1359,9 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
   );
 };
 
-const BrandSearch = () => {
+interface BrandSearchProps { isCompleted: boolean; }
+
+const BrandSearch: React.FC<BrandSearchProps> = (props: BrandSearchProps): JSX.Element => {
   const [brandSearchResult, setBrandSearchResult] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -1439,6 +1413,7 @@ const BrandSearch = () => {
               <div className="w-4"></div>
               <div
                 onClick={() => {
+                  if (!props.isCompleted) return setError("Complete your profile in order to search.");
                   brandtextsearch(brandTextSearch!.current!.value);
                 }}
               >

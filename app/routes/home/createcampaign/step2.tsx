@@ -167,7 +167,7 @@ const Step2 = () => {
                     })}
                 </div>
                 {/* mendtion start here */}
-                <h2 className="text-primary tect-xl font-medium text-left my-1">Mentions</h2>
+                <h2 className="text-primary tect-xl font-medium text-left my-1">Mentions  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                 <div className="flex">
                     <div className="bg-[#EEEEEE]  h-10 rounded-lg  flex gap-1 pl-2 sm:w-96 w-72">
                         <div className="flex gap-x-2 overflow-x-scroll no-scrollbar">
@@ -226,7 +226,7 @@ const Step2 = () => {
                 }
                 {/* mendtion end here */}
                 {/* hashtag start here */}
-                <h2 className="text-primary tect-xl font-medium text-left my-1">Hashtag</h2>
+                <h2 className="text-primary tect-xl font-medium text-left my-1">Hashtag  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                 <div className="flex">
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 sm:w-96 w-72">
                         <div className="flex gap-x-2 overflow-x-scroll no-scrollbar">
@@ -286,7 +286,7 @@ const Step2 = () => {
                 {
                     campaginType == "2" ?
                         <>
-                            <h2 className="text-primary tect-xl font-medium text-left my-1">Minimum rating required</h2>
+                            <h2 className="text-primary tect-xl font-medium text-left my-1">Minimum rating required  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                             <div className="w-60">
                                 <Rating
                                     initialValue={rating}
@@ -300,7 +300,7 @@ const Step2 = () => {
                         <>
                             <h2 className="text-primary tect-xl font-medium text-left my-1">Affiliated links (optional)</h2>
                             <input ref={affLink} type={"text"} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
-                            <h2 className="text-primary tect-xl font-medium text-left my-1">Discount coupons</h2>
+                            <h2 className="text-primary tect-xl font-medium text-left my-1">Discount coupons  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                             <input ref={discCopon} type={"text"} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
                         </>
                         : null
@@ -310,21 +310,21 @@ const Step2 = () => {
                         <>
                             <div className="flex flex-col lg:flex-row">
                                 <div>
-                                    <h2 className="text-primary tect-xl font-medium text-left my-1">Target</h2>
+                                    <h2 className="text-primary tect-xl font-medium text-left my-1">Target  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                                     <input ref={tar} type={"text"} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
                                 </div>
                                 <div className="w-8"></div>
                                 <div>
-                                    <h2 className="text-primary tect-xl font-medium text-left my-1">Min target</h2>
+                                    <h2 className="text-primary tect-xl font-medium text-left my-1">Min target  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                                     <input ref={mintar} type={"text"} className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2" />
                                 </div>
                             </div>
                         </>
                         : null
                 }
-                <h2 className="text-primary tect-xl font-medium text-left my-1">Campaign info</h2>
+                <h2 className="text-primary tect-xl font-medium text-left my-1">Campaign info  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                 <textarea ref={campinfo} className="p-4 w-full h-40 outline-none bg-[#EEEEEE] focus:border-gray-300 rounded-md resize-none"  ></textarea>
-                <h2 className="text-primary tect-xl font-medium text-left my-1">Attachments</h2>
+                <h2 className="text-primary tect-xl font-medium text-left my-1">Attachments  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                 <div className="bg-[#EEEEEE] w-full h-10 rounded-lg flex items-center pl-4">
                     <h3 className="text-black font-semibold  text-md">{pdfFile.length == 0 ? "" : pdfFile[0].name}</h3>
                     <div className="grow"></div>
@@ -356,7 +356,7 @@ const Step2 = () => {
                                 <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                             </div>
                             <div className="grid place-items-center">
-                                <h2 className="text-primary text-lg text-left font-medium">Do</h2>
+                                <h2 className="text-primary text-lg text-left font-medium">Do  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                             </div>
                             <div className="grow"></div>
                             <div className="grid place-items-center px-4 bg-gray-300 rounded-lg" onClick={() => setAddDos(true)}>
@@ -416,7 +416,7 @@ const Step2 = () => {
                                 <FontAwesomeIcon icon={faRemove}></FontAwesomeIcon>
                             </div>
                             <div className="grid place-items-center">
-                                <h2 className="text-primary text-lg text-left font-medium">Don't</h2>
+                                <h2 className="text-primary text-lg text-left font-medium">Don't  <span className="text-rose-500 text-2xl font-semibold">&#42;</span></h2>
                             </div>
                             <div className="grow"></div>
                             <div className="grid place-items-center px-4 bg-gray-300 rounded-lg" onClick={() => setAddDonts(true)}>

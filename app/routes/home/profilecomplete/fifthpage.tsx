@@ -57,7 +57,7 @@ const ThirdPage = () => {
           <div className="w-full">
             <div>
               <p className="text-black text-left font-normal text-lg  mt-4">
-                Username
+                Username  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </p>
               <input
                 ref={nameRef}
@@ -65,7 +65,7 @@ const ThirdPage = () => {
                 className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
               />
               <p className="text-black text-left font-normal text-lg  mt-4">
-                Email
+                Email  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </p>
               <input
                 ref={emailRef}
@@ -73,13 +73,12 @@ const ThirdPage = () => {
                 className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
               />
               <p className="text-black text-left font-normal text-lg  mt-4">
-                contact number
+                Contact number  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
               </p>
               <input
                 onChange={handelcontent}
                 value={contactnumber}
                 type={"text"}
-                maxLength={10}
                 className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
               />
             </div>
@@ -119,9 +118,11 @@ const ThirdPage = () => {
                       contactnumber == 0
                     ) {
                       setError("Fill the contact number");
-                    } else if (contactnumber.toString().length != 10) {
-                      setError("Enter a 10 degit valid contact number");
-                    } else {
+                    }
+                    //  else if (contactnumber.toString().length != 10) {
+                    //   setError("Enter a 10 degit valid contact number");
+                    // }
+                    else {
                       let req = {
                         userId: userId,
                         brandId: brandId,

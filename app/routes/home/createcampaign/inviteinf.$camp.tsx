@@ -395,14 +395,14 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
               </div>
               <div className="ml-2">
                 <h1 className="text-primary text-lg font-bold mb">Platforms</h1>
-                <div className="gap-2 flex  overflow-x-scroll flex-nowrap no-scrollbar py-2">
+                <div className="gap-2 flex  overflow-x-scroll flex-nowrap no-scrollbar pb-4">
                   {platform.map((val: any, i: number) => {
                     return (
                       <div
                         key={i}
-                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-lg ${selPlatform.includes(val.id)
-                          ? "bg-white "
-                          : "bg-gray-200"
+                        className={`shrink-0 p-1 w-10 h-10 shadow-lg rounded-full ${selPlatform.includes(val.id)
+                          ? "border-2 border-blue-500"
+                          : ""
                           } `}
                         onClick={() => {
                           if (selPlatform.includes(val.id)) {
@@ -418,7 +418,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                         <img
                           src={platform[i]["platformLogoUrl"]}
                           alt="error"
-                          className="object-cover w-full h-full inline-block"
+                          className="object-cover rounded-full w-full h-full inline-block"
                         />
                       </div>
                     );

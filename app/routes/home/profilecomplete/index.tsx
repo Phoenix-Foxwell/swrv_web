@@ -118,7 +118,7 @@ const UserInputBoxOne = () => {
           </div>
           <div className="w-full">
             <p className="text-black text-left font-normal text-lg mt-4">
-              Email
+              Email <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <input
               ref={emailRef}
@@ -127,7 +127,7 @@ const UserInputBoxOne = () => {
               className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
             />
             <p className="text-black text-left font-normal text-lg  mt-4">
-              Username
+              Username <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <input
               ref={usernameRef}
@@ -135,7 +135,7 @@ const UserInputBoxOne = () => {
               className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
             />
             <p className="text-black text-left font-normal text-lg  mt-4">
-              Nickname
+              Nickname <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <input
               ref={nicknameRef}
@@ -143,7 +143,7 @@ const UserInputBoxOne = () => {
               className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
             />
             <p className="text-black text-left font-normal text-lg  mt-4">
-              Date of birth
+              Date of birth <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <input
               type={"date"}
@@ -151,7 +151,7 @@ const UserInputBoxOne = () => {
               className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
             />
             <p className="text-black text-left font-normal text-lg  mt-4">
-              Bio
+              Bio <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
             <textarea
               ref={bioRef}

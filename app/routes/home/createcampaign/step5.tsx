@@ -55,7 +55,7 @@ const Step5 = () => {
             population.
           </p>
           <h2 className="text-primary tect-xl font-medium text-left my-1">
-            Brand info
+            Brand info  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
           </h2>
           <textarea
             ref={brandInfo}
@@ -63,7 +63,7 @@ const Step5 = () => {
             onChange={(val) => setbi(val.target.value)}
           ></textarea>
           <h2 className="text-primary tect-xl font-medium text-left my-1">
-            Campaign purpose
+            Campaign purpose  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
           </h2>
           <textarea
             ref={CampaignPurpose}
@@ -71,7 +71,7 @@ const Step5 = () => {
             onChange={(val) => setcp(val.target.value)}
           ></textarea>
           <h2 className="text-primary tect-xl font-medium text-left my-1">
-            Mood boards
+            Mood boards  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
           </h2>
           <div className="hidden">
             <input
@@ -134,8 +134,8 @@ const Step5 = () => {
             </div>
           </div>
           {imgerror == "" ||
-          imgerror == null ||
-          imgerror == undefined ? null : (
+            imgerror == null ||
+            imgerror == undefined ? null : (
             <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
               {imgerror}
             </div>

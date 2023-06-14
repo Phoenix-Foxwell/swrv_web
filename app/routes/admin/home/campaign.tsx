@@ -117,7 +117,7 @@ const Campaign = () => {
                 <div className="bg-[#31353f] rounded-lg p-4 w-80">
                     <div className="mx-auto">
                         <div className="text-white">
-                            <p>Are you Sure you want to change the status of {delDate.campaignName} champaign?</p>
+                            <p>Are you Sure you want to change the status of {delDate.campaignName} campaign?</p>
                         </div>
                         <div className="w-full h-[1px] bg-gray-300 my-2"></div>
                         <div className="flex w-full justify-between">

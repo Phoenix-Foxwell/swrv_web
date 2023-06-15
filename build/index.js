@@ -343,7 +343,7 @@ __export(socialregister_id_exports, {
 var import_node3 = require("@remix-run/node"), import_axios = __toESM(require("axios"));
 
 // app/const.ts
-var BaseUrl = "https://bluelemontech.in/websites/swrv", ModeshApi = "http://bluelemontech.in:5563/";
+var BaseUrl = "http://localhost/swrv", ModeshApi = "http://bluelemontech.in:5563/";
 
 // app/cookies.ts
 var import_node2 = require("@remix-run/node"), userPrefs = (0, import_node2.createCookie)("user-prefs"), adminUser = (0, import_node2.createCookie)("admin-user");
@@ -1545,49 +1545,68 @@ __export(verifyuser_mail_exports, {
   default: () => verifyuser_mail_default,
   loader: () => loader5
 });
-var import_node7 = require("@remix-run/node"), import_react9 = require("@remix-run/react");
+var import_node7 = require("@remix-run/node"), import_react9 = require("@remix-run/react"), import_axios5 = __toESM(require("axios"));
 var import_jsx_dev_runtime14 = require("react/jsx-dev-runtime"), loader5 = async (props) => {
-  console.log(props.params.mail);
-  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
-  return (0, import_node7.json)({ user: cookie.user });
-}, verifyuser = () => /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_jsx_dev_runtime14.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "w-full bg-[#eeeeee] grid place-content-center h-screen", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "bg-white rounded-lg shadow-md p-6 mx-10", children: [
-  /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "rounded-md bg-red-500 text-white text-2xl text-center font-semibold py-2 px-4", children: "This is an error" }, void 0, !1, {
+  let email = props.params.mail, data = await (0, import_axios5.default)({
+    method: "post",
+    url: `${BaseUrl}/api/verify-user`,
+    data: { email },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Options": "*",
+      "Access-Control-Allow-Methods": "*",
+      "X-Content-Type-Options": "*",
+      "Content-Type": "application/json",
+      Accept: "*"
+    }
+  });
+  return (0, import_node7.json)({ error: !data.data.status, message: data.data.message });
+}, verifyuser = () => {
+  let error = (0, import_react9.useLoaderData)().error, message = (0, import_react9.useLoaderData)().message;
+  return /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_jsx_dev_runtime14.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "w-full bg-[#eeeeee] grid place-content-center h-screen", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "bg-white rounded-lg shadow-md px-6 py-2 mx-10", children: [
+    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("p", { className: "text-3xl text-center font-semibold text-gray-600 my-4", children: "Email verification" }, void 0, !1, {
+      fileName: "app/routes/verifyuser.$mail.tsx",
+      lineNumber: 35,
+      columnNumber: 21
+    }, this),
+    error ? /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "rounded-md bg-red-500 text-white text-2xl text-center font-semibold py-2 px-4", children: message }, void 0, !1, {
+      fileName: "app/routes/verifyuser.$mail.tsx",
+      lineNumber: 38,
+      columnNumber: 29
+    }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "rounded-md bg-green-500 text-white text-2xl text-center font-semibold py-2 px-4", children: message }, void 0, !1, {
+      fileName: "app/routes/verifyuser.$mail.tsx",
+      lineNumber: 40,
+      columnNumber: 29
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "h-10" }, void 0, !1, {
+      fileName: "app/routes/verifyuser.$mail.tsx",
+      lineNumber: 42,
+      columnNumber: 21
+    }, this),
+    /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "w-full grid place-items-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react9.Link, { to: "/", className: "text-xl text-center font-semibold text-blue-500", children: "Go back to website" }, void 0, !1, {
+      fileName: "app/routes/verifyuser.$mail.tsx",
+      lineNumber: 44,
+      columnNumber: 25
+    }, this) }, void 0, !1, {
+      fileName: "app/routes/verifyuser.$mail.tsx",
+      lineNumber: 43,
+      columnNumber: 21
+    }, this)
+  ] }, void 0, !0, {
     fileName: "app/routes/verifyuser.$mail.tsx",
-    lineNumber: 18,
-    columnNumber: 21
-  }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "rounded-md bg-green-500 text-white text-2xl text-center font-semibold py-2 px-4", children: "This completed message" }, void 0, !1, {
-    fileName: "app/routes/verifyuser.$mail.tsx",
-    lineNumber: 19,
-    columnNumber: 21
-  }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "h-10" }, void 0, !1, {
-    fileName: "app/routes/verifyuser.$mail.tsx",
-    lineNumber: 20,
-    columnNumber: 21
-  }, this),
-  /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)("div", { className: "w-full grid place-items-center", children: /* @__PURE__ */ (0, import_jsx_dev_runtime14.jsxDEV)(import_react9.Link, { to: "/", className: "text-xl text-center font-semibold text-blue ", children: "Go back to website" }, void 0, !1, {
-    fileName: "app/routes/verifyuser.$mail.tsx",
-    lineNumber: 22,
-    columnNumber: 25
+    lineNumber: 33,
+    columnNumber: 17
   }, this) }, void 0, !1, {
     fileName: "app/routes/verifyuser.$mail.tsx",
-    lineNumber: 21,
-    columnNumber: 21
-  }, this)
-] }, void 0, !0, {
-  fileName: "app/routes/verifyuser.$mail.tsx",
-  lineNumber: 17,
-  columnNumber: 17
-}, this) }, void 0, !1, {
-  fileName: "app/routes/verifyuser.$mail.tsx",
-  lineNumber: 16,
-  columnNumber: 13
-}, this) }, void 0, !1, {
-  fileName: "app/routes/verifyuser.$mail.tsx",
-  lineNumber: 15,
-  columnNumber: 9
-}, this), verifyuser_mail_default = verifyuser;
+    lineNumber: 32,
+    columnNumber: 13
+  }, this) }, void 0, !1, {
+    fileName: "app/routes/verifyuser.$mail.tsx",
+    lineNumber: 31,
+    columnNumber: 9
+  }, this);
+}, verifyuser_mail_default = verifyuser;
 
 // app/routes/users/youtubers.tsx
 var youtubers_exports = {};
@@ -1596,8 +1615,8 @@ __export(youtubers_exports, {
   loader: () => loader6
 });
 var import_node8 = require("@remix-run/node");
-var import_axios5 = __toESM(require("axios")), import_react10 = require("@remix-run/react"), import_jsx_dev_runtime15 = require("react/jsx-dev-runtime"), loader6 = async (props) => {
-  let user = await import_axios5.default.post(`${BaseUrl}/api/user-search`, { role: 10 });
+var import_axios6 = __toESM(require("axios")), import_react10 = require("@remix-run/react"), import_jsx_dev_runtime15 = require("react/jsx-dev-runtime"), loader6 = async (props) => {
+  let user = await import_axios6.default.post(`${BaseUrl}/api/user-search`, { role: 10 });
   return (0, import_node8.json)({ user: user.data.data });
 }, youtubers2 = () => {
   let userdata = (0, import_react10.useLoaderData)().user;
@@ -1657,10 +1676,10 @@ __export(notablebrand_exports, {
   default: () => notablebrand_default,
   loader: () => loader7
 });
-var import_node9 = require("@remix-run/node"), import_axios6 = __toESM(require("axios"));
+var import_node9 = require("@remix-run/node"), import_axios7 = __toESM(require("axios"));
 var import_react11 = require("@remix-run/react");
 var import_jsx_dev_runtime17 = require("react/jsx-dev-runtime"), loader7 = async (props) => {
-  let id = props.params.id, brand = await import_axios6.default.post(`${BaseUrl}/api/get-top-brands`);
+  let id = props.params.id, brand = await import_axios7.default.post(`${BaseUrl}/api/get-top-brands`);
   return (0, import_node9.json)({ brand: brand.data.data });
 }, media = () => {
   let mediadata = (0, import_react11.useLoaderData)().brand;
@@ -2129,9 +2148,9 @@ var import_react12 = require("@remix-run/react"), import_jsx_dev_runtime20 = req
 
 // app/routes/blogs/index.tsx
 var import_node12 = require("@remix-run/node");
-var import_axios7 = __toESM(require("axios")), import_react13 = require("@remix-run/react");
+var import_axios8 = __toESM(require("axios")), import_react13 = require("@remix-run/react");
 var import_jsx_dev_runtime21 = require("react/jsx-dev-runtime"), loader10 = async (props) => {
-  let blog = await import_axios7.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
+  let blog = await import_axios8.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
   return (0, import_node12.json)({ blog: blog.data.data });
 }, blogs3 = () => {
   let blogdata = (0, import_react13.useLoaderData)().blog[0];
@@ -2174,7 +2193,7 @@ __export(createbrand_exports, {
   default: () => createbrand_default,
   loader: () => loader11
 });
-var import_free_solid_svg_icons4 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome4 = require("@fortawesome/react-fontawesome"), import_node13 = require("@remix-run/node"), import_react14 = require("@remix-run/react"), import_axios9 = __toESM(require("axios")), import_react15 = require("react");
+var import_free_solid_svg_icons4 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome4 = require("@fortawesome/react-fontawesome"), import_node13 = require("@remix-run/node"), import_react14 = require("@remix-run/react"), import_axios10 = __toESM(require("axios")), import_react15 = require("react");
 
 // app/components/utils/buttont.tsx
 var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), CusButton = (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime22.jsxDEV)("button", { onClick: () => {
@@ -2190,12 +2209,12 @@ var import_jsx_dev_runtime22 = require("react/jsx-dev-runtime"), CusButton = (pr
 }, this);
 
 // app/utils.ts
-var import_axios8 = __toESM(require("axios"));
+var import_axios9 = __toESM(require("axios"));
 async function UploadFile(file) {
   try {
     let formData = new FormData();
     formData.append("file", file);
-    let data = await (0, import_axios8.default)({
+    let data = await (0, import_axios9.default)({
       method: "post",
       url: `${BaseUrl}/api/upload-file`,
       data: formData,
@@ -2216,7 +2235,7 @@ async function UploadFile(file) {
 }
 async function getCampaignType(id) {
   try {
-    let data = await import_axios8.default.post(`${BaseUrl}/api/get-campaign-type`);
+    let data = await import_axios9.default.post(`${BaseUrl}/api/get-campaign-type`);
     if (data.data.status == !1)
       return data.data.message;
     {
@@ -2238,7 +2257,7 @@ var EmailValidator = __toESM(require("email-validator")), import_jsx_dev_runtime
   let navigator2 = (0, import_react14.useNavigate)(), data = (0, import_react14.useActionData)(), nextButton = (0, import_react15.useRef)(null), uidref = (0, import_react15.useRef)(null), userId = (0, import_react14.useLoaderData)().user.id, [error, setError] = (0, import_react15.useState)(""), [img, setImale] = (0, import_react15.useState)(null), imgref = (0, import_react15.useRef)(null), [imgerror, setImgerror] = (0, import_react15.useState)(null), [cityerror, setCityerror] = (0, import_react15.useState)(null), [citybox, setCitybox] = (0, import_react15.useState)(!1), [searchcity, setSearchcity] = (0, import_react15.useState)([]), [selectedcity, setSelectedctiy] = (0, import_react15.useState)(null), [contactnumber, setContactnumber] = (0, import_react15.useState)(), handelcontent = (e) => {
     setContactnumber(e.target.value.replace(/\D/g, ""));
   }, cityref = (0, import_react15.useRef)(null), getCity = async (city) => {
-    let data2 = await import_axios9.default.post(`${BaseUrl}/api/get-city`, { search: city });
+    let data2 = await import_axios10.default.post(`${BaseUrl}/api/get-city`, { search: city });
     setSearchcity(data2.data.data);
   }, nameRef = (0, import_react15.useRef)(null), codeRef = (0, import_react15.useRef)(null), addressRef = (0, import_react15.useRef)(null), websiteRef = (0, import_react15.useRef)(null), emailRef = (0, import_react15.useRef)(null), binfoRef = (0, import_react15.useRef)(null), cinfoRef = (0, import_react15.useRef)(null);
   return (0, import_react15.useEffect)(() => {
@@ -2754,7 +2773,7 @@ var EmailValidator = __toESM(require("email-validator")), import_jsx_dev_runtime
                     brandBioInfo: (_B = binfoRef.current) == null ? void 0 : _B.value,
                     comapnyBio: (_C = cinfoRef.current) == null ? void 0 : _C.value,
                     cityId: selectedcity.id
-                  }, data2 = await (0, import_axios9.default)({
+                  }, data2 = await (0, import_axios10.default)({
                     method: "post",
                     url: `${BaseUrl}/api/add-brand`,
                     data: req,
@@ -2839,7 +2858,7 @@ var EmailValidator = __toESM(require("email-validator")), import_jsx_dev_runtime
   }, this);
 }, createbrand_default = createBarnd;
 async function action({ request }) {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios9.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios10.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -2870,8 +2889,8 @@ __export(users_exports, {
   loader: () => loader12
 });
 var import_node14 = require("@remix-run/node");
-var import_axios10 = __toESM(require("axios")), import_react16 = require("@remix-run/react"), import_jsx_dev_runtime24 = require("react/jsx-dev-runtime"), loader12 = async (props) => {
-  let user = await import_axios10.default.post(`${BaseUrl}/api/user-search`, { role: 10 });
+var import_axios11 = __toESM(require("axios")), import_react16 = require("@remix-run/react"), import_jsx_dev_runtime24 = require("react/jsx-dev-runtime"), loader12 = async (props) => {
+  let user = await import_axios11.default.post(`${BaseUrl}/api/user-search`, { role: 10 });
   return (0, import_node14.json)({ user: user.data.data });
 }, users = () => {
   let userdata = (0, import_react16.useLoaderData)().user;
@@ -3713,12 +3732,12 @@ __export(userhandel_id_exports, {
   default: () => userhandel_id_default,
   loader: () => loader14
 });
-var import_node16 = require("@remix-run/node"), import_react18 = require("@remix-run/react"), import_axios11 = __toESM(require("axios")), import_react19 = require("react");
+var import_node16 = require("@remix-run/node"), import_react18 = require("@remix-run/react"), import_axios12 = __toESM(require("axios")), import_react19 = require("react");
 var import_moment = __toESM(require("moment")), import_jsx_dev_runtime26 = require("react/jsx-dev-runtime"), loader14 = async ({
   request,
   params
 }) => {
-  let cookieHeader = request.headers.get("Cookie"), cookie = await adminUser.parse(cookieHeader), id = params.id, userdata = await import_axios11.default.post(`${BaseUrl}/api/get-user-handles`, {
+  let cookieHeader = request.headers.get("Cookie"), cookie = await adminUser.parse(cookieHeader), id = params.id, userdata = await import_axios12.default.post(`${BaseUrl}/api/get-user-handles`, {
     userId: id
   });
   return (0, import_node16.json)({
@@ -3727,18 +3746,18 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime26 = requi
   });
 }, UserHandel = () => {
   let platformdata = (0, import_react18.useLoaderData)().userplatformdata, userId = (0, import_react18.useLoaderData)().user.id, [platformData, setPlatformData] = (0, import_react19.useState)(), getPlatform = async (handle_id) => {
-    let userdata = await import_axios11.default.post(`${BaseUrl}/api/get-insta-handel-byid`, {
+    let userdata = await import_axios12.default.post(`${BaseUrl}/api/get-insta-handel-byid`, {
       userId,
       handleId: handle_id
     });
     setPlatformData((val) => userdata.data.data[0]);
   }, [error, setError] = (0, import_react19.useState)(), [sus, setSus] = (0, import_react19.useState)(), handeladdupdate = async (handle_id, handle_name) => {
     setError(null);
-    let modashdata = await (0, import_axios11.default)({
+    let modashdata = await (0, import_axios12.default)({
       method: "post",
       url: `${ModeshApi}${handle_name}`
     }), data = modashdata.data.data;
-    modashdata.data.status && (await import_axios11.default.post(`${BaseUrl}/api/add-insta-handel`, {
+    modashdata.data.status && (await import_axios12.default.post(`${BaseUrl}/api/add-insta-handel`, {
       userId,
       handleId: handle_id,
       userName: data.profile.profile.username,
@@ -5034,7 +5053,7 @@ __export(campaigntype_exports, {
   links: () => links2,
   loader: () => loader15
 });
-var import_free_solid_svg_icons6 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome6 = require("@fortawesome/react-fontawesome"), import_node17 = require("@remix-run/node"), import_react20 = require("@remix-run/react"), import_axios12 = __toESM(require("axios")), import_react21 = require("react");
+var import_free_solid_svg_icons6 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome6 = require("@fortawesome/react-fontawesome"), import_node17 = require("@remix-run/node"), import_react20 = require("@remix-run/react"), import_axios13 = __toESM(require("axios")), import_react21 = require("react");
 var import_react_toastify = require("react-toastify");
 
 // node_modules/.pnpm/react-toastify@9.1.1_react-dom@18.2.0_react@18.2.0/node_modules/react-toastify/dist/ReactToastify.css
@@ -5046,7 +5065,7 @@ function links2() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader15 = async (props) => {
-  let campaignType = await (0, import_axios12.default)({
+  let campaignType = await (0, import_axios13.default)({
     method: "post",
     url: `${BaseUrl}/api/get-campaign-type`
   });
@@ -5057,28 +5076,28 @@ var loader15 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react21.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios12.default)({
+    let view2 = await (0, import_axios13.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react21.useState)(!1), [delDate, setDelData] = (0, import_react21.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios12.default)({
+    let view2 = await (0, import_axios13.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios12.default)({
+    let res = await (0, import_axios13.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios12.default)({
+    let view2 = await (0, import_axios13.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -5091,7 +5110,7 @@ var loader15 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios12.default)({
+      let res = await (0, import_axios13.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -5105,7 +5124,7 @@ var loader15 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios12.default)({
+      let res = await (0, import_axios13.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -5524,14 +5543,14 @@ __export(platforms_exports, {
   links: () => links3,
   loader: () => loader16
 });
-var import_free_solid_svg_icons7 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome7 = require("@fortawesome/react-fontawesome"), import_node18 = require("@remix-run/node"), import_react22 = require("@remix-run/react"), import_axios13 = __toESM(require("axios")), import_react23 = require("react");
+var import_free_solid_svg_icons7 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome7 = require("@fortawesome/react-fontawesome"), import_node18 = require("@remix-run/node"), import_react22 = require("@remix-run/react"), import_axios14 = __toESM(require("axios")), import_react23 = require("react");
 var import_react_toastify2 = require("react-toastify");
 var import_jsx_dev_runtime28 = require("react/jsx-dev-runtime");
 function links3() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader16 = async (props) => {
-  let platforms = await (0, import_axios13.default)({
+  let platforms = await (0, import_axios14.default)({
     method: "post",
     url: `${BaseUrl}/api/getplatform`
   });
@@ -5542,28 +5561,28 @@ var loader16 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react23.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios13.default)({
+    let view2 = await (0, import_axios14.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react23.useState)(!1), [delDate, setDelData] = (0, import_react23.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios13.default)({
+    let view2 = await (0, import_axios14.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios13.default)({
+    let res = await (0, import_axios14.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify2.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify2.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios13.default)({
+    let view2 = await (0, import_axios14.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -5576,7 +5595,7 @@ var loader16 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios13.default)({
+      let res = await (0, import_axios14.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -5590,7 +5609,7 @@ var loader16 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios13.default)({
+      let res = await (0, import_axios14.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -6009,14 +6028,14 @@ __export(blognews_exports, {
   links: () => links4,
   loader: () => loader17
 });
-var import_free_solid_svg_icons8 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome8 = require("@fortawesome/react-fontawesome"), import_node19 = require("@remix-run/node"), import_react24 = require("@remix-run/react"), import_axios14 = __toESM(require("axios")), import_react25 = require("react");
+var import_free_solid_svg_icons8 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome8 = require("@fortawesome/react-fontawesome"), import_node19 = require("@remix-run/node"), import_react24 = require("@remix-run/react"), import_axios15 = __toESM(require("axios")), import_react25 = require("react");
 var import_react_toastify3 = require("react-toastify");
 var import_jsx_dev_runtime29 = require("react/jsx-dev-runtime");
 function links4() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader17 = async (props) => {
-  let neb = await (0, import_axios14.default)({
+  let neb = await (0, import_axios15.default)({
     method: "post",
     url: `${BaseUrl}/api/get-neb`
   });
@@ -6032,28 +6051,28 @@ var loader17 = async (props) => {
     type: ((_f = typeRef.current) == null ? void 0 : _f.value) || "",
     dateTime: ((_g = dateRef.current) == null ? void 0 : _g.value) || ""
   }), [error, setError] = (0, import_react25.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios14.default)({
+    let view2 = await (0, import_axios15.default)({
       method: "post",
       url: `${BaseUrl}/api/get-neb-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react25.useState)(!1), [delDate, setDelData] = (0, import_react25.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios14.default)({
+    let view2 = await (0, import_axios15.default)({
       method: "post",
       url: `${BaseUrl}/api/get-neb-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios14.default)({
+    let res = await (0, import_axios15.default)({
       method: "post",
       url: `${BaseUrl}/api/del-neb`,
       data: { id }
     });
     res.data.status ? import_react_toastify3.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify3.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios14.default)({
+    let view2 = await (0, import_axios15.default)({
       method: "post",
       url: `${BaseUrl}/api/get-neb-byid`,
       data: { id }
@@ -6092,7 +6111,7 @@ var loader17 = async (props) => {
         else
           return setError(imageurl.data);
       }
-      let res = await (0, import_axios14.default)({
+      let res = await (0, import_axios15.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-neb`,
         data: sendata
@@ -6126,7 +6145,7 @@ var loader17 = async (props) => {
           description: (_w = descriptionNewRef.current) == null ? void 0 : _w.value,
           type: (_x = typeNewRef.current) == null ? void 0 : _x.value,
           imageUrl: imageurl.data
-        }, res = await (0, import_axios14.default)({
+        }, res = await (0, import_axios15.default)({
           method: "post",
           url: `${BaseUrl}/api/add-neb`,
           data: sendata
@@ -7428,35 +7447,35 @@ __export(campaign_exports, {
   links: () => links5,
   loader: () => loader18
 });
-var import_free_solid_svg_icons9 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome9 = require("@fortawesome/react-fontawesome"), import_node20 = require("@remix-run/node"), import_react26 = require("@remix-run/react"), import_axios15 = __toESM(require("axios")), import_react27 = require("react");
+var import_free_solid_svg_icons9 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome9 = require("@fortawesome/react-fontawesome"), import_node20 = require("@remix-run/node"), import_react26 = require("@remix-run/react"), import_axios16 = __toESM(require("axios")), import_react27 = require("react");
 var import_react_toastify4 = require("react-toastify");
 var import_jsx_dev_runtime30 = require("react/jsx-dev-runtime");
 function links5() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader18 = async (props) => {
-  let campaign = await (0, import_axios15.default)({
+  let campaign = await (0, import_axios16.default)({
     method: "post",
     url: `${BaseUrl}/api/get-campaigns`
   });
   return (0, import_node20.json)({ campaign: campaign.data.data[0] });
 }, Campaign = () => {
   let campaign = (0, import_react26.useLoaderData)().campaign, [viewBox, setViewBox] = (0, import_react27.useState)(!1), [viewDate, setViewData] = (0, import_react27.useState)({}), [delBox, setDelBox] = (0, import_react27.useState)(!1), [delDate, setDelData] = (0, import_react27.useState)({}), status = async (id) => {
-    let view2 = await (0, import_axios15.default)({
+    let view2 = await (0, import_axios16.default)({
       method: "post",
       url: `${BaseUrl}/api/campaign-search`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, statusButton = async (id, status2) => {
-    let res = await (0, import_axios15.default)({
+    let res = await (0, import_axios16.default)({
       method: "post",
       url: `${BaseUrl}/api/status-campaign`,
       data: { id, status: status2 == 1 ? 0 : 1 }
     });
     res.data.status ? import_react_toastify4.toast.success("Successfully updated.", { theme: "dark" }) : import_react_toastify4.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios15.default)({
+    let view2 = await (0, import_axios16.default)({
       method: "post",
       url: `${BaseUrl}/api/campaign-search`,
       data: { id }
@@ -7856,14 +7875,14 @@ __export(category_exports, {
   links: () => links6,
   loader: () => loader19
 });
-var import_free_solid_svg_icons10 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome10 = require("@fortawesome/react-fontawesome"), import_node21 = require("@remix-run/node"), import_react28 = require("@remix-run/react"), import_axios16 = __toESM(require("axios")), import_react29 = require("react");
+var import_free_solid_svg_icons10 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome10 = require("@fortawesome/react-fontawesome"), import_node21 = require("@remix-run/node"), import_react28 = require("@remix-run/react"), import_axios17 = __toESM(require("axios")), import_react29 = require("react");
 var import_react_toastify5 = require("react-toastify");
 var import_jsx_dev_runtime31 = require("react/jsx-dev-runtime");
 function links6() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader19 = async (props) => {
-  let cateogry = await (0, import_axios16.default)({
+  let cateogry = await (0, import_axios17.default)({
     method: "post",
     url: `${BaseUrl}/api/getcategory`
   });
@@ -7874,28 +7893,28 @@ var loader19 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react29.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios16.default)({
+    let view2 = await (0, import_axios17.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react29.useState)(!1), [delDate, setDelData] = (0, import_react29.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios16.default)({
+    let view2 = await (0, import_axios17.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios16.default)({
+    let res = await (0, import_axios17.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify5.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify5.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios16.default)({
+    let view2 = await (0, import_axios17.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -7908,7 +7927,7 @@ var loader19 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios16.default)({
+      let res = await (0, import_axios17.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -7922,7 +7941,7 @@ var loader19 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios16.default)({
+      let res = await (0, import_axios17.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -8370,14 +8389,14 @@ __export(currency_exports, {
   links: () => links7,
   loader: () => loader20
 });
-var import_free_solid_svg_icons11 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome11 = require("@fortawesome/react-fontawesome"), import_node22 = require("@remix-run/node"), import_react30 = require("@remix-run/react"), import_axios17 = __toESM(require("axios")), import_react31 = require("react");
+var import_free_solid_svg_icons11 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome11 = require("@fortawesome/react-fontawesome"), import_node22 = require("@remix-run/node"), import_react30 = require("@remix-run/react"), import_axios18 = __toESM(require("axios")), import_react31 = require("react");
 var import_react_toastify6 = require("react-toastify");
 var import_he = __toESM(require("he")), import_jsx_dev_runtime32 = require("react/jsx-dev-runtime");
 function links7() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader20 = async (props) => {
-  let currency = await (0, import_axios17.default)({
+  let currency = await (0, import_axios18.default)({
     method: "post",
     url: `${BaseUrl}/api/getcurrency`
   });
@@ -8388,28 +8407,28 @@ var loader20 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react31.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios17.default)({
+    let view2 = await (0, import_axios18.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react31.useState)(!1), [delDate, setDelData] = (0, import_react31.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios17.default)({
+    let view2 = await (0, import_axios18.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios17.default)({
+    let res = await (0, import_axios18.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify6.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify6.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios17.default)({
+    let view2 = await (0, import_axios18.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -8422,7 +8441,7 @@ var loader20 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios17.default)({
+      let res = await (0, import_axios18.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -8436,7 +8455,7 @@ var loader20 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios17.default)({
+      let res = await (0, import_axios18.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -8851,14 +8870,14 @@ __export(language_exports, {
   links: () => links8,
   loader: () => loader21
 });
-var import_free_solid_svg_icons12 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome12 = require("@fortawesome/react-fontawesome"), import_node23 = require("@remix-run/node"), import_react32 = require("@remix-run/react"), import_axios18 = __toESM(require("axios")), import_react33 = require("react");
+var import_free_solid_svg_icons12 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome12 = require("@fortawesome/react-fontawesome"), import_node23 = require("@remix-run/node"), import_react32 = require("@remix-run/react"), import_axios19 = __toESM(require("axios")), import_react33 = require("react");
 var import_react_toastify7 = require("react-toastify");
 var import_he2 = __toESM(require("he")), import_jsx_dev_runtime33 = require("react/jsx-dev-runtime");
 function links8() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader21 = async (props) => {
-  let language = await (0, import_axios18.default)({
+  let language = await (0, import_axios19.default)({
     method: "post",
     url: `${BaseUrl}/api/getlanguage`
   });
@@ -8869,28 +8888,28 @@ var loader21 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react33.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios18.default)({
+    let view2 = await (0, import_axios19.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react33.useState)(!1), [delDate, setDelData] = (0, import_react33.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios18.default)({
+    let view2 = await (0, import_axios19.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios18.default)({
+    let res = await (0, import_axios19.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify7.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify7.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios18.default)({
+    let view2 = await (0, import_axios19.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -8903,7 +8922,7 @@ var loader21 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios18.default)({
+      let res = await (0, import_axios19.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: {
@@ -8921,7 +8940,7 @@ var loader21 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios18.default)({
+      let res = await (0, import_axios19.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: {
@@ -9592,14 +9611,14 @@ __export(contact_exports, {
   links: () => links9,
   loader: () => loader22
 });
-var import_free_solid_svg_icons13 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome13 = require("@fortawesome/react-fontawesome"), import_node24 = require("@remix-run/node"), import_react34 = require("@remix-run/react"), import_axios19 = __toESM(require("axios")), import_react35 = require("react");
+var import_free_solid_svg_icons13 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome13 = require("@fortawesome/react-fontawesome"), import_node24 = require("@remix-run/node"), import_react34 = require("@remix-run/react"), import_axios20 = __toESM(require("axios")), import_react35 = require("react");
 var import_react_toastify8 = require("react-toastify");
 var import_jsx_dev_runtime34 = require("react/jsx-dev-runtime");
 function links9() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader22 = async (props) => {
-  let contactus = await (0, import_axios19.default)({
+  let contactus = await (0, import_axios20.default)({
     method: "post",
     url: `${BaseUrl}/api/get-contact`
   });
@@ -9610,28 +9629,28 @@ var loader22 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react35.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios19.default)({
+    let view2 = await (0, import_axios20.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react35.useState)(!1), [delDate, setDelData] = (0, import_react35.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios19.default)({
+    let view2 = await (0, import_axios20.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios19.default)({
+    let res = await (0, import_axios20.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify8.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify8.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios19.default)({
+    let view2 = await (0, import_axios20.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -9644,7 +9663,7 @@ var loader22 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios19.default)({
+      let res = await (0, import_axios20.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: {
@@ -9662,7 +9681,7 @@ var loader22 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios19.default)({
+      let res = await (0, import_axios20.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: {
@@ -10325,14 +10344,14 @@ __export(country_exports, {
   links: () => links10,
   loader: () => loader23
 });
-var import_free_solid_svg_icons14 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome14 = require("@fortawesome/react-fontawesome"), import_node25 = require("@remix-run/node"), import_react36 = require("@remix-run/react"), import_axios20 = __toESM(require("axios")), import_react37 = require("react");
+var import_free_solid_svg_icons14 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome14 = require("@fortawesome/react-fontawesome"), import_node25 = require("@remix-run/node"), import_react36 = require("@remix-run/react"), import_axios21 = __toESM(require("axios")), import_react37 = require("react");
 var import_react_toastify9 = require("react-toastify");
 var import_jsx_dev_runtime35 = require("react/jsx-dev-runtime");
 function links10() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader23 = async (props) => {
-  let country = await (0, import_axios20.default)({
+  let country = await (0, import_axios21.default)({
     method: "post",
     url: `${BaseUrl}/api/getcountry`
   });
@@ -10343,28 +10362,28 @@ var loader23 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react37.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios20.default)({
+    let view2 = await (0, import_axios21.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react37.useState)(!1), [delDate, setDelData] = (0, import_react37.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios20.default)({
+    let view2 = await (0, import_axios21.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios20.default)({
+    let res = await (0, import_axios21.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify9.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify9.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios20.default)({
+    let view2 = await (0, import_axios21.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -10377,7 +10396,7 @@ var loader23 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios20.default)({
+      let res = await (0, import_axios21.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -10391,7 +10410,7 @@ var loader23 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios20.default)({
+      let res = await (0, import_axios21.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -10786,14 +10805,14 @@ __export(dispute_exports, {
   links: () => links11,
   loader: () => loader24
 });
-var import_free_solid_svg_icons15 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome15 = require("@fortawesome/react-fontawesome"), import_node26 = require("@remix-run/node"), import_react38 = require("@remix-run/react"), import_axios21 = __toESM(require("axios")), import_react39 = require("react");
+var import_free_solid_svg_icons15 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome15 = require("@fortawesome/react-fontawesome"), import_node26 = require("@remix-run/node"), import_react38 = require("@remix-run/react"), import_axios22 = __toESM(require("axios")), import_react39 = require("react");
 var import_react_toastify10 = require("react-toastify");
 var import_jsx_dev_runtime36 = require("react/jsx-dev-runtime");
 function links11() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader24 = async (props) => {
-  let dispute = await (0, import_axios21.default)({
+  let dispute = await (0, import_axios22.default)({
     method: "post",
     url: `${BaseUrl}/api/get-dispute`
   });
@@ -10804,28 +10823,28 @@ var loader24 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react39.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios21.default)({
+    let view2 = await (0, import_axios22.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react39.useState)(!1), [delDate, setDelData] = (0, import_react39.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios21.default)({
+    let view2 = await (0, import_axios22.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios21.default)({
+    let res = await (0, import_axios22.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify10.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify10.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios21.default)({
+    let view2 = await (0, import_axios22.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -10838,7 +10857,7 @@ var loader24 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios21.default)({
+      let res = await (0, import_axios22.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: {
@@ -10856,7 +10875,7 @@ var loader24 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios21.default)({
+      let res = await (0, import_axios22.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: {
@@ -11608,14 +11627,14 @@ __export(market_exports, {
   links: () => links12,
   loader: () => loader25
 });
-var import_free_solid_svg_icons16 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome16 = require("@fortawesome/react-fontawesome"), import_node27 = require("@remix-run/node"), import_react40 = require("@remix-run/react"), import_axios22 = __toESM(require("axios")), import_react41 = require("react");
+var import_free_solid_svg_icons16 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome16 = require("@fortawesome/react-fontawesome"), import_node27 = require("@remix-run/node"), import_react40 = require("@remix-run/react"), import_axios23 = __toESM(require("axios")), import_react41 = require("react");
 var import_react_toastify11 = require("react-toastify");
 var import_jsx_dev_runtime37 = require("react/jsx-dev-runtime");
 function links12() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader25 = async (props) => {
-  let mainmarketRes = await (0, import_axios22.default)({
+  let mainmarketRes = await (0, import_axios23.default)({
     method: "post",
     url: `${BaseUrl}/api/get-market`
   });
@@ -11626,28 +11645,28 @@ var loader25 = async (props) => {
     name: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     code: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react41.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios22.default)({
+    let view2 = await (0, import_axios23.default)({
       method: "post",
       url: `${BaseUrl}/api/get-market-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react41.useState)(!1), [delDate, setDelData] = (0, import_react41.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios22.default)({
+    let view2 = await (0, import_axios23.default)({
       method: "post",
       url: `${BaseUrl}/api/get-market-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios22.default)({
+    let res = await (0, import_axios23.default)({
       method: "post",
       url: `${BaseUrl}/api/del-market`,
       data: { id }
     });
     res.data.status ? import_react_toastify11.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify11.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios22.default)({
+    let view2 = await (0, import_axios23.default)({
       method: "post",
       url: `${BaseUrl}/api/get-market-byid`,
       data: { id }
@@ -11660,7 +11679,7 @@ var loader25 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios22.default)({
+      let res = await (0, import_axios23.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-market`,
         data: { marketName: (_g = nameRef.current) == null ? void 0 : _g.value, marketCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -11674,7 +11693,7 @@ var loader25 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios22.default)({
+      let res = await (0, import_axios23.default)({
         method: "post",
         url: `${BaseUrl}/api/add-market`,
         data: { marketName: (_g = nameNewRef.current) == null ? void 0 : _g.value, marketCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -12122,35 +12141,35 @@ __export(brand_exports, {
   links: () => links13,
   loader: () => loader26
 });
-var import_free_solid_svg_icons17 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome17 = require("@fortawesome/react-fontawesome"), import_node28 = require("@remix-run/node"), import_react42 = require("@remix-run/react"), import_axios23 = __toESM(require("axios")), import_react43 = require("react");
+var import_free_solid_svg_icons17 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome17 = require("@fortawesome/react-fontawesome"), import_node28 = require("@remix-run/node"), import_react42 = require("@remix-run/react"), import_axios24 = __toESM(require("axios")), import_react43 = require("react");
 var import_react_toastify12 = require("react-toastify");
 var import_jsx_dev_runtime38 = require("react/jsx-dev-runtime");
 function links13() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader26 = async (props) => {
-  let brand = await (0, import_axios23.default)({
+  let brand = await (0, import_axios24.default)({
     method: "post",
     url: `${BaseUrl}/api/get-brands`
   });
   return (0, import_node28.json)({ brand: brand.data.data[0] });
 }, Brand = () => {
   let brand = (0, import_react42.useLoaderData)().brand, [viewBox, setViewBox] = (0, import_react43.useState)(!1), [viewDate, setViewData] = (0, import_react43.useState)({}), [delBox, setDelBox] = (0, import_react43.useState)(!1), [delDate, setDelData] = (0, import_react43.useState)({}), status = async (id) => {
-    let view2 = await (0, import_axios23.default)({
+    let view2 = await (0, import_axios24.default)({
       method: "post",
       url: `${BaseUrl}/api/search-brand`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, statusButton = async (id, status2) => {
-    let res = await (0, import_axios23.default)({
+    let res = await (0, import_axios24.default)({
       method: "post",
       url: `${BaseUrl}/api/status-brand`,
       data: { id, status: status2 == 1 ? 0 : 1 }
     });
     res.data.status ? import_react_toastify12.toast.success("Successfully updated.", { theme: "dark" }) : import_react_toastify12.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios23.default)({
+    let view2 = await (0, import_axios24.default)({
       method: "post",
       url: `${BaseUrl}/api/search-brand`,
       data: { id }
@@ -12655,14 +12674,14 @@ __export(state_exports, {
   links: () => links14,
   loader: () => loader27
 });
-var import_free_solid_svg_icons18 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome18 = require("@fortawesome/react-fontawesome"), import_node29 = require("@remix-run/node"), import_react44 = require("@remix-run/react"), import_axios24 = __toESM(require("axios")), import_react45 = require("react");
+var import_free_solid_svg_icons18 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome18 = require("@fortawesome/react-fontawesome"), import_node29 = require("@remix-run/node"), import_react44 = require("@remix-run/react"), import_axios25 = __toESM(require("axios")), import_react45 = require("react");
 var import_react_toastify13 = require("react-toastify");
 var import_jsx_dev_runtime40 = require("react/jsx-dev-runtime");
 function links14() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader27 = async (props) => {
-  let state = await (0, import_axios24.default)({
+  let state = await (0, import_axios25.default)({
     method: "post",
     url: `${BaseUrl}/api/get-state`
   });
@@ -12673,28 +12692,28 @@ var loader27 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react45.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios24.default)({
+    let view2 = await (0, import_axios25.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react45.useState)(!1), [delDate, setDelData] = (0, import_react45.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios24.default)({
+    let view2 = await (0, import_axios25.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios24.default)({
+    let res = await (0, import_axios25.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify13.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify13.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios24.default)({
+    let view2 = await (0, import_axios25.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -12707,7 +12726,7 @@ var loader27 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios24.default)({
+      let res = await (0, import_axios25.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -12721,7 +12740,7 @@ var loader27 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios24.default)({
+      let res = await (0, import_axios25.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -13136,14 +13155,14 @@ __export(city_exports, {
   links: () => links15,
   loader: () => loader28
 });
-var import_free_solid_svg_icons19 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome19 = require("@fortawesome/react-fontawesome"), import_node30 = require("@remix-run/node"), import_react46 = require("@remix-run/react"), import_axios25 = __toESM(require("axios")), import_react47 = require("react");
+var import_free_solid_svg_icons19 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome19 = require("@fortawesome/react-fontawesome"), import_node30 = require("@remix-run/node"), import_react46 = require("@remix-run/react"), import_axios26 = __toESM(require("axios")), import_react47 = require("react");
 var import_react_toastify14 = require("react-toastify");
 var import_jsx_dev_runtime41 = require("react/jsx-dev-runtime");
 function links15() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader28 = async (props) => {
-  let city = await (0, import_axios25.default)({
+  let city = await (0, import_axios26.default)({
     method: "post",
     url: `${BaseUrl}/api/getcity`
   });
@@ -13154,28 +13173,28 @@ var loader28 = async (props) => {
     categoryName: ((_a = nameRef.current) == null ? void 0 : _a.value) || "",
     categoryCode: ((_b = codeRef.current) == null ? void 0 : _b.value) || ""
   }), [error, setError] = (0, import_react47.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios25.default)({
+    let view2 = await (0, import_axios26.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react47.useState)(!1), [delDate, setDelData] = (0, import_react47.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios25.default)({
+    let view2 = await (0, import_axios26.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios25.default)({
+    let res = await (0, import_axios26.default)({
       method: "post",
       url: `${BaseUrl}/api/del-category`,
       data: { id }
     });
     res.data.status ? import_react_toastify14.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify14.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios25.default)({
+    let view2 = await (0, import_axios26.default)({
       method: "post",
       url: `${BaseUrl}/api/get-category-byid`,
       data: { id }
@@ -13188,7 +13207,7 @@ var loader28 = async (props) => {
     else if (((_d = codeRef.current) == null ? void 0 : _d.value) == null || ((_e = codeRef.current) == null ? void 0 : _e.value) == null || ((_f = codeRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios25.default)({
+      let res = await (0, import_axios26.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-category`,
         data: { categoryName: (_g = nameRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeRef.current) == null ? void 0 : _h.value, id }
@@ -13202,7 +13221,7 @@ var loader28 = async (props) => {
     else if (((_d = codeNewRef.current) == null ? void 0 : _d.value) == null || ((_e = codeNewRef.current) == null ? void 0 : _e.value) == null || ((_f = codeNewRef.current) == null ? void 0 : _f.value) == "")
       setError("Enter the code.");
     else {
-      let res = await (0, import_axios25.default)({
+      let res = await (0, import_axios26.default)({
         method: "post",
         url: `${BaseUrl}/api/add-category`,
         data: { categoryName: (_g = nameNewRef.current) == null ? void 0 : _g.value, categoryCode: (_h = codeNewRef.current) == null ? void 0 : _h.value }
@@ -13617,14 +13636,14 @@ __export(team_exports, {
   links: () => links16,
   loader: () => loader29
 });
-var import_free_solid_svg_icons20 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome20 = require("@fortawesome/react-fontawesome"), import_node31 = require("@remix-run/node"), import_react48 = require("@remix-run/react"), import_axios26 = __toESM(require("axios")), import_react49 = require("react");
+var import_free_solid_svg_icons20 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome20 = require("@fortawesome/react-fontawesome"), import_node31 = require("@remix-run/node"), import_react48 = require("@remix-run/react"), import_axios27 = __toESM(require("axios")), import_react49 = require("react");
 var import_react_toastify15 = require("react-toastify");
 var import_jsx_dev_runtime42 = require("react/jsx-dev-runtime");
 function links16() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader29 = async (props) => {
-  let team = await (0, import_axios26.default)({
+  let team = await (0, import_axios27.default)({
     method: "post",
     url: `${BaseUrl}/api/get-team`
   });
@@ -13639,28 +13658,28 @@ var loader29 = async (props) => {
     number: ((_e = numberRef.current) == null ? void 0 : _e.value) || "",
     positon: ((_f = positonRef.current) == null ? void 0 : _f.value) || ""
   }), [error, setError] = (0, import_react49.useState)(""), edit = async (id) => {
-    let view2 = await (0, import_axios26.default)({
+    let view2 = await (0, import_axios27.default)({
       method: "post",
       url: `${BaseUrl}/api/get-team-byid`,
       data: { id }
     });
     setEditBox((val) => !0), setEditData((val) => view2.data.data[0]);
   }, [delBox, setDelBox] = (0, import_react49.useState)(!1), [delDate, setDelData] = (0, import_react49.useState)({}), del = async (id) => {
-    let view2 = await (0, import_axios26.default)({
+    let view2 = await (0, import_axios27.default)({
       method: "post",
       url: `${BaseUrl}/api/get-team-byid`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, delButton = async (id) => {
-    let res = await (0, import_axios26.default)({
+    let res = await (0, import_axios27.default)({
       method: "post",
       url: `${BaseUrl}/api/del-team`,
       data: { id }
     });
     res.data.status ? import_react_toastify15.toast.success("Successfully Deleted.", { theme: "dark" }) : import_react_toastify15.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios26.default)({
+    let view2 = await (0, import_axios27.default)({
       method: "post",
       url: `${BaseUrl}/api/get-team-byid`,
       data: { id }
@@ -13696,7 +13715,7 @@ var loader29 = async (props) => {
         else
           return setError(imageurl.data);
       }
-      let res = await (0, import_axios26.default)({
+      let res = await (0, import_axios27.default)({
         method: "post",
         url: `${BaseUrl}/api/upd-team`,
         data: sendata
@@ -13727,7 +13746,7 @@ var loader29 = async (props) => {
           dob: (_s = dobNewRef.current) == null ? void 0 : _s.value,
           description: (_t = descriptionNewRef.current) == null ? void 0 : _t.value,
           imageUrl: imageurl.data
-        }, res = await (0, import_axios26.default)({
+        }, res = await (0, import_axios27.default)({
           method: "post",
           url: `${BaseUrl}/api/add-team`,
           data: sendata
@@ -14814,35 +14833,35 @@ __export(user_exports, {
   links: () => links17,
   loader: () => loader30
 });
-var import_free_solid_svg_icons21 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome21 = require("@fortawesome/react-fontawesome"), import_node32 = require("@remix-run/node"), import_react50 = require("@remix-run/react"), import_axios27 = __toESM(require("axios")), import_react51 = require("react");
+var import_free_solid_svg_icons21 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome21 = require("@fortawesome/react-fontawesome"), import_node32 = require("@remix-run/node"), import_react50 = require("@remix-run/react"), import_axios28 = __toESM(require("axios")), import_react51 = require("react");
 var import_react_toastify16 = require("react-toastify");
 var import_jsx_dev_runtime43 = require("react/jsx-dev-runtime");
 function links17() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
 }
 var loader30 = async (props) => {
-  let user = await (0, import_axios27.default)({
+  let user = await (0, import_axios28.default)({
     method: "post",
     url: `${BaseUrl}/api/get-users`
   });
   return (0, import_node32.json)({ user: user.data.data[0] });
 }, User = () => {
   let user = (0, import_react50.useLoaderData)().user, [viewBox, setViewBox] = (0, import_react51.useState)(!1), [viewDate, setViewData] = (0, import_react51.useState)({}), [editBox, setEditBox] = (0, import_react51.useState)(!1), nameRef = (0, import_react51.useRef)(null), codeRef = (0, import_react51.useRef)(null), [delBox, setDelBox] = (0, import_react51.useState)(!1), [delDate, setDelData] = (0, import_react51.useState)({}), status = async (id) => {
-    let view2 = await (0, import_axios27.default)({
+    let view2 = await (0, import_axios28.default)({
       method: "post",
       url: `${BaseUrl}/api/user-search`,
       data: { id }
     });
     setDelBox((val) => !0), setDelData((val) => view2.data.data[0]);
   }, statusButton = async (id, status2) => {
-    let res = await (0, import_axios27.default)({
+    let res = await (0, import_axios28.default)({
       method: "post",
       url: `${BaseUrl}/api/status-user`,
       data: { id, status: status2 == 1 ? 0 : 1 }
     });
     res.data.status ? import_react_toastify16.toast.success("Successfully updated.", { theme: "dark" }) : import_react_toastify16.toast.error(res.data.message, { theme: "dark" }), setDelBox((val) => !1), window.location.reload();
   }, view = async (id) => {
-    let view2 = await (0, import_axios27.default)({
+    let view2 = await (0, import_axios28.default)({
       method: "post",
       url: `${BaseUrl}/api/user-search`,
       data: { id }
@@ -15368,7 +15387,7 @@ __export(adminlogin_exports, {
   links: () => links18,
   loader: () => loader31
 });
-var import_free_solid_svg_icons22 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome22 = require("@fortawesome/react-fontawesome"), import_node33 = require("@remix-run/node"), import_react52 = require("@remix-run/react"), import_axios28 = __toESM(require("axios")), import_react53 = require("react");
+var import_free_solid_svg_icons22 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome22 = require("@fortawesome/react-fontawesome"), import_node33 = require("@remix-run/node"), import_react52 = require("@remix-run/react"), import_axios29 = __toESM(require("axios")), import_react53 = require("react");
 var import_jsx_dev_runtime44 = require("react/jsx-dev-runtime");
 function links18() {
   return [{ rel: "stylesheet", href: ReactToastify_default }];
@@ -15474,7 +15493,7 @@ var AdminLogin = () => {
   if (value.password == null || value.password == "" || value.password == null)
     return { message: "Enter password.", error: !0 };
   try {
-    let data = await import_axios28.default.post(`${BaseUrl}/api/admin-login`, { userName: value.username, password: value.password });
+    let data = await import_axios29.default.post(`${BaseUrl}/api/admin-login`, { userName: value.username, password: value.password });
     return data.data.status == !1 ? { message: data.data.message, error: !0 } : (0, import_node33.redirect)("/admin/home", {
       headers: {
         "Set-Cookie": await adminUser.serialize({ user: data.data.data[0], AdminLogin: !0 })
@@ -15766,8 +15785,8 @@ var import_react54 = require("@remix-run/react"), import_jsx_dev_runtime47 = req
 
 // app/routes/news/index.tsx
 var import_node34 = require("@remix-run/node");
-var import_axios29 = __toESM(require("axios")), import_react55 = require("@remix-run/react"), import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), loader32 = async (props) => {
-  let news = await import_axios29.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 2 }), event = await import_axios29.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 3 }), newsevent = [...news.data.data, ...event.data.data];
+var import_axios30 = __toESM(require("axios")), import_react55 = require("@remix-run/react"), import_jsx_dev_runtime48 = require("react/jsx-dev-runtime"), loader32 = async (props) => {
+  let news = await import_axios30.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 2 }), event = await import_axios30.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 3 }), newsevent = [...news.data.data, ...event.data.data];
   return (0, import_node34.json)({ newsevent });
 }, blogs4 = () => {
   let newsevent = (0, import_react55.useLoaderData)().newsevent[0];
@@ -15800,10 +15819,10 @@ __export(notableinf_exports, {
   default: () => notableinf_default,
   loader: () => loader33
 });
-var import_node35 = require("@remix-run/node"), import_axios30 = __toESM(require("axios"));
+var import_node35 = require("@remix-run/node"), import_axios31 = __toESM(require("axios"));
 var import_react56 = require("@remix-run/react");
 var import_jsx_dev_runtime49 = require("react/jsx-dev-runtime"), loader33 = async (props) => {
-  let id = props.params.id, media3 = await import_axios30.default.post(`${BaseUrl}/api/get-top-influencer`);
+  let id = props.params.id, media3 = await import_axios31.default.post(`${BaseUrl}/api/get-top-influencer`);
   return (0, import_node35.json)({ media: media3.data.data });
 }, NotableInf = () => {
   let mediadata = (0, import_react56.useLoaderData)().media;
@@ -16341,10 +16360,10 @@ __export(media_id_exports, {
   default: () => media_id_default,
   loader: () => loader34
 });
-var import_node36 = require("@remix-run/node"), import_axios31 = __toESM(require("axios"));
+var import_node36 = require("@remix-run/node"), import_axios32 = __toESM(require("axios"));
 var import_react57 = require("@remix-run/react");
 var import_jsx_dev_runtime52 = require("react/jsx-dev-runtime"), loader34 = async (props) => {
-  let id = props.params.id, media3 = await import_axios31.default.post(`${BaseUrl}/api/get-user-media`, {
+  let id = props.params.id, media3 = await import_axios32.default.post(`${BaseUrl}/api/get-user-media`, {
     platformId: id
   });
   return (0, import_node36.json)({ media: media3.data.data });
@@ -16683,7 +16702,7 @@ __export(register_exports, {
   default: () => register_default,
   loader: () => loader35
 });
-var import_node37 = require("@remix-run/node"), import_react60 = require("@remix-run/react"), import_axios33 = __toESM(require("axios"));
+var import_node37 = require("@remix-run/node"), import_react60 = require("@remix-run/react"), import_axios34 = __toESM(require("axios"));
 
 // app/components/user/register.tsx
 var import_react58 = require("@remix-run/react");
@@ -16701,7 +16720,7 @@ var import_app2 = require("firebase/app"), import_auth = require("firebase/auth"
 }, app = (0, import_app2.initializeApp)(firebaseConfig), auth = (0, import_auth.getAuth)(app);
 
 // app/components/user/register.tsx
-var import_axios32 = __toESM(require("axios")), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), RegisterBox = (props) => {
+var import_axios33 = __toESM(require("axios")), import_jsx_dev_runtime53 = require("react/jsx-dev-runtime"), RegisterBox = (props) => {
   let navigator2 = (0, import_react58.useNavigate)(), [isBrand, setBrand] = (0, import_react59.useState)(!1), cat = (0, import_react59.useRef)(null);
   (0, import_react59.useEffect)(() => {
     props.isBrand ? (cat.current.value = "brand", setBrand(!0)) : (cat.current.value = "inf", setBrand(!1));
@@ -16717,7 +16736,7 @@ var import_axios32 = __toESM(require("axios")), import_jsx_dev_runtime53 = requi
       "confirm-password": pass,
       isBrand: "0",
       isInfluencer: "1"
-    }, apidata = await (0, import_axios32.default)({
+    }, apidata = await (0, import_axios33.default)({
       method: "post",
       url: `${BaseUrl}/api/register`,
       data: req,
@@ -17232,7 +17251,7 @@ var import_jsx_dev_runtime54 = require("react/jsx-dev-runtime"), loader35 = asyn
     isInfluencer: "0"
   });
   try {
-    let apidata = await (0, import_axios33.default)({
+    let apidata = await (0, import_axios34.default)({
       method: "post",
       url: `${BaseUrl}/api/register`,
       data: req,
@@ -17249,7 +17268,7 @@ var import_jsx_dev_runtime54 = require("react/jsx-dev-runtime"), loader35 = asyn
     if (apidata.data.status == !1)
       return { message: apidata.data.message };
     {
-      let userdata = await (0, import_axios33.default)({
+      let userdata = await (0, import_axios34.default)({
         method: "post",
         url: `${BaseUrl}/api/getuser`,
         data: { id: apidata.data.data.id },
@@ -17262,7 +17281,7 @@ var import_jsx_dev_runtime54 = require("react/jsx-dev-runtime"), loader35 = asyn
           "Content-Type": "application/json",
           Accept: "*"
         }
-      }), sendverificationmail = await (0, import_axios33.default)({
+      }), sendverificationmail = await (0, import_axios34.default)({
         method: "post",
         url: `${BaseUrl}/api/send-otp`,
         data: { userId: apidata.data.data.id },
@@ -17391,7 +17410,7 @@ var import_react61 = require("@remix-run/react"), import_react_fontawesome24 = r
 
 // app/components/contact/contact.tsx
 var import_react62 = require("react");
-var import_axios34 = __toESM(require("axios")), import_jsx_dev_runtime56 = require("react/jsx-dev-runtime"), ContactPage = () => {
+var import_axios35 = __toESM(require("axios")), import_jsx_dev_runtime56 = require("react/jsx-dev-runtime"), ContactPage = () => {
   let nameRef = (0, import_react62.useRef)(null), [error, setError] = (0, import_react62.useState)(null), [sus, setSus] = (0, import_react62.useState)(null), messageRef = (0, import_react62.useRef)(null), [contactnumber, setContactnumber] = (0, import_react62.useState)(), [isBrand, setIsBrand] = (0, import_react62.useState)(!1), handelcontent = (e) => {
     setContactnumber(e.target.value.replace(/\D/g, ""));
   }, submit = async () => {
@@ -17408,7 +17427,7 @@ var import_axios34 = __toESM(require("axios")), import_jsx_dev_runtime56 = requi
         number: contactnumber,
         isBrand: isBrand ? 1 : 0,
         message: (_h = messageRef.current) == null ? void 0 : _h.value
-      }, data = await (0, import_axios34.default)({
+      }, data = await (0, import_axios35.default)({
         method: "post",
         url: `${BaseUrl}/api/add-contact`,
         data: req,
@@ -18330,10 +18349,10 @@ var import_jsx_dev_runtime62 = require("react/jsx-dev-runtime"), AboutPage = (pr
 }, this), about_default = AboutPage;
 
 // app/routes/about.tsx
-var import_node39 = require("@remix-run/node"), import_axios35 = __toESM(require("axios"));
+var import_node39 = require("@remix-run/node"), import_axios36 = __toESM(require("axios"));
 var import_react63 = require("@remix-run/react");
 var import_jsx_dev_runtime63 = require("react/jsx-dev-runtime"), loader37 = async (props) => {
-  let team = await import_axios35.default.post(`${BaseUrl}/api/get-team`);
+  let team = await import_axios36.default.post(`${BaseUrl}/api/get-team`);
   return (0, import_node39.json)({ team: team.data.data });
 }, about2 = () => {
   let temadata = (0, import_react63.useLoaderData)().team[0];
@@ -19743,9 +19762,9 @@ var import_react64 = require("@remix-run/react"), import_react65 = require("reac
 
 // app/routes/index.tsx
 var import_node40 = require("@remix-run/node");
-var import_axios36 = __toESM(require("axios")), import_react66 = require("@remix-run/react");
+var import_axios37 = __toESM(require("axios")), import_react66 = require("@remix-run/react");
 var import_jsx_dev_runtime67 = require("react/jsx-dev-runtime"), loader38 = async (props) => {
-  let blog = await import_axios36.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
+  let blog = await import_axios37.default.post(`${BaseUrl}/api/get-neb-bytype`, { type: 1 });
   return (0, import_node40.json)({ blog: blog.data.data });
 }, index = () => {
   let blogdata = (0, import_react66.useLoaderData)().blog[0];
@@ -19858,12 +19877,12 @@ var import_react67 = require("@remix-run/react"), import_jsx_dev_runtime68 = req
 // app/components/user/login.tsx
 var import_react68 = require("@remix-run/react");
 var import_react69 = require("react"), import_react_fontawesome25 = require("@fortawesome/react-fontawesome"), import_free_solid_svg_icons24 = require("@fortawesome/free-solid-svg-icons"), import_auth3 = require("firebase/auth");
-var import_axios37 = __toESM(require("axios"));
+var import_axios38 = __toESM(require("axios"));
 var EmailValidator2 = __toESM(require("email-validator")), import_jsx_dev_runtime69 = require("react/jsx-dev-runtime"), LoginBox = (props) => {
   let navigator2 = (0, import_react68.useNavigate)(), [showpass, setShowPass] = (0, import_react69.useState)(!1), changePassVisabel = () => {
     setShowPass(!showpass);
   }, [error, setError] = (0, import_react69.useState)(null), socialLogin = async (email, pass) => {
-    let apidata = await import_axios37.default.post(`${BaseUrl}/api/login`, {
+    let apidata = await import_axios38.default.post(`${BaseUrl}/api/login`, {
       email,
       password: pass
     });
@@ -19875,7 +19894,7 @@ var EmailValidator2 = __toESM(require("email-validator")), import_jsx_dev_runtim
     else if (!EmailValidator2.validate((_d = emailRef.current) == null ? void 0 : _d.value))
       setEmailError("Enter valid email");
     else {
-      let apidata = await import_axios37.default.post(`${BaseUrl}/api/send-forgot-password`, {
+      let apidata = await import_axios38.default.post(`${BaseUrl}/api/send-forgot-password`, {
         user: (_e = emailRef.current) == null ? void 0 : _e.value
       });
       return apidata.data.status ? setForgetPasswordBox(!1) : setEmailError(apidata.data.message);
@@ -20285,7 +20304,7 @@ var EmailValidator2 = __toESM(require("email-validator")), import_jsx_dev_runtim
 };
 
 // app/routes/login.tsx
-var EmailValidator3 = __toESM(require("email-validator")), import_node41 = require("@remix-run/node"), import_axios38 = __toESM(require("axios"));
+var EmailValidator3 = __toESM(require("email-validator")), import_node41 = require("@remix-run/node"), import_axios39 = __toESM(require("axios"));
 var import_jsx_dev_runtime70 = require("react/jsx-dev-runtime"), login = () => {
   let data = (0, import_react70.useActionData)();
   return /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)(import_jsx_dev_runtime70.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime70.jsxDEV)("div", { className: "flex flex-col min-h-screen bg-[#eeeeee]", children: [
@@ -20334,14 +20353,14 @@ var action4 = async ({ request }) => {
   if (value.password == "" || value.password == null || value.password == null)
     return { message: "Enter the password" };
   try {
-    let data = await import_axios38.default.post(`${BaseUrl}/api/login`, {
+    let data = await import_axios39.default.post(`${BaseUrl}/api/login`, {
       email: value.email,
       password: value.password
     });
     if (data.data.status == !1)
       return { message: data.data.message };
     {
-      let userdata = await (0, import_axios38.default)({
+      let userdata = await (0, import_axios39.default)({
         method: "post",
         url: `${BaseUrl}/api/getuser`,
         data: { id: data.data.data.id },
@@ -21601,10 +21620,10 @@ __export(paymentreq_brandId_camId_draftId_exports, {
   default: () => paymentreq_brandId_camId_draftId_default,
   loader: () => loader41
 });
-var import_free_solid_svg_icons27 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome28 = require("@fortawesome/react-fontawesome"), import_node43 = require("@remix-run/node"), import_react77 = require("@remix-run/react"), import_axios40 = __toESM(require("axios")), import_react78 = require("react");
+var import_free_solid_svg_icons27 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome28 = require("@fortawesome/react-fontawesome"), import_node43 = require("@remix-run/node"), import_react77 = require("@remix-run/react"), import_axios41 = __toESM(require("axios")), import_react78 = require("react");
 
 // app/components/utils/raiting.tsx
-var import_axios39 = __toESM(require("axios")), import_react76 = require("react"), import_react_simple_star_rating = require("react-simple-star-rating");
+var import_axios40 = __toESM(require("axios")), import_react76 = require("react"), import_react_simple_star_rating = require("react-simple-star-rating");
 var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), MyRating = (props) => {
   let [crating, setCRating] = (0, import_react76.useState)(0), [arating, setARating] = (0, import_react76.useState)(0), [prating, setPRating] = (0, import_react76.useState)(0), [error, setError] = (0, import_react76.useState)(null), handlecReset = (rate) => {
     setCRating(rate);
@@ -21630,7 +21649,7 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), MyRating = (pro
         rating3: prating.toString(),
         reviewType: props.reviewType,
         remark: "User To Brand"
-      }, apireq = await (0, import_axios39.default)({
+      }, apireq = await (0, import_axios40.default)({
         method: "post",
         url: `${BaseUrl}/api/add-review`,
         data: req
@@ -21751,7 +21770,7 @@ var import_jsx_dev_runtime76 = require("react/jsx-dev-runtime"), MyRating = (pro
 
 // app/routes/home/paymentreq.$brandId.$camId.$draftId.tsx
 var import_jsx_dev_runtime77 = require("react/jsx-dev-runtime"), loader41 = async (props) => {
-  let camId = props.params.camId, draftId = props.params.draftId, brandId = props.params.brandId, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), camp = await (0, import_axios40.default)({
+  let camId = props.params.camId, draftId = props.params.draftId, brandId = props.params.brandId, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), camp = await (0, import_axios41.default)({
     method: "post",
     url: `${BaseUrl}/api/campaign-search`,
     data: { id: camId }
@@ -21778,7 +21797,7 @@ var PaymentRequest = () => {
         influencer: userId
       }
     };
-    (await (0, import_axios40.default)({
+    (await (0, import_axios41.default)({
       method: "post",
       url: `${BaseUrl}/api/search-review`,
       data: req
@@ -21964,14 +21983,14 @@ var PaymentRequest = () => {
   }, this);
 }, paymentreq_brandId_camId_draftId_default = PaymentRequest, Payments = (props) => {
   let [paymentBox, setPaymentBox] = (0, import_react78.useState)(!1), [paymentError, setPaymentError] = (0, import_react78.useState)(""), paymentRef = (0, import_react78.useRef)(null), [recived, setRecived] = (0, import_react78.useState)(0), [requested, serRequested] = (0, import_react78.useState)(0), [sus, setSus] = (0, import_react78.useState)(null), init = async () => {
-    let reqdata = await import_axios40.default.post(`${BaseUrl}/api/get-received-payment`, {
+    let reqdata = await import_axios41.default.post(`${BaseUrl}/api/get-received-payment`, {
       userId: props.userId,
       draftId: props.draftId
     });
     reqdata.data.status ? setRecived(
       parseInt(reqdata.data.data.totalAmtReq.toString().split(".")[0])
     ) : setRecived(0);
-    let reqdata1 = await import_axios40.default.post(`${BaseUrl}/api/get-pending-payment`, {
+    let reqdata1 = await import_axios41.default.post(`${BaseUrl}/api/get-pending-payment`, {
       userId: props.userId,
       draftId: props.draftId
     });
@@ -21998,7 +22017,7 @@ var PaymentRequest = () => {
         draftId: props.draftId,
         brandId: props.brandId,
         paymentType: "1"
-      }, paymentdata = await import_axios40.default.post(
+      }, paymentdata = await import_axios41.default.post(
         `${BaseUrl}/api/new-pay-request`,
         req
       );
@@ -22236,7 +22255,7 @@ var PaymentRequest = () => {
         campaignId: props.campaignId,
         isBrand: 0,
         message: (_i = messageRef.current) == null ? void 0 : _i.value
-      }, data = await (0, import_axios40.default)({
+      }, data = await (0, import_axios41.default)({
         method: "post",
         url: `${BaseUrl}/api/add-dispute`,
         data: req,
@@ -22363,12 +22382,12 @@ __export(brandpay_brandId_camId_draftId_exports, {
   default: () => brandpay_brandId_camId_draftId_default,
   loader: () => loader42
 });
-var import_free_solid_svg_icons28 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome29 = require("@fortawesome/react-fontawesome"), import_node44 = require("@remix-run/node"), import_react79 = require("@remix-run/react"), import_axios41 = __toESM(require("axios")), import_react80 = require("react");
+var import_free_solid_svg_icons28 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome29 = require("@fortawesome/react-fontawesome"), import_node44 = require("@remix-run/node"), import_react79 = require("@remix-run/react"), import_axios42 = __toESM(require("axios")), import_react80 = require("react");
 var import_stripe = __toESM(require("stripe")), import_jsx_dev_runtime78 = require("react/jsx-dev-runtime"), stripe = new import_stripe.default(
   "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",
   { apiVersion: "2022-11-15" }
 ), loader42 = async (props) => {
-  let camId = props.params.camId, draftId = props.params.draftId, brandId = props.params.brandId, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), camp = await (0, import_axios41.default)({
+  let camId = props.params.camId, draftId = props.params.draftId, brandId = props.params.brandId, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), camp = await (0, import_axios42.default)({
     method: "post",
     url: `${BaseUrl}/api/campaign-search`,
     data: { id: camId }
@@ -22395,7 +22414,7 @@ var PaymentRequest2 = () => {
         influencer: userId
       }
     };
-    (await (0, import_axios41.default)({
+    (await (0, import_axios42.default)({
       method: "post",
       url: `${BaseUrl}/api/search-review`,
       data: req
@@ -22575,7 +22594,7 @@ var PaymentRequest2 = () => {
         campaign: props.campaingid,
         influencer: props.userid
       }
-    }, responseData = await import_axios41.default.post(`${BaseUrl}/api/get-req-pay`, req);
+    }, responseData = await import_axios42.default.post(`${BaseUrl}/api/get-req-pay`, req);
     responseData.data.status == !0 && setRequestPayment(responseData.data.data);
   };
   (0, import_react80.useEffect)(() => {
@@ -22586,12 +22605,12 @@ var PaymentRequest2 = () => {
       id,
       status: "2",
       refNo: `${new Date().toLocaleDateString()}_${props.userid}_${props.campaingid}`
-    }, responseData = await import_axios41.default.post(`${BaseUrl}/api/update-payment`, req);
+    }, responseData = await import_axios42.default.post(`${BaseUrl}/api/update-payment`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setAcceptbox(!1), window.location.reload();
   }, rejectRequest = async () => {
-    let req = { id, status: "3" }, responseData = await import_axios41.default.post(`${BaseUrl}/api/update-payment`, req);
+    let req = { id, status: "3" }, responseData = await import_axios42.default.post(`${BaseUrl}/api/update-payment`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setrejectbox(!1), window.location.reload();
@@ -23066,7 +23085,7 @@ var PaymentRequest2 = () => {
     else if (((_g = date.current) == null ? void 0 : _g.value) == null || ((_h = date.current) == null ? void 0 : _h.value) == null || ((_i = date.current) == null ? void 0 : _i.value) == "")
       setError("Fill the publication date");
     else {
-      let responseData = await import_axios41.default.post(`${BaseUrl}/api/update-draft`, {
+      let responseData = await import_axios42.default.post(`${BaseUrl}/api/update-draft`, {
         id: props.draftid,
         publication_type: (_j = type.current) == null ? void 0 : _j.value,
         target_react: react,
@@ -23528,9 +23547,9 @@ __export(secondpage_exports, {
   default: () => secondpage_default,
   loader: () => loader44
 });
-var import_free_solid_svg_icons29 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome30 = require("@fortawesome/react-fontawesome"), import_node46 = require("@remix-run/node"), import_react83 = require("@remix-run/react"), import_axios42 = __toESM(require("axios")), import_he3 = __toESM(require("he")), import_react84 = require("react");
+var import_free_solid_svg_icons29 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome30 = require("@fortawesome/react-fontawesome"), import_node46 = require("@remix-run/node"), import_react83 = require("@remix-run/react"), import_axios43 = __toESM(require("axios")), import_he3 = __toESM(require("he")), import_react84 = require("react");
 var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), loader44 = async (props) => {
-  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), accountRes = await (0, import_axios42.default)({
+  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), accountRes = await (0, import_axios43.default)({
     method: "post",
     url: `${BaseUrl}/api/getcurrency`,
     headers: {
@@ -23542,7 +23561,7 @@ var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), loader44 = asyn
       "Content-Type": "application/json",
       Accept: "*"
     }
-  }), categoryRes = await (0, import_axios42.default)({
+  }), categoryRes = await (0, import_axios43.default)({
     method: "post",
     url: `${BaseUrl}/api/getcategory`,
     headers: {
@@ -23554,7 +23573,7 @@ var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), loader44 = asyn
       "Content-Type": "application/json",
       Accept: "*"
     }
-  }), languagesRes = await (0, import_axios42.default)({
+  }), languagesRes = await (0, import_axios43.default)({
     method: "post",
     url: `${BaseUrl}/api/getlanguage`,
     headers: {
@@ -23566,7 +23585,7 @@ var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), loader44 = asyn
       "Content-Type": "application/json",
       Accept: "*"
     }
-  }), mainmarketRes = await (0, import_axios42.default)({
+  }), mainmarketRes = await (0, import_axios43.default)({
     method: "post",
     url: `${BaseUrl}/api/get-market`,
     headers: {
@@ -24036,7 +24055,7 @@ var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), loader44 = asyn
           categories: ids(selcategory),
           marketId: selmarket[0].id,
           markets: ids(selorthermarket)
-        }, data = await (0, import_axios42.default)({
+        }, data = await (0, import_axios43.default)({
           method: "post",
           url: `${BaseUrl}/api/updateuser`,
           data: req,
@@ -24093,7 +24112,7 @@ var import_jsx_dev_runtime80 = require("react/jsx-dev-runtime"), loader44 = asyn
     columnNumber: 9
   }, this);
 }, secondpage_default = SecondPage, action5 = async ({ request }) => {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios42.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios43.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -24121,7 +24140,7 @@ __export(extrapage_exports, {
   default: () => extrapage_default,
   loader: () => loader45
 });
-var import_free_solid_svg_icons30 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome31 = require("@fortawesome/react-fontawesome"), import_node47 = require("@remix-run/node"), import_react85 = require("@remix-run/react"), import_axios43 = __toESM(require("axios")), import_react86 = require("react");
+var import_free_solid_svg_icons30 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome31 = require("@fortawesome/react-fontawesome"), import_node47 = require("@remix-run/node"), import_react85 = require("@remix-run/react"), import_axios44 = __toESM(require("axios")), import_react86 = require("react");
 var import_jsx_dev_runtime81 = require("react/jsx-dev-runtime"), loader45 = async (props) => {
   let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node47.json)({ user: cookie.user });
@@ -24475,7 +24494,7 @@ var import_jsx_dev_runtime81 = require("react/jsx-dev-runtime"), loader45 = asyn
           acNo: (_p = accountNumber.current) == null ? void 0 : _p.value
         };
         updoc1.status && (req.doc1 = updoc1.data), updoc2.status && (req.doc2 = updoc2.data), updoc3.status && (req.doc3 = updoc3.data);
-        let data = await (0, import_axios43.default)({
+        let data = await (0, import_axios44.default)({
           method: "post",
           url: `${BaseUrl}/api/updateuser`,
           data: req,
@@ -24528,7 +24547,7 @@ var import_jsx_dev_runtime81 = require("react/jsx-dev-runtime"), loader45 = asyn
     columnNumber: 9
   }, this);
 }, extrapage_default = ExtraPage, action6 = async ({ request }) => {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios43.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios44.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -24556,7 +24575,7 @@ __export(fifthpage_exports, {
   default: () => fifthpage_default,
   loader: () => loader46
 });
-var import_node48 = require("@remix-run/node"), import_react87 = require("@remix-run/react"), import_axios44 = __toESM(require("axios")), import_react88 = require("react");
+var import_node48 = require("@remix-run/node"), import_react87 = require("@remix-run/react"), import_axios45 = __toESM(require("axios")), import_react88 = require("react");
 var EmailValidator4 = __toESM(require("email-validator")), import_jsx_dev_runtime82 = require("react/jsx-dev-runtime"), loader46 = async (props) => {
   let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node48.json)({ user: cookie.user });
@@ -24702,7 +24721,7 @@ var EmailValidator4 = __toESM(require("email-validator")), import_jsx_dev_runtim
                   name: (_h = nameRef.current) == null ? void 0 : _h.value,
                   email: (_i = emailRef.current) == null ? void 0 : _i.value,
                   contact: contactnumber
-                }, data = await (0, import_axios44.default)({
+                }, data = await (0, import_axios45.default)({
                   method: "post",
                   url: `${BaseUrl}/api/send-brand-invite`,
                   data: req
@@ -24841,7 +24860,7 @@ var EmailValidator4 = __toESM(require("email-validator")), import_jsx_dev_runtim
     columnNumber: 5
   }, this);
 }, fifthpage_default = ThirdPage, action7 = async ({ request }) => {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios44.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios45.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -24872,9 +24891,9 @@ __export(forthpage_exports, {
   default: () => forthpage_default,
   loader: () => loader47
 });
-var import_free_solid_svg_icons31 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome32 = require("@fortawesome/react-fontawesome"), import_node49 = require("@remix-run/node"), import_react89 = require("@remix-run/react"), import_axios45 = __toESM(require("axios")), import_react90 = require("react");
+var import_free_solid_svg_icons31 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome32 = require("@fortawesome/react-fontawesome"), import_node49 = require("@remix-run/node"), import_react89 = require("@remix-run/react"), import_axios46 = __toESM(require("axios")), import_react90 = require("react");
 var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime"), loader47 = async (props) => {
-  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), country = await (0, import_axios45.default)({
+  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), country = await (0, import_axios46.default)({
     method: "post",
     url: `${BaseUrl}/api/getcountry`,
     headers: {
@@ -24892,7 +24911,7 @@ var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime"), loader47 = asyn
   let userdata = (0, import_react89.useLoaderData)(), userId = userdata.user.id, country = userdata.country, gender = ["MALE", "FEMALE", "TRANSGENDER"], isBrand = userdata.user.role.code == "50", [selCountry, setSelCountry] = (0, import_react90.useState)([]), [con, setcon] = (0, import_react90.useState)(!1), [selGender, setSelGender] = (0, import_react90.useState)([]), [gen, setgen] = (0, import_react90.useState)(!1), [error, setError] = (0, import_react90.useState)(""), [cityerror, setCityerror] = (0, import_react90.useState)(null), [citybox, setCitybox] = (0, import_react90.useState)(!1), [searchcity, setSearchcity] = (0, import_react90.useState)([]), [selectedcity, setSelectedctiy] = (0, import_react90.useState)(null), [contactnumber, setContactnumber] = (0, import_react90.useState)(), handelcontent = (e) => {
     setContactnumber(e.target.value.replace(/\D/g, ""));
   }, cityref = (0, import_react90.useRef)(null), getCity = async (city, countryId) => {
-    let data = await import_axios45.default.post(`${BaseUrl}/api/get-city`, {
+    let data = await import_axios46.default.post(`${BaseUrl}/api/get-city`, {
       search: city,
       countryId
     });
@@ -25428,7 +25447,7 @@ var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime"), loader47 = asyn
                 cityId: selectedcity.id,
                 userContact: contactnumber,
                 userGender: selGender[0] == "MALE" ? "1" : selGender[0] == "FEMALE" ? "2" : "3"
-              }, data = await (0, import_axios45.default)({
+              }, data = await (0, import_axios46.default)({
                 method: "post",
                 url: `${BaseUrl}/api/updateuser`,
                 data: req,
@@ -25530,7 +25549,7 @@ var import_jsx_dev_runtime83 = require("react/jsx-dev-runtime"), loader47 = asyn
     columnNumber: 5
   }, this);
 }, forthpage_default = ForthPage, action8 = async ({ request }) => {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios45.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios46.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -25561,9 +25580,9 @@ __export(thirdpage_exports, {
   default: () => thirdpage_default,
   loader: () => loader48
 });
-var import_node50 = require("@remix-run/node"), import_react91 = require("@remix-run/react"), import_axios46 = __toESM(require("axios")), import_react92 = require("react");
+var import_node50 = require("@remix-run/node"), import_react91 = require("@remix-run/react"), import_axios47 = __toESM(require("axios")), import_react92 = require("react");
 var import_jsx_dev_runtime84 = require("react/jsx-dev-runtime"), loader48 = async (props) => {
-  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), paltform = await (0, import_axios46.default)({
+  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), paltform = await (0, import_axios47.default)({
     method: "post",
     url: `${BaseUrl}/api/getplatform`,
     headers: {
@@ -25658,7 +25677,7 @@ var import_jsx_dev_runtime84 = require("react/jsx-dev-runtime"), loader48 = asyn
               userId,
               platformId: val.val.id,
               handleName: val.text
-            }, data = await (0, import_axios46.default)({
+            }, data = await (0, import_axios47.default)({
               method: "post",
               url: `${BaseUrl}/api/add-handle`,
               data: req,
@@ -25750,7 +25769,7 @@ var import_jsx_dev_runtime84 = require("react/jsx-dev-runtime"), loader48 = asyn
     columnNumber: 9
   }, this);
 }, thirdpage_default = ThirdPage2, action9 = async ({ request }) => {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios46.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios47.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -25779,7 +25798,7 @@ __export(profilecomplete_exports2, {
   loader: () => loader49
 });
 var import_node51 = require("@remix-run/node"), import_react93 = require("@remix-run/react"), import_react94 = require("react");
-var import_axios47 = __toESM(require("axios")), import_jsx_dev_runtime85 = require("react/jsx-dev-runtime"), loader49 = async (props) => {
+var import_axios48 = __toESM(require("axios")), import_jsx_dev_runtime85 = require("react/jsx-dev-runtime"), loader49 = async (props) => {
   let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node51.json)({ user: cookie.user });
 }, UserInputBoxOne = () => {
@@ -26095,7 +26114,7 @@ var import_axios47 = __toESM(require("axios")), import_jsx_dev_runtime85 = requi
                     userBioInfo: (_r = bioRef.current) == null ? void 0 : _r.value,
                     userDOB: (_s = datepicker.current) == null ? void 0 : _s.value,
                     userPicUrl: avatar.data
-                  }, data = await (0, import_axios47.default)({
+                  }, data = await (0, import_axios48.default)({
                     method: "post",
                     url: `${BaseUrl}/api/updateuser`,
                     data: req,
@@ -26180,7 +26199,7 @@ var import_axios47 = __toESM(require("axios")), import_jsx_dev_runtime85 = requi
     columnNumber: 5
   }, this);
 }, profilecomplete_default2 = UserInputBoxOne, action10 = async ({ request }) => {
-  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios47.default)({
+  let formData = await request.formData(), value = Object.fromEntries(formData), userdata = await (0, import_axios48.default)({
     method: "post",
     url: `${BaseUrl}/api/getuser`,
     data: { id: value.id },
@@ -26226,9 +26245,9 @@ __export(inviteinf_camp_exports, {
   default: () => inviteinf_camp_default,
   loader: () => loader50
 });
-var import_free_solid_svg_icons32 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome33 = require("@fortawesome/react-fontawesome"), import_node52 = require("@remix-run/node"), import_react96 = require("@remix-run/react"), import_axios48 = __toESM(require("axios")), import_react97 = require("react"), import_react_switch = __toESM(require("react-switch")), import_use_local_storage_state = __toESM(require("use-local-storage-state"));
+var import_free_solid_svg_icons32 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome33 = require("@fortawesome/react-fontawesome"), import_node52 = require("@remix-run/node"), import_react96 = require("@remix-run/react"), import_axios49 = __toESM(require("axios")), import_react97 = require("react"), import_react_switch = __toESM(require("react-switch")), import_use_local_storage_state = __toESM(require("use-local-storage-state"));
 var import_jsx_dev_runtime87 = require("react/jsx-dev-runtime"), loader50 = async (props) => {
-  let id = props.params.camp, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), platformRes = await import_axios48.default.post(`${BaseUrl}/api/getplatform`), categoryRes = await import_axios48.default.post(`${BaseUrl}/api/getcategory`), countryRes = await import_axios48.default.post(`${BaseUrl}/api/getcountry`);
+  let id = props.params.camp, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), platformRes = await import_axios49.default.post(`${BaseUrl}/api/getplatform`), categoryRes = await import_axios49.default.post(`${BaseUrl}/api/getcategory`), countryRes = await import_axios49.default.post(`${BaseUrl}/api/getcountry`);
   return (0, import_node52.json)({
     user: cookie.user,
     campid: id,
@@ -26266,7 +26285,7 @@ var import_jsx_dev_runtime87 = require("react/jsx-dev-runtime"), loader50 = asyn
   ), [active, setActive] = (0, import_react97.useState)(!1), [camSearchResult, setCamSearchResult] = (0, import_react97.useState)([]), champTextSearch = (0, import_react97.useRef)(null), [selCountry, setSelCountry] = (0, import_react97.useState)([]), [con, setcon] = (0, import_react97.useState)(!1), [selPlatform, setSelectedPlatform] = (0, import_react97.useState)([]), [selcategory, setSelcategory] = (0, import_react97.useState)([]), [cat, setcat] = (0, import_react97.useState)(!1), [error, setError] = (0, import_react97.useState)(null), camptextsearch = async (searchtext) => {
     if (champTextSearch.current.value = "", searchtext == "" || searchtext == null || searchtext == null)
       return setError("Fill the field to start searching");
-    let req = { search: searchtext, role: 10 }, data = await import_axios48.default.post(`${BaseUrl}/api/user-search`, req);
+    let req = { search: searchtext, role: 10 }, data = await import_axios49.default.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == !1)
       return setCamSearchResult([data.data.data]), setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -26283,7 +26302,7 @@ var import_jsx_dev_runtime87 = require("react/jsx-dev-runtime"), loader50 = asyn
       category: selcategory[0].id,
       active: active ? "1" : "0",
       role: 10
-    }, data = await import_axios48.default.post(`${BaseUrl}/api/user-search`, req);
+    }, data = await import_axios49.default.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == !1)
       return setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -27230,7 +27249,7 @@ var import_jsx_dev_runtime87 = require("react/jsx-dev-runtime"), loader50 = asyn
       fromUserId: props.brandUserId,
       toUserId: props.id,
       inviteMessage: "A brand invited you to there campaign."
-    }, data = await import_axios48.default.post(`${BaseUrl}/api/add-invite`, req);
+    }, data = await import_axios49.default.post(`${BaseUrl}/api/add-invite`, req);
     data.data.status == !1 ? setError(data.data.message) : setSus("Request has been sent.");
   };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)(import_jsx_dev_runtime87.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime87.jsxDEV)("div", { className: "bg-white rounded-xl shadow-xl w-64 my-2", children: [
@@ -27404,7 +27423,7 @@ __export(createcampaign_exports2, {
   default: () => createcampaign_default3,
   loader: () => loader51
 });
-var import_free_solid_svg_icons33 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome34 = require("@fortawesome/react-fontawesome"), import_node53 = require("@remix-run/node"), import_react98 = require("@remix-run/react"), import_axios49 = __toESM(require("axios")), import_react99 = require("react");
+var import_free_solid_svg_icons33 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome34 = require("@fortawesome/react-fontawesome"), import_node53 = require("@remix-run/node"), import_react98 = require("@remix-run/react"), import_axios50 = __toESM(require("axios")), import_react99 = require("react");
 
 // app/state/campaign/createcampaign.ts
 var import_zustand8 = require("zustand"), CreateCampaignStore = (0, import_zustand8.create)()((set) => ({
@@ -27499,7 +27518,7 @@ var import_zustand8 = require("zustand"), CreateCampaignStore = (0, import_zusta
 
 // app/routes/home/createcampaign/index.tsx
 var import_jsx_dev_runtime88 = require("react/jsx-dev-runtime"), loader51 = async () => {
-  let data = await import_axios49.default.post(`${BaseUrl}/api/get-campaign-type`);
+  let data = await import_axios50.default.post(`${BaseUrl}/api/get-campaign-type`);
   return (0, import_node53.json)({ data: data.data.data });
 }, Step1 = () => {
   let navigate = (0, import_react98.useNavigate)(), [error, setError] = (0, import_react99.useState)(!1), catdata = (0, import_react98.useLoaderData)().data, campaginType = createcampaign_default2((state) => state.campaignTypeId), setCampaginType = createcampaign_default2(
@@ -27618,9 +27637,9 @@ __export(step2_exports, {
   default: () => step2_default,
   loader: () => loader52
 });
-var import_free_solid_svg_icons34 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome35 = require("@fortawesome/react-fontawesome"), import_node54 = require("@remix-run/node"), import_react100 = require("@remix-run/react"), import_axios50 = __toESM(require("axios"));
+var import_free_solid_svg_icons34 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome35 = require("@fortawesome/react-fontawesome"), import_node54 = require("@remix-run/node"), import_react100 = require("@remix-run/react"), import_axios51 = __toESM(require("axios"));
 var import_react101 = require("react"), import_react_simple_star_rating2 = require("react-simple-star-rating"), import_jsx_dev_runtime89 = require("react/jsx-dev-runtime"), loader52 = async () => {
-  let platform = await import_axios50.default.post(`${BaseUrl}/api/getplatform`);
+  let platform = await import_axios51.default.post(`${BaseUrl}/api/getplatform`);
   return (0, import_node54.json)({ platform: platform.data.data });
 }, Step2 = () => {
   let [backbox, setBackBox] = (0, import_react101.useState)(!1), mediatype = ["Post", "Story", "Reel", "Video", "Audio"], data = (0, import_react100.useLoaderData)(), navigator2 = (0, import_react100.useNavigate)(), campaginType = createcampaign_default2((state) => state.campaignTypeId), [error, setError] = (0, import_react101.useState)(null), mendtionText = (0, import_react101.useRef)(null), [menerror, setMenError] = (0, import_react101.useState)(null), [addmendtion, setAddMendtion] = (0, import_react101.useState)(!1), mendtion = createcampaign_default2((state) => state.mendtion), removeMendtion = createcampaign_default2((state) => state.removeMeddtion), clearMendtion = createcampaign_default2((state) => state.clearMendtion), addMendtion = createcampaign_default2((state) => state.addMendtion), hashtagText = (0, import_react101.useRef)(null), [hasherror, setHashError] = (0, import_react101.useState)(null), [addhashtag, setAddHashtag] = (0, import_react101.useState)(!1), hashtag = createcampaign_default2((state) => state.hashtag), removeHashtag = createcampaign_default2((state) => state.removeHashtag), clearHashtag = createcampaign_default2((state) => state.clearHashtag), addHashtag = createcampaign_default2((state) => state.addHashtag), dosText = (0, import_react101.useRef)(null), [doserror, setDosError] = (0, import_react101.useState)(null), [adddos, setAddDos] = (0, import_react101.useState)(!1), dos = createcampaign_default2((state) => state.dos), removeDos = createcampaign_default2((state) => state.removeDos), addDos = createcampaign_default2((state) => state.addDos), dontsText = (0, import_react101.useRef)(null), [dontserror, setDontsError] = (0, import_react101.useState)(null), [adddonts, setAddDonts] = (0, import_react101.useState)(!1), donts = createcampaign_default2((state) => state.donts), removeDonts = createcampaign_default2((state) => state.removeDonts), addDonts = createcampaign_default2((state) => state.addDonts), inputFile = (0, import_react101.useRef)(null), [pdferror, setPdferror] = (0, import_react101.useState)(null), pdfFile = createcampaign_default2((state) => state.pdffile), addPdfFile = createcampaign_default2((state) => state.addPdfFile), platform = createcampaign_default2((state) => state.platform), setPlatform = createcampaign_default2((state) => state.setPlatform), media3 = createcampaign_default2((state) => state.media), setMedia = createcampaign_default2((state) => state.setMedia), campinfo = (0, import_react101.useRef)(null), campaignInfo = createcampaign_default2((state) => state.campaignInfo), setCampaignInfo = createcampaign_default2((state) => state.setCampaignInfo), affLink = (0, import_react101.useRef)(null), affiliatedLinks = createcampaign_default2((state) => state.affiliatedLinks), setAffiliatedLinks = createcampaign_default2((state) => state.setAffiliatedLinks), discCopon = (0, import_react101.useRef)(null), discoutCoupon = createcampaign_default2((state) => state.discoutCoupon), setDiscoutCoupon = createcampaign_default2((state) => state.setDiscoutCoupon), tar = (0, import_react101.useRef)(null), target = createcampaign_default2((state) => state.target), setTarget = createcampaign_default2((state) => state.setTarget), mintar = (0, import_react101.useRef)(null), mintarget = createcampaign_default2((state) => state.minTarget), setMintarget = createcampaign_default2((state) => state.setMinTarget), [rating, setRating] = (0, import_react101.useState)(0), getrating = createcampaign_default2((state) => state.rating), setrating = createcampaign_default2((state) => state.setRating), handleRating = (rate) => {
@@ -28466,7 +28485,7 @@ __export(step3_exports, {
   default: () => step3_default,
   loader: () => loader53
 });
-var import_free_solid_svg_icons35 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome36 = require("@fortawesome/react-fontawesome"), import_node55 = require("@remix-run/node"), import_react103 = require("@remix-run/react"), import_axios51 = __toESM(require("axios")), import_react104 = require("react");
+var import_free_solid_svg_icons35 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome36 = require("@fortawesome/react-fontawesome"), import_node55 = require("@remix-run/node"), import_react103 = require("@remix-run/react"), import_axios52 = __toESM(require("axios")), import_react104 = require("react");
 var import_api = require("@react-google-maps/api");
 
 // app/location.ts
@@ -28501,7 +28520,7 @@ var import_react102 = require("react"), useGeoLocation = () => {
 
 // app/routes/home/createcampaign/step3.tsx
 var import_jsx_dev_runtime90 = require("react/jsx-dev-runtime"), loader53 = async () => {
-  let data = await import_axios51.default.post(`${BaseUrl}/api/getcategory`);
+  let data = await import_axios52.default.post(`${BaseUrl}/api/getcategory`);
   return (0, import_node55.json)({ data: data.data.data });
 }, Step3 = () => {
   let navigator2 = (0, import_react103.useNavigate)(), data = (0, import_react103.useLoaderData)(), location = location_default(), [error, setError] = (0, import_react104.useState)(null), audienceText = (0, import_react104.useRef)(null), [auderror, setAudError] = (0, import_react104.useState)(null), [addaudience, setAddAudience] = (0, import_react104.useState)(!1), audience = createcampaign_default2((state) => state.audience), removeAudience = createcampaign_default2((state) => state.removeAudience), clearAudience = createcampaign_default2((state) => state.clearAudience), addAudience = createcampaign_default2((state) => state.addAudience), infLocation = createcampaign_default2((state) => state.infLocation), setInfLocation = createcampaign_default2((state) => state.setInfLocation), datepicker = (0, import_react104.useRef)(null), tilldate = createcampaign_default2((state) => state.tilldate), setTillDate = createcampaign_default2((state) => state.setTillDate), maxInf = (0, import_react104.useRef)(null), maxinf = createcampaign_default2((state) => state.maxInf), setMaxInf = createcampaign_default2((state) => state.setMaxInf), remuneration = (0, import_react104.useRef)(null), Remuneration = createcampaign_default2((state) => state.remuneration), setRemuneration = createcampaign_default2((state) => state.setRemuneration), remunerationType = createcampaign_default2(
@@ -30365,7 +30384,7 @@ __export(step6_exports, {
   default: () => step6_default,
   loader: () => loader55
 });
-var import_free_solid_svg_icons37 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome38 = require("@fortawesome/react-fontawesome"), import_node57 = require("@remix-run/node"), import_react109 = require("@remix-run/react"), import_axios52 = __toESM(require("axios")), import_react110 = require("react");
+var import_free_solid_svg_icons37 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome38 = require("@fortawesome/react-fontawesome"), import_node57 = require("@remix-run/node"), import_react109 = require("@remix-run/react"), import_axios53 = __toESM(require("axios")), import_react110 = require("react");
 var import_jsx_dev_runtime93 = require("react/jsx-dev-runtime");
 async function loader55({ request }) {
   let cookieHeader = request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
@@ -30416,7 +30435,7 @@ var Step6 = () => {
       campaignStatus: "1"
     };
     remunerationType == "1" && (req.remunerationCash = remuneration), remunerationType == "2" && (req.remunerationProductDetail = remuneration), remunerationType == "3" && (req.remunerationRevenuePer = remuneration), remunerationType == "4" && (req.dicountCoupon = remuneration), campaignTypeId == "4" && (req.minTarget = minTarget, req.maxTarget = target);
-    let data = await (0, import_axios52.default)({
+    let data = await (0, import_axios53.default)({
       method: "post",
       url: `${BaseUrl}/api/add-campaign`,
       data: req,
@@ -30439,7 +30458,7 @@ var Step6 = () => {
         title: `attachemtn${id}`,
         url: pdfurl.data
       };
-      await (0, import_axios52.default)({
+      await (0, import_axios53.default)({
         method: "post",
         url: `${BaseUrl}/api/add-campaign-attachment`,
         data: pdfref,
@@ -30461,7 +30480,7 @@ var Step6 = () => {
             title: `moodboard${id}${i}`,
             url: imgurl.data
           };
-          await (0, import_axios52.default)({
+          await (0, import_axios53.default)({
             method: "post",
             url: `${BaseUrl}/api/add-campaign-attachment`,
             data: imgref,
@@ -30478,7 +30497,7 @@ var Step6 = () => {
         } else
           setError(imgurl.data);
       }
-      return await (0, import_axios52.default)({
+      return await (0, import_axios53.default)({
         method: "post",
         url: "http://bluelemontech.in:5563/notification/send",
         data: {
@@ -30898,10 +30917,10 @@ __export(spbd_exports, {
   default: () => spbd_default,
   loader: () => loader56
 });
-var import_node58 = require("@remix-run/node"), import_react111 = require("@remix-run/react"), import_axios53 = __toESM(require("axios"));
+var import_node58 = require("@remix-run/node"), import_react111 = require("@remix-run/react"), import_axios54 = __toESM(require("axios"));
 var import_react112 = require("react");
 var import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), loader56 = async ({ request }) => {
-  let platform = await import_axios53.default.post(`${BaseUrl}/api/getplatform`), cookieHeader = request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
+  let platform = await import_axios54.default.post(`${BaseUrl}/api/getplatform`), cookieHeader = request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node58.json)({ platform: platform.data.data, userdata: cookie.user });
 }, Spbd = () => {
   let [backbox, setBackBox] = (0, import_react112.useState)(!1), userdata = (0, import_react111.useLoaderData)(), userId = userdata.userdata.id, brandId = userdata.userdata.brandId, mediatype = ["Post", "Story", "Reel", "Video", "Audio"], data = (0, import_react111.useLoaderData)(), navigator2 = (0, import_react111.useNavigate)(), campaginType = createcampaign_default2((state) => state.campaignTypeId), [error, setError] = (0, import_react112.useState)(null), platform = createcampaign_default2((state) => state.platform), setPlatform = createcampaign_default2((state) => state.setPlatform), media3 = createcampaign_default2((state) => state.media), setMedia = createcampaign_default2((state) => state.setMedia), CampaignName = (0, import_react112.useRef)(null), campinfo = (0, import_react112.useRef)(null), StartDate = (0, import_react112.useRef)(null), EndDate = (0, import_react112.useRef)(null), [sd, setsd] = (0, import_react112.useState)(""), [ed, seted] = (0, import_react112.useState)(""), [cn, setcn] = (0, import_react112.useState)(""), campaignTypeId = createcampaign_default2((state) => state.campaignTypeId), CostPerPost = (0, import_react112.useRef)(null), [cpp, setcpp] = (0, import_react112.useState)("");
@@ -31389,7 +31408,7 @@ var import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), loader56 = asyn
                       platforms: platform.join(),
                       startAt: (_t = StartDate.current) == null ? void 0 : _t.value,
                       endAt: (_u = EndDate.current) == null ? void 0 : _u.value
-                    }, data2 = await (0, import_axios53.default)({
+                    }, data2 = await (0, import_axios54.default)({
                       method: "post",
                       url: `${BaseUrl}/api/add-campaign`,
                       data: req,
@@ -31411,7 +31430,7 @@ var import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), loader56 = asyn
                         campaignId: data2.data.data.campaign.id,
                         remark: "init bid",
                         bidamount: (_v = CostPerPost.current) == null ? void 0 : _v.value
-                      }, data1 = await (0, import_axios53.default)({
+                      }, data1 = await (0, import_axios54.default)({
                         method: "post",
                         url: `${BaseUrl}/api/add-bid`,
                         data: req1,
@@ -31428,7 +31447,7 @@ var import_jsx_dev_runtime94 = require("react/jsx-dev-runtime"), loader56 = asyn
                       if (data1.data.status == !1)
                         setError(data1.data.message);
                       else
-                        return await (0, import_axios53.default)({
+                        return await (0, import_axios54.default)({
                           method: "post",
                           url: "http://bluelemontech.in:5563/notification/send",
                           data: {
@@ -31513,7 +31532,7 @@ __export(brand_id_exports, {
   default: () => brand_id_default,
   loader: () => loader57
 });
-var import_free_solid_svg_icons38 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome39 = require("@fortawesome/react-fontawesome"), import_node59 = require("@remix-run/node"), import_react115 = require("@remix-run/react"), import_axios54 = __toESM(require("axios")), import_react116 = require("react"), import_use_local_storage_state2 = __toESM(require("use-local-storage-state"));
+var import_free_solid_svg_icons38 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome39 = require("@fortawesome/react-fontawesome"), import_node59 = require("@remix-run/node"), import_react115 = require("@remix-run/react"), import_axios55 = __toESM(require("axios")), import_react116 = require("react"), import_use_local_storage_state2 = __toESM(require("use-local-storage-state"));
 
 // app/components/utils/campagincard.tsx
 var import_react113 = require("@remix-run/react");
@@ -31713,9 +31732,9 @@ var import_react114 = require("react"), import_jsx_dev_runtime95 = require("reac
 
 // app/routes/home/brand.$id.tsx
 var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), loader57 = async (props) => {
-  let id = props.params.id, branddata = await import_axios54.default.post(`${BaseUrl}/api/get-brand`, { id }), cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), reqdata = await import_axios54.default.post(`${BaseUrl}/api/get-brand-connection`, {
+  let id = props.params.id, branddata = await import_axios55.default.post(`${BaseUrl}/api/get-brand`, { id }), cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), reqdata = await import_axios55.default.post(`${BaseUrl}/api/get-brand-connection`, {
     brandId: id
-  }), reqdata1 = await import_axios54.default.post(`${BaseUrl}/api/get-brand-com-cam`, {
+  }), reqdata1 = await import_axios55.default.post(`${BaseUrl}/api/get-brand-com-cam`, {
     brandId: id
   });
   return (0, import_node59.json)({
@@ -31747,7 +31766,7 @@ var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), loader57 = asyn
         type: "3",
         brand: brand.id
       }
-    }, apireq = await (0, import_axios54.default)({
+    }, apireq = await (0, import_axios55.default)({
       method: "post",
       url: `${BaseUrl}/api/search-review`,
       data: req
@@ -31860,7 +31879,7 @@ var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), loader57 = asyn
                     fromUserId: user.id,
                     toUserId: brand.id,
                     comment: (_d = messageRef.current) == null ? void 0 : _d.value
-                  }, data = await (0, import_axios54.default)({
+                  }, data = await (0, import_axios55.default)({
                     method: "post",
                     url: `${BaseUrl}/api/add-chat`,
                     data: req,
@@ -32358,7 +32377,7 @@ var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), loader57 = asyn
   let [topChampaing, setTopChampaing] = (0, import_react116.useState)([]), [campaignCards, setCampaignCards] = (0, import_react116.useState)([]);
   return (0, import_react116.useEffect)(() => {
     (async () => {
-      let apidata = await (0, import_axios54.default)({
+      let apidata = await (0, import_axios55.default)({
         method: "post",
         url: `${BaseUrl}/api/campaign-search`,
         data: { brand: props.brandId }
@@ -32428,7 +32447,7 @@ var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), loader57 = asyn
         influencer: props.userId,
         brand: props.brandId
       }
-    }, responseData = await import_axios54.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setResDarft(responseData.data.data);
   };
   return (0, import_react116.useEffect)(() => {
@@ -32557,14 +32576,14 @@ var import_jsx_dev_runtime96 = require("react/jsx-dev-runtime"), loader57 = asyn
 };
 
 // app/routes/home/campaigns.$id.tsx
-var import_node60 = require("@remix-run/node"), import_axios55 = __toESM(require("axios"));
+var import_node60 = require("@remix-run/node"), import_axios56 = __toESM(require("axios"));
 var import_react118 = require("@remix-run/react");
 var import_stripe2 = __toESM(require("stripe")), import_jsx_dev_runtime97 = require("react/jsx-dev-runtime"), stripe2 = new import_stripe2.default(
   "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",
   { apiVersion: "2022-11-15" }
 );
 var loader58 = async (props) => {
-  let id = props.params.id, campaigndata = await import_axios55.default.post(
+  let id = props.params.id, campaigndata = await import_axios56.default.post(
     `${BaseUrl}/api/campaign-search`,
     { id },
     {
@@ -32596,13 +32615,13 @@ var loader58 = async (props) => {
         campaign: champaign.id,
         influencer: userId
       }
-    }, reqdata = await import_axios55.default.post(`${BaseUrl}/api/search-invite`, req);
+    }, reqdata = await import_axios56.default.post(`${BaseUrl}/api/search-invite`, req);
     reqdata.data.status == !0 ? (reqdata.data.data[0].status.code == "1" && setAcceptreq(1 /* Panding */), reqdata.data.data[0].status.code == "3" && setAcceptreq(2 /* Accepted */), reqdata.data.data[0].status.code == "5" && setAcceptreq(3 /* Rejected */), setRequestdata(reqdata.data.data)) : setAcceptreq(0 /* None */);
-    let reqdata1 = await import_axios55.default.post(`${BaseUrl}/api/get-brand-connection`, {
+    let reqdata1 = await import_axios56.default.post(`${BaseUrl}/api/get-brand-connection`, {
       brandId: champaign.brand.id
     });
     reqdata.data.status ? setBarndConnection(reqdata1.data.data.influencer_count) : setBarndConnection(0);
-    let reqdata2 = await import_axios55.default.post(`${BaseUrl}/api/get-brand-com-cam`, {
+    let reqdata2 = await import_axios56.default.post(`${BaseUrl}/api/get-brand-com-cam`, {
       brandId: champaign.brand.id
     });
     reqdata2.data.status ? setBarndComCam(reqdata2.data.data.completed_campaign) : setBarndComCam(0);
@@ -32611,7 +32630,7 @@ var loader58 = async (props) => {
         type: "3",
         brand: champaign.brand.id
       }
-    }, apireq = await (0, import_axios55.default)({
+    }, apireq = await (0, import_axios56.default)({
       method: "post",
       url: `${BaseUrl}/api/search-review`,
       data: req1
@@ -32623,7 +32642,7 @@ var loader58 = async (props) => {
       rate: myrate,
       constCount: 3
     }));
-    let bidreq = await import_axios55.default.post(`${BaseUrl}/api/get-approved-bid`, {
+    let bidreq = await import_axios56.default.post(`${BaseUrl}/api/get-approved-bid`, {
       campaignId: champaign.id
     });
     bidreq.data.status && setApprovedBid((val) => bidreq.data.data[0]);
@@ -33544,7 +33563,7 @@ var loader58 = async (props) => {
         status: "3",
         campaign: props.champaignId
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-invite`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/search-invite`, req);
     if (responseData.data.status == !0 && (invites = responseData.data.data.length), new Date() >= new Date(props.endAt))
       return setError1("Campaign already ended.");
     if (invites > props.maxinf)
@@ -33560,7 +33579,7 @@ var loader58 = async (props) => {
       fromUserId: props.fromuserId,
       toUserId: props.touserId,
       inviteMessage: (_d = messageRef.current) == null ? void 0 : _d.value
-    }, data = await import_axios55.default.post(`${BaseUrl}/api/add-invite`, req);
+    }, data = await import_axios56.default.post(`${BaseUrl}/api/add-invite`, req);
     data.data.status == !1 ? setError(data.data.message) : (messageRef.current.value = "", onCloseModal()), window.location.reload();
   };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)(import_jsx_dev_runtime97.Fragment, { children: [
@@ -33828,10 +33847,10 @@ var loader58 = async (props) => {
         status: "1",
         campaign: props.campaingid
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-invite`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/search-invite`, req);
     responseData.data.status == !0 && setRequestinvite(responseData.data.data);
   }, acceptRequest = async () => {
-    let req = { id, status: "3" }, responseData = await import_axios55.default.post(`${BaseUrl}/api/update-invite`, req);
+    let req = { id, status: "3" }, responseData = await import_axios56.default.post(`${BaseUrl}/api/update-invite`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setAcceptbox(!1), window.location.reload();
@@ -33843,7 +33862,7 @@ var loader58 = async (props) => {
       id,
       status: "5",
       rejectReason: (_d = rejectiontextRef.current) == null ? void 0 : _d.value
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/update-invite`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/update-invite`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     rejectiontextRef.current.value == "", setrejectbox(!1), window.location.reload();
@@ -34287,10 +34306,10 @@ var loader58 = async (props) => {
         campaign: props.campaingid,
         toUser: props.userId
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setRequestinvite(responseData.data.data);
   }, acceptRequest = async () => {
-    let req = { id, status: "3" }, responseData = await import_axios55.default.post(`${BaseUrl}/api/update-draft`, req);
+    let req = { id, status: "3" }, responseData = await import_axios56.default.post(`${BaseUrl}/api/update-draft`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setAcceptbox(!1), window.location.reload();
@@ -34302,7 +34321,7 @@ var loader58 = async (props) => {
       id,
       status: "5",
       rejectReason: (_d = rejectiontextRef.current) == null ? void 0 : _d.value
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/update-draft`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/update-draft`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     rejectiontextRef.current.value == "", setrejectbox(!1), window.location.reload();
@@ -34792,7 +34811,7 @@ var loader58 = async (props) => {
       fromUserId: props.fromuserId,
       toUserId: props.touserId,
       inviteMessage: (_d = messageRef.current) == null ? void 0 : _d.value
-    }, data = await import_axios55.default.post(`${BaseUrl}/api/add-invite`, req);
+    }, data = await import_axios56.default.post(`${BaseUrl}/api/add-invite`, req);
     data.data.status == !1 ? setError(data.data.message) : (messageRef.current.value = "", onCloseModal()), window.location.reload();
   };
   return /* @__PURE__ */ (0, import_jsx_dev_runtime97.jsxDEV)(import_jsx_dev_runtime97.Fragment, { children: [
@@ -35145,7 +35164,7 @@ var loader58 = async (props) => {
                   publishAt: (_g = datepicker.current) == null ? void 0 : _g.value,
                   attach01: pdfurl.data,
                   description: (_h = descraption.current) == null ? void 0 : _h.value
-                }, data = await (0, import_axios55.default)({
+                }, data = await (0, import_axios56.default)({
                   method: "post",
                   url: `${BaseUrl}/api/add-draft`,
                   data: req
@@ -35222,7 +35241,7 @@ var loader58 = async (props) => {
       search: {
         campaign: props.campaingid
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/get-req-pay`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/get-req-pay`, req);
     responseData.data.status == !0 && setRequestPayment(responseData.data.data);
   };
   (0, import_react117.useEffect)(() => {
@@ -35233,12 +35252,12 @@ var loader58 = async (props) => {
       id,
       status: "2",
       refNo: `${new Date().toLocaleDateString()}_${props.userid}_${props.campaingid}`
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/update-payment`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/update-payment`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setAcceptbox(!1), window.location.reload();
   }, rejectRequest = async () => {
-    let req = { id, status: "3" }, responseData = await import_axios55.default.post(`${BaseUrl}/api/update-payment`, req);
+    let req = { id, status: "3" }, responseData = await import_axios56.default.post(`${BaseUrl}/api/update-payment`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setrejectbox(!1), window.location.reload();
@@ -35707,7 +35726,7 @@ var loader58 = async (props) => {
         campaign: props.campaingid,
         influencer: props.userId
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setResDarft(responseData.data.data);
   };
   return (0, import_react117.useEffect)(() => {
@@ -35877,7 +35896,7 @@ var loader58 = async (props) => {
       search: {
         campaign: props.campaingid
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setResDarft(responseData.data.data);
   };
   return (0, import_react117.useEffect)(() => {
@@ -36087,7 +36106,7 @@ var loader58 = async (props) => {
         influencer: props.userId,
         status: 3
       }
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setResDarft(responseData.data.data), setLinkBox(Array(responseData.data.data.length).fill(!1)), setError(Array(responseData.data.data.length).fill("")), setLinkValue(Array(responseData.data.data.length).fill(""));
   }, upadteLinkBox = (value, index2) => {
     let updatedLinkBox = [...linkBox];
@@ -36098,7 +36117,7 @@ var loader58 = async (props) => {
       let updatedErrors = [...errors];
       updatedErrors[index2] = "Please enter the link", setError(updatedErrors);
     } else {
-      let responseData = await import_axios55.default.post(`${BaseUrl}/api/update-draft`, {
+      let responseData = await import_axios56.default.post(`${BaseUrl}/api/update-draft`, {
         id: resDarft[index2].id,
         linkCampaign: link
       });
@@ -36249,7 +36268,7 @@ var loader58 = async (props) => {
   let [error, setError] = (0, import_react117.useState)(""), [amount, setAmount] = (0, import_react117.useState)(0), messageRef = (0, import_react117.useRef)(null), [bidamount, setBidamount] = (0, import_react117.useState)(0), handelcontent = (e) => {
     setBidamount(e.target.value.replace(/\D/g, ""));
   }, init = async () => {
-    let camp = await (0, import_axios55.default)({
+    let camp = await (0, import_axios56.default)({
       method: "post",
       url: `${BaseUrl}/api/get-campaign-last-bid`,
       data: { campaignId: props.campaignId }
@@ -36276,7 +36295,7 @@ var loader58 = async (props) => {
         campaignId: props.campaignId,
         remark: (_d = messageRef.current) == null ? void 0 : _d.value,
         bidamount: Number(bidamount)
-      }, data = await (0, import_axios55.default)({
+      }, data = await (0, import_axios56.default)({
         method: "post",
         url: `${BaseUrl}/api/add-bid`,
         data: req,
@@ -36409,7 +36428,7 @@ var loader58 = async (props) => {
   let [resbid, setResbid] = (0, import_react117.useState)([]), [acceptbox, setAcceptbox] = (0, import_react117.useState)(!1), [error, setError] = (0, import_react117.useState)(null), [id, setId] = (0, import_react117.useState)(null), init = async () => {
     let req = {
       campaignId: props.campaingid
-    }, responseData = await import_axios55.default.post(
+    }, responseData = await import_axios56.default.post(
       `${BaseUrl}/api/get-campaign-bid`,
       req
     );
@@ -36421,7 +36440,7 @@ var loader58 = async (props) => {
   let acceptRequest = async () => {
     let req = {
       id
-    }, responseData = await import_axios55.default.post(`${BaseUrl}/api/approve-bid`, req);
+    }, responseData = await import_axios56.default.post(`${BaseUrl}/api/approve-bid`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setAcceptbox(!1), window.location.reload();
@@ -36724,7 +36743,7 @@ __export(findcampaign_exports, {
 });
 var import_free_solid_svg_icons41 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome42 = require("@fortawesome/react-fontawesome");
 var import_react_switch3 = __toESM(require("react-switch")), import_react121 = require("react");
-var import_axios56 = __toESM(require("axios"));
+var import_axios57 = __toESM(require("axios"));
 var import_node61 = require("@remix-run/node"), import_react122 = require("@remix-run/react");
 
 // app/components/utils/brandcard.tsx
@@ -36984,7 +37003,7 @@ var import_react_fontawesome41 = require("@fortawesome/react-fontawesome"), impo
 
 // app/routes/home/findcampaign.tsx
 var import_use_local_storage_state3 = __toESM(require("use-local-storage-state")), import_jsx_dev_runtime100 = require("react/jsx-dev-runtime"), loader59 = async (props) => {
-  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), platformRes = await import_axios56.default.post(`${BaseUrl}/api/getplatform`), categoryRes = await import_axios56.default.post(`${BaseUrl}/api/getcategory`), countryRes = await import_axios56.default.post(`${BaseUrl}/api/getcountry`), type = await import_axios56.default.post(`${BaseUrl}/api/get-campaign-type`);
+  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), platformRes = await import_axios57.default.post(`${BaseUrl}/api/getplatform`), categoryRes = await import_axios57.default.post(`${BaseUrl}/api/getcategory`), countryRes = await import_axios57.default.post(`${BaseUrl}/api/getcountry`), type = await import_axios57.default.post(`${BaseUrl}/api/get-campaign-type`);
   return (0, import_node61.json)({
     user: cookie.user,
     platform: platformRes.data.data,
@@ -37201,7 +37220,7 @@ var import_use_local_storage_state3 = __toESM(require("use-local-storage-state")
       complete: !0
     };
     champTextSearch.current.value != null && champTextSearch.current.value != null && champTextSearch.current.value != "" && (req.name = champTextSearch.current.value), ((_a = minReachSearch.current) == null ? void 0 : _a.value) != null && ((_b = minReachSearch.current) == null ? void 0 : _b.value) != null && ((_c = minReachSearch.current) == null ? void 0 : _c.value) != "" && (req.minReach = (_d = minReachSearch.current) == null ? void 0 : _d.value), ((_e = endDateSearch.current) == null ? void 0 : _e.value) != null && ((_f = endDateSearch.current) == null ? void 0 : _f.value) != null && ((_g = endDateSearch.current) == null ? void 0 : _g.value) != "" && (req.endDate = (_h = endDateSearch.current) == null ? void 0 : _h.value), ((_i = cppSearch.current) == null ? void 0 : _i.value) != null && ((_j = cppSearch.current) == null ? void 0 : _j.value) != null && ((_k = cppSearch.current) == null ? void 0 : _k.value) != "" && (req.costPerPost = (_l = cppSearch.current) == null ? void 0 : _l.value), ((_m = minTargetSearch.current) == null ? void 0 : _m.value) != null && ((_n = minTargetSearch.current) == null ? void 0 : _n.value) != null && ((_o = minTargetSearch.current) == null ? void 0 : _o.value) != "" && (req.minTarget = (_p = minTargetSearch.current) == null ? void 0 : _p.value), selcategory.length != 0 && (req.category = selcategory[0].id), ((_q = minRatingSearch.current) == null ? void 0 : _q.value) != null && ((_r = minRatingSearch.current) == null ? void 0 : _r.value) != null && ((_s = minRatingSearch.current) == null ? void 0 : _s.value) != "" && (req.minRating = (_t = minRatingSearch.current) == null ? void 0 : _t.value);
-    let data = await import_axios56.default.post(`${BaseUrl}/api/campaign-search`, req);
+    let data = await import_axios57.default.post(`${BaseUrl}/api/campaign-search`, req);
     if (data.data.status == !1)
       return setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -37212,7 +37231,7 @@ var import_use_local_storage_state3 = __toESM(require("use-local-storage-state")
       active: active ? "1" : "0"
     };
     selchamptype.length != 0 && (req.type = selchamptype[0].id), selPlatform.length != 0 && (req.platform = selPlatform.join(",")), selCountry.length != 0 && (req.country = selCountry[0].id);
-    let data = await import_axios56.default.post(`${BaseUrl}/api/campaign-search`, req);
+    let data = await import_axios57.default.post(`${BaseUrl}/api/campaign-search`, req);
     if (data.data.status == !1)
       return setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -38377,7 +38396,7 @@ var import_use_local_storage_state3 = __toESM(require("use-local-storage-state")
   ), [active, setActive] = (0, import_react121.useState)(!1), [camSearchResult, setCamSearchResult] = (0, import_react121.useState)([]), champTextSearch = (0, import_react121.useRef)(null), [selCountry, setSelCountry] = (0, import_react121.useState)([]), [con, setcon] = (0, import_react121.useState)(!1), [selPlatform, setSelectedPlatform] = (0, import_react121.useState)([]), [selcategory, setSelcategory] = (0, import_react121.useState)([]), [cat, setcat] = (0, import_react121.useState)(!1), [error, setError] = (0, import_react121.useState)(null), camptextsearch = async (searchtext) => {
     if (setError(null), champTextSearch.current.value = "", searchtext == "" || searchtext == null || searchtext == null)
       return setError("Fill the field to start searching");
-    let req = { search: searchtext, role: 10 }, data = await import_axios56.default.post(`${BaseUrl}/api/user-search`, req);
+    let req = { search: searchtext, role: 10 }, data = await import_axios57.default.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == !1)
       return setCamSearchResult([]), setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -38388,7 +38407,7 @@ var import_use_local_storage_state3 = __toESM(require("use-local-storage-state")
       role: 10
     };
     selcategory.length != 0 && (req.category = selcategory[0].id), selPlatform.length != 0 && (req.platform = selPlatform.join(",")), selCountry.length != 0 && (req.country = selCountry[0].id);
-    let data = await import_axios56.default.post(`${BaseUrl}/api/user-search`, req);
+    let data = await import_axios57.default.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == !1)
       return setError(data.data.message);
     setCamSearchResult(data.data.data);
@@ -39215,7 +39234,7 @@ var import_use_local_storage_state3 = __toESM(require("use-local-storage-state")
   }, brandTextSearch = (0, import_react121.useRef)(null), brandtextsearch = async (searchtext) => {
     if (setError(null), brandTextSearch.current.value = "", searchtext == "" || searchtext == null || searchtext == null)
       return setError("Fill the field to start searching");
-    let req = { search: searchtext }, data = await import_axios56.default.post(`${BaseUrl}/api/search-brand`, req);
+    let req = { search: searchtext }, data = await import_axios57.default.post(`${BaseUrl}/api/search-brand`, req);
     if (data.data.status == !1)
       return setError(data.data.message);
     setBrandSearchResult(data.data.data);
@@ -39541,9 +39560,9 @@ __export(mycampaings_exports, {
   default: () => mycampaings_default,
   loader: () => loader60
 });
-var import_free_solid_svg_icons42 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome43 = require("@fortawesome/react-fontawesome"), import_node62 = require("@remix-run/node"), import_react123 = require("@remix-run/react"), import_axios57 = __toESM(require("axios")), import_react124 = require("react");
+var import_free_solid_svg_icons42 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome43 = require("@fortawesome/react-fontawesome"), import_node62 = require("@remix-run/node"), import_react123 = require("@remix-run/react"), import_axios58 = __toESM(require("axios")), import_react124 = require("react");
 var import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), loader60 = async ({ request }) => {
-  let cookieHeader = request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), userid = cookie.user.id, campdata = await (0, import_axios57.default)({
+  let cookieHeader = request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), userid = cookie.user.id, campdata = await (0, import_axios58.default)({
     method: "post",
     url: `${BaseUrl}/api/get-my-campaigns`,
     data: { id: userid }
@@ -39553,7 +39572,7 @@ var import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), loader60 = asy
       influencer: userid,
       fromUser: userid
     }
-  }, usercamp = await (0, import_axios57.default)({
+  }, usercamp = await (0, import_axios58.default)({
     method: "post",
     url: `${BaseUrl}/api/search-invite`,
     data: req,
@@ -39860,7 +39879,7 @@ var import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), loader60 = asy
         status: "3",
         influencer: props.userid
       }
-    }, apidata = await (0, import_axios57.default)({
+    }, apidata = await (0, import_axios58.default)({
       method: "post",
       url: `${BaseUrl}/api/search-invite`,
       data: req,
@@ -40132,7 +40151,7 @@ var import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), loader60 = asy
         influencer: props.userId,
         toUser: props.userId
       }
-    }, apidata = await (0, import_axios57.default)({
+    }, apidata = await (0, import_axios58.default)({
       method: "post",
       url: `${BaseUrl}/api/search-invite`,
       data: req
@@ -40143,7 +40162,7 @@ var import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), loader60 = asy
     init();
   }, []);
   let acceptRequest = async () => {
-    let req = { id, status: "3" }, responseData = await import_axios57.default.post(`${BaseUrl}/api/update-invite`, req);
+    let req = { id, status: "3" }, responseData = await import_axios58.default.post(`${BaseUrl}/api/update-invite`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     setAcceptbox(!1), window.location.reload();
@@ -40155,7 +40174,7 @@ var import_jsx_dev_runtime101 = require("react/jsx-dev-runtime"), loader60 = asy
       id,
       status: "5",
       rejectReason: (_d = rejectiontextRef.current) == null ? void 0 : _d.value
-    }, responseData = await import_axios57.default.post(`${BaseUrl}/api/update-invite`, req);
+    }, responseData = await import_axios58.default.post(`${BaseUrl}/api/update-invite`, req);
     if (responseData.data.staus == !1)
       return setError(responseData.data.message);
     rejectiontextRef.current.value == "", setrejectbox(!1), window.location.reload();
@@ -40598,7 +40617,7 @@ __export(myuser_id_exports, {
   default: () => myuser_id_default,
   loader: () => loader61
 });
-var import_free_solid_svg_icons43 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome44 = require("@fortawesome/react-fontawesome"), import_node63 = require("@remix-run/node"), import_react125 = require("@remix-run/react"), import_axios58 = __toESM(require("axios")), import_react126 = require("react"), import_react_simple_star_rating3 = require("react-simple-star-rating"), import_timeago = require("timeago.js");
+var import_free_solid_svg_icons43 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome44 = require("@fortawesome/react-fontawesome"), import_node63 = require("@remix-run/node"), import_react125 = require("@remix-run/react"), import_axios59 = __toESM(require("axios")), import_react126 = require("react"), import_react_simple_star_rating3 = require("react-simple-star-rating"), import_timeago = require("timeago.js");
 
 // app/components/progressbr.tsx
 var import_jsx_dev_runtime102 = require("react/jsx-dev-runtime"), ProgressBar = (props) => {
@@ -40628,7 +40647,7 @@ var import_jsx_dev_runtime102 = require("react/jsx-dev-runtime"), ProgressBar = 
 // app/routes/home/myuser.$id.tsx
 var import_jsx_dev_runtime103 = require("react/jsx-dev-runtime");
 var loader61 = async (props) => {
-  let id = props.params.id, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), userdata = await import_axios58.default.post(`${BaseUrl}/api/getuser`, { id }), apidata = await (0, import_axios58.default)({
+  let id = props.params.id, cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), userdata = await import_axios59.default.post(`${BaseUrl}/api/getuser`, { id }), apidata = await (0, import_axios59.default)({
     method: "post",
     url: `${BaseUrl}/api/get-my-campaigns`,
     data: { id: cookie.user.id }
@@ -40649,7 +40668,7 @@ var loader61 = async (props) => {
         influencer: user.id
       }
     };
-    if ((await import_axios58.default.post(`${BaseUrl}/api/search-invite`, req1)).data.data.length > 0)
+    if ((await import_axios59.default.post(`${BaseUrl}/api/search-invite`, req1)).data.data.length > 0)
       return setError("Already Invited.");
     {
       let req = {
@@ -40658,7 +40677,7 @@ var loader61 = async (props) => {
         fromUserId: curUser.id,
         toUserId: user.id,
         inviteMessage: "A brand invited you to there campaign."
-      }, data = await import_axios58.default.post(`${BaseUrl}/api/add-invite`, req);
+      }, data = await import_axios59.default.post(`${BaseUrl}/api/add-invite`, req);
       data.data.status == !1 ? setError(data.data.message) : (messageRef.current.value = "", setInviteBox(!1));
     }
   }, init = async () => {
@@ -40669,7 +40688,7 @@ var loader61 = async (props) => {
         influencer: user.id
       }
     };
-    (await (0, import_axios58.default)({
+    (await (0, import_axios59.default)({
       method: "post",
       url: `${BaseUrl}/api/search-review`,
       data: req
@@ -40892,7 +40911,7 @@ var loader61 = async (props) => {
                     fromUserId: curUser.id,
                     toUserId: user.id,
                     comment: (_d = messageRef.current) == null ? void 0 : _d.value
-                  }, data = await (0, import_axios58.default)({
+                  }, data = await (0, import_axios59.default)({
                     method: "post",
                     url: `${BaseUrl}/api/add-chat`,
                     data: req,
@@ -41416,7 +41435,7 @@ var loader61 = async (props) => {
   columnNumber: 5
 }, this), Channels = (props) => {
   let [handles, setHandles] = (0, import_react126.useState)([]), init = async () => {
-    let datahandles = await import_axios58.default.post(
+    let datahandles = await import_axios59.default.post(
       `${BaseUrl}/api/get-user-handles`,
       { userId: props.userId },
       {
@@ -41584,7 +41603,7 @@ var loader61 = async (props) => {
         influencer: props.userId,
         brand: props.brandId
       }
-    }, responseData = await import_axios58.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios59.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setResDarft(responseData.data.data);
   };
   return (0, import_react126.useEffect)(() => {
@@ -41716,7 +41735,7 @@ var loader61 = async (props) => {
   }, this);
 }, Review = (props) => {
   let [review, setReview] = (0, import_react126.useState)([]), init = async () => {
-    let datareview = await import_axios58.default.post(
+    let datareview = await import_axios59.default.post(
       `${BaseUrl}/api/get-user-review`,
       { userId: props.userId },
       {
@@ -41810,7 +41829,7 @@ var loader61 = async (props) => {
   }, this);
 }, Payment = (props) => {
   let [status, setStatus] = (0, import_react126.useState)([]), init = async () => {
-    let status2 = await import_axios58.default.post(
+    let status2 = await import_axios59.default.post(
       `${BaseUrl}/api/payment-status`,
       { userId: props.userId },
       {
@@ -41954,7 +41973,7 @@ var loader61 = async (props) => {
         brandId: props.brandId,
         isBrand: 0,
         message: (_i = messageRef.current) == null ? void 0 : _i.value
-      }, data = await (0, import_axios58.default)({
+      }, data = await (0, import_axios59.default)({
         method: "post",
         url: `${BaseUrl}/api/add-dispute`,
         data: req,
@@ -42075,7 +42094,7 @@ var loader61 = async (props) => {
   }, this);
 }, UserInsights = (props) => {
   let [platformData, setPlatformData] = (0, import_react126.useState)(), [allPlatformData, setAllPlatformData] = (0, import_react126.useState)([]), init = async () => {
-    let userdata = await import_axios58.default.post(`${BaseUrl}/api/get-user-handles`, {
+    let userdata = await import_axios59.default.post(`${BaseUrl}/api/get-user-handles`, {
       userId: props.userId
     });
     userdata.data.status && setAllPlatformData((val) => userdata.data.data);
@@ -42084,13 +42103,13 @@ var loader61 = async (props) => {
     init();
   }, []);
   let getPlatform = async (handle_id) => {
-    let userdata = await import_axios58.default.post(`${BaseUrl}/api/get-insta-handel-byid`, {
+    let userdata = await import_axios59.default.post(`${BaseUrl}/api/get-insta-handel-byid`, {
       userId: props.userId,
       handleId: handle_id
     });
     setPlatformData((val) => userdata.data.data[0]);
   }, handeladdupdate = async (handle_id) => {
-    let data = (await (0, import_axios58.default)({
+    let data = (await (0, import_axios59.default)({
       method: "get",
       url: "https://api.modash.io/v1/instagram/profile/nusr_et/report?access_token=8PVJbSqOpTYwQ90B3sMMji0u05vhpOhN",
       headers: {
@@ -42105,7 +42124,7 @@ var loader61 = async (props) => {
       }
     })).data;
     if (!data.error) {
-      let userdata = await import_axios58.default.post(`${BaseUrl}/api/add-insta-handel`, {
+      let userdata = await import_axios59.default.post(`${BaseUrl}/api/add-insta-handel`, {
         userId: props.userId,
         handleId: handle_id,
         userName: data.profile.profile.username,
@@ -44675,7 +44694,7 @@ __export(revenues_exports, {
   default: () => revenues_default,
   loader: () => loader62
 });
-var import_node64 = require("@remix-run/node"), import_react132 = require("@remix-run/react"), import_axios59 = __toESM(require("axios")), import_chart = require("chart.js"), import_react_chartjs_2 = require("react-chartjs-2");
+var import_node64 = require("@remix-run/node"), import_react132 = require("@remix-run/react"), import_axios60 = __toESM(require("axios")), import_chart = require("chart.js"), import_react_chartjs_2 = require("react-chartjs-2");
 var import_timeago2 = require("timeago.js"), import_jsx_dev_runtime111 = require("react/jsx-dev-runtime");
 import_chart.Chart.register(
   import_chart.CategoryScale,
@@ -44686,7 +44705,7 @@ import_chart.Chart.register(
   import_chart.Legend
 );
 var loader62 = async (props) => {
-  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), status = await import_axios59.default.post(
+  let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader), status = await import_axios60.default.post(
     `${BaseUrl}/api/payment-status`,
     { userId: cookie.user.id },
     {
@@ -44700,7 +44719,7 @@ var loader62 = async (props) => {
         Accept: "*"
       }
     }
-  ), graph = await import_axios59.default.post(
+  ), graph = await import_axios60.default.post(
     `${BaseUrl}/api/payment-graph`,
     { userId: cookie.user.id },
     {
@@ -44915,16 +44934,16 @@ __export(user_id_exports, {
   default: () => user_id_default,
   loader: () => loader63
 });
-var import_free_solid_svg_icons46 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome47 = require("@fortawesome/react-fontawesome"), import_node65 = require("@remix-run/node"), import_react133 = require("@remix-run/react"), import_axios60 = __toESM(require("axios")), import_react134 = require("react");
+var import_free_solid_svg_icons46 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome47 = require("@fortawesome/react-fontawesome"), import_node65 = require("@remix-run/node"), import_react133 = require("@remix-run/react"), import_axios61 = __toESM(require("axios")), import_react134 = require("react");
 var import_jsx_dev_runtime112 = require("react/jsx-dev-runtime");
 var loader63 = async (props) => {
-  let id = props.params.id, userinsights = await (0, import_axios60.default)({
+  let id = props.params.id, userinsights = await (0, import_axios61.default)({
     method: "post",
     url: `${BaseUrl}/api/user-analytics`,
     data: {
       id
     }
-  }), userdata = await import_axios60.default.post(`${BaseUrl}/api/getuser`, { id });
+  }), userdata = await import_axios61.default.post(`${BaseUrl}/api/getuser`, { id });
   return (0, import_node65.json)({ user: userdata.data.data[0], userinsights: userinsights.data.data.profile });
 }, BrandPage3 = () => {
   let user = (0, import_react133.useLoaderData)().user, userinsights = (0, import_react133.useLoaderData)().userinsights, [userDetails, setUserDetails] = (0, import_react134.useState)(0 /* insights */), avatar = user.pic == "0" || user.pic == null || user.pic == null || user.pic == "" ? "/images/avatar/user.png" : user.pic, [error, setError] = (0, import_react134.useState)(null), messageRef = (0, import_react134.useRef)(null), [connectBox, setConnectBox] = (0, import_react134.useState)(!1);
@@ -44982,7 +45001,7 @@ var loader63 = async (props) => {
             fromUserId: user.id,
             toUserId: "89",
             comment: (_d = messageRef.current) == null ? void 0 : _d.value
-          }, data = await (0, import_axios60.default)({
+          }, data = await (0, import_axios61.default)({
             method: "post",
             url: `${BaseUrl}/api/add-chat`,
             data: req,
@@ -45613,7 +45632,7 @@ __export(drafts_exports, {
   default: () => drafts_default,
   loader: () => loader64
 });
-var import_node66 = require("@remix-run/node"), import_react135 = require("@remix-run/react"), import_axios61 = __toESM(require("axios")), import_react136 = require("react");
+var import_node66 = require("@remix-run/node"), import_react135 = require("@remix-run/react"), import_axios62 = __toESM(require("axios")), import_react136 = require("react");
 var import_jsx_dev_runtime113 = require("react/jsx-dev-runtime"), loader64 = async (props) => {
   let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node66.json)({ user: cookie.user });
@@ -45624,7 +45643,7 @@ var import_jsx_dev_runtime113 = require("react/jsx-dev-runtime"), loader64 = asy
         fromUser: userid,
         influencer: userid
       }
-    }, responseData = await import_axios61.default.post(`${BaseUrl}/api/search-draft`, req);
+    }, responseData = await import_axios62.default.post(`${BaseUrl}/api/search-draft`, req);
     responseData.data.status == !0 && setResDarft(responseData.data.data);
   };
   return (0, import_react136.useEffect)(() => {
@@ -45787,7 +45806,7 @@ __export(invite_exports, {
   loader: () => loader65
 });
 var import_react137 = require("react"), EmailValidator5 = __toESM(require("email-validator")), import_node67 = require("@remix-run/node");
-var import_react138 = require("@remix-run/react"), import_axios62 = __toESM(require("axios"));
+var import_react138 = require("@remix-run/react"), import_axios63 = __toESM(require("axios"));
 var import_jsx_dev_runtime114 = require("react/jsx-dev-runtime"), loader65 = async (props) => {
   let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node67.json)({ user: cookie.user });
@@ -45795,7 +45814,7 @@ var import_jsx_dev_runtime114 = require("react/jsx-dev-runtime"), loader65 = asy
   let isSubmitting = (0, import_react138.useTransition)().state === "submitting", userId = (0, import_react138.useLoaderData)().user.id, nameRef = (0, import_react137.useRef)(null), emailRef = (0, import_react137.useRef)(null), [contactnumber, setContactnumber] = (0, import_react137.useState)(), [error, setError] = (0, import_react137.useState)(""), [refstatus, setRefStatus] = (0, import_react137.useState)([]), [sus, setSus] = (0, import_react137.useState)(""), handelcontent = (e) => {
     setContactnumber(e.target.value.replace(/\D/g, ""));
   }, init = async () => {
-    let data = await (0, import_axios62.default)({
+    let data = await (0, import_axios63.default)({
       method: "get",
       url: `${BaseUrl}/api/user-referrals/${userId}`,
       headers: {
@@ -45891,7 +45910,7 @@ var import_jsx_dev_runtime114 = require("react/jsx-dev-runtime"), loader65 = asy
                 name: (_h = nameRef.current) == null ? void 0 : _h.value,
                 email: (_i = emailRef.current) == null ? void 0 : _i.value,
                 contact: contactnumber
-              }, data = await (0, import_axios62.default)({
+              }, data = await (0, import_axios63.default)({
                 method: "post",
                 url: `${BaseUrl}/api/send-referral`,
                 data: req,
@@ -46080,7 +46099,7 @@ __export(inbox_exports, {
   loader: () => loader66
 });
 var import_react139 = require("react"), import_node68 = require("@remix-run/node");
-var import_react140 = require("@remix-run/react"), import_axios63 = __toESM(require("axios"));
+var import_react140 = require("@remix-run/react"), import_axios64 = __toESM(require("axios"));
 var import_jsx_dev_runtime116 = require("react/jsx-dev-runtime"), loader66 = async (props) => {
   let cookieHeader = props.request.headers.get("Cookie"), cookie = await userPrefs.parse(cookieHeader);
   return (0, import_node68.json)({ user: cookie.user });
@@ -46088,7 +46107,7 @@ var import_jsx_dev_runtime116 = require("react/jsx-dev-runtime"), loader66 = asy
   let userdata = (0, import_react140.useLoaderData)(), userId = userdata.user.id, [msgIds, setMsgIds] = (0, import_react139.useState)([]), [messages, setMessages] = (0, import_react139.useState)([]), navigator2 = (0, import_react140.useNavigate)(), sidebar = sidebar_default((state) => state.changeTab), [user, setUser] = (0, import_react139.useState)(), init = async () => {
     let req = {
       search: { fromToUser: import_react139.useId }
-    }, data = await import_axios63.default.post(`${BaseUrl}/api/search-chat`, req);
+    }, data = await import_axios64.default.post(`${BaseUrl}/api/search-chat`, req);
     if (data.data.status == !0)
       for (let i = 0; i < data.data.data.length; i++) {
         let fromId = data.data.data[i].fromUser.id, toId = data.data.data[i].toUser.id;
@@ -46351,7 +46370,7 @@ var import_jsx_dev_runtime116 = require("react/jsx-dev-runtime"), loader66 = asy
   columnNumber: 5
 }, this), UserCard2 = (props) => {
   let [userdata, setUserdata] = (0, import_react139.useState)(null), init = async () => {
-    let userdata2 = await (0, import_axios63.default)({
+    let userdata2 = await (0, import_axios64.default)({
       method: "post",
       url: `${BaseUrl}/api/getuser`,
       data: { id: props.id }
@@ -46457,11 +46476,11 @@ var import_jsx_dev_runtime116 = require("react/jsx-dev-runtime"), loader66 = asy
         fromUser: props.userId,
         toUser: props.id
       }
-    }, user1data = await (0, import_axios63.default)({
+    }, user1data = await (0, import_axios64.default)({
       method: "post",
       url: `${BaseUrl}/api/search-chat`,
       data: user1
-    }), user2data = await (0, import_axios63.default)({
+    }), user2data = await (0, import_axios64.default)({
       method: "post",
       url: `${BaseUrl}/api/search-chat`,
       data: user2
@@ -46486,7 +46505,7 @@ var import_jsx_dev_runtime116 = require("react/jsx-dev-runtime"), loader66 = asy
       fromUserId: props.userId,
       toUserId: props.id,
       comment: msg
-    }, data = await (0, import_axios63.default)({
+    }, data = await (0, import_axios64.default)({
       method: "post",
       url: `${BaseUrl}/api/add-chat`,
       data: req,
@@ -46644,7 +46663,7 @@ __export(home_exports4, {
   default: () => home_default4,
   loader: () => loader67
 });
-var import_free_solid_svg_icons49 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome50 = require("@fortawesome/react-fontawesome"), import_node69 = require("@remix-run/node"), import_react141 = require("@remix-run/react"), import_axios64 = __toESM(require("axios")), import_react142 = require("react");
+var import_free_solid_svg_icons49 = require("@fortawesome/free-solid-svg-icons"), import_react_fontawesome50 = require("@fortawesome/react-fontawesome"), import_node69 = require("@remix-run/node"), import_react141 = require("@remix-run/react"), import_axios65 = __toESM(require("axios")), import_react142 = require("react");
 
 // app/state/home/profilecompletestat.ts
 var import_zustand9 = require("zustand"), ProfileComleteStore = (0, import_zustand9.create)()((set) => ({
@@ -46851,7 +46870,7 @@ var import_react_indiana_drag_scroll = __toESM(require("react-indiana-drag-scrol
     return (0, import_node69.redirect)("/login");
   if (cookie.isLogin == !1)
     return (0, import_node69.redirect)("/login");
-  let platformRes = await import_axios64.default.post(`${BaseUrl}/api/getplatform`), categoryRes = await import_axios64.default.post(`${BaseUrl}/api/getcategory`), countryRes = await import_axios64.default.post(`${BaseUrl}/api/getcountry`);
+  let platformRes = await import_axios65.default.post(`${BaseUrl}/api/getplatform`), categoryRes = await import_axios65.default.post(`${BaseUrl}/api/getcategory`), countryRes = await import_axios65.default.post(`${BaseUrl}/api/getcountry`);
   return (0, import_node69.json)({
     user: cookie.user,
     platform: platformRes.data.data,
@@ -47055,7 +47074,7 @@ var import_react_indiana_drag_scroll = __toESM(require("react-indiana-drag-scrol
     { image: "87.jfif", id: "87" },
     { image: "88.jfif", id: "88" }
   ], init = async () => {
-    let apidata = await (0, import_axios64.default)({
+    let apidata = await (0, import_axios65.default)({
       method: "post",
       url: `${BaseUrl}/api/search-brand`
     });
@@ -47204,7 +47223,7 @@ var import_react_indiana_drag_scroll = __toESM(require("react-indiana-drag-scrol
   let [topChampaing, setTopChampaing] = (0, import_react142.useState)([]), [campaignCards, setCampaignCards] = (0, import_react142.useState)([]);
   return (0, import_react142.useEffect)(() => {
     (async () => {
-      let apidata = await (0, import_axios64.default)({
+      let apidata = await (0, import_axios65.default)({
         method: "post",
         url: `${BaseUrl}/api/get-top-campaigns`
       });
@@ -47293,7 +47312,7 @@ var import_react_indiana_drag_scroll = __toESM(require("react-indiana-drag-scrol
   let [topChampaing, setTopChampaing] = (0, import_react142.useState)([]), [campaignCards, setCampaignCards] = (0, import_react142.useState)([]);
   return (0, import_react142.useEffect)(() => {
     (async () => {
-      let apidata = await (0, import_axios64.default)({
+      let apidata = await (0, import_axios65.default)({
         method: "post",
         url: `${BaseUrl}/api/campaign-search`
       });
@@ -47383,7 +47402,7 @@ var import_react_indiana_drag_scroll = __toESM(require("react-indiana-drag-scrol
   }, this);
 }, TopBrands = () => {
   let [topBrands, setTopBarnds] = (0, import_react142.useState)([]), init = async () => {
-    let apidata = await (0, import_axios64.default)({
+    let apidata = await (0, import_axios65.default)({
       method: "post",
       url: `${BaseUrl}/api/get-top-brands`,
       headers: {
@@ -47463,7 +47482,7 @@ var import_react_indiana_drag_scroll = __toESM(require("react-indiana-drag-scrol
   }, this);
 }, TopInfluencer = () => {
   let [topInfluencer, setTopInfluencer] = (0, import_react142.useState)([]), init = async () => {
-    let apidata = await (0, import_axios64.default)({
+    let apidata = await (0, import_axios65.default)({
       method: "post",
       url: `${BaseUrl}/api/user-search`,
       data: { role: 10 },
@@ -50205,7 +50224,7 @@ var import_jsx_dev_runtime140 = require("react/jsx-dev-runtime"), pp2 = () => /*
 }, this), pp_default2 = pp2;
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "8341de18", entry: { module: "/build/entry.client-ZU5ENSUM.js", imports: ["/build/_shared/chunk-GXGHFQ2S.js", "/build/_shared/chunk-YSUO5XC3.js", "/build/_shared/chunk-QUEIQGSW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-T7ATA7XY.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-MUWZJL6T.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home": { id: "routes/admin/home", parentId: "root", path: "admin/home", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home-EUZUXHJV.js", imports: ["/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/blognews": { id: "routes/admin/home/blognews", parentId: "routes/admin/home", path: "blognews", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/blognews-B64C46CA.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/brand": { id: "routes/admin/home/brand", parentId: "routes/admin/home", path: "brand", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/brand-G3HKJ3EV.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaign": { id: "routes/admin/home/campaign", parentId: "routes/admin/home", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaign-CNQ3QD6W.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaigntype": { id: "routes/admin/home/campaigntype", parentId: "routes/admin/home", path: "campaigntype", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaigntype-CXBW4N36.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/category": { id: "routes/admin/home/category", parentId: "routes/admin/home", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/category-JY2QFTDZ.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/city": { id: "routes/admin/home/city", parentId: "routes/admin/home", path: "city", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/city-P64MLNNY.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/contact": { id: "routes/admin/home/contact", parentId: "routes/admin/home", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/contact-OZWWW52H.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/country": { id: "routes/admin/home/country", parentId: "routes/admin/home", path: "country", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/country-PZ4IREOZ.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/currency": { id: "routes/admin/home/currency", parentId: "routes/admin/home", path: "currency", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/currency-TMDO2Q6I.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/dispute": { id: "routes/admin/home/dispute", parentId: "routes/admin/home", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/dispute-FDXUG7KC.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/index": { id: "routes/admin/home/index", parentId: "routes/admin/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/admin/home/index-OBL7YLS7.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/language": { id: "routes/admin/home/language", parentId: "routes/admin/home", path: "language", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/language-QPRIH4DT.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/market": { id: "routes/admin/home/market", parentId: "routes/admin/home", path: "market", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/market-6NLU3IDK.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/platforms": { id: "routes/admin/home/platforms", parentId: "routes/admin/home", path: "platforms", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/platforms-WHE7ZWMJ.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/state": { id: "routes/admin/home/state", parentId: "routes/admin/home", path: "state", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/state-V7ZN6QPN.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/team": { id: "routes/admin/home/team", parentId: "routes/admin/home", path: "team", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/team-4UDANEPO.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/user": { id: "routes/admin/home/user", parentId: "routes/admin/home", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/user-L3QHYNSV.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/userhandel.$id": { id: "routes/admin/home/userhandel.$id", parentId: "routes/admin/home", path: "userhandel/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/userhandel.$id-KYB7HA4N.js", imports: ["/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/index": { id: "routes/admin/index", parentId: "root", path: "admin", index: !0, caseSensitive: void 0, module: "/build/routes/admin/index-RYQGC7YZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogin": { id: "routes/adminlogin", parentId: "root", path: "adminlogin", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogin-MM53DQAE.js", imports: ["/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogout": { id: "routes/adminlogout", parentId: "root", path: "adminlogout", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogout-7UEGTPTC.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/bloginfo.$id": { id: "routes/blogs/bloginfo.$id", parentId: "root", path: "blogs/bloginfo/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/blogs/bloginfo.$id-GH27SVRE.js", imports: ["/build/_shared/chunk-UIJVHUWO.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/index": { id: "routes/blogs/index", parentId: "root", path: "blogs", index: !0, caseSensitive: void 0, module: "/build/routes/blogs/index-HA4MMPP3.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/contact": { id: "routes/contact", parentId: "root", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/contact-5GJ3PSQC.js", imports: ["/build/_shared/chunk-MKV3HC23.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/createbrand": { id: "routes/createbrand", parentId: "root", path: "createbrand", index: void 0, caseSensitive: void 0, module: "/build/routes/createbrand-5IUVXAFD.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/dispute": { id: "routes/dispute", parentId: "root", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/dispute-GXSWSSY6.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/sociallogin.$id": { id: "routes/extra/sociallogin.$id", parentId: "root", path: "extra/sociallogin/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/sociallogin.$id-5PWOEFXE.js", imports: ["/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/socialregister.$id": { id: "routes/extra/socialregister.$id", parentId: "root", path: "extra/socialregister/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/socialregister.$id-5XRM37AF.js", imports: ["/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/faq": { id: "routes/faq", parentId: "root", path: "faq", index: void 0, caseSensitive: void 0, module: "/build/routes/faq-QQDW24YI.js", imports: ["/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-EA3ENBR2.js", imports: ["/build/_shared/chunk-L4EYGIH2.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brand.$id": { id: "routes/home/brand.$id", parentId: "routes/home", path: "brand/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brand.$id-4ZUBNQJU.js", imports: ["/build/_shared/chunk-5HAB4MOR.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brandpay.$brandId.$camId.$draftId": { id: "routes/home/brandpay.$brandId.$camId.$draftId", parentId: "routes/home", path: "brandpay/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brandpay.$brandId.$camId.$draftId-ATQKWCB4.js", imports: ["/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser": { id: "routes/home/branduser", parentId: "routes/home", path: "branduser", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser-OKUOO76F.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/index": { id: "routes/home/branduser/index", parentId: "routes/home/branduser", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/branduser/index-ULQHWFFR.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/influencers": { id: "routes/home/branduser/influencers", parentId: "routes/home/branduser", path: "influencers", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/influencers-KCW4WFKU.js", imports: ["/build/_shared/chunk-HDRV6ZIJ.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/payments": { id: "routes/home/branduser/payments", parentId: "routes/home/branduser", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/payments-X3OOBWWN.js", imports: ["/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/campaigns.$id": { id: "routes/home/campaigns.$id", parentId: "routes/home", path: "campaigns/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/campaigns.$id-4PKDURZD.js", imports: ["/build/_shared/chunk-5HAB4MOR.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign": { id: "routes/home/createcampaign", parentId: "routes/home", path: "createcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign-5TDDIKFM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/index": { id: "routes/home/createcampaign/index", parentId: "routes/home/createcampaign", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/index-OUX7G7AH.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/inviteinf.$camp": { id: "routes/home/createcampaign/inviteinf.$camp", parentId: "routes/home/createcampaign", path: "inviteinf/:camp", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/inviteinf.$camp-43CR2DYY.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/spbd": { id: "routes/home/createcampaign/spbd", parentId: "routes/home/createcampaign", path: "spbd", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/spbd-TH3F43OW.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step2": { id: "routes/home/createcampaign/step2", parentId: "routes/home/createcampaign", path: "step2", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step2-7U7HVIHN.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step3": { id: "routes/home/createcampaign/step3", parentId: "routes/home/createcampaign", path: "step3", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step3-MZODTABC.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step4": { id: "routes/home/createcampaign/step4", parentId: "routes/home/createcampaign", path: "step4", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step4-FCT2JRJ5.js", imports: ["/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step5": { id: "routes/home/createcampaign/step5", parentId: "routes/home/createcampaign", path: "step5", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step5-ASA34IFS.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step6": { id: "routes/home/createcampaign/step6", parentId: "routes/home/createcampaign", path: "step6", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step6-GNDJ6KCL.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/drafts": { id: "routes/home/drafts", parentId: "routes/home", path: "drafts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/drafts-U5WUVBQW.js", imports: ["/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/empty": { id: "routes/home/empty", parentId: "routes/home", path: "empty", index: void 0, caseSensitive: void 0, module: "/build/routes/home/empty-Z7NNOGBY.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/favourite": { id: "routes/home/favourite", parentId: "routes/home", path: "favourite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/favourite-3KIA5YA4.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/findcampaign": { id: "routes/home/findcampaign", parentId: "routes/home", path: "findcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/findcampaign-F4UELWKJ.js", imports: ["/build/_shared/chunk-RE2UJWMT.js", "/build/_shared/chunk-HDRV6ZIJ.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help": { id: "routes/home/help", parentId: "routes/home", path: "help", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help-24UAEAGO.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/analytics": { id: "routes/home/help/analytics", parentId: "routes/home/help", path: "analytics", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/analytics-U4DBWR73.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/brands": { id: "routes/home/help/brands", parentId: "routes/home/help", path: "brands", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/brands-FD6RTH4J.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaign": { id: "routes/home/help/campaign", parentId: "routes/home/help", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaign-GYQ2Z34X.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaigns": { id: "routes/home/help/campaigns", parentId: "routes/home/help", path: "campaigns", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaigns-P4ELF2HJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/forgetpassword": { id: "routes/home/help/forgetpassword", parentId: "routes/home/help", path: "forgetpassword", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/forgetpassword-UFCQ2FVA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/index": { id: "routes/home/help/index", parentId: "routes/home/help", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/help/index-G5TAMEH4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/manage_your_account": { id: "routes/home/help/manage_your_account", parentId: "routes/home/help", path: "manage_your_account", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/manage_your_account-VDXDFOAB.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/payments": { id: "routes/home/help/payments", parentId: "routes/home/help", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/payments-D5LUI37I.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/registration": { id: "routes/home/help/registration", parentId: "routes/home/help", path: "registration", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/registration-UVA6R65N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/rules_and_policies": { id: "routes/home/help/rules_and_policies", parentId: "routes/home/help", path: "rules_and_policies", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/rules_and_policies-FH7KFAOX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/safety_and_security": { id: "routes/home/help/safety_and_security", parentId: "routes/home/help", path: "safety_and_security", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/safety_and_security-TEEN5TCX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/social_media_accounts": { id: "routes/home/help/social_media_accounts", parentId: "routes/home/help", path: "social_media_accounts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/social_media_accounts-VY5VME4W.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/termsandconditions": { id: "routes/home/help/termsandconditions", parentId: "routes/home/help", path: "termsandconditions", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/termsandconditions-WAPCAZMG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/verificaiton": { id: "routes/home/help/verificaiton", parentId: "routes/home/help", path: "verificaiton", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/verificaiton-CLQJJPRA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/inbox": { id: "routes/home/inbox", parentId: "routes/home", path: "inbox", index: void 0, caseSensitive: void 0, module: "/build/routes/home/inbox-DNAVBEIM.js", imports: ["/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/index": { id: "routes/home/index", parentId: "routes/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/index-UG3QRLGA.js", imports: ["/build/_shared/chunk-RE2UJWMT.js", "/build/_shared/chunk-HDRV6ZIJ.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/invite": { id: "routes/home/invite", parentId: "routes/home", path: "invite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/invite-5KU6LTSC.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/mycampaings": { id: "routes/home/mycampaings", parentId: "routes/home", path: "mycampaings", index: void 0, caseSensitive: void 0, module: "/build/routes/home/mycampaings-IVRYQ4L5.js", imports: ["/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/myuser.$id": { id: "routes/home/myuser.$id", parentId: "routes/home", path: "myuser/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/myuser.$id-V2PL5H6S.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js", "/build/_shared/chunk-MMDENRAY.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/paymentreq.$brandId.$camId.$draftId": { id: "routes/home/paymentreq.$brandId.$camId.$draftId", parentId: "routes/home", path: "paymentreq/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/paymentreq.$brandId.$camId.$draftId-5B5SZNFP.js", imports: ["/build/_shared/chunk-MMDENRAY.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete": { id: "routes/home/profilecomplete", parentId: "routes/home", path: "profilecomplete", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete-OOJJWTKP.js", imports: ["/build/_shared/chunk-RAFJ3YWD.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/extrapage": { id: "routes/home/profilecomplete/extrapage", parentId: "routes/home/profilecomplete", path: "extrapage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/extrapage-PATOQW3B.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/fifthpage": { id: "routes/home/profilecomplete/fifthpage", parentId: "routes/home/profilecomplete", path: "fifthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/fifthpage-WH6SIWZQ.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/forthpage": { id: "routes/home/profilecomplete/forthpage", parentId: "routes/home/profilecomplete", path: "forthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/forthpage-2P6YTUH7.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/index": { id: "routes/home/profilecomplete/index", parentId: "routes/home/profilecomplete", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/index-6ZFTK3WT.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4GWH4BZO.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/secondpage": { id: "routes/home/profilecomplete/secondpage", parentId: "routes/home/profilecomplete", path: "secondpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/secondpage-VO5LGJWL.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/thirdpage": { id: "routes/home/profilecomplete/thirdpage", parentId: "routes/home/profilecomplete", path: "thirdpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/thirdpage-5YY6542O.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/revenues": { id: "routes/home/revenues", parentId: "routes/home", path: "revenues", index: void 0, caseSensitive: void 0, module: "/build/routes/home/revenues-7LXPCUFU.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/sorry": { id: "routes/home/sorry", parentId: "routes/home", path: "sorry", index: void 0, caseSensitive: void 0, module: "/build/routes/home/sorry-BDZL43F4.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/user.$id": { id: "routes/home/user.$id", parentId: "routes/home", path: "user/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/user.$id-UHCWXFSD.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/howitworks": { id: "routes/howitworks", parentId: "root", path: "howitworks", index: void 0, caseSensitive: void 0, module: "/build/routes/howitworks-73AGMQFU.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-INKOQL2V.js", imports: ["/build/_shared/chunk-MKV3HC23.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-MVXP4OPG.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-UXJK45NY.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/media.$id": { id: "routes/media.$id", parentId: "root", path: "media/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/media.$id-GUFPD5YP.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/bloginfo": { id: "routes/news/bloginfo", parentId: "root", path: "news/bloginfo", index: void 0, caseSensitive: void 0, module: "/build/routes/news/bloginfo-UWP56RRK.js", imports: ["/build/_shared/chunk-UIJVHUWO.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/index": { id: "routes/news/index", parentId: "root", path: "news", index: !0, caseSensitive: void 0, module: "/build/routes/news/index-LCXPRIDM.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notablebrand": { id: "routes/notablebrand", parentId: "root", path: "notablebrand", index: void 0, caseSensitive: void 0, module: "/build/routes/notablebrand-PUYGWQBA.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notableinf": { id: "routes/notableinf", parentId: "root", path: "notableinf", index: void 0, caseSensitive: void 0, module: "/build/routes/notableinf-W53I34EN.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/pp": { id: "routes/pp", parentId: "root", path: "pp", index: void 0, caseSensitive: void 0, module: "/build/routes/pp-B4LJLJ4D.js", imports: ["/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/register": { id: "routes/register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/register-ORVTNDY2.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tos": { id: "routes/tos", parentId: "root", path: "tos", index: void 0, caseSensitive: void 0, module: "/build/routes/tos-AH3ONL2H.js", imports: ["/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/index": { id: "routes/users/index", parentId: "root", path: "users", index: !0, caseSensitive: void 0, module: "/build/routes/users/index-GDPOBXOE.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/instagrams": { id: "routes/users/instagrams", parentId: "root", path: "users/instagrams", index: void 0, caseSensitive: void 0, module: "/build/routes/users/instagrams-CKQ4AQU6.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/youtubers": { id: "routes/users/youtubers", parentId: "root", path: "users/youtubers", index: void 0, caseSensitive: void 0, module: "/build/routes/users/youtubers-JTYI7UIQ.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-4IGPHUYY.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/verifyuser.$mail": { id: "routes/verifyuser.$mail", parentId: "root", path: "verifyuser/:mail", index: void 0, caseSensitive: void 0, module: "/build/routes/verifyuser.$mail-BWGQ6DCR.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/whatyouget": { id: "routes/whatyouget", parentId: "root", path: "whatyouget", index: void 0, caseSensitive: void 0, module: "/build/routes/whatyouget-F3AMDFVE.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-8341DE18.js" };
+var assets_manifest_default = { version: "21c05af3", entry: { module: "/build/entry.client-ZU5ENSUM.js", imports: ["/build/_shared/chunk-GXGHFQ2S.js", "/build/_shared/chunk-YSUO5XC3.js", "/build/_shared/chunk-QUEIQGSW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-T7ATA7XY.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-Y3OBR7PO.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home": { id: "routes/admin/home", parentId: "root", path: "admin/home", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home-EUZUXHJV.js", imports: ["/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/blognews": { id: "routes/admin/home/blognews", parentId: "routes/admin/home", path: "blognews", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/blognews-XTRVMETU.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/brand": { id: "routes/admin/home/brand", parentId: "routes/admin/home", path: "brand", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/brand-RWQOX4PO.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaign": { id: "routes/admin/home/campaign", parentId: "routes/admin/home", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaign-WSOBQL2T.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaigntype": { id: "routes/admin/home/campaigntype", parentId: "routes/admin/home", path: "campaigntype", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaigntype-QOR7KTCS.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/category": { id: "routes/admin/home/category", parentId: "routes/admin/home", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/category-DSH5OZI3.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/city": { id: "routes/admin/home/city", parentId: "routes/admin/home", path: "city", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/city-CG4H2T5B.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/contact": { id: "routes/admin/home/contact", parentId: "routes/admin/home", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/contact-2C4XGL4M.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/country": { id: "routes/admin/home/country", parentId: "routes/admin/home", path: "country", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/country-2NLJ24ML.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/currency": { id: "routes/admin/home/currency", parentId: "routes/admin/home", path: "currency", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/currency-VBKBCVN3.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/dispute": { id: "routes/admin/home/dispute", parentId: "routes/admin/home", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/dispute-UEWDPTZF.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/index": { id: "routes/admin/home/index", parentId: "routes/admin/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/admin/home/index-OBL7YLS7.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/language": { id: "routes/admin/home/language", parentId: "routes/admin/home", path: "language", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/language-54KALZOK.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/market": { id: "routes/admin/home/market", parentId: "routes/admin/home", path: "market", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/market-5BVNDLH5.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/platforms": { id: "routes/admin/home/platforms", parentId: "routes/admin/home", path: "platforms", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/platforms-QNXHOUVW.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/state": { id: "routes/admin/home/state", parentId: "routes/admin/home", path: "state", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/state-3ZZMHLIE.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/team": { id: "routes/admin/home/team", parentId: "routes/admin/home", path: "team", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/team-U7A5RVK3.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/user": { id: "routes/admin/home/user", parentId: "routes/admin/home", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/user-J3HOKWCH.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/userhandel.$id": { id: "routes/admin/home/userhandel.$id", parentId: "routes/admin/home", path: "userhandel/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/userhandel.$id-LUL3XQNT.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/index": { id: "routes/admin/index", parentId: "root", path: "admin", index: !0, caseSensitive: void 0, module: "/build/routes/admin/index-RYQGC7YZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogin": { id: "routes/adminlogin", parentId: "root", path: "adminlogin", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogin-O4CHEPD4.js", imports: ["/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogout": { id: "routes/adminlogout", parentId: "root", path: "adminlogout", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogout-7UEGTPTC.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/bloginfo.$id": { id: "routes/blogs/bloginfo.$id", parentId: "root", path: "blogs/bloginfo/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/blogs/bloginfo.$id-KWWR77LW.js", imports: ["/build/_shared/chunk-UIJVHUWO.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/index": { id: "routes/blogs/index", parentId: "root", path: "blogs", index: !0, caseSensitive: void 0, module: "/build/routes/blogs/index-VVTT37HA.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/contact": { id: "routes/contact", parentId: "root", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/contact-T7HWLX6W.js", imports: ["/build/_shared/chunk-MKV3HC23.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/createbrand": { id: "routes/createbrand", parentId: "root", path: "createbrand", index: void 0, caseSensitive: void 0, module: "/build/routes/createbrand-K5AOQXCJ.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/dispute": { id: "routes/dispute", parentId: "root", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/dispute-GXSWSSY6.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/sociallogin.$id": { id: "routes/extra/sociallogin.$id", parentId: "root", path: "extra/sociallogin/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/sociallogin.$id-XHHF22MT.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/socialregister.$id": { id: "routes/extra/socialregister.$id", parentId: "root", path: "extra/socialregister/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/socialregister.$id-EOKNY7ZN.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/faq": { id: "routes/faq", parentId: "root", path: "faq", index: void 0, caseSensitive: void 0, module: "/build/routes/faq-QQDW24YI.js", imports: ["/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-EA3ENBR2.js", imports: ["/build/_shared/chunk-L4EYGIH2.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brand.$id": { id: "routes/home/brand.$id", parentId: "routes/home", path: "brand/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brand.$id-S4JTDZYQ.js", imports: ["/build/_shared/chunk-UEHN2DZ5.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brandpay.$brandId.$camId.$draftId": { id: "routes/home/brandpay.$brandId.$camId.$draftId", parentId: "routes/home", path: "brandpay/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brandpay.$brandId.$camId.$draftId-SA6OTNNZ.js", imports: ["/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser": { id: "routes/home/branduser", parentId: "routes/home", path: "branduser", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser-OKUOO76F.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/index": { id: "routes/home/branduser/index", parentId: "routes/home/branduser", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/branduser/index-ULQHWFFR.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/influencers": { id: "routes/home/branduser/influencers", parentId: "routes/home/branduser", path: "influencers", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/influencers-KCW4WFKU.js", imports: ["/build/_shared/chunk-HDRV6ZIJ.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/payments": { id: "routes/home/branduser/payments", parentId: "routes/home/branduser", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/payments-X3OOBWWN.js", imports: ["/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/campaigns.$id": { id: "routes/home/campaigns.$id", parentId: "routes/home", path: "campaigns/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/campaigns.$id-XBUA2SOT.js", imports: ["/build/_shared/chunk-UEHN2DZ5.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign": { id: "routes/home/createcampaign", parentId: "routes/home", path: "createcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign-5TDDIKFM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/index": { id: "routes/home/createcampaign/index", parentId: "routes/home/createcampaign", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/index-RB6K4CXN.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/inviteinf.$camp": { id: "routes/home/createcampaign/inviteinf.$camp", parentId: "routes/home/createcampaign", path: "inviteinf/:camp", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/inviteinf.$camp-CLC7TIXC.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/spbd": { id: "routes/home/createcampaign/spbd", parentId: "routes/home/createcampaign", path: "spbd", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/spbd-F2EFSP6D.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step2": { id: "routes/home/createcampaign/step2", parentId: "routes/home/createcampaign", path: "step2", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step2-DCBY5O7E.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step3": { id: "routes/home/createcampaign/step3", parentId: "routes/home/createcampaign", path: "step3", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step3-3ZOCJPPE.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step4": { id: "routes/home/createcampaign/step4", parentId: "routes/home/createcampaign", path: "step4", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step4-FCT2JRJ5.js", imports: ["/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step5": { id: "routes/home/createcampaign/step5", parentId: "routes/home/createcampaign", path: "step5", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step5-ASA34IFS.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step6": { id: "routes/home/createcampaign/step6", parentId: "routes/home/createcampaign", path: "step6", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step6-HS7LTIDV.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/drafts": { id: "routes/home/drafts", parentId: "routes/home", path: "drafts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/drafts-XXGXUVX3.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/empty": { id: "routes/home/empty", parentId: "routes/home", path: "empty", index: void 0, caseSensitive: void 0, module: "/build/routes/home/empty-Z7NNOGBY.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/favourite": { id: "routes/home/favourite", parentId: "routes/home", path: "favourite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/favourite-3KIA5YA4.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/findcampaign": { id: "routes/home/findcampaign", parentId: "routes/home", path: "findcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/findcampaign-36I5SDAF.js", imports: ["/build/_shared/chunk-ZEALYO4W.js", "/build/_shared/chunk-HDRV6ZIJ.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help": { id: "routes/home/help", parentId: "routes/home", path: "help", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help-24UAEAGO.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/analytics": { id: "routes/home/help/analytics", parentId: "routes/home/help", path: "analytics", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/analytics-U4DBWR73.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/brands": { id: "routes/home/help/brands", parentId: "routes/home/help", path: "brands", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/brands-FD6RTH4J.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaign": { id: "routes/home/help/campaign", parentId: "routes/home/help", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaign-GYQ2Z34X.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaigns": { id: "routes/home/help/campaigns", parentId: "routes/home/help", path: "campaigns", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaigns-P4ELF2HJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/forgetpassword": { id: "routes/home/help/forgetpassword", parentId: "routes/home/help", path: "forgetpassword", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/forgetpassword-UFCQ2FVA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/index": { id: "routes/home/help/index", parentId: "routes/home/help", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/help/index-G5TAMEH4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/manage_your_account": { id: "routes/home/help/manage_your_account", parentId: "routes/home/help", path: "manage_your_account", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/manage_your_account-VDXDFOAB.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/payments": { id: "routes/home/help/payments", parentId: "routes/home/help", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/payments-D5LUI37I.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/registration": { id: "routes/home/help/registration", parentId: "routes/home/help", path: "registration", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/registration-UVA6R65N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/rules_and_policies": { id: "routes/home/help/rules_and_policies", parentId: "routes/home/help", path: "rules_and_policies", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/rules_and_policies-FH7KFAOX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/safety_and_security": { id: "routes/home/help/safety_and_security", parentId: "routes/home/help", path: "safety_and_security", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/safety_and_security-TEEN5TCX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/social_media_accounts": { id: "routes/home/help/social_media_accounts", parentId: "routes/home/help", path: "social_media_accounts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/social_media_accounts-VY5VME4W.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/termsandconditions": { id: "routes/home/help/termsandconditions", parentId: "routes/home/help", path: "termsandconditions", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/termsandconditions-WAPCAZMG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/verificaiton": { id: "routes/home/help/verificaiton", parentId: "routes/home/help", path: "verificaiton", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/verificaiton-CLQJJPRA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/inbox": { id: "routes/home/inbox", parentId: "routes/home", path: "inbox", index: void 0, caseSensitive: void 0, module: "/build/routes/home/inbox-SM4PMWOD.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/index": { id: "routes/home/index", parentId: "routes/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/index-GF6G6HMX.js", imports: ["/build/_shared/chunk-ZEALYO4W.js", "/build/_shared/chunk-HDRV6ZIJ.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/invite": { id: "routes/home/invite", parentId: "routes/home", path: "invite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/invite-AXPT7Q7Z.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/mycampaings": { id: "routes/home/mycampaings", parentId: "routes/home", path: "mycampaings", index: void 0, caseSensitive: void 0, module: "/build/routes/home/mycampaings-LIB2CFX7.js", imports: ["/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/myuser.$id": { id: "routes/home/myuser.$id", parentId: "routes/home", path: "myuser/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/myuser.$id-HMYTDWLL.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js", "/build/_shared/chunk-QOEK7KW7.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/paymentreq.$brandId.$camId.$draftId": { id: "routes/home/paymentreq.$brandId.$camId.$draftId", parentId: "routes/home", path: "paymentreq/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/paymentreq.$brandId.$camId.$draftId-NR6G53CQ.js", imports: ["/build/_shared/chunk-QOEK7KW7.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete": { id: "routes/home/profilecomplete", parentId: "routes/home", path: "profilecomplete", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete-OOJJWTKP.js", imports: ["/build/_shared/chunk-RAFJ3YWD.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/extrapage": { id: "routes/home/profilecomplete/extrapage", parentId: "routes/home/profilecomplete", path: "extrapage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/extrapage-PTKCILAX.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/fifthpage": { id: "routes/home/profilecomplete/fifthpage", parentId: "routes/home/profilecomplete", path: "fifthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/fifthpage-56PU2NGF.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/forthpage": { id: "routes/home/profilecomplete/forthpage", parentId: "routes/home/profilecomplete", path: "forthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/forthpage-LQJVO736.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/index": { id: "routes/home/profilecomplete/index", parentId: "routes/home/profilecomplete", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/index-QXX5SJQV.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/secondpage": { id: "routes/home/profilecomplete/secondpage", parentId: "routes/home/profilecomplete", path: "secondpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/secondpage-22EYAERF.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/thirdpage": { id: "routes/home/profilecomplete/thirdpage", parentId: "routes/home/profilecomplete", path: "thirdpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/thirdpage-HFXAC35K.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/revenues": { id: "routes/home/revenues", parentId: "routes/home", path: "revenues", index: void 0, caseSensitive: void 0, module: "/build/routes/home/revenues-3SCLEB3I.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/sorry": { id: "routes/home/sorry", parentId: "routes/home", path: "sorry", index: void 0, caseSensitive: void 0, module: "/build/routes/home/sorry-BDZL43F4.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/user.$id": { id: "routes/home/user.$id", parentId: "routes/home", path: "user/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/user.$id-WM4YTNDY.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/howitworks": { id: "routes/howitworks", parentId: "root", path: "howitworks", index: void 0, caseSensitive: void 0, module: "/build/routes/howitworks-73AGMQFU.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-XCXZ4J2Q.js", imports: ["/build/_shared/chunk-MKV3HC23.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-STU6KHTT.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-UXJK45NY.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/media.$id": { id: "routes/media.$id", parentId: "root", path: "media/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/media.$id-ERKE2C2M.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/bloginfo": { id: "routes/news/bloginfo", parentId: "root", path: "news/bloginfo", index: void 0, caseSensitive: void 0, module: "/build/routes/news/bloginfo-UWP56RRK.js", imports: ["/build/_shared/chunk-UIJVHUWO.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/index": { id: "routes/news/index", parentId: "root", path: "news", index: !0, caseSensitive: void 0, module: "/build/routes/news/index-OH3U6M4M.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notablebrand": { id: "routes/notablebrand", parentId: "root", path: "notablebrand", index: void 0, caseSensitive: void 0, module: "/build/routes/notablebrand-ZIVCGECX.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notableinf": { id: "routes/notableinf", parentId: "root", path: "notableinf", index: void 0, caseSensitive: void 0, module: "/build/routes/notableinf-MRF2FL4P.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/pp": { id: "routes/pp", parentId: "root", path: "pp", index: void 0, caseSensitive: void 0, module: "/build/routes/pp-B4LJLJ4D.js", imports: ["/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/register": { id: "routes/register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/register-MMCHBCEZ.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tos": { id: "routes/tos", parentId: "root", path: "tos", index: void 0, caseSensitive: void 0, module: "/build/routes/tos-AH3ONL2H.js", imports: ["/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/index": { id: "routes/users/index", parentId: "root", path: "users", index: !0, caseSensitive: void 0, module: "/build/routes/users/index-XJQRYV6C.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/instagrams": { id: "routes/users/instagrams", parentId: "root", path: "users/instagrams", index: void 0, caseSensitive: void 0, module: "/build/routes/users/instagrams-KPVJPFBO.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/youtubers": { id: "routes/users/youtubers", parentId: "root", path: "users/youtubers", index: void 0, caseSensitive: void 0, module: "/build/routes/users/youtubers-JUWA7KQ4.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-U277YPDT.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/verifyuser.$mail": { id: "routes/verifyuser.$mail", parentId: "root", path: "verifyuser/:mail", index: void 0, caseSensitive: void 0, module: "/build/routes/verifyuser.$mail-ZFFRISLQ.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/whatyouget": { id: "routes/whatyouget", parentId: "root", path: "whatyouget", index: void 0, caseSensitive: void 0, module: "/build/routes/whatyouget-F3AMDFVE.js", imports: ["/build/_shared/chunk-FSYZTJOK.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-IOOST47J.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-4NSQR6PB.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-21C05AF3.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public\\build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

@@ -1,7 +1,7 @@
 import { faEdit, faEye, faFill, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { BaseUrl } from "~/const";
@@ -151,12 +151,14 @@ const Brand = () => {
                                         <div className="text-cyan-500 cursor-pointer">
                                             <FontAwesomeIcon icon={faEdit} onClick={() => status(val.id)}></FontAwesomeIcon>
                                         </div>
+
+                                        <Link to={`/admin/home/editbrand/${val.id}`} className="w-16 py-1 text-white text-xs bg-cyan-500 text-center rounded-md font-medium">Edit</Link>
+
                                     </div>
                                 </div>
                             );
                         })
                     }
-
                 </div>
                 <ToastContainer></ToastContainer>
             </div>

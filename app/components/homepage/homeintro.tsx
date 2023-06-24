@@ -5,48 +5,52 @@ import { BlogsCard } from "../utils/blogscard";
 import { DownloadApp } from "../utils/downloadapp";
 import { Link } from "@remix-run/react";
 import { useState } from "react";
-import ProgressBar from "../progressbr";
 type HomeIntroProps = {
   blogdata: any[];
+  homedata: any;
 };
 export const HomeIntro: React.FC<HomeIntroProps> = (
   props: HomeIntroProps
-): JSX.Element => (
-  <>
-    <div className="w-full px-2 sm:px-16">
-      <HomeFirst></HomeFirst>
-      <RelatatinoAndTrust></RelatatinoAndTrust>
-      <Market></Market>
-      <PowerfullInf></PowerfullInf>
-      <ExploreCategory></ExploreCategory>
-      <JoinSwrv></JoinSwrv>
-      <Marketing></Marketing>
-      <Blogs blogdata={props.blogdata}></Blogs>
-      <SocialMedai></SocialMedai>
-      {/* <TopCategory></TopCategory> */}
-    </div>
-  </>
-);
+): JSX.Element => {
+  return (
+    <>
+      <div className="w-full px-2 sm:px-16">
+        <HomeFirst text_1={props.homedata["text_1"]} text_2={props.homedata["text_2"]}></HomeFirst>
+        <RelatatinoAndTrust text_3={props.homedata["text_3"]} text_4={props.homedata["text_4"]} text_5={props.homedata["text_5"]}></RelatatinoAndTrust>
+        <Market text_6={props.homedata["text_6"]} text_7={props.homedata["text_7"]} text_8={props.homedata["text_8"]} text_9={props.homedata["text_9"]} text_10={props.homedata["text_10"]}></Market>
+        <PowerfullInf></PowerfullInf>
+        <ExploreCategory text_11={props.homedata["text_11"]} text_12={props.homedata["text_12"]} text_13={props.homedata["text_13"]} text_14={props.homedata["text_14"]} text_15={props.homedata["text_15"]} text_16={props.homedata["text_16"]} text_17={props.homedata["text_17"]} text_18={props.homedata["text_18"]}></ExploreCategory>
+        <JoinSwrv></JoinSwrv>
+        <Marketing text_19={props.homedata["text_19"]} text_20={props.homedata["text_20"]} text_21={props.homedata["text_21"]} text_22={props.homedata["text_22"]} text_23={props.homedata["text_23"]} text_24={props.homedata["text_24"]}></Marketing>
+        <Blogs blogdata={props.blogdata}></Blogs>
+        <SocialMedai></SocialMedai>
+        {/* <TopCategory></TopCategory> */}
+      </div>
+    </>
+  )
+};
 
-const RelatatinoAndTrust = () => {
+interface RelatatinoAndTrustProps {
+  text_3: string;
+  text_4: string;
+  text_5: string;
+}
+
+
+const RelatatinoAndTrust: React.FC<RelatatinoAndTrustProps> = (props: RelatatinoAndTrustProps) => {
   return (
     <>
       <div className="w-full md:w-3/5 lg:w-4/6 mx-auto lg:my-28">
         <h3 className="text-primary text-3xl font-bold">
-          We strengthen relationships between
+          {props.text_3}
         </h3>
         <h3 className="text-secondary text-3xl font-bold">
-          brands and creatives.
+          {props.text_4}
         </h3>
         <p className="text-gray-500 text-md font-normal">
-          Our mission is to Make Waves, which stems from the fact that our
-          creators tell stories that foster human relationships and generate
-          waves of influence. These waves of influence create our data layers,
-          and we use them to calculate the impact. Our clients and creators make
-          a splash, and we track the results.
+          {props.text_5}
         </p>
       </div>
-
       <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-10">
         <h3 className="text-primary text-3xl font-bold">Trusted by</h3>
         <div className="h-[1px] bg-black w-full my-2"></div>
@@ -58,28 +62,16 @@ const RelatatinoAndTrust = () => {
           className="h-[70px] w-[2640px] object-cover object-left-top hover:object-right-top transition-all duration-[4s]"
         />
       </div>
-      {/* <div className="w-full grid palce-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 text-5xl text-center text-gray-600 gap-x-5 mb-10">
-        <div>
-          <h1>OGILVY</h1>
-        </div>
-        <div>
-          <h1>McDonald's</h1>
-        </div>
-        <div>
-          <h1>Shelter</h1>
-        </div>
-        <div>
-          <h1>Playtika</h1>
-        </div>
-        <div>
-          <h1>Starbucks</h1>
-        </div>
-      </div> */}
     </>
   );
 };
 
-const HomeFirst = () => {
+interface HomeFirstProps {
+  text_1: string;
+  text_2: string;
+}
+
+const HomeFirst: React.FC<HomeFirstProps> = (props: HomeFirstProps): JSX.Element => {
   return (
     <>
       <div className="relative">
@@ -89,13 +81,10 @@ const HomeFirst = () => {
         <div className="w-full px-5 md:p-0 md:w-3/5 lg:w-4/6 relative mx-auto">
           <div className="pt-10 md:pt-24">
             <h3 className="text-white text-5xl font-bold">
-              Reach the next billion
+              {props.text_1}
             </h3>
             <h3 className="text-white text-md font-normal mt-4">
-              We connect brands with targeted audience through nano influencer
-              marketing. Save time and improve performance. Take the guesswork
-              out of Influencer analysis with data-driven audience insights,
-              managed in one easy to use platform.
+              {props.text_2}
             </h3>
             <div className="flex flex-col sm:flex-row items-center ">
               <Link to="/register?isBrand=1">
@@ -162,7 +151,17 @@ const HomeFirst = () => {
   );
 };
 
-const Market = () => {
+
+interface MarketProps {
+  text_6: string;
+  text_7: string;
+  text_8: string;
+  text_9: string;
+  text_10: string;
+}
+
+const Market: React.FC<MarketProps> = (props: MarketProps) => {
+
   return (
     <>
       <div className="w-full bg-[#EFEFEF]  rounded-xl md:p-0 p-6">
@@ -182,31 +181,31 @@ const Market = () => {
             <MarkatingCard
               imageUrl="/images/icons/icon1.png"
               title="Make a campaign"
-              description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+              description={props.text_6}
               leftBorder={true}
             ></MarkatingCard>
             <MarkatingCard
               imageUrl="/images/icons/icon5.png"
               title="Look for influencers."
-              description="Access a vast influencer database. It's simple to locate influencers thanks to advanced search criteria."
+              description={props.text_7}
               leftBorder={true}
             ></MarkatingCard>
             <MarkatingCard
               imageUrl="/images/icons/icon4.png"
               title="Statistics"
-              description="Real-time campaign performance analysis and sharing"
+              description={props.text_8}
               leftBorder={true}
             ></MarkatingCard>
             <MarkatingCard
               imageUrl="/images/icons/icon3.png"
               title="Communication"
-              description="For quick and easy connection with your influencers, there's an integrated chat option and a notification centre."
+              description={props.text_9}
               leftBorder={true}
             ></MarkatingCard>
             <MarkatingCard
               imageUrl="/images/icons/icon2.png"
               title="Payments"
-              description="Easily and securely manage payments from buyers to influencers."
+              description={props.text_10}
               leftBorder={true}
             ></MarkatingCard>
           </div>
@@ -251,42 +250,38 @@ const PowerfullInf = () => {
   );
 };
 
-const Marketing = () => {
+
+interface MarketingProps {
+  text_19: string;
+  text_20: string;
+  text_21: string;
+  text_22: string;
+  text_23: string;
+  text_24: string;
+}
+const Marketing: React.FC<MarketingProps> = (props: MarketingProps) => {
   return (
     <>
       <div className="bg-[#EFEFEF] w-full my-10 rounded-xl md:p-0 p-6">
         <div className=" py-4 w-full md:w-3/5 lg:w-4/6   mx-auto">
           <h3 className="text-primary text-4xl font-bold mt-20">
-            We assist the influencer marketing sector in
+            {props.text_19}
           </h3>
           <h3 className="text-secondary text-4xl font-bold mb-10">
-            becoming more efficient.
+            {props.text_20}
           </h3>
           <h3 className="text-gray-500 text-md font-normal mt-4">
-            SWRV is a Danir AB project. Sigma, a major IT consulting
-            organisation with 6,000 workers in 13 countries, is our sibling
-            company. SWRV AB began as a celebrity app in 2011. The company
-            expanded abroad, attracting hundreds of celebrities, bloggers, and
-            users every day.
+            {props.text_21}
             <br />
             <br />
-            United Influencers, the largest influencer marketing agency in
-            Scandinavia, was launched in 2014. United Influencers, which has
-            operations in Sweden and Norway, has run over 2,000 campaigns to
-            date. <br />
-            <br />
-            SWRV has worked with dedicated developers for the past six years to
-            create a full IT platform for influencer marketing. The goal was to
-            assist United Influencers in lowering expenses, increasing income,
-            and working more efficiently.
+            {props.text_22}
             <br />
             <br />
-            We learned in September 2015 that numerous firms may utilise the
-            same IT platform and save a lot of money. Furthermore, unified IT
-            development is a critical business enabler for the industry's
-            expansion. SWRV was conceived as an idea.
+            {props.text_23}
+            <br />
+            <br />
+            {props.text_24}
           </h3>
-
           <DownloadApp></DownloadApp>
           <div className="h-20"></div>
         </div>
@@ -295,52 +290,64 @@ const Marketing = () => {
   );
 };
 
-const ExploreCategory = () => {
+interface ExploreCategoryProps {
+  text_11: string;
+  text_12: string;
+  text_13: string;
+  text_14: string;
+  text_15: string;
+  text_16: string;
+  text_17: string;
+  text_18: string;
+}
+
+const ExploreCategory: React.FC<ExploreCategoryProps> = (props: ExploreCategoryProps) => {
   return (
     <>
       <div className="w-full md:w-3/5 lg:w-4/6 mx-auto mt-28 mb-4">
         <h3 className="text-primary text-3xl font-bold">Explore by category</h3>
       </div>
-      <div className="grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 my-6 ">
+      <div className="flex flex-wrap gap-6">
         <CategoryCard
           imageUrl="/images/icons/education.png"
           title="Education"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          // description={props.text_11}
+          description="good"
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/food.png"
           title="Food"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_12}
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/photography.png"
           title="Photography"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_13}
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/travel.png"
           title="Travel"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_14}
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/motivation.png"
           title="Motivation"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_15}
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/beauty.png"
           title="Beauty"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_16}
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/automotive.png"
           title="Automotive"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_17}
         ></CategoryCard>
         <CategoryCard
           imageUrl="/images/icons/health.png"
           title="Health"
-          description="Make briefs, invite influencers, negotiate, and manage your campaigns with ease."
+          description={props.text_18}
         ></CategoryCard>
       </div>
     </>

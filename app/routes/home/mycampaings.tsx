@@ -301,7 +301,6 @@ const UserDrafts = (props: UserDraftsProps) => {
       },
     });
 
-    console.log(apidata.data);
 
     if (isActive) {
       let data = apidata.data.data.filter((val: any) => new Date(val["campaign"]["endAt"]) > new Date());

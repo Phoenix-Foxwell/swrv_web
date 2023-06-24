@@ -946,10 +946,12 @@ const Dispute: React.FC<DisputeProps> = (props: DisputeProps): JSX.Element => {
             id="reason"
             className="w-full rounded-md border-none outline-none bg-gray-100 py-2 my-2 px-2"
           >
-            <option value="1">This is bad</option>
-            <option value="2">This is so bad</option>
-            <option value="3">This is extrimily bad</option>
-            <option value="4">I just don't want it</option>
+            <option value="1">Product or service issue</option>
+            <option value="2">Billing or payment issue</option>
+            <option value="3">Shipping or delivery issue</option>
+            <option value="4">Customer service issue</option>
+            <option value="5">Website or app issue</option>
+            <option value="6">Other issue</option>
           </select>
           <textarea
             ref={messageRef}

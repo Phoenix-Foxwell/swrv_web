@@ -7,7 +7,6 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "~/services/firebase";
 import { BaseUrl } from "~/const";
 import axios from "axios";
-import isbot from "isbot";
 
 type RegisterBoxState = {
   message: string | null | undefined;
@@ -19,6 +18,7 @@ export const RegisterBox = (props: RegisterBoxState) => {
   const cat = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
+
     if (props.isBrand) {
       cat.current!.value = "brand";
       setBrand(true);

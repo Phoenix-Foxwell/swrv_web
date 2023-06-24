@@ -40,15 +40,16 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 
 const BrandPage = () => {
   const brand = useLoaderData().brand;
+
   const user = useLoaderData().user;
   const [isPast, setPast] = useState(false);
   const brandConnection = useLoaderData().brandConnection.influencer_count;
   const brandComCam = useLoaderData().brandComCam.completed_campaign;
   const logo =
     brand.logo == "" ||
-    brand.logo == undefined ||
-    brand.logo == null ||
-    brand.logo == "0"
+      brand.logo == undefined ||
+      brand.logo == null ||
+      brand.logo == "0"
       ? "images/avatar.png"
       : brand.logo;
   const [fav, setFav] = useState<boolean>(false);
@@ -137,9 +138,8 @@ const BrandPage = () => {
   return (
     <>
       <div
-        className={`w-full h-screen bg-gray-500 fixed top-0 left-0 bg-opacity-30 grid place-items-center ${
-          connectBox ? "fixed" : "hidden"
-        }`}
+        className={`w-full h-screen bg-gray-500 fixed top-0 left-0 bg-opacity-30 grid place-items-center ${connectBox ? "fixed" : "hidden"
+          }`}
         style={{ zIndex: 100 }}
       >
         <div className="p-6 bg-white rounded-xl shadow-xl w-96">
@@ -233,7 +233,7 @@ const BrandPage = () => {
             ></FontAwesomeIcon>
           </div>
           <img
-            src="/images/products/shoe1.jpg"
+            src={brand.banner == "" || brand.banner == undefined || brand.banner == null ? "/images/products/shoe1.jpg" : brand.banner}
             alt="error"
             className="w-full h-60 object-cover rounded-t-xl"
           />
@@ -278,8 +278,8 @@ const BrandPage = () => {
                   isNaN(Math.round(sum.rate / sum.rowCount / sum.constCount))
                     ? "0"
                     : Math.round(
-                        sum.rate / sum.rowCount / sum.constCount
-                      ).toString()
+                      sum.rate / sum.rowCount / sum.constCount
+                    ).toString()
                 }
               ></Rating>
               <Completed completed={brandComCam.toString()}></Completed>
@@ -441,16 +441,16 @@ const AvailableCampaigns: React.FC<AvailableCampaignsProps> = (
           let campaignType = await getCampaignType(val["campaignTypeId"]);
           let image =
             val["brand"].length == 0 ||
-            val["brand"] == undefined ||
-            val["brand"] == null ||
-            val["brand"] == ""
+              val["brand"] == undefined ||
+              val["brand"] == null ||
+              val["brand"] == ""
               ? "/images/avatar/user.png"
               : val["brand"]["logo"] == "0" ||
                 val["brand"]["logo"] == undefined ||
                 val["brand"]["logo"] == null ||
                 val["brand"]["logo"] == ""
-              ? "/images/avatar/user.png"
-              : val["brand"]["logo"];
+                ? "/images/avatar/user.png"
+                : val["brand"]["logo"];
           return (
             <div key={index}>
               <CampaginCard
@@ -527,16 +527,16 @@ const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
           {resDarft.map((val: any, index: number) => {
             let image =
               val["brand"].length == 0 ||
-              val["brand"] == undefined ||
-              val["brand"] == null ||
-              val["brand"] == ""
+                val["brand"] == undefined ||
+                val["brand"] == null ||
+                val["brand"] == ""
                 ? "/images/avatar/user.png"
                 : val["brand"]["logo"] == "0" ||
                   val["brand"]["logo"] == undefined ||
                   val["brand"]["logo"] == null ||
                   val["brand"]["logo"] == ""
-                ? "/images/avatar/user.png"
-                : val["brand"]["logo"];
+                  ? "/images/avatar/user.png"
+                  : val["brand"]["logo"];
             return (
               <div
                 key={index}
@@ -565,13 +565,12 @@ const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
                 </a>
                 <p className="mt-2 text-md font-medium">Status</p>
                 <p
-                  className={`mt-2 text-md text-white font-medium text-center rounded-md ${
-                    val.status.name == "ACCEPTED"
-                      ? "bg-green-500"
-                      : val.status.name == "PENDING"
+                  className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
+                    ? "bg-green-500"
+                    : val.status.name == "PENDING"
                       ? "bg-yellow-500"
                       : "bg-red-500"
-                  }`}
+                    }`}
                 >
                   {val.status.name}
                 </p>
@@ -581,7 +580,7 @@ const PastBrandAssociation: React.FC<PastBrandAssociationProps> = (
         </div>
       )}
     </>
-   
+
   );
 };
 

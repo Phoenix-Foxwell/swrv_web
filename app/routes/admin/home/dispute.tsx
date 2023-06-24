@@ -157,9 +157,8 @@ const Contact = () => {
     <>
       {/* view box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          viewBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${viewBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4">
           <div className="mx-auto">
@@ -181,9 +180,8 @@ const Contact = () => {
       </div>
       {/* del box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          delBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${delBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4">
           <div className="mx-auto">
@@ -218,9 +216,8 @@ const Contact = () => {
       </div>
       {/* edit box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          editBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${editBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4 w-80">
           <div className="mx-auto">
@@ -289,9 +286,8 @@ const Contact = () => {
       </div>
       {/* add box */}
       <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${
-          newBox ? "grid" : "hidden"
-        }`}
+        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${newBox ? "grid" : "hidden"
+          }`}
       >
         <div className="bg-[#31353f] rounded-lg p-4 w-80">
           <div className="mx-auto">
@@ -353,6 +349,29 @@ const Contact = () => {
         <div className="w-full bg-slate-400 h-[1px] my-2"></div>
         <div className="flex gap-4 flex-wrap">
           {dispute.map((val: any, index: number) => {
+
+            let reason = "";
+            switch (val.type) {
+              case "1":
+                reason = "Product or service issue";
+                break;
+              case "2":
+                reason = "Billing or payment issue";
+                break;
+              case "3":
+                reason = "Shipping or delivery issue";
+                break;
+              case "4":
+                reason = "Customer service issue";
+                break;
+              case "5":
+                reason = "Website or app issue";
+                break;
+              case "6":
+                reason = "Other issue";
+                break;
+            }
+
             return (
               <div
                 key={index}
@@ -413,6 +432,7 @@ const Contact = () => {
                   </>
                 )}
                 <div className="mt-4">Message : {val.message}</div>
+                <div className="mt-4">Reason : {reason}</div>
               </div>
             );
           })}

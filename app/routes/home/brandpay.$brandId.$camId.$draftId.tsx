@@ -240,12 +240,6 @@ const UserPaymentRequest = (props: UserPaymentRequestProps) => {
   };
 
   const handlepayment = async () => {
-    // stripe.customers
-    //   .create({
-    //     email: "customer@example.com",
-    //   })
-    //   .then((customer) => console.log(customer))
-    //   .catch((error) => console.error(error));
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",

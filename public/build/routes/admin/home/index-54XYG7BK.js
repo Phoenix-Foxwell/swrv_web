@@ -1,0 +1,1 @@
+import{e as a,h as e}from"/build/_shared/chunk-EUC6ZTEW.js";var d=a(e()),l=()=>(0,d.jsxs)("div",{className:"grow bg-[#1b2028] my-2 rounded-md p-4 w-full",children:[(0,d.jsx)("h1",{className:"text-white font-medium text-xl",children:"Dashboard"}),(0,d.jsx)("div",{className:"w-full bg-slate-400 h-[1px] my-2"})]}),t=l;export{t as default};

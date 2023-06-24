@@ -49,7 +49,6 @@ const Invite = () => {
     useEffect(() => { init(); }, [])
     return (
         <>
-            <div></div>
             <div>
                 <div className="grid place-items-center w-full bg-yellow-500 rounded-xl shadow-xl my-6">
                     <img src="/images/cashgirl.png" alt="error" className="h-72" />

@@ -1,5 +1,6 @@
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData, useNavigate } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import { HomeFooter } from "~/components/home/footer/homefooter";
 import { MainNavBar } from "~/components/home/navbar/mainnavbar";
 import { SideBar } from "~/components/home/sidebar/sidebar";
@@ -14,9 +15,15 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 
 const HomePage = () => {
   const userdata = useLoaderData();
+
   const isbrand = userdata.user.role.code != 10;
   const isOpen = SideBarStore((state) => state.isOpen);
-
+  const navigator = useNavigate();
+  useEffect(() => {
+    if (userdata.user.status.code == "0" || userdata.user.status.code == 0) {
+      navigator("/sorry");
+    }
+  }, []);
   return (
     <>
       <div className="flex md:relative bg-background">
@@ -25,12 +32,13 @@ const HomePage = () => {
           className={`w-full min-h-screen transition-all  relative md:relative ${isOpen ? "md:ml-60" : "md:ml-20"
             }  p-2 pr-4`}
         >
-          <div className={`fixed top-0 left-0 w-full my-4 mx-2 pr-6 z-20 ${isOpen ? "pl-60" : "pl-20"}`}>
+          <div className={`fixed top-0 left-0 w-full my-4 mx-2 pl-2 pr-6 z-20 ${isOpen ? "md:pl-60" : "md:pl-20"}`}>
             <MainNavBar
               isBrand={isbrand}
               name={userdata.user.userName}
               role={userdata.user.role.name}
               avatar={userdata.user.pic}
+              id={userdata.user.id}
             ></MainNavBar>
           </div>
           {/* main section start here */}

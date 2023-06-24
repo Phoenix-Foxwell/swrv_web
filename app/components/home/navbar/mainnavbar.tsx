@@ -30,6 +30,7 @@ type MainNavBarProps = {
   avatar: string;
   role: string;
   isBrand: boolean;
+  id: string;
 };
 
 export const MainNavBar = (props: MainNavBarProps) => {
@@ -73,6 +74,7 @@ export const MainNavBar = (props: MainNavBarProps) => {
               avatar={props.avatar}
               role={props.role}
               name={props.name}
+              id={props.id}
             ></MainNavRight>
             <div
               className="md:hidden block cursor-pointer"
@@ -89,9 +91,8 @@ export const MainNavBar = (props: MainNavBarProps) => {
           </div>
           {/* //mobie nav */}
           <div
-            className={`w-full p-2 transition-all md:hidden ${
-              isOpen ? "" : "hidden"
-            } `}
+            className={`w-full p-2 transition-all md:hidden ${isOpen ? "" : "hidden"
+              } `}
           >
             <div className="w-full h-full bg-primary rounded-2xl flex flex-col items-center  py-8 px-3">
               <Link
@@ -230,6 +231,7 @@ type MainNavRightProps = {
   name: string;
   avatar: string;
   role: string;
+  id: string;
 };
 
 const MainNavRight = (props: MainNavRightProps) => {
@@ -243,9 +245,9 @@ const MainNavRight = (props: MainNavRightProps) => {
   const name = props.name.split("@")[0];
   const avatar =
     props.avatar == "0" ||
-    props.avatar == null ||
-    props.avatar == undefined ||
-    props.avatar == ""
+      props.avatar == null ||
+      props.avatar == undefined ||
+      props.avatar == ""
       ? "/images/avatar/user.png"
       : props.avatar;
   return (
@@ -279,17 +281,15 @@ const MainNavRight = (props: MainNavRightProps) => {
           <Notification></Notification>
         </div>
         <div className="h-8 mx-4 bg-primary w-[2px]"> </div>
-        <div className="flex items-center">
+        <Link to={`/home/profileedit/${props.id}`} className="flex items-center">
           <p className="text-left text-md text-black font-normal">{name}</p>
           {/* <p className="text-left text-xs text-black font-normal">{role}</p> */}
-        </div>
-        <div className="mx-2">
           <img
             src={avatar}
             alt="user avatar"
-            className="w-10 h-10 rounded object-cover"
+            className="w-10 h-10 rounded object-cover mx-2"
           />
-        </div>
+        </Link>
       </div>
     </>
   );

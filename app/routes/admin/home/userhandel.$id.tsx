@@ -40,7 +40,9 @@ const UserHandel = (): JSX.Element => {
   const [sus, setSus] = useState<string | null>();
 
   const handeladdupdate = async (handle_id: string, handle_name: string) => {
+
     setError(null);
+
     const modashdata = await axios({
       method: "post",
       url: `${ModeshApi}${handle_name}`
@@ -128,6 +130,7 @@ const UserHandel = (): JSX.Element => {
         fiveMonthAgoAvgLike: data.profile.statHistory[2].avgLikes,
         fiveMonthAgoFollowing: data.profile.statHistory[2].following,
       });
+
       if (userdata.data.status) {
         setSus("Successful Updated the data")
       } else {

@@ -220,7 +220,6 @@ const Campaigns = () => {
             startdate={champaign.startAt}
             enddate={champaign.endAt}
           ></Target>
-
           {isbrand ? <>
             <InviteInf champaignId={champaign.id}></InviteInf>
           </> : (
@@ -343,17 +342,84 @@ const Campaigns = () => {
               // currency={user.currency.code}
               currency={"USD"}
             ></ChampaingPaymentRequest>
-
             {champaign.campaignTypeId == "6" ? (
               <ChampaingBidRequest
                 userid={user.id}
                 campaingid={champaign.id}
               ></ChampaingBidRequest>
             ) : null}
-            <ListCreatedDrafts campaingid={champaign.id} brandid={userId}  ></ListCreatedDrafts>
           </>
         ) : null}
       </div>
+      <h3 className="rounded-lg shadow-lg text-center font-semibold bg-white py-2 text-3xl my-4">Snapshot</h3>
+
+      {isbrand ? (
+        <>
+          <SnapshotChampaingAcceptRequest
+            userId={userId}
+            campaingid={champaign.id}
+            isUser={false}
+          ></SnapshotChampaingAcceptRequest>
+          <SnapshotDraftAcceptRequest
+            userId={userId}
+            campaingid={champaign.id}
+            isUser={false}
+          ></SnapshotDraftAcceptRequest>
+          <SnapshopCreatedDrafts
+            campaingid={champaign.id}
+            brandid={userId}
+            userId={userId}
+            isUser={false}
+          ></SnapshopCreatedDrafts>
+          <SnapshotChampaingPaymentRequest
+            userid={user.id}
+            campaingid={champaign.id}
+            isUser={false}
+            currency={"USD"}></SnapshotChampaingPaymentRequest>
+          {champaign.campaignTypeId == "6" ? (
+            <SnapshotChampaingBidRequest
+              userid={user.id}
+              campaingid={champaign.id}
+              isUser={false}
+            ></SnapshotChampaingBidRequest>
+          ) : null}
+        </>
+      ) : (
+        <>
+          <SnapshotChampaingAcceptRequest
+            userId={userId}
+            campaingid={champaign.id}
+            isUser={true}
+          ></SnapshotChampaingAcceptRequest>
+          <SnapshotDraftAcceptRequest
+            userId={userId}
+            campaingid={champaign.id}
+            isUser={false}
+          ></SnapshotDraftAcceptRequest>
+          <SnapshopCreatedDrafts
+            campaingid={champaign.id}
+            brandid={userId}
+            userId={userId}
+            isUser={true}
+          ></SnapshopCreatedDrafts>
+          <SnapshotChampaingPaymentRequest
+            userid={user.id}
+            campaingid={champaign.id}
+            isUser={true}
+            currency={"USD"}></SnapshotChampaingPaymentRequest>
+          {champaign.campaignTypeId == "6" ? (
+            <SnapshotChampaingBidRequest
+              userid={user.id}
+              campaingid={champaign.id}
+              isUser={true}
+            ></SnapshotChampaingBidRequest>
+          ) : null}
+
+
+          {/* SnapshotChampaingBidRequest */}
+        </>
+      )}
+
     </>
   );
 };
@@ -1018,6 +1084,101 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
   );
 };
 
+
+
+
+type SnapshotChampaingAcceptRequestProps = {
+  campaingid: string;
+  userId: string;
+  isUser: boolean;
+};
+
+const SnapshotChampaingAcceptRequest: React.FC<SnapshotChampaingAcceptRequestProps> = (props: SnapshotChampaingAcceptRequestProps) => {
+  const [resinvite, setRequestinvite] = useState<any[]>([]);
+  const init = async () => {
+    let req: any = {
+      search: {
+      },
+    };
+
+    if (props.isUser) {
+      req.search.influencer = props.userId;
+    } else {
+      req.search.campaign = props.campaingid;
+    }
+
+
+
+
+    const responseData = await axios.post(`${BaseUrl}/api/search-invite`, req);
+    if (responseData.data.status == true) {
+      setRequestinvite(responseData.data.data);
+    }
+  };
+
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <>
+      <div className="p-4 rounded-xl shadow-xl bg-white">
+        {resinvite.length == 0 ? (
+          <div>No Invite request is pending</div>
+        ) : (
+          <div>
+            <p className="text-md font-medium">Requested Invites</p>
+            <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+            <div className="flex flex-wrap gap-6">
+              {resinvite.map((val: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="p-4 bg-white rounded-lg shadow-lg"
+                  >
+                    <div className="flex">
+                      <img
+                        src={val.influencer.pic}
+                        alt="influencer pic"
+                        className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                      />
+                      <div className="ml-2">
+                        <p className="text-md font-medium">
+                          {val.influencer.name.toString().split("@")[0]}
+                        </p>
+                        <p className="text-sm font-medium">
+                          {val.influencer.email}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-md font-medium">Message</p>
+                    <p className="text-sm font-medium">{val.inviteMessage}</p>
+
+                    <p className="mt-2 text-md font-medium">Status</p>
+                    <p
+                      className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
+                        ? "bg-green-500"
+                        : val.status.name == "PENDING"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                        }`}
+                    >
+                      {val.status.name}
+                    </p>
+
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+
 type DraftAcceptRequestProps = {
   campaingid: string;
   userId: string;
@@ -1240,6 +1401,111 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
                         Reject
                       </button>
                     </div>
+                    <div></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+type SnapshotDraftAcceptRequestProps = {
+  campaingid: string;
+  userId: string;
+  isUser: boolean;
+};
+
+const SnapshotDraftAcceptRequest = (props: SnapshotDraftAcceptRequestProps) => {
+  const [resinvite, setRequestinvite] = useState<any[]>([]);
+
+  const init = async () => {
+    let req: any = {
+      search: {
+      },
+    };
+
+    if (props.isUser) {
+      req.search.influencer = props.userId;
+    } else {
+      req.search.campaign = props.campaingid;
+    }
+
+    const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
+    if (responseData.data.status == true) {
+      setRequestinvite(responseData.data.data);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
+    <>
+      <div className="p-4 rounded-xl shadow-xl bg-white mt-4">
+        {resinvite.length == 0 ? (
+          <div>No draft request is pending</div>
+        ) : (
+          <div>
+            <p className="text-md font-medium">Requested drafts</p>
+            <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+            <div className="flex flex-wrap gap-6">
+              {resinvite.map((val: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="p-4 bg-white rounded-lg shadow-lg"
+                  >
+                    <div className="flex">
+                      <img
+                        src={val.influencer.pic}
+                        alt="influencer pic"
+                        className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                      />
+                      <div className="ml-2">
+                        <p className="text-md font-medium">
+                          {val.influencer.name.split("@")[0]}
+                        </p>
+                        <p className="text-sm font-medium">
+                          {val.influencer.email}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-md font-medium">Description</p>
+                    <p className="text-sm font-medium">{val.description}</p>
+                    <p className="mt-2 text-md font-medium">Handle Info</p>
+                    <div className="flex gap-4">
+                      <img src={val.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                      <p className="text-xl font-semibold text-center">{val.handle.name}</p>
+                    </div>
+                    <p className="mt-2 text-md font-medium">Attachment</p>
+                    <a
+                      target="_blank"
+                      className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500"
+                      href={val.attach01}
+                    >
+                      View Doc
+                    </a>
+
+
+                    <p className="mt-2 text-md font-medium">Status</p>
+                    <p
+                      className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
+                        ? "bg-green-500"
+                        : val.status.name == "PENDING"
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                        }`}
+                    >
+                      {val.status.name}
+                    </p>
+
+
+
                     <div></div>
                   </div>
                 );
@@ -1590,12 +1856,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
   };
 
   const handlepayment = async () => {
-    // stripe.customers
-    //   .create({
-    //     email: "customer@example.com",
-    //   })
-    //   .then((customer) => console.log(customer))
-    //   .catch((error) => console.error(error));
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -1792,6 +2053,103 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
   );
 };
 
+
+type SnapshotChampaingPaymentRequestProps = {
+  campaingid: string;
+  userid: string;
+  currency: string;
+  isUser: boolean;
+};
+
+const SnapshotChampaingPaymentRequest: React.FC<SnapshotChampaingPaymentRequestProps> = (props: SnapshotChampaingPaymentRequestProps) => {
+  const [respayment, setRequestPayment] = useState<any[]>([]);
+
+  const init = async () => {
+    let req: any = {
+      search: {
+      },
+    };
+
+    if (props.isUser) {
+      req.search.influencer = props.userid;
+    } else {
+      req.search.campaign = props.campaingid;
+    }
+
+    const responseData = await axios.post(`${BaseUrl}/api/get-req-pay`, req);
+    if (responseData.data.status == true) {
+      setRequestPayment(responseData.data.data);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+
+  return (
+    <>
+      <div className="p-4 rounded-xl shadow-xl bg-white">
+        {respayment.length == 0 ? (
+          <>
+            <div>No payment request is pending</div>
+          </>
+        ) : (
+          <div>
+            <p className="text-md font-medium">Requested Payment</p>
+            <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+            <div className="flex flex-wrap gap-6">
+              {respayment.map((val: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="p-4 bg-white rounded-lg shadow-lg w-72"
+                  >
+                    <p className="mt-2 text-md font-medium">Requested by</p>
+                    <div className="w-full h-[2px] bg-gray-700"></div>
+                    <div className="flex mt-4">
+                      <img
+                        src={val.influencer.pic}
+                        alt="influencer pic"
+                        className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                      />
+                      <div className="ml-2">
+                        <p className="text-md font-medium">
+                          {val.influencer.name.split("@")[0]}
+                        </p>
+                        <p className="text-sm font-medium">
+                          {val.influencer.email}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-md font-medium">Amount</p>
+                    <p className="text-sm font-medium">
+                      {val.amount.toString().split(".")[0]} {props.currency}
+                    </p>
+                    {parseInt(val.status.code) == 2 ? (
+                      <p className="py-1 px-4 text-center text-white bg-green-500 rounded-md my-2">
+                        Accepted
+                      </p>
+                    ) : parseInt(val.status.code) == 3 ? (
+                      <p className="py-1 px-4 text-center text-white bg-red-500 rounded-md my-2">
+                        Rejected
+                      </p>
+                    ) : (
+                      <p className="py-1 px-4 text-center text-white bg-yellow-500 rounded-md my-2">
+                        Panding
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
 type UserCreatedDraftsProps = {
   campaingid: string;
   userId: string;
@@ -1889,20 +2247,29 @@ const UserCreatedDrafts = (props: UserCreatedDraftsProps) => {
   );
 };
 
-type ListCreatedDraftsProps = {
+type SnapshotCreatedDraftsProps = {
   campaingid: string;
   brandid: string;
+  isUser: boolean;
+  userId: string;
 };
 
-const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
+const SnapshopCreatedDrafts: React.FC<SnapshotCreatedDraftsProps> = (props: SnapshotCreatedDraftsProps) => {
   const [resDarft, setResDarft] = useState<any[]>([]);
 
   const init = async () => {
-    let req = {
+    let req: any = {
       search: {
-        campaign: props.campaingid,
       },
     };
+
+
+    if (props.isUser) {
+      req.search.influencer = props.userId;
+    } else {
+      req.search.campaign = props.campaingid;
+    }
+
 
     const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
     if (responseData.data.status == true) {
@@ -1959,6 +2326,13 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
                       <p className="text-sm font-medium">{new Date(val.draft_approval.toString()).toLocaleString()}</p> :
                       <p className="text-sm font-medium">No Publication Time is set</p>
                     }
+
+                    <p className="mt-2 text-md font-medium">Campaign Link</p>
+                    {val.linkCampaign != null || val.linkCampaign != "" ?
+                      <p className="text-sm font-medium">{val.linkCampaign}</p> :
+                      <p className="text-sm font-medium">No Campaign is Linked</p>
+                    }
+
                     <p className="mt-2 text-md font-medium">Attachment</p>
                     <a
                       target="_blank"
@@ -1998,7 +2372,7 @@ const ListCreatedDrafts = (props: ListCreatedDraftsProps) => {
             </div>
           </div>
         )}
-      </div>
+      </div >
     </>
   );
 };
@@ -2412,6 +2786,108 @@ const ChampaingBidRequest = (props: ChampaingBidRequestProps) => {
                         Accept
                       </button>
                     </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {error == "" || error == null || error == undefined ? null : (
+          <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+            {error}
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+
+
+
+type SnapshotChampaingBidRequestProps = {
+  campaingid: string;
+  userid: string;
+  isUser: boolean;
+};
+
+const SnapshotChampaingBidRequest: React.FC<SnapshotChampaingBidRequestProps> = (props: SnapshotChampaingBidRequestProps) => {
+  const [resbid, setResbid] = useState<any[]>([]);
+
+  const [error, setError] = useState<string | null>(null);
+
+  const init = async () => {
+    let req = {
+      campaignId: props.campaingid,
+    };
+    const responseData = await axios.post(
+      `${BaseUrl}/api/get-bid`,
+      req
+    );
+    if (responseData.data.status) {
+      if (props.isUser) {
+        const data = responseData.data.data.filter((val: any) => val.userId == props.userid)
+        setResbid(data);
+      } else {
+        setResbid(responseData.data.data);
+      }
+    } else {
+      setError(responseData.data.message);
+    }
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
+
+  return (
+    <>
+      <div className="p-4 rounded-xl shadow-xl bg-white mt-4">
+        {resbid.length == 0 ? (
+          <>
+            <div>No bid request is pending</div>
+          </>
+        ) : (
+          <div>
+            <p className="text-md font-medium">Requested Bid</p>
+            <div className="w-full bg-gray-400 h-[1px] my-2"></div>
+            <div className="flex flex-wrap gap-6">
+              {resbid.map((val: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className="p-4 bg-white rounded-lg shadow-lg"
+                  >
+                    <p className="mt-2 text-md font-medium">Requested by</p>
+                    <div className="w-full h-[2px] bg-gray-700"></div>
+                    <div className="flex mt-4">
+                      <img
+                        src={val.userPicUrl}
+                        alt="influencer pic"
+                        className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                      />
+                      <div className="ml-2">
+                        <p className="text-md font-medium">
+                          {val.userName.split("@")[0]}
+                        </p>
+                        <p className="text-sm font-medium">{val.userEmail}</p>
+                      </div>
+                    </div>
+                    <p className="text-lg font-medium">Amount</p>
+                    <p className="text-md font-semibold">{val.bidamount}</p>
+                    <p className="text-lg font-medium mt-2">Remark</p>
+                    <p className="text-md font-semibold">{val.remark}</p>
+
+                    <p className="mt-2 text-md font-medium">Status</p>
+                    <p
+                      className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.approved == "1"
+                        ? "bg-green-500"
+                        : "bg-yellow-500"
+                        }`}
+                    >
+                      {val.approved == "1" ? "Approved" : "Pending"}
+                    </p>
                   </div>
                 );
               })}

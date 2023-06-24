@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../app/routes/admin/home/index.tsx"],
+  "sourcesContent": ["const AdminDashboard = () => {\r\n  return (\r\n    <div className=\"grow bg-[#1b2028] my-2 rounded-md p-4 w-full\">\r\n      <h1 className=\"text-white font-medium text-xl\">Dashboard</h1>\r\n      <div className=\"w-full bg-slate-400 h-[1px] my-2\"></div>\r\n    </div>\r\n  );\r\n};\r\n\r\nexport default AdminDashboard;\r\n"],
+  "mappings": ";;;;;;AAGM;AAHN,IAAM,iBAAiB,MAAM;AAC3B,SACE,mDAAC,SAAI,WAAU,gDACb;AAAA,uDAAC,QAAG,WAAU,kCAAiC,yBAA/C;AAAA;AAAA;AAAA;AAAA,WAAwD;AAAA,IACxD,mDAAC,SAAI,WAAU,sCAAf;AAAA;AAAA;AAAA;AAAA,WAAkD;AAAA,OAFpD;AAAA;AAAA;AAAA;AAAA,SAGA;AAEJ;AAEA,IAAO,eAAQ;",
+  "names": []
+}

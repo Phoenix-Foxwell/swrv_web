@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 enum AdminSideBarTabs {
   None,
+  HOME,
   CITY,
   CATEGORY,
   COUNTRY,
@@ -17,6 +18,7 @@ enum AdminSideBarTabs {
   USER,
   CAMPAIGN,
   DISPUTE,
+  SUPPORT,
   CONTACT,
 }
 

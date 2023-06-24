@@ -1,392 +1,120 @@
-import {
-  faEdit,
-  faEye,
-  faFill,
-  faTrash,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { BaseUrl } from "~/const";
-import { ToastContainer, toast } from "react-toastify";
-
-import styles from "react-toastify/dist/ReactToastify.css";
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }];
-}
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
-  const contactus = await axios({
-    method: "post",
-    url: `${BaseUrl}/api/get-contact`,
-  });
-  return json({ contactus: contactus.data.data[0] });
+    const address = await axios.post(`${BaseUrl}/api/get-home`);
+    return json({ address: address.data.data });
 };
 
 const Contact = () => {
-  const contactus = useLoaderData().contactus;
+    const address = useLoaderData().address[0];
+    const [error, setError] = useState<string>("");
 
-  const [viewBox, setViewBox] = useState<boolean>(false);
-  const [viewDate, setViewData] = useState<any>({});
+    const address1Ref = useRef<HTMLInputElement>(null);
+    const address2Ref = useRef<HTMLInputElement>(null);
+    const address3Ref = useRef<HTMLInputElement>(null);
 
-  const [editBox, setEditBox] = useState<boolean>(false);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const codeRef = useRef<HTMLInputElement>(null);
+    useEffect(() => {
+        address1Ref!.current!.value = address["address_1"];
+        address2Ref!.current!.value = address["address_2"];
+        address3Ref!.current!.value = address["address_3"];
+    }, []);
 
-  const [editDate, setEditData] = useState<any>({
-    categoryName: nameRef.current?.value || "",
-    categoryCode: codeRef.current?.value || "",
-  });
-
-  const [error, setError] = useState<String>("");
-
-  const edit = async (id: number) => {
-    const view = await axios({
-      method: "post",
-      url: `${BaseUrl}/api/get-category-byid`,
-      data: { id: id },
-    });
-    setEditBox((val) => true);
-    setEditData((val: any) => view.data.data[0]);
-  };
-
-  const [delBox, setDelBox] = useState<boolean>(false);
-  const [delDate, setDelData] = useState<any>({});
-  const del = async (id: number) => {
-    const view = await axios({
-      method: "post",
-      url: `${BaseUrl}/api/get-category-byid`,
-      data: { id: id },
-    });
-    setDelBox((val) => true);
-    setDelData((val: any) => view.data.data[0]);
-  };
-
-  const delButton = async (id: number) => {
-    const res = await axios({
-      method: "post",
-      url: `${BaseUrl}/api/del-category`,
-      data: { id: id },
-    });
-    if (res.data.status) {
-      toast.success("Successfully Deleted.", { theme: "dark" });
-    } else {
-      toast.error(res.data.message, { theme: "dark" });
-    }
-    setDelBox((val) => false);
-    window.location.reload();
-  };
-  const view = async (id: number) => {
-    const view = await axios({
-      method: "post",
-      url: `${BaseUrl}/api/get-category-byid`,
-      data: { id: id },
-    });
-    setViewBox((val) => true);
-    setViewData((val: any) => view.data.data[0]);
-  };
-
-  const submit = async (id: number) => {
-    if (
-      nameRef.current?.value == null ||
-      nameRef.current?.value == undefined ||
-      nameRef.current?.value == ""
-    ) {
-      setError("Enter the name.");
-    } else if (
-      codeRef.current?.value == null ||
-      codeRef.current?.value == undefined ||
-      codeRef.current?.value == ""
-    ) {
-      setError("Enter the code.");
-    } else {
-      const res = await axios({
-        method: "post",
-        url: `${BaseUrl}/api/upd-category`,
-        data: {
-          categoryName: nameRef.current?.value,
-          categoryCode: codeRef.current?.value,
-          id: id,
-        },
-      });
-      if (res.data.status) {
-        toast.success("Successfully updated.", { theme: "dark" });
-      } else {
-        toast.error(res.data.message, { theme: "dark" });
-      }
-      setEditBox((val) => false);
-      window.location.reload();
-    }
-  };
-
-  const [newBox, setNewBox] = useState<boolean>(false);
-  const nameNewRef = useRef<HTMLInputElement>(null);
-  const codeNewRef = useRef<HTMLInputElement>(null);
-
-  const submitNew = async () => {
-    if (
-      nameNewRef.current?.value == null ||
-      nameNewRef.current?.value == undefined ||
-      nameNewRef.current?.value == ""
-    ) {
-      setError("Enter the name.");
-    } else if (
-      codeNewRef.current?.value == null ||
-      codeNewRef.current?.value == undefined ||
-      codeNewRef.current?.value == ""
-    ) {
-      setError("Enter the code.");
-    } else {
-      const res = await axios({
-        method: "post",
-        url: `${BaseUrl}/api/add-category`,
-        data: {
-          categoryName: nameNewRef.current?.value,
-          categoryCode: codeNewRef.current?.value,
-        },
-      });
-      if (res.data.status) {
-        toast.success("Successfully added.", { theme: "dark" });
-      } else {
-        toast.error(res.data.message, { theme: "dark" });
-      }
-      setNewBox((val) => false);
-      window.location.reload();
-    }
-  };
-
-  return (
-    <>
-      {/* view box */}
-      <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${viewBox ? "grid" : "hidden"
-          }`}
-      >
-        <div className="bg-[#31353f] rounded-lg p-4">
-          <div className="mx-auto">
-            <div className="text-white">
-              <p>ID : {viewDate.id}</p>
-              <p>Name : {viewDate.categoryName} </p>
-              <p>Code : {viewDate.categoryCode}</p>
-            </div>
-            <div className="w-full h-[1px] bg-gray-300 my-2"></div>
-            <div
-              onClick={() => setViewBox(false)}
-              className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md hover:border hover:border-rose-400 hover:bg-rose-500 hover:bg-opacity-10 hover:text-rose-500 text-gray-300 cursor-pointer`}
-            >
-              <FontAwesomeIcon icon={faXmark} className="w-6"></FontAwesomeIcon>
-              <p>CLOSE</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* del box */}
-      <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${delBox ? "grid" : "hidden"
-          }`}
-      >
-        <div className="bg-[#31353f] rounded-lg p-4">
-          <div className="mx-auto">
-            <div className="text-white">
-              <p>Are you Sure you want to delete {delDate.name}?</p>
-            </div>
-            <div className="w-full h-[1px] bg-gray-300 my-2"></div>
-            <div className="flex w-full justify-between">
-              <div
-                onClick={() => setDelBox(false)}
-                className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md border border-gray-300 hover:border hover:border-rose-400 hover:bg-rose-500 hover:bg-opacity-10 hover:text-rose-500 text-gray-300 cursor-pointer`}
-              >
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className="w-6"
-                ></FontAwesomeIcon>
-                <p>CLOSE</p>
-              </div>
-              <div
-                onClick={() => delButton(delDate.id)}
-                className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md border border-gray-300hover:border hover:border-green-400 hover:bg-green-500 hover:bg-opacity-10 hover:text-green-500 text-gray-300 cursor-pointer`}
-              >
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  className="w-6"
-                ></FontAwesomeIcon>
-                <p>Delete</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* edit box */}
-      <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${editBox ? "grid" : "hidden"
-          }`}
-      >
-        <div className="bg-[#31353f] rounded-lg p-4 w-80">
-          <div className="mx-auto">
-            <div className="text-white">
-              <input
-                ref={nameRef}
-                type={"text"}
-                name="name"
-                className="py-1 px-2 rounded-md border border-white w-full my-2 bg-transparent outline-none focus:bg-transparent fill-none"
-                placeholder="Enter the name.."
-                autoComplete="off"
-                value={editDate.categoryName}
-                onChange={(e) =>
-                  setEditData((data: any) => ({
-                    ...data,
-                    categoryName: e.target.value,
-                  }))
+    const submit = async () => {
+        const userdata = await axios({
+            method: "post",
+            url: `${BaseUrl}/api/edit-home`,
+            data: {
+                update: {
+                    address_1: address1Ref!.current!.value,
+                    address_2: address2Ref!.current!.value,
+                    address_3: address3Ref!.current!.value
                 }
-              />
-              <input
-                ref={codeRef}
-                type={"text"}
-                name="code"
-                className="py-1 px-2 rounded-md border border-white w-full my-2 bg-transparent outline-none focus:bg-transparent fill-none"
-                placeholder="Enter the code.."
-                autoComplete="off"
-                value={editDate.categoryCode}
-                onChange={(e) =>
-                  setEditData((data: any) => ({
-                    ...data,
-                    categoryCode: e.target.value,
-                  }))
-                }
-              />
-            </div>
-            {error == "" || error == null || error == undefined ? null : (
-              <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
-                {error}
-              </div>
-            )}
-            <div className="w-full h-[1px] bg-gray-300 my-2"></div>
-            <div className="flex w-full justify-between">
-              <div
-                onClick={() => setEditBox(false)}
-                className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md border border-gray-300 hover:border hover:border-rose-400 hover:bg-rose-500 hover:bg-opacity-10 hover:text-rose-500 text-gray-300 cursor-pointer`}
-              >
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className="w-6"
-                ></FontAwesomeIcon>
-                <p>CLOSE</p>
-              </div>
-              <div
-                onClick={() => submit(editDate.id)}
-                className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md border border-gray-300hover:border hover:border-green-400 hover:bg-green-500 hover:bg-opacity-10 hover:text-green-500 text-gray-300 cursor-pointer`}
-              >
-                <FontAwesomeIcon
-                  icon={faFill}
-                  className="w-6"
-                ></FontAwesomeIcon>
-                <p>SUBMIT</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* add box */}
-      <div
-        className={`fixed h-full w-full bg-slate-800 bg-opacity-40 top-0 left-0 place-items-center ${newBox ? "grid" : "hidden"
-          }`}
-      >
-        <div className="bg-[#31353f] rounded-lg p-4 w-80">
-          <div className="mx-auto">
-            <div className="text-white">
-              <input
-                ref={nameNewRef}
-                type={"text"}
-                name="name"
-                className="py-1 px-2 rounded-md border border-white w-full my-2 bg-transparent outline-none focus:bg-transparent fill-none"
-                placeholder="Enter the name.."
-                autoComplete="off"
-              />
-              <input
-                ref={codeNewRef}
-                type={"text"}
-                name="code"
-                className="py-1 px-2 rounded-md border border-white w-full my-2 bg-transparent outline-none focus:bg-transparent fill-none"
-                placeholder="Enter the code.."
-                autoComplete="off"
-              />
-            </div>
-            {error == "" || error == null || error == undefined ? null : (
-              <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
-                {error}
-              </div>
-            )}
-            <div className="w-full h-[1px] bg-gray-300 my-2"></div>
-            <div className="flex w-full justify-between">
-              <div
-                onClick={() => setNewBox(false)}
-                className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md border border-gray-300 hover:border hover:border-rose-400 hover:bg-rose-500 hover:bg-opacity-10 hover:text-rose-500 text-gray-300 cursor-pointer`}
-              >
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className="w-6"
-                ></FontAwesomeIcon>
-                <p>CLOSE</p>
-              </div>
-              <div
-                onClick={submitNew}
-                className={`text-sm flex gap-2 items-center my-1 b  py-1 px-2 rounded-md border border-gray-300hover:border hover:border-green-400 hover:bg-green-500 hover:bg-opacity-10 hover:text-green-500 text-gray-300 cursor-pointer`}
-              >
-                <FontAwesomeIcon
-                  icon={faFill}
-                  className="w-6"
-                ></FontAwesomeIcon>
-                <p>SUBMIT</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="grow bg-[#1b2028] my-2 rounded-md p-4 w-full">
-        <div className="flex">
-          <h1 className="text-white font-medium text-xl">Contact</h1>
-          <div className="grow"></div>
-          {/* <button onClick={() => setNewBox(true)} className="bg-green-600 py-1 px-2 text-sm text-white rounded-md">ADD NEW</button> */}
-        </div>
-        <div className="w-full bg-slate-400 h-[1px] my-2"></div>
-        <div className="flex gap-4 flex-wrap">
-          {contactus.map((val: any, index: number) => {
-            return (
-              <div
-                key={index}
-                className="bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-60"
-              >
-                <div className="flex gap-4 w-full">
-                  <div>{val.id}.</div>
-                  <div>{val.name}</div>
-                  <div className="grow"></div>
-                  <div>
-                    {Number(val.isbrand) === 1 ? (
-                      <div className="w-16 py-1 text-white text-xs bg-rose-500 text-center rounded-md font-medium">
-                        Brand
-                      </div>
-                    ) : (
-                      <div className="w-16 py-1 text-white text-xs bg-green-500 text-center rounded-md font-medium">
-                        Influencer
-                      </div>
+            },
+        });
 
-                    )}
-                  </div>
+        if (userdata.data.status == false) {
+            setError(userdata.data.message);
+        } else {
+            window.location.reload();
+        }
+    }
+
+
+    return (
+        <div className="grow bg-[#1b2028] my-2 rounded-md p-4 w-full">
+            <h1 className="text-white font-medium text-xl">Contact</h1>
+            <div className="w-full bg-slate-400 h-[1px] my-2"></div>
+            <div className="flex gap-4 flex-col lg:flex-row items-center w-full mt-4 justify-center">
+                <div className=" w-60 py-2 px-4 rounded-md shadow-xl bg-white text-center text-primary font-medium flex gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M12 4c2.2 0 4 1.8 4 4c0 2.1-2.1 5.5-4 7.9c-1.9-2.5-4-5.8-4-7.9c0-2.2 1.8-4 4-4m0-2C8.7 2 6 4.7 6 8c0 4.5 6 11 6 11s6-6.6 6-11c0-3.3-2.7-6-6-6m0 4c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m8 13c0 2.2-3.6 4-8 4s-8-1.8-8-4c0-1.3 1.2-2.4 3.1-3.2l.6.9c-1 .5-1.7 1.1-1.7 1.8c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5c0-.7-.7-1.3-1.8-1.8l.6-.9c2 .8 3.2 1.9 3.2 3.2Z"
+                        />
+                    </svg>{" "}
+                    {address["address_1"]}
                 </div>
-                <div>{val.number}</div>
-                <div className="mt-4">Message : {val.message}</div>
-              </div>
-            );
-          })}
+                <div className="w-60 py-2 px-4 rounded-md shadow-xl bg-white text-center text-primary font-medium flex gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="28"
+                        height="28"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M19 12q0-2.925-2.038-4.963T12 5V3q1.875 0 3.513.713t2.85 1.924q1.212 1.213 1.925 2.85T21 12h-2Zm-4 0q0-1.25-.875-2.125T12 9V7q2.075 0 3.538 1.463T17 12h-2Zm4.95 9q-3.225 0-6.288-1.438t-5.425-3.8q-2.362-2.362-3.8-5.425T3 4.05q0-.45.3-.75t.75-.3H8.1q.35 0 .625.225t.325.575l.65 3.5q.05.35-.013.638T9.4 8.45L6.975 10.9q1.05 1.8 2.638 3.375T13.1 17l2.35-2.35q.225-.225.588-.338t.712-.062l3.45.7q.35.075.575.338T21 15.9v4.05q0 .45-.3.75t-.75.3ZM6.025 9l1.65-1.65L7.25 5H5.025q.125 1.025.35 2.025T6.025 9Zm8.95 8.95q.975.425 1.988.675T19 18.95v-2.2l-2.35-.475l-1.675 1.675ZM6.025 9Zm8.95 8.95Z"
+                        />
+                    </svg>{" "}
+                    {address["address_2"]}
+                </div>
+                <div className="w-60 py-2 px-4 rounded-md shadow-xl bg-white text-center text-primary font-medium flex gap-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"
+                        />
+                    </svg>{" "}
+                    {address["address_3"]}
+                </div>
+            </div>
+
+            <h1 className="text-white font-medium text-xl">Edit Contact</h1>
+            <div className="w-full bg-slate-400 h-[1px] my-2"></div>
+            <input
+                ref={address1Ref}
+                className="p-2 w-80 outline-none bg-transparent text-white border-2 border-white block my-4 rounded-md resize-none"
+            />
+            <input
+                ref={address2Ref}
+                className="p-2 w-80 outline-none bg-transparent text-white border-2 border-white block my-4 rounded-md resize-none"
+            />
+            <input
+                ref={address3Ref}
+                className="p-2 w-80 outline-none bg-transparent text-white border-2 border-white block my-4 rounded-md resize-none"
+            />
+            {error == "" || error == null || error == undefined ? null : (
+                <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+                    {error}
+                </div>
+            )}
+            <button className="text-white py-2 px-4 rounded-md bg-cyan-500 w-80 text-center" onClick={submit}>UPDATE</button>
         </div>
-        <ToastContainer></ToastContainer>
-      </div>
-    </>
-  );
+    );
 };
 
 export default Contact;

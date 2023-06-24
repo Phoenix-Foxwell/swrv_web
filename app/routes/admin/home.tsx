@@ -7,6 +7,7 @@ import {
   faCity,
   faDollarSign,
   faFlag,
+  faHandsHelping,
   faHome,
   faLanguage,
   faLocationPin,
@@ -29,7 +30,6 @@ import AsideBarStore, { AdminSideBarTabs } from "~/state/siderbar";
 import { adminUser } from "~/cookies";
 import { LoaderArgs, LoaderFunction, json, redirect } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useNavigate } from "@remix-run/react";
-import { useEffect } from "react";
 
 export const loader: LoaderFunction = async (props: LoaderArgs) => {
   const cookieHeader = props.request.headers.get("Cookie");
@@ -51,9 +51,9 @@ const DashBoard = () => {
   const changeMobile = AsideBarStore((state) => state.change);
   const useravatar =
     userData.userPicUrl == null ||
-    userData.userPicUrl == undefined ||
-    userData.userPicUrl == "" ||
-    userData.userPicUrl == "0"
+      userData.userPicUrl == undefined ||
+      userData.userPicUrl == "" ||
+      userData.userPicUrl == "0"
       ? "/images/avatar/user.png"
       : userData.userPicUrl;
   const asideindex = AsideBarStore((state) => state.currentIndex);
@@ -68,9 +68,8 @@ const DashBoard = () => {
     <>
       <div className="flex w-full p-4 bg-[#31353f] min-h-screen gap-4">
         <div
-          className={`w-full md:w-60 bg-[#1b2028] rounded-md p-2 md:flex flex-col absolute top-0 left-0 min-h-full md:h-auto md:relative ${
-            isMobile ? "grid place-items-center" : "hidden"
-          }`}
+          className={`w-full md:w-60 bg-[#1b2028] rounded-md p-2 md:flex flex-col absolute top-0 left-0 min-h-full md:h-auto md:relative ${isMobile ? "grid place-items-center" : "hidden"
+            }`}
         >
           <div className="md:flex flex-col md:h-full">
             <div className="text-white text-center mb-4">
@@ -78,6 +77,8 @@ const DashBoard = () => {
               <p className="text-xs font-bold">ADMIN PANEL</p>
             </div>
             <div className="flex flex-col grow">
+
+
               <Link
                 to={"/admin/home"}
                 onClick={() => achangeindex(AdminSideBarTabs.None)}
@@ -88,6 +89,19 @@ const DashBoard = () => {
                   active={asideindex === AdminSideBarTabs.None}
                 ></SidebarTab>
               </Link>
+
+              <Link
+                to={"/admin/home/home"}
+                onClick={() => achangeindex(AdminSideBarTabs.HOME)}
+              >
+                <SidebarTab
+                  icon={faHome}
+                  title="HOME"
+                  active={asideindex === AdminSideBarTabs.HOME}
+                ></SidebarTab>
+              </Link>
+
+
 
               {/* status change */}
               <Link
@@ -278,6 +292,19 @@ const DashBoard = () => {
                 ></SidebarTab>
               </Link>
               <Link
+                to={"/admin/home/support/"}
+                onClick={() => {
+                  achangeindex(AdminSideBarTabs.SUPPORT);
+                  changeMobile(false);
+                }}
+              >
+                <SidebarTab
+                  icon={faHandsHelping}
+                  title="SUPPORT"
+                  active={asideindex === AdminSideBarTabs.SUPPORT}
+                ></SidebarTab>
+              </Link>
+              <Link
                 to={"/admin/home/contact/"}
                 onClick={() => {
                   achangeindex(AdminSideBarTabs.CONTACT);
@@ -344,11 +371,10 @@ type SideBarTabProps = {
 const SidebarTab = (props: SideBarTabProps) => {
   return (
     <div
-      className={`w-60 md:w-auto flex gap-2 items-center my-1 b  py-1 px-2 rounded-md text-sm cursor-pointer ${
-        props.active
-          ? "border border-green-400 g-green-500 bg-opacity-10 text-green-500 "
-          : "text-gray-300 hover:bg-[#31353f] "
-      }`}
+      className={`w-60 md:w-auto flex gap-2 items-center my-1 b  py-1 px-2 rounded-md text-sm cursor-pointer ${props.active
+        ? "border border-green-400 g-green-500 bg-opacity-10 text-green-500 "
+        : "text-gray-300 hover:bg-[#31353f] "
+        }`}
     >
       <FontAwesomeIcon icon={props.icon} className="w-6"></FontAwesomeIcon>
       <p>{props.title}</p>

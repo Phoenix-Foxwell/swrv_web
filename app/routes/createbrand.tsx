@@ -28,10 +28,12 @@ export const loader: LoaderFunction = async (props: LoaderArgs) => {
 };
 
 const createBarnd = () => {
-  const navigator = useNavigate();
   const data = useActionData();
   const nextButton = useRef<HTMLButtonElement>(null);
   const uidref = useRef<HTMLInputElement>(null);
+
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+
 
   const userdata = useLoaderData();
   const userId: string = userdata.user.id;
@@ -43,6 +45,11 @@ const createBarnd = () => {
   const [citybox, setCitybox] = useState<boolean>(false);
   const [searchcity, setSearchcity] = useState<any[]>([]);
   const [selectedcity, setSelectedctiy] = useState<any>(null);
+
+
+  const [banner, setBanner] = useState<File | null>(null);
+  let bannerRef = useRef<HTMLInputElement | null>(null);
+  const [bannererror, setBannererror] = useState<string | null>(null);
 
   const [contactnumber, setContactnumber] = useState<number>();
   const handelcontent = (e: any) => {
@@ -66,6 +73,8 @@ const createBarnd = () => {
   useEffect(() => {
     uidref.current!.value = userId;
   }, []);
+
+
 
   return (
     <>
@@ -92,7 +101,6 @@ const createBarnd = () => {
             <div className="h-72 overflow-y-scroll no-scrollbar">
               {searchcity.map((value: any, index: number) => {
                 return (
-                  <>
                     <div
                       onClick={() => {
                         setSelectedctiy(value);
@@ -104,7 +112,6 @@ const createBarnd = () => {
                     >
                       {value["name"]} - {value["code"]}
                     </div>
-                  </>
                 );
               })}
             </div>
@@ -117,6 +124,7 @@ const createBarnd = () => {
             <img src="./images/swrvlogo.png" className="w-28 lg:w-32" />
           </NavLink>
         </div>
+        {/* brand logo start  here */}
         <div className="bg-white w-full shadow-xl p-4 mt-4 rounded-lg mx-auto sm:w-96">
           <div className="hidden">
             <input
@@ -181,6 +189,70 @@ const createBarnd = () => {
               </div>
             </div>
           </div>
+          {/* brand logo end here */}
+
+          {/* banner upload start here */}
+
+          <div className="hidden">
+            <input
+              type="file"
+              accept="image/*"
+              ref={bannerRef}
+              onChange={(value) => {
+                let file_size = parseInt(
+                  (value!.target.files![0].size / 1024 / 1024).toString()
+                );
+                if (file_size < 4) {
+                  setBannererror(null);
+                  setBanner(value!.target.files![0]);
+                } else {
+                  setBannererror("Image file size must be less then 4 mb");
+                }
+              }}
+            />
+          </div>
+          <div className="bg-gray-200 rounded-lg my-6 mr-6 p-4 text-gray-400 w-full">
+            <div className="grid place-items-center mr-4 h-40 object-cover w-full">
+              {banner == null ? (
+                <img
+                  src="/images/icons/gallery.png"
+                  alt="error"
+                  className="w-40 object-cover inline-block"
+                />
+              ) : (
+                <img
+                  src={URL.createObjectURL(banner)}
+                  alt="error"
+                  className="w-full h-36 inline-block object-cover rounded-md"
+                />
+              )}
+            </div>
+            <div>
+
+              <div className="mt-4">
+                {bannererror == "" ||
+                  bannererror == null ||
+                  bannererror == undefined ? null : (
+                  <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+                    {bannererror}
+                  </div>
+                )}
+                <div
+                  onClick={() => {
+                    bannerRef.current?.click();
+                  }}
+                >
+                  <CusButton
+                    text="Upload"
+                    textColor={"text-white"}
+                    width={"w-full"}
+                    background={"bg-gray-400"}
+                  ></CusButton>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* banner upload end here */}
           <h2 className="text-primary tect-xl font-medium text-left my-1">
             Brand Name
           </h2>
@@ -302,7 +374,10 @@ const createBarnd = () => {
             onClick={async () => {
               if (img == null || img == undefined) {
                 setError("Select the image");
-              } else if (
+              } else if (banner == null || banner == undefined) {
+                setError("Select the banner image");
+              }
+              else if (
                 nameRef.current?.value == null ||
                 nameRef.current?.value == undefined ||
                 nameRef.current?.value == ""
@@ -360,8 +435,9 @@ const createBarnd = () => {
                 setError("Fill the Campany info");
               } else {
                 const imageurl = await UploadFile(img);
+                const bannerurl = await UploadFile(banner);
 
-                if (imageurl.status) {
+                if (imageurl.status && bannerurl.status) {
                   let req = {
                     userId: userId,
                     brandLogoUrl: imageurl.data,
@@ -374,7 +450,9 @@ const createBarnd = () => {
                     brandBioInfo: binfoRef.current?.value,
                     comapnyBio: cinfoRef.current?.value,
                     cityId: selectedcity["id"],
+                    banner: bannerurl.data
                   };
+
 
                   const data = await axios({
                     method: "post",

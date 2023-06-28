@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { HomeFooter } from "~/components/home/footer/homefooter";
 import { MainNavBar } from "~/components/home/navbar/mainnavbar";
 import { SideBar } from "~/components/home/sidebar/sidebar";
+import { ConAlert } from "~/components/utils/alert";
 import { userPrefs } from "~/cookies";
 import SideBarStore from "~/state/home/sidebarstate";
 
@@ -21,6 +22,9 @@ const HomePage = () => {
   const navigator = useNavigate();
   useEffect(() => {
     if (userdata.user.status.code == "0" || userdata.user.status.code == 0) {
+      navigator("/sorry");
+    }
+    if (userdata.user.emailVerified == null || userdata.user.emailVerified == undefined || userdata.user.emailVerified == "") {
       navigator("/sorry");
     }
   }, []);

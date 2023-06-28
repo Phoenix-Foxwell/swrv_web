@@ -46,6 +46,11 @@ const UserInputBoxOne = () => {
 
   const nextButton = useRef<HTMLButtonElement>(null);
 
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 15);
+  const maxDateString = maxDate.toISOString().split("T")[0];
+
+
   return (
     <>
       <div className="p-8 w-full">
@@ -149,6 +154,7 @@ const UserInputBoxOne = () => {
               type={"date"}
               ref={datepicker}
               className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md w-full p-2"
+              max={maxDateString}
             />
             <p className="text-black text-left font-normal text-lg  mt-4">
               Bio <span className="text-rose-500 text-2xl font-semibold">&#42;</span>

@@ -112,7 +112,10 @@ const ThirdPage = () => {
                       !EmailValidator.validate(emailRef.current?.value)
                     ) {
                       setError("Enter valid email");
-                    } else if (
+                    } else if (emailRef.current?.value.toString().endsWith("@gmail.com") || emailRef.current?.value.toString().endsWith("@yahoo.com") || emailRef.current?.value.toString().endsWith("@hotmail.com")) {
+                      setError("Enter Brand email");
+                    }
+                    else if (
                       contactnumber == null ||
                       contactnumber == undefined ||
                       contactnumber == 0

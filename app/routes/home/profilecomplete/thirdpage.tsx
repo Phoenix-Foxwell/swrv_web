@@ -162,7 +162,7 @@ const ThirdPage = () => {
                         <div onClick={() => {
                             if (addedPlatfrom.length == 0) {
                                 setSus(null);
-                                setError("Add at least one handle");
+                                setError("Click on Add New Channel for adding new channel");
                             }
                             else {
                                 if (addedPlatfrom[0]["status"]) {
@@ -170,7 +170,7 @@ const ThirdPage = () => {
                                     nextButton.current!.click();
                                 } else {
                                     setSus(null);
-                                    setError("Add at least one handle");
+                                    setError("Click on Add New Channel for adding new channel");
                                 }
                             }
                         }}>

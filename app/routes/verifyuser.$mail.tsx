@@ -41,7 +41,7 @@ const verifyuser: React.FC = (): JSX.Element => {
                     }
                     <div className="h-10"></div>
                     <div className="w-full grid place-items-center">
-                        <Link to="/" className="text-xl text-center font-semibold text-blue-500">Go back to website</Link>
+                        <Link to="/logout" className="text-xl text-center font-semibold text-blue-500">Go back to website</Link>
                     </div>
                 </div>
             </div>

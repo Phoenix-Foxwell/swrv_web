@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { HomeFooter } from "~/components/home/footer/homefooter";
 import { MainNavBar } from "~/components/home/navbar/mainnavbar";
 import { SideBar } from "~/components/home/sidebar/sidebar";
-import { ConAlert } from "~/components/utils/alert";
 import { userPrefs } from "~/cookies";
 import SideBarStore from "~/state/home/sidebarstate";
 

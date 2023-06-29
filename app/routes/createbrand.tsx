@@ -101,17 +101,17 @@ const createBarnd = () => {
             <div className="h-72 overflow-y-scroll no-scrollbar">
               {searchcity.map((value: any, index: number) => {
                 return (
-                    <div
-                      onClick={() => {
-                        setSelectedctiy(value);
-                        setCitybox(false);
-                        cityref!.current!.value = "";
-                      }}
-                      key={index}
-                      className="my-6 cursor-pointer bg-white rounded-md py-1 border-2 text-center font-normal text-md hover:border-emerald-500"
-                    >
-                      {value["name"]} - {value["code"]}
-                    </div>
+                  <div
+                    onClick={() => {
+                      setSelectedctiy(value);
+                      setCitybox(false);
+                      cityref!.current!.value = "";
+                    }}
+                    key={index}
+                    className="my-6 cursor-pointer bg-white rounded-md py-1 border-2 text-center font-normal text-md hover:border-emerald-500"
+                  >
+                    {value["name"]} - {value["code"]}
+                  </div>
                 );
               })}
             </div>
@@ -525,7 +525,7 @@ export async function action({ request }: ActionArgs) {
   if (userdata.data.status == false) {
     return { message: userdata.data.message };
   } else {
-    return redirect("/welcome", {
+    return redirect(`/welcome/${userdata.data.data[0]["email"]}`, {
       headers: {
         "Set-Cookie": await userPrefs.serialize({
           user: userdata.data.data[0],

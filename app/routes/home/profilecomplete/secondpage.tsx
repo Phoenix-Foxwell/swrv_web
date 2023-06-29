@@ -145,6 +145,7 @@ const SecondPage = () => {
                                             } else {
                                                 setSelmarket([val]);
                                             }
+                                            setmar(false);
                                         }} key={i} className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selmarket.includes(val) ? "border-green-500 text-green-500" : "border-gray-800 text-black"}  no-scrollbar`}>{val["code"]} - {val["name"]}</h1>
                                     );
                                 })}
@@ -249,7 +250,6 @@ const SecondPage = () => {
                     <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
                         <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
                             {selcurrency.map((value: any, i: number) => {
-
                                 return (
                                     <div key={i} className="flex bg-white my-1 rounded-md py-1 px-2 items-center gap-x-4">
                                         <h1 className=" text-black font-semibold text-center w-32">
@@ -278,6 +278,7 @@ const SecondPage = () => {
                                             } else {
                                                 setSelcurrency([val]);
                                             }
+                                            setcur(false);
                                         }} key={i} className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selcurrency.includes(val) ? "border-green-500 text-green-500" : "border-gray-800 text-black"}  no-scrollbar`}>{val["currencyCode"]} - {val["currencyName"]}  {he.decode(val["currencyAsciiSymbol"])} </h1>
                                     );
                                 })}

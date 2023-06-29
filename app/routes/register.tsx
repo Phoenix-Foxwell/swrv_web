@@ -149,7 +149,7 @@ export const action = async ({ request }: ActionArgs) => {
         return { message: sendverificationmail.data.message };
       } else {
         if (value.cat == "inf") {
-          return redirect("/welcome", {
+          return redirect(`/welcome/${userdata.data.data[0]["email"]}`, {
             headers: {
               "Set-Cookie": await userPrefs.serialize({
                 user: userdata.data.data[0],

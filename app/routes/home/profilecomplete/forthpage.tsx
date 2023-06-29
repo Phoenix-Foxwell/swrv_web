@@ -178,6 +178,7 @@ const ForthPage = () => {
                       <h1
                         onClick={() => {
                           setSelCountry((value) => [val]);
+                          setcon(false);
                         }}
                         key={i}
                         className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
@@ -250,6 +251,7 @@ const ForthPage = () => {
                           } else {
                             setSelGender([val]);
                           }
+                          setgen(false);
                         }}
                         key={i}
                         className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selGender.includes(val)

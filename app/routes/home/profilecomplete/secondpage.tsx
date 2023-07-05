@@ -349,7 +349,7 @@ const SecondPage = () => {
                             return res;
                         }
                         if (selcurrency.length == 0) {
-                            setError("Select the currecny.");
+                            setError("Select the currency.");
                         } else if (selcategory.length == 0) {
                             setError("Select the category.")
                         } else if (sellanguages.length == 0) {
@@ -357,7 +357,7 @@ const SecondPage = () => {
                         } else if (selmarket.length == 0) {
                             setError("Select the main market.")
                         } else if (selorthermarket.length == 0) {
-                            setError("Select the other markder");
+                            setError("Select the other market.");
                         } else {
                             let req = {
                                 "id": userID,

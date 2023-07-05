@@ -93,7 +93,6 @@ const BrandPage = () => {
                 </div>
             </div>
             <div className="w-full mt-4 shadow-xl bg-white rounded-xl">
-                <img src="/images/products/shoe1.jpg" alt="error" className="w-full h-60 object-cover rounded-t-xl" />
                 <div className="flex flex-col lg:flex-row">
                     <div className="p-8 flex flex-row gap-x-3 lg:flex-col">
                         <div>

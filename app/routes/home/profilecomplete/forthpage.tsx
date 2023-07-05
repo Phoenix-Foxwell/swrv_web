@@ -137,71 +137,6 @@ const ForthPage = () => {
       <div className="p-8 w-full">
         <div className="flex w-full">
           <div className="w-full">
-            {/* country start here */}
-            <p className="text-black text-left font-normal text-lg mt-4">
-              Country  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
-            </p>
-            <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
-              <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
-                {selCountry.map((value: any, i: number) => {
-                  return (
-                    <div
-                      key={i}
-                      className="flex bg-white my-1 rounded-md py-1 px-2 items-center gap-x-4"
-                    >
-                      <h1 className=" text-black font-semibold text-center w-40">
-                        {`${value["name"]} - [${value["code"]}]`}
-                      </h1>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="grow"></div>
-              <div
-                className="grid place-items-center px-4 bg-gray-300 rounded-lg"
-                onClick={() => {
-                  setcon(true);
-                }}
-              >
-                <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
-              </div>
-            </div>
-            <div
-              className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
-                } grid place-items-center`}
-              onClick={val => setcon(false)}
-            >
-              <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
-                <div className="overflow-y-scroll no-scrollbar w-80 h-[350px]">
-                  {country.map((val: any, i: number) => {
-                    return (
-                      <h1
-                        onClick={() => {
-                          setSelCountry((value) => [val]);
-                          setcon(false);
-                        }}
-                        key={i}
-                        className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
-                          ? "border-green-500 text-green-500"
-                          : "border-gray-800 text-black"
-                          }  no-scrollbar`}
-                      >
-                        {val["code"]} - {val["name"]}
-                      </h1>
-                    );
-                  })}
-                </div>
-                <div
-                  onClick={() => {
-                    setcon(false);
-                  }}
-                  className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer"
-                >
-                  Close
-                </div>
-              </div>
-            </div>
-            {/* country end here */}
 
             {/* Gender start here */}
             <p className="text-black text-left font-normal text-lg  mt-4">
@@ -274,8 +209,75 @@ const ForthPage = () => {
                 </div>
               </div>
             </div>
-
             {/* Gender end here */}
+            {/* country start here */}
+            <p className="text-black text-left font-normal text-lg mt-4">
+              Country  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
+            </p>
+            <div className="bg-[#EEEEEE] h-10 rounded-lg  flex gap-1 pl-2 w-full">
+              <div className="flex gap-x-2 overflow-x-scroll flex-nowrap no-scrollbar">
+                {selCountry.map((value: any, i: number) => {
+                  return (
+                    <div
+                      key={i}
+                      className="flex bg-white my-1 rounded-md py-1 px-2 items-center gap-x-4"
+                    >
+                      <h1 className=" text-black font-semibold text-center w-auto">
+                        {`${value["name"]} - [${value["code"]}]`}
+                      </h1>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="grow"></div>
+              <div
+                className="grid place-items-center px-4 bg-gray-300 rounded-lg"
+                onClick={() => {
+                  setcon(true);
+                }}
+              >
+                <FontAwesomeIcon icon={faAdd}></FontAwesomeIcon>
+              </div>
+            </div>
+            <div
+              className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
+                } grid place-items-center`}
+              onClick={val => setcon(false)}
+            >
+              <div className="bg-white p-10 cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                <div className="overflow-y-scroll no-scrollbar w-80 h-[350px]">
+                  {country.map((val: any, i: number) => {
+                    return (
+                      <h1
+                        onClick={() => {
+                          setSelCountry((value) => [val]);
+                          setcon(false);
+                        }}
+                        key={i}
+                        className={`text-lg text-center font-normal rounded-md w-full my-2 border-2 ${selCountry.includes(val)
+                          ? "border-green-500 text-green-500"
+                          : "border-gray-800 text-black"
+                          }  no-scrollbar`}
+                      >
+                        {val["code"]} - {val["name"]}
+                      </h1>
+                    );
+                  })}
+                </div>
+                <div
+                  onClick={() => {
+                    setcon(false);
+                  }}
+                  className="my-4 bg-red-500 bg-opacity-10 b-2 border-red-500 px-4 py-1 text-red-500 font-medium text-center cursor-pointer"
+                >
+                  Close
+                </div>
+              </div>
+            </div>
+            {/* country end here */}
+
+
+            {/* form city start here */}
             <p className="text-black text-left font-normal text-lg  mt-4">
               City  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
@@ -322,6 +324,9 @@ const ForthPage = () => {
                 {selectedcity["name"]} - {selectedcity["code"]}
               </div>
             )}
+            {/* form city end here */}
+
+            {/* form phone number start here */}
             <p className="text-black text-left font-normal text-lg  mt-4">
               Phone number  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
             </p>
@@ -336,6 +341,8 @@ const ForthPage = () => {
                 className="w-full outline-none bg-transparent focus:border-gray-300 rounded-md resize-none"
               />
             </div>
+            {/* form phone number start here */}
+            {/* form end there */}
             <div className="flex gap-2 mt-4 items-center">
               <div>
                 <input

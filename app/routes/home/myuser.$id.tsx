@@ -270,11 +270,6 @@ const BrandPage = () => {
       </div>
       {/* connnection box end */}
       <div className="w-full mt-4 shadow-xl bg-white rounded-xl">
-        <img
-          src="/images/products/shoe1.jpg"
-          alt="error"
-          className="w-full h-60 object-cover rounded-t-xl"
-        />
         <div className="flex flex-col lg:flex-row">
           <div className="p-8 flex flex-row gap-x-3 lg:flex-col">
             <div>
@@ -331,7 +326,7 @@ const BrandPage = () => {
         </div>
       </div>
       {/* tabs start here */}
-      <div className="w-full mt-4 shadow-xl bg-white rounded-xl flex gap-4 overflow-x-scroll px-4">
+      <div className="w-full mt-4 shadow-xl bg-white rounded-xl flex flex-wrap gap-4 overflow-x-scroll p-4">
         <UserPageTabs
           text="Insights"
           currentTab={userDetails}
@@ -486,6 +481,7 @@ const UserPageTabs: React.FC<UserPageTabsProps> = (
           fontwidth="font-bold"
           textColor={`${props.currentTab == props.tab ? "text-black" : "text-gray-600"
             }`}
+          margin="m-0"
         ></CusButton>
       </div>
     </>

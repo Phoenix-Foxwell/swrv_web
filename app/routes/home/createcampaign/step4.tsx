@@ -198,7 +198,7 @@ const Step4 = () => {
             ></ReactSwitch>
             <div className="grow">
               <h1 className="text-primary text-lg font-medium">
-                Public globally
+                Publish Globally
               </h1>
               <p className="text-primary text-md font-normal">
                 The term business demography is used to cover a set of variables
@@ -360,7 +360,7 @@ const Step4 = () => {
                     parseInt(MinReach.current?.value) >
                     parseInt(MaxReact.current?.value)
                   ) {
-                    setError("Max react should be gretter then min reach");
+                    setError("Max react should be greater than min reach");
                   } else if (pass_date) {
                     setError("Start date should be less then end date");
                   } else {

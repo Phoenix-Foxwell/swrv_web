@@ -140,7 +140,7 @@ const ThirdPage = () => {
                         data: req,
                       });
                       if (data.data.status == false) {
-                        return setError(data.data.message);
+                        setError(data.data.message);
                       } else {
                         let user: InvitedUser = {
                           name: nameRef.current?.value,
@@ -152,10 +152,10 @@ const ThirdPage = () => {
                         setContactnumber(0);
                         nameRef.current!.value = "";
                         emailRef.current!.value = "";
-                        setIsSending(false);
-                        return setSus("User invited successfully");
+                        setSus("User invited successfully");
                       }
                     }
+                    setIsSending(false);
                   }}
                   className="text-white rounded-lg bg-secondary py-1 px-4 font-semibold text-lg"
                 >

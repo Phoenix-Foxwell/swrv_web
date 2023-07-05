@@ -41,7 +41,7 @@ const UserInputBoxOne = () => {
 
   useEffect(() => {
     emailRef!.current!.value = useremail;
-    usernameRef!.current!.value = useremail;
+    usernameRef!.current!.value = useremail.toString().split("@")[0];
   }, []);
 
   const nextButton = useRef<HTMLButtonElement>(null);

@@ -76,6 +76,7 @@ const HomePage = () => {
               platform={user.platform}
               country={user.country}
               category={user.category}
+              isCompleted={true}
             ></InfluencerSearch>
             <TopInfluencer></TopInfluencer>
           </>
@@ -107,8 +108,7 @@ const ProfileComplete = () => {
                 Please Complete Your Profile
               </h1>
               <h1 className="text-md text-white font-normal">
-                Your linked social media accounts are under verification. You'll
-                be notified within 24 hours.
+                Kindly complete your profile to proceed with acitvities on SWRV website.
               </h1>
             </div>
           </div>
@@ -232,9 +232,9 @@ const Intro: React.FC<IntroProps> = (props: IntroProps): JSX.Element => {
 const EarnSection = () => {
   return (
     <>
-      <div className="w-full rounded-xl flex flex-col md:flex-row bg-yellow-500 mt-12">
-        <div className="grow grid place-items-center">
-          <img src="/images/cashgirl.png" alt="error" className="md:h-80" />
+      <div className="w-full rounded-xl flex flex-col sm:flex-row bg-yellow-500 mt-12">
+        <div className="grow grid place-items-center shrink-0">
+          <img src="/images/cashgirl.png" alt="error" className="h-40 md:h-80" />
         </div>
         <div className="p-4 md:p-12 bg-[#F7941D] rounded-r-xl grid place-items-center">
           <div>

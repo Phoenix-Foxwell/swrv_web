@@ -268,7 +268,7 @@ const UserCard = (props: UserCardProps) => {
   return (
     <>
       {userdata == undefined ? (
-        <div className="bg-white rounded-lg shadow-xl">
+        <div className="bg-white rounded-lg shadow-xl shrink-0">
           <h1 className="text-center font-semibold text-rose-500 p-4">
             No user found
           </h1>

@@ -608,6 +608,10 @@ input[type="number"]::-webkit-inner-spin-button,
   margin: 0.5rem;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -905,6 +909,10 @@ input[type="number"]::-webkit-inner-spin-button,
   height: 350px;
 }
 
+.h-\[200px\] {
+  height: 200px;
+}
+
 .max-h-56 {
   max-height: 14rem;
 }
@@ -1096,6 +1104,10 @@ input[type="number"]::-webkit-inner-spin-button,
 
 .w-36 {
   width: 9rem;
+}
+
+.w-auto {
+  width: auto;
 }
 
 .min-w-\[800px\] {

@@ -350,7 +350,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                   className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${cat ? "" : "hidden"
                     } grid place-items-center`}
                 >
-                  <div className="bg-white p-10 cursor-pointer">
+                  <div className="bg-white p-6 rounded-md cursor-pointer">
                     <div className="min-h-80 w-80 overflow-y-scroll no-scrollbar">
                       {category.map((val: any, i: number) => {
                         return (
@@ -376,6 +376,9 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                           </h1>
                         );
                       })}
+                      <button
+                        onClick={() => setcat(false)}
+                        className="w-full border-red-500 border-2 rounded-md text-center text-rose-500 text-xl py bg-rose-500 bg-opacity-20">Close</button>
                     </div>
                   </div>
                 </div>
@@ -459,8 +462,8 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                   className={`w-full h-screen bg-gray-300 bg-opacity-20 fixed top-0 left-0 ${con ? "" : "hidden"
                     } grid place-items-center`}
                 >
-                  <div className="bg-white p-10 cursor-pointer">
-                    <div className="min-h-80 overflow-y-scroll no-scrollbar w-80">
+                  <div className="bg-white p-6 cursor-pointer rounded-md">
+                    <div className="min-h-80 overflow-y-scroll no-scrollbar w-80 h-[400px]">
                       {country.map((val: any, i: number) => {
                         return (
                           <h1
@@ -485,6 +488,10 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
                           </h1>
                         );
                       })}
+
+                      <button
+                        onClick={() => setcon(false)}
+                        className="w-full border-red-500 border-2 rounded-md text-center text-rose-500 text-xl py bg-rose-500 bg-opacity-20">Close</button>
                     </div>
                   </div>
                 </div>
@@ -532,7 +539,7 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
             data={camSearchResult}
           ></SearchedInfluencer>
         ) : null}
-      </div>
+      </div >
     </>
   );
 };
@@ -657,22 +664,6 @@ const InfluencerCard = (props: InfluencerCardProps) => {
           alt="error"
           className="w-full h-40 object-cover rounded-t-md"
         />
-        <div className="flex gap-1 -translate-y-5 pl-4">
-          <div className="border p-1 bg-white border-blue-500 rounded-full">
-            <img
-              src="/images/media/instagram.png"
-              alt="error"
-              className="w-6 h-6 rounded-full"
-            />
-          </div>
-          <div className="border p-1 border-blue-500 bg-white rounded-full">
-            <img
-              src="/images/media/youtube.png"
-              alt="error"
-              className="w-6 h-6 rounded-full"
-            />
-          </div>
-        </div>
         <div className="px-4 pb-2">
           <div className="flex items-start justify-between">
             <div className="grow">

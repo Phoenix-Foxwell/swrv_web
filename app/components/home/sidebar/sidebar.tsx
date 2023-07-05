@@ -42,8 +42,6 @@ export const SideBar = (props: SideBarProps) => {
         <div className="w-full h-full bg-primary rounded-2xl flex flex-col py-8 px-3">
           <div
             onClick={() => {
-              // console.log(!isOpen);
-              // changeSidebar(!isOpen);
               changeSidebar(!isOpen);
             }}
             className="w-full flex cursor-pointer"

@@ -19,10 +19,9 @@ export const UserEditBox = () => {
                             <img src="/images/avatar/profile1.png" alt="error" className="h-[400px]" />
                         </div>
                         <h1 className="pt-4 text-3xl text-primary text-left font-semibold">Welcome</h1>
-                        <p className="pt-2 text-black text-xl font-normal">Thank you for the confirmation, Login with your account and start searching for the brands.</p>
+                        <p className="pt-2 text-black text-xl font-normal">Fill all details to proceed.</p>
                     </div>
                     <div>
-
                         <div className="bg-white rounded-xl shadow-xl px-2 py-4 flex flex-col items-center">
                             <ProfileCompleteBox isActive={true} positionumber={"01"} title={"Info"}></ProfileCompleteBox>
                             <ProfileCompleteBox isActive={false} positionumber={"02"} title={"Audience"}></ProfileCompleteBox>

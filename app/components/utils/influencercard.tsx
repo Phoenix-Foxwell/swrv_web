@@ -57,22 +57,6 @@ const InfluencerCard = (props: InfluencerCardProps) => {
           alt="error"
           className="w-full h-40 object-cover rounded-t-md"
         />
-        <div className="flex gap-1 -translate-y-5 pl-4">
-          <div className="border p-1 bg-white border-blue-500 rounded-full">
-            <img
-              src="/images/media/instagram.png"
-              alt="error"
-              className="w-6 h-6 rounded-full"
-            />
-          </div>
-          <div className="border p-1 border-blue-500 bg-white rounded-full">
-            <img
-              src="/images/media/youtube.png"
-              alt="error"
-              className="w-6 h-6 rounded-full"
-            />
-          </div>
-        </div>
         <div className="px-4 pb-2">
           <div className="flex items-start justify-between">
             <div className="grow">

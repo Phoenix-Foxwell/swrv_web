@@ -301,7 +301,6 @@ const UserDrafts = (props: UserDraftsProps) => {
       },
     });
 
-
     if (isActive) {
       let data = apidata.data.data.filter((val: any) => new Date(val["campaign"]["endAt"]) > new Date());
       setUserDraft((val) => data);
@@ -441,8 +440,8 @@ interface RequestedInviteProps {
 const RequestedInvite: React.FC<RequestedInviteProps> = (
   props: RequestedInviteProps
 ): JSX.Element => {
-  const [userInvite, setInvite] = useState<any[]>([]);
 
+  const [userInvite, setInvite] = useState<any[]>([]);
   const [acceptbox, setAcceptbox] = useState<boolean>(false);
   const [rejectbox, setrejectbox] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -585,6 +584,9 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
               Reject
             </button>
           </div>
+
+
+
         </div>
       </div>
       <div className="bg-white rounded-2xl my-4 shadow-xl p-4">
@@ -649,7 +651,12 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
                     Reject
                   </button>
                 </div>
-                <div></div>
+                <Link
+                  to={`/home/campaigns/${val.id}`}
+                  className="bg-white inline-block mt-4 rounded-xl text-cyan-500 font-normal border-2 py-1 px-2 w-28"
+                >
+                  View campaign
+                </Link>
               </div>
             );
           })}

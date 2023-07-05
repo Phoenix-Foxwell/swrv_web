@@ -547,7 +547,7 @@ const Step2 = () => {
                                     setError("Enter min target");
                                 }
                                 else if (parseInt(mintar.current?.value) > parseInt(tar.current?.value)) {
-                                    setError("Target must be gretter then min target.");
+                                    setError("Target must be greater than min target.");
                                 }
                                 else {
                                     setMintarget(parseInt(mintar.current?.value));

@@ -205,6 +205,7 @@ const Campaigns = () => {
           image={brandimage}
           website={champaign.brand.website}
           category={category}
+          typeid={champaign.campaignTypeId}
         ></CampaignsInfo>
         <div className="lg:col-start-6 lg:col-end-8 grid gap-y-4 w-full">
           <Budget
@@ -219,6 +220,7 @@ const Campaigns = () => {
             maxreach={champaign.maxReach}
             startdate={champaign.startAt}
             enddate={champaign.endAt}
+            typeid={champaign.campaignTypeId}
           ></Target>
           {isbrand ? <>
             <InviteInf champaignId={champaign.id}></InviteInf>
@@ -486,6 +488,7 @@ type CampaignsInfoProps = {
   mendtion: string;
   hastag: string;
   title: string;
+  typeid: string;
 };
 
 const CampaignsInfo = (props: CampaignsInfoProps) => {
@@ -520,24 +523,27 @@ const CampaignsInfo = (props: CampaignsInfoProps) => {
         <p className="text-black font-semibold text-xs text-left">
           {props.info}
         </p>
-        <div>
-          <p className="text-black text-left text-md font-medium mt-2">
-            Moodboard
-          </p>
-          <div className="flex gap-x-4 overflow-x-scroll no-scrollbar">
-            {props.moddboard.map((val: any, index: number) => {
-              return (
-                <div className="shrink-0" key={index}>
-                  <img
-                    src={val.url}
-                    alt="error"
-                    className="h-14 w-14 object-cover rounded-md object-center"
-                  />
-                </div>
-              );
-            })}
+
+        {(props.typeid == "5" || props.typeid == "6") ? null :
+          <div>
+            <p className="text-black text-left text-md font-medium mt-2">
+              Moodboard
+            </p>
+            <div className="flex gap-x-4 overflow-x-scroll no-scrollbar">
+              {props.moddboard.map((val: any, index: number) => {
+                return (
+                  <div className="shrink-0" key={index}>
+                    <img
+                      src={val.url}
+                      alt="error"
+                      className="h-14 w-14 object-cover rounded-md object-center"
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        }
         <p className="text-black text-left text-md font-medium mt-2">
           Platforms
         </p>
@@ -554,55 +560,62 @@ const CampaignsInfo = (props: CampaignsInfoProps) => {
             );
           })}
         </div>
-        <div className="bg-gray-200  rounded-md py-2 flex justify-around w-72 mt-6">
-          <div>
-            <p className="text-sm font-semibold">Do's</p>
-            {props.dos.split(",").map((val: any, index: number) => {
-              return (
-                <p key={index} className="text-md font-normal">
-                  {val}
-                </p>
-              );
-            })}
-          </div>
-          <div className="h-10 w-[1px] bg-slate-900"></div>
-          <div>
-            <p className="text-sm font-semibold">Dont's</p>
-            {props.dont.split(",").map((val: any, index: number) => {
-              return (
-                <p key={index} className="text-md font-normal">
-                  {val}
-                </p>
-              );
-            })}
-          </div>
-        </div>
-        <p className="text-sm font-semibold mt-4">Hashtags</p>
-        <div className="flex flex-nowrap gap-2 my-4">
-          {props.hastag.split(",").map((val: any, index: number) => {
-            return (
-              <p
-                key={index}
-                className="text-md font-normal rounded-md bg-gray-300 py-1 px-4"
-              >
-                #{val}
-              </p>
-            );
-          })}
-        </div>
-        <p className="text-sm font-semibold mt-4">Mentions</p>
-        <div className="flex flex-nowrap gap-2 my-4">
-          {props.mendtion.split(",").map((val: any, index: number) => {
-            return (
-              <p
-                key={index}
-                className="text-md font-normal rounded-md bg-gray-300 py-1 px-4"
-              >
-                @{val}
-              </p>
-            );
-          })}
-        </div>
+        {(props.typeid == "5" || props.typeid == "6") ? null :
+          <>
+            3            <div className="bg-gray-200  rounded-md py-2 flex justify-around w-72 mt-6">
+              <div>
+                <p className="text-sm font-semibold">Do's</p>
+                {props.dos.split(",").map((val: any, index: number) => {
+                  return (
+                    <p key={index} className="text-md font-normal">
+                      {val}
+                    </p>
+                  );
+                })}
+              </div>
+              <div className="h-10 w-[1px] bg-slate-900"></div>
+              <div>
+                <p className="text-sm font-semibold">Dont's</p>
+                {props.dont.split(",").map((val: any, index: number) => {
+                  return (
+                    <p key={index} className="text-md font-normal">
+                      {val}
+                    </p>
+                  );
+                })}
+              </div>
+            </div>
+
+
+
+            <p className="text-sm font-semibold mt-4">Hashtags</p>
+            <div className="flex flex-nowrap gap-2 my-4">
+              {props.hastag.split(",").map((val: any, index: number) => {
+                return (
+                  <p
+                    key={index}
+                    className="text-md font-normal rounded-md bg-gray-300 py-1 px-4"
+                  >
+                    #{val}
+                  </p>
+                );
+              })}
+            </div>
+            <p className="text-sm font-semibold mt-4">Mentions</p>
+            <div className="flex flex-nowrap gap-2 my-4">
+              {props.mendtion.split(",").map((val: any, index: number) => {
+                return (
+                  <p
+                    key={index}
+                    className="text-md font-normal rounded-md bg-gray-300 py-1 px-4"
+                  >
+                    @{val}
+                  </p>
+                );
+              })}
+            </div>
+          </>
+        }
       </div>
     </>
   );
@@ -614,6 +627,7 @@ type TargetProps = {
   maxreach: string;
   startdate: string;
   enddate: string;
+  typeid: string;
 };
 
 const Target = (props: TargetProps) => {
@@ -628,23 +642,28 @@ const Target = (props: TargetProps) => {
           <h2 className="text-xl text-primary font-medium px-4">Target</h2>
         </div>
         <div className="h-[1px] bg-gray-500 w-full my-2"></div>
-        <div className="flex my-2">
-          <p className="text-md text-primary">Audience Location</p>
-          <div className="grow"></div>
-          <p className="text-md font-bold text-primary">
-            {props.audienceloaction}
-          </p>
-        </div>
-        <div className="flex my-2">
-          <p className="text-md text-primary">Min Reach</p>
-          <div className="grow"></div>
-          <p className="text-md font-bold text-black">{props.minreach}</p>
-        </div>
-        <div className="flex my-2">
-          <p className="text-md text-primary">Max Reach</p>
-          <div className="grow"></div>
-          <p className="text-md font-bold text-black">{props.maxreach}</p>
-        </div>
+
+        {(props.typeid == "5" || props.typeid == "6") ? null :
+          <>
+            <div className="flex my-2">
+              <p className="text-md text-primary">Audience Location</p>
+              <div className="grow"></div>
+              <p className="text-md font-bold text-primary">
+                {props.audienceloaction}
+              </p>
+            </div>
+            <div className="flex my-2">
+              <p className="text-md text-primary">Min Reach</p>
+              <div className="grow"></div>
+              <p className="text-md font-bold text-black">{props.minreach}</p>
+            </div>
+            <div className="flex my-2">
+              <p className="text-md text-primary">Max Reach</p>
+              <div className="grow"></div>
+              <p className="text-md font-bold text-black">{props.maxreach}</p>
+            </div>
+          </>
+        }
         <div className="flex my-2">
           <p className="text-md text-primary">Start Date</p>
           <div className="grow"></div>
@@ -858,7 +877,7 @@ const Panding = () => {
     <>
       <div className="p-4 rounded-xl shadow-xl bg-primary">
         <h1 className="text-white text-xl text-left font-normal">
-          Your request in progress..
+          Your request is in progress..
         </h1>
       </div>
     </>
@@ -2562,7 +2581,7 @@ const Bidding: React.FC<BiddingProps> = (props: BiddingProps): JSX.Element => {
       setError("Fill the Bid amount.");
     } else if (Number(bidamount) % 100 !== 0) {
       setError("Bid amount must be a multiple of 100.");
-    } else if (amount < Number(bidamount)) {
+    } else if (Number(amount) < Number(bidamount)) {
       setError("Bid amount must be less then current bid amount.");
     } else if (
       messageRef.current?.value == null ||

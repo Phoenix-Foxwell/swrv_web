@@ -11,6 +11,13 @@ type InfluencerCardProps = {
   bio: string;
 };
 const InfluencerCard = (props: InfluencerCardProps) => {
+
+  function truncateText(text: string) {
+    if (text.length > 100) {
+      return text.substring(0, 100) + "...";
+    }
+    return text;
+  }
   const Star = () => {
     const fullStars = Math.floor(props.star);
     const fractionalStar = props.star - fullStars;
@@ -51,20 +58,20 @@ const InfluencerCard = (props: InfluencerCardProps) => {
   };
   return (
     <>
-      <div className="bg-white rounded-xl shadow-xl w-64 my-2">
+      <div className="bg-white rounded-xl shadow-xl w-64 my-2 h-full">
         <img
           src={props.image}
           alt="error"
           className="w-full h-40 object-cover rounded-t-md"
         />
-        <div className="px-4 pb-2">
+        <div className="px-4 pb-2 flex flex-col h-full">
           <div className="flex items-start justify-between">
             <div className="grow">
               <p className="text-black font-semibold text-lg text-left">
                 {props.name == undefined || props.name == null ? "" : props.name.split("@")[0]}
               </p>
               <p className="text-black font-semibold text-sm text-left mt-2">
-                {props.bio}
+                {truncateText(props.bio)}
               </p>
               <div className="flex">
                 <Star></Star>
@@ -74,6 +81,7 @@ const InfluencerCard = (props: InfluencerCardProps) => {
                             <p className="text-black font-bold  text-md text-right">3500 <br />USD / post</p>
                         </div> */}
           </div>
+          <div className="grow"></div>
           <Link to={`/home/myuser/${props.id}`}>
             <CusButton
               text="View Profile"

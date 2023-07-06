@@ -1,7 +1,7 @@
 import { faCoins, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { CusButton } from "~/components/utils/buttont";
@@ -181,7 +181,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
               <a
                 target="_blank"
                 className="w-full mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500 text-center"
-                href={draftdata.linkCampaign}
+                href={draftdata.linkCampaign.toString().startsWith("http") ? draftdata.linkCampaign : `https://${draftdata.linkCampaign}`}
               >
                 View Insights
               </a>

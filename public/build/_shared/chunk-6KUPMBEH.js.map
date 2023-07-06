@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/const.ts"],
-  "sourcesContent": ["// const BaseUrl = \"https://bluelemontech.in/websites/swrv\";\r\nconst BaseUrl = \"http://localhost/swrv\";\r\n// const BaseUrl = \"http://192.168.1.19/swrv\";\r\n// const ModeshApi = \"http://192.168.1.19:6654/\";\r\nconst ModeshApi = \"http://bluelemontech.in:5563/\";\r\nexport { BaseUrl, ModeshApi };\r\n"],
-  "mappings": ";AACA,IAAM,UAAU;AAGhB,IAAM,YAAY;",
-  "names": []
-}

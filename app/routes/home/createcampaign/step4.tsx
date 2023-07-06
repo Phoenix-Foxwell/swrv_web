@@ -322,40 +322,40 @@ const Step4 = () => {
                     PlanedBudget.current?.value == "" ||
                     parseInt(PlanedBudget.current?.value) == 0
                   ) {
-                    setError("Enter planed budget");
+                    setError("Enter planned budget");
                   } else if (
                     CostPerPost.current?.value == null ||
                     CostPerPost.current?.value == undefined ||
                     CostPerPost.current?.value == "" ||
                     parseInt(CostPerPost.current?.value) == 0
                   ) {
-                    setError("Enter planed cost per post");
+                    setError("Enter planned cost per post");
                   } else if (
                     StartDate.current?.value == null ||
                     StartDate.current?.value == undefined ||
                     StartDate.current?.value == ""
                   ) {
-                    setError("Enter planed starting date");
+                    setError("Enter planned starting date");
                   } else if (
                     EndDate.current?.value == null ||
                     EndDate.current?.value == undefined ||
                     EndDate.current?.value == ""
                   ) {
-                    setError("Enter planed end date");
+                    setError("Enter planned end date");
                   } else if (
                     MinReach.current?.value == null ||
                     MinReach.current?.value == undefined ||
                     MinReach.current?.value == "" ||
                     parseInt(MinReach.current?.value) == 0
                   ) {
-                    setError("Enter planed min reach");
+                    setError("Enter planned min reach");
                   } else if (
                     MaxReact.current?.value == null ||
                     MaxReact.current?.value == undefined ||
                     MaxReact.current?.value == "" ||
                     parseInt(MaxReact.current?.value) == 0
                   ) {
-                    setError("Enter planed max reach");
+                    setError("Enter planned max reach");
                   } else if (
                     parseInt(MinReach.current?.value) >
                     parseInt(MaxReact.current?.value)

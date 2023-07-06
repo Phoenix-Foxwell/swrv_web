@@ -314,16 +314,18 @@ const Campaigns = () => {
                     </div>
                   </>
                 ) : (
-                  <div className="w-full bg-rose-500 py-4 px-10 text-white font-semibold text-2xl rounded-lg">
-                    Your bid is not accepted
-                  </div>
+                  isbrand ? null :
+                    <div className="w-full bg-rose-500 py-4 px-10 text-white font-semibold text-2xl rounded-lg">
+                      Your bid is not accepted
+                    </div>
                 )}
               </div>
             )}
           </div>
           {/* <UserCreatedDrafts userId={userId} campaingid={champaign.id} /> */}
         </>
-      ) : null}
+      ) : null
+      }
 
       <div className="my-6">
         {isbrand ? (
@@ -354,70 +356,72 @@ const Campaigns = () => {
         ) : null}
       </div>
       <h3 className="rounded-lg shadow-lg text-center font-semibold bg-white py-2 text-3xl my-4">Snapshot</h3>
-      {isbrand ? (
-        <>
-          <SnapshotChampaingAcceptRequest
-            userId={userId}
-            campaingid={champaign.id}
-            isUser={false}
-          ></SnapshotChampaingAcceptRequest>
-          <SnapshotDraftAcceptRequest
-            userId={userId}
-            campaingid={champaign.id}
-            isUser={false}
-          ></SnapshotDraftAcceptRequest>
-          <SnapshopCreatedDrafts
-            campaingid={champaign.id}
-            brandid={userId}
-            userId={userId}
-            isUser={false}
-          ></SnapshopCreatedDrafts>
-          <SnapshotChampaingPaymentRequest
-            userid={user.id}
-            campaingid={champaign.id}
-            isUser={false}
-            currency={"USD"}></SnapshotChampaingPaymentRequest>
-          {champaign.campaignTypeId == "6" ? (
-            <SnapshotChampaingBidRequest
+      {
+        isbrand ? (
+          <>
+            <SnapshotChampaingAcceptRequest
+              userId={userId}
+              campaingid={champaign.id}
+              isUser={false}
+            ></SnapshotChampaingAcceptRequest>
+            <SnapshotDraftAcceptRequest
+              userId={userId}
+              campaingid={champaign.id}
+              isUser={false}
+            ></SnapshotDraftAcceptRequest>
+            <SnapshopCreatedDrafts
+              campaingid={champaign.id}
+              brandid={userId}
+              userId={userId}
+              isUser={false}
+            ></SnapshopCreatedDrafts>
+            <SnapshotChampaingPaymentRequest
               userid={user.id}
               campaingid={champaign.id}
               isUser={false}
-            ></SnapshotChampaingBidRequest>
-          ) : null}
-        </>
-      ) : (
-        <>
-          <SnapshotChampaingAcceptRequest
-            userId={userId}
-            campaingid={champaign.id}
-            isUser={true}
-          ></SnapshotChampaingAcceptRequest>
-          <SnapshotDraftAcceptRequest
-            userId={userId}
-            campaingid={champaign.id}
-            isUser={false}
-          ></SnapshotDraftAcceptRequest>
-          <SnapshopCreatedDrafts
-            campaingid={champaign.id}
-            brandid={userId}
-            userId={userId}
-            isUser={true}
-          ></SnapshopCreatedDrafts>
-          <SnapshotChampaingPaymentRequest
-            userid={user.id}
-            campaingid={champaign.id}
-            isUser={true}
-            currency={"USD"}></SnapshotChampaingPaymentRequest>
-          {champaign.campaignTypeId == "6" ? (
-            <SnapshotChampaingBidRequest
+              currency={"USD"}></SnapshotChampaingPaymentRequest>
+            {champaign.campaignTypeId == "6" ? (
+              <SnapshotChampaingBidRequest
+                userid={user.id}
+                campaingid={champaign.id}
+                isUser={false}
+              ></SnapshotChampaingBidRequest>
+            ) : null}
+          </>
+        ) : (
+          <>
+            <SnapshotChampaingAcceptRequest
+              userId={userId}
+              campaingid={champaign.id}
+              isUser={true}
+            ></SnapshotChampaingAcceptRequest>
+            <SnapshotDraftAcceptRequest
+              userId={userId}
+              campaingid={champaign.id}
+              isUser={false}
+            ></SnapshotDraftAcceptRequest>
+            <SnapshopCreatedDrafts
+              campaingid={champaign.id}
+              brandid={userId}
+              userId={userId}
+              isUser={true}
+            ></SnapshopCreatedDrafts>
+            <SnapshotChampaingPaymentRequest
               userid={user.id}
               campaingid={champaign.id}
               isUser={true}
-            ></SnapshotChampaingBidRequest>
-          ) : null}
+              currency={"USD"}></SnapshotChampaingPaymentRequest>
+            {champaign.campaignTypeId == "6" ? (
+              <SnapshotChampaingBidRequest
+                userid={user.id}
+                campaingid={champaign.id}
+                isUser={true}
+              ></SnapshotChampaingBidRequest>
+            ) : null}
 
-        </>
-      )}
+          </>
+        )
+      }
 
     </>
   );
@@ -762,14 +766,26 @@ const Apply = (props: ApplyProps) => {
       inviteMessage: messageRef.current?.value,
     };
 
-    const data = await axios.post(`${BaseUrl}/api/add-invite`, req);
-    if (data.data.status == false) {
-      setError(data.data.message);
+    const search_invite = await axios.post(`${BaseUrl}/api/search-invite`, {
+      search: {
+        status: "1",
+        campaign: props.champaignId,
+        influencer: props.userId
+      },
+    });
+    if (search_invite.data.status) {
+      setError("Invite already sent.");
     } else {
-      messageRef!.current!.value = "";
-      onCloseModal();
+      const data = await axios.post(`${BaseUrl}/api/add-invite`, req);
+      if (data.data.status == false) {
+        setError(data.data.message);
+      } else {
+        messageRef!.current!.value = "";
+        onCloseModal();
+      }
+      window.location.reload();
     }
-    window.location.reload();
+
   };
   return (
     <>
@@ -899,6 +915,7 @@ const ChampaingAcceptRequest = (props: ChampaingAcceptRequestProps) => {
       search: {
         status: "1",
         campaign: props.campaingid,
+        toUser: props.userId
       },
     };
     const responseData = await axios.post(`${BaseUrl}/api/search-invite`, req);

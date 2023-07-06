@@ -83,19 +83,21 @@ export const InfluencerSearch = (props: InfluencerSearchProps) => {
   const [error, setError] = useState<string | null>(null);
 
   const camptextsearch = async (searchtext: string) => {
+    setError(null);
     champTextSearch!.current!.value = "";
     if (searchtext == "" || searchtext == null || searchtext == undefined)
       return setError("Fill the field to start searching");
     let req = { search: searchtext, role: 10 };
     const data = await axios.post(`${BaseUrl}/api/user-search`, req);
     if (data.data.status == false) {
-      setCamSearchResult([data.data.data]);
+      setCamSearchResult([]);
       return setError(data.data.message);
     }
     setCamSearchResult(data.data.data);
   };
 
   const campadvancesearch = async () => {
+    setError(null);
     if (selcategory.length == 0) {
       setCamSearchResult([]);
       return setError("Select the category");
@@ -557,31 +559,37 @@ const SearchedInfluencer = (props: SearchedInfluencerProps) => {
         <div className="w-60 text-md font-bold text-primary p-2 my-2">
           Found: {props.data.length} Influencer{" "}
         </div>
-        <div className="grid place-items-center lg:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {props.data.map((val: any, index: number) => {
-            const avatar =
-              val["pic"] == "0" ||
-                val["pic"] == null ||
-                val["pic"] == undefined ||
-                val["pic"] == ""
-                ? "/images/inf/inf14.png"
-                : val["pic"];
-            const name = val["userName"];
-            return (
-              <div key={index}>
-                <InfluencerCard
-                  id={val["id"]}
-                  image={avatar}
-                  name={name}
-                  star={parseInt(val.rating)}
-                  bio={val.bio}
-                  campaignId={props.campaignId}
-                  brandUserId={props.brandUserId}
-                ></InfluencerCard>
-              </div>
-            );
-          })}
-        </div>
+        {props.data.length == 0 ?
+          <div >
+
+          </div>
+          :
+          <div className="grid place-items-center lg:place-items-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {props.data.map((val: any, index: number) => {
+              const avatar =
+                val["pic"] == "0" ||
+                  val["pic"] == null ||
+                  val["pic"] == undefined ||
+                  val["pic"] == ""
+                  ? "/images/inf/inf14.png"
+                  : val["pic"];
+              const name = val["userName"];
+              return (
+                <div key={index}>
+                  <InfluencerCard
+                    id={val["id"]}
+                    image={avatar}
+                    name={name}
+                    star={parseInt(val.rating)}
+                    bio={val.bio}
+                    campaignId={props.campaignId}
+                    brandUserId={props.brandUserId}
+                  ></InfluencerCard>
+                </div>
+              );
+            })}
+          </div>
+        }
       </div>
     </>
   );
@@ -640,22 +648,41 @@ const InfluencerCard = (props: InfluencerCardProps) => {
   };
 
   const invite = async () => {
-    let req = {
-      campaignId: props.campaignId,
-      influencerId: props.id,
-      fromUserId: props.brandUserId,
-      toUserId: props.id,
-      inviteMessage: "A brand invited you to there campaign.",
-    };
-
-    const data = await axios.post(`${BaseUrl}/api/add-invite`, req);
-    if (data.data.status == false) {
-      setError(data.data.message);
+    const search_invite = await axios.post(`${BaseUrl}/api/search-invite`, {
+      search: {
+        status: "1",
+        campaign: props.campaignId,
+        influencer: props.id
+      },
+    });
+    if (search_invite.data.status) {
+      setError("Invite already sent.");
     } else {
-      setSus("Request has been sent.");
-    }
 
+
+      let req = {
+        campaignId: props.campaignId,
+        influencerId: props.id,
+        fromUserId: props.brandUserId,
+        toUserId: props.id,
+        inviteMessage: "A brand invited you to there campaign.",
+      };
+
+      const data = await axios.post(`${BaseUrl}/api/add-invite`, req);
+      if (data.data.status == false) {
+        setError(data.data.message);
+      } else {
+        setSus("Request has been sent.");
+      }
+    }
   };
+
+  function truncateText(text: string) {
+    if (text.length > 100) {
+      return text.substring(0, 100) + "...";
+    }
+    return text;
+  }
   return (
     <>
       <div className="bg-white rounded-xl shadow-xl w-64 my-2">
@@ -668,10 +695,10 @@ const InfluencerCard = (props: InfluencerCardProps) => {
           <div className="flex items-start justify-between">
             <div className="grow">
               <p className="text-black font-semibold text-lg text-left">
-                {props.name.split("@")[0]}
+                {props.name.toString().split("@")[0]}
               </p>
               <p className="text-black font-semibold text-sm text-left mt-2">
-                {props.bio}
+                {truncateText(props.bio)}
               </p>
               <div className="flex">
                 <Star></Star>

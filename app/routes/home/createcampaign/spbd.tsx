@@ -298,7 +298,7 @@ const Spbd = () => {
                       StartDate.current?.value == undefined ||
                       StartDate.current?.value == ""
                     ) {
-                      setError("Enter planed starting date");
+                      setError("Enter planned starting date");
                     } else if (pass_date) {
                       setError("Start date should be less then end date");
                     } else if (
@@ -306,7 +306,7 @@ const Spbd = () => {
                       EndDate.current?.value == undefined ||
                       EndDate.current?.value == ""
                     ) {
-                      setError("Enter planed end date");
+                      setError("Enter planned end date");
                     } else {
                       const req = {
                         userId: userId,

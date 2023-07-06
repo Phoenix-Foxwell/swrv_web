@@ -79,7 +79,7 @@ const Step1 = () => {
             return (
               <div
                 key={i}
-                className={`shadow-xl rounded-xl w-72 bg-white my-4 h-[350px]`}
+                className={`shadow-xl rounded-xl w-72 bg-white my-4 h-[350px] cursor-pointer`}
                 onClick={() => {
                   setCamptype(catdata[i]["id"]);
                   if (catdata[i]["id"] === "0") {

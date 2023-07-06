@@ -65,6 +65,8 @@ const PaymentRequest: React.FC = (): JSX.Element => {
     UserDetailsType.insights
   );
 
+  const [draftdata, setDraftdata] = useState<any>("");
+
   const init = async () => {
     const req = {
       search: {
@@ -82,6 +84,23 @@ const PaymentRequest: React.FC = (): JSX.Element => {
     if (apireq.data.data.length > 0) {
       setSubmit(true);
     }
+
+    let req1 = {
+      search: {
+        status: "3",
+        campaign: campaignId,
+        toUser: userId,
+      },
+    }
+
+    const apireq1 = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/search-draft`,
+      data: req1,
+    });
+    if (apireq1.data.status) {
+      setDraftdata((val: any) => apireq1.data.data[0]);
+    }
   };
 
   useEffect(() => {
@@ -91,7 +110,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
   return (
     <>
       <div className="w-full mt-4 shadow-xl bg-white rounded-xl">
-        <div className="flex mx-4 gap-4">
+        <div className="flex mx-4 gap-4 flex-wrap py-4">
           <div
             onClick={() => {
               setUserDetails(UserDetailsType.insights);
@@ -99,6 +118,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
           >
             <CusButton
               text="Insights"
+              margin="0"
               background={`${userDetails == UserDetailsType.insights
                 ? "bg-[#01FFF4]"
                 : "bg-gray-100"
@@ -116,6 +136,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
             }}
           >
             <CusButton
+              margin="0"
               text="Payments"
               background={`${userDetails == UserDetailsType.payments
                 ? "bg-[#01FFF4]"
@@ -134,6 +155,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
             }}
           >
             <CusButton
+              margin="0"
               text="Schedule"
               background={`${userDetails == UserDetailsType.schedule
                 ? "bg-[#01FFF4]"
@@ -150,7 +172,51 @@ const PaymentRequest: React.FC = (): JSX.Element => {
       </div>
       <div className="flex flex-wrap gap-6 mt-6">
         {userDetails == UserDetailsType.insights ? (
-          <div></div>
+          (
+            (draftdata == null || draftdata == undefined || draftdata == "") ? null :
+              <div
+                className="p-4 bg-white rounded-lg shadow-lg"
+              >
+                <div className="flex">
+                  <img
+                    src={draftdata.influencer.pic}
+                    alt="influencer pic"
+                    className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                  />
+                  <div className="ml-2">
+                    <p className="text-md font-medium">
+                      {draftdata.influencer.name.split("@")[0]}
+                    </p>
+                    <p className="text-sm font-medium">
+                      {draftdata.influencer.email}
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-2 text-md font-medium">Description</p>
+                <p className="text-sm font-medium">{draftdata.description}</p>
+                <p className="mt-2 text-md font-medium">Handle Info</p>
+                <div className="flex gap-4">
+                  <img src={draftdata.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                  <p className="text-xl font-semibold text-center">{draftdata.handle.name}</p>
+                </div>
+                <p className="mt-2 text-md font-medium">Attachment</p>
+                <a
+                  target="_blank"
+                  className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500 w-full text-center"
+                  href={draftdata.attach01}
+                >
+                  View Doc
+                </a>
+                <a
+                  target="_blank"
+                  className="w-full mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500 text-center"
+                  href={draftdata.linkCampaign}
+                >
+                  View Insights
+                </a>
+              </div>
+
+          )
         ) : (
           //   <Insights insights={userinsights}></Insights>
           <></>
@@ -453,6 +519,28 @@ const Schedule: React.FC<ScheduleProps> = (props: ScheduleProps): JSX.Element =>
 
   const [error, setError] = useState<String | null>(null);
   const [sus, setSus] = useState<String | null>(null);
+
+
+  const [draft, setDraft] = useState<any>(null);
+
+  const init = async () => {
+
+    let req = {
+      search: {
+        id: props.draftid
+      },
+    };
+    const responseData = await axios.post(`${BaseUrl}/api/search-draft`, req);
+
+    if (responseData.data.status == true) {
+      setDraft(responseData.data.data[0]);
+    }
+  }
+
+  useEffect(() => {
+    init();
+  }, []);
+
   const submit = async () => {
     setError(null);
     if (
@@ -497,69 +585,97 @@ const Schedule: React.FC<ScheduleProps> = (props: ScheduleProps): JSX.Element =>
         setSus("Schedule is updated.");
         window.location.reload();
       }
-
     }
   }
-
 
   return (
     <>
       <div className="p-4 rounded-xl shadow-xl bg-white w-full">
-        <div className="flex gap-4 flex-wrap">
-          <div>
-            <p className="text-lg font-semibold text-primary">Publcation Type</p>
-            <input
-              ref={type}
-              type="text"
-              className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
-            />
-          </div>
-          <div>
-            <p className="text-lg font-semibold text-primary">Target reach</p>
-            <input
-              onChange={handelreact}
-              value={react}
-              type="text"
-              className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
-            />
-          </div>
-        </div>
-        <div className="flex gap-4 flex-wrap mt-4">
-          <div>
-            <p className="text-lg font-semibold text-primary">Publication time</p>
-            <input
-              ref={time}
-              type="time"
-              className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
-            />
-          </div>
-          <div>
-            <p className="text-lg font-semibold text-primary">Publication Date</p>
-            <input
-              ref={date}
-              type="date"
-              className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
-            />
-          </div>
-        </div>
-        <div></div>
-        {error == "" || error == null || error == undefined ? null : (
-          <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
-            {error}
-          </div>
-        )}
-        {sus == "" || sus == null || sus == undefined ? null : (
-          <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
-            {sus}
-          </div>
-        )}
-        <button
-          onClick={submit}
-          className="mt-4 text-md w-80 text-black font-semibold bg-[#fbca8e] rounded-md shadow-lg py-1"
-        >
-          Submit
-        </button>
-      </div>
+        {
+          (draft == null || draft == undefined || draft == "") ? null :
+
+            (draft.draft_approval == null || draft.draft_approval == undefined) ?
+              <>
+                <div className="flex gap-4 flex-wrap">
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Publication Type</p>
+                    <input
+                      ref={type}
+                      type="text"
+                      className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Target reach</p>
+                    <input
+                      onChange={handelreact}
+                      value={react}
+                      type="text"
+                      className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-4 flex-wrap mt-4">
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Publication time</p>
+                    <input
+                      ref={time}
+                      type="time"
+                      className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Publication Date</p>
+                    <input
+                      ref={date}
+                      type="date"
+                      className="w-80 outline-none fill-none bg-transparent py-1 px-4 rounded-md border-2 border-gray-400"
+                    />
+                  </div>
+                </div>
+                {error == "" || error == null || error == undefined ? null : (
+                  <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+                    {error}
+                  </div>
+                )}
+                {sus == "" || sus == null || sus == undefined ? null : (
+                  <div className="bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4">
+                    {sus}
+                  </div>
+                )}
+                <button
+                  onClick={submit}
+                  className="mt-4 text-md w-80 text-black font-semibold bg-[#fbca8e] rounded-md shadow-lg py-1"
+                >
+                  Submit
+                </button>
+              </>
+              :
+              <>
+                <div className="flex gap-4 flex-wrap">
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Publication Type</p>
+                    <p className="text-md font-semibold text-black">{draft.publication_type}</p>
+
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Target reach</p>
+                    <p className="text-md font-semibold text-black">{draft.target_react}</p>
+                  </div>
+                </div>
+                <div className="flex gap-4 flex-wrap mt-4">
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Publication time</p>
+                    <p className="text-md font-semibold text-black">{draft.publication_time}</p>
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold text-primary">Publication Date</p>
+                    <p className="text-md font-semibold text-black">{draft.draft_approval}</p>
+                  </div>
+                </div>
+              </>
+        }
+      </div >
     </>
   );
 }

@@ -24,7 +24,7 @@ const ProfileEdit: React.FC = (): JSX.Element => {
     const userKnownAsRef = useRef<HTMLInputElement>(null);
     const userWebUrlRef = useRef<HTMLInputElement>(null);
     const userFullPostalAddressRef = useRef<HTMLTextAreaElement>(null);
-    const userPicUrlRef = useRef<HTMLInputElement>(null);
+    // const userPicUrlRef = useRef<HTMLInputElement>(null);
     const userBioInfoRef = useRef<HTMLTextAreaElement>(null);
     const personalHistoryRef = useRef<HTMLTextAreaElement>(null);
     const careerHistoryRef = useRef<HTMLTextAreaElement>(null);
@@ -43,7 +43,7 @@ const ProfileEdit: React.FC = (): JSX.Element => {
         userKnownAsRef!.current!.value = user["knownAs"];
         userWebUrlRef!.current!.value = user["website"];
         userFullPostalAddressRef!.current!.value = user["address"];
-        userPicUrlRef!.current!.value = user["pic"];
+        // userPicUrlRef!.current!.value = user["pic"];
         userBioInfoRef!.current!.value = user["bio"];
         personalHistoryRef!.current!.value = user["personalHistory"];
         careerHistoryRef!.current!.value = user["careerHistory"];
@@ -62,7 +62,7 @@ const ProfileEdit: React.FC = (): JSX.Element => {
                     userKnownAs: userKnownAsRef!.current!.value,
                     userWebUrl: userWebUrlRef!.current!.value,
                     userFullPostalAddress: userFullPostalAddressRef!.current!.value,
-                    userPicUrl: userPicUrlRef!.current!.value,
+                    // userPicUrl: userPicUrlRef!.current!.value,
                     userBioInfo: userBioInfoRef!.current!.value,
                     personalHistory: personalHistoryRef!.current!.value,
                     careerHistory: careerHistoryRef!.current!.value,
@@ -106,11 +106,11 @@ const ProfileEdit: React.FC = (): JSX.Element => {
                     ref={userFullPostalAddressRef}
                     className="p-2 w-96 outline-none bg-transparent text-black border-2 border-black block my-4 rounded-md h-32 resize-none"
                 ></textarea>
-                <p className="text-black font-semibold text-xl">User Pic Link</p>
+                {/* <p className="text-black font-semibold text-xl">User Pic Link</p>
                 <input
                     ref={userPicUrlRef}
                     className="p-2 w-96 outline-none bg-transparent text-black border-2 border-black block my-4 rounded-md"
-                />
+                /> */}
                 <p className="text-black font-semibold text-xl">User Bio Info</p>
                 <textarea
                     ref={userBioInfoRef}

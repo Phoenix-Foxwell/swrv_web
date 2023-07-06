@@ -584,9 +584,6 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
               Reject
             </button>
           </div>
-
-
-
         </div>
       </div>
       <div className="bg-white rounded-2xl my-4 shadow-xl p-4">
@@ -653,7 +650,7 @@ const RequestedInvite: React.FC<RequestedInviteProps> = (
                 </div>
                 <Link
                   to={`/home/campaigns/${val.id}`}
-                  className="bg-white inline-block mt-4 rounded-xl text-cyan-500 font-normal border-2 py-1 px-2 w-28"
+                  className="inline-block mt-4 rounded-md  text-xl font-semibold text-center text-cyan-500 bg-cyan-500 bg-opacity-10 border-cyan-500 border-2 py-1 px-2 w-full"
                 >
                   View campaign
                 </Link>

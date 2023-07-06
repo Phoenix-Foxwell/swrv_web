@@ -331,6 +331,7 @@ const Spbd = () => {
                         platforms: platform.join(),
                         startAt: StartDate.current?.value,
                         endAt: EndDate.current?.value,
+                        totalParticipants: 100,
                       };
 
                       const data = await axios({

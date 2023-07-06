@@ -103,7 +103,8 @@ const Step6 = () => {
       dos: dos,
       donts: donts,
       totalParticipants: maxInf,
-      remuneration: remunerationType,
+      // remuneration: remunerationType,
+      remunerationCash: remuneration,
       geoLat: lat.toString(),
       geoLng: long.toString(),
       geoRadiusKm: radius.toString(),
@@ -115,18 +116,18 @@ const Step6 = () => {
       isPublic: publicGlobally,
       campaignStatus: "1"
     };
-    if (remunerationType == "1") {
-      req["remunerationCash"] = remuneration;
-    }
-    if (remunerationType == "2") {
-      req["remunerationProductDetail"] = remuneration;
-    }
-    if (remunerationType == "3") {
-      req["remunerationRevenuePer"] = remuneration;
-    }
-    if (remunerationType == "4") {
-      req["dicountCoupon"] = remuneration;
-    }
+    // if (remunerationType == "1") {
+    //   req["remunerationCash"] = remuneration;
+    // }
+    // if (remunerationType == "2") {
+    //   req["remunerationProductDetail"] = remuneration;
+    // }
+    // if (remunerationType == "3") {
+    //   req["remunerationRevenuePer"] = remuneration;
+    // }
+    // if (remunerationType == "4") {
+    //   req["dicountCoupon"] = remuneration;
+    // }
 
     if (campaignTypeId == "4") {
       req["minTarget"] = minTarget;
@@ -228,7 +229,7 @@ const Step6 = () => {
           <div className="flex items-end gap-x-3">
             <div className="flex">
               <img
-                src="/images/brand/adidas.jpg"
+                src={userdata.userdata.brand.logo}
                 alt="error"
                 className="object-cover w-16 h-16 rounded"
               />

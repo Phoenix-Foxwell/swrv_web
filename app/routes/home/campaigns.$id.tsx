@@ -321,7 +321,7 @@ const Campaigns = () => {
               </div>
             )}
           </div>
-          <UserCreatedDrafts userId={userId} campaingid={champaign.id} />
+          {/* <UserCreatedDrafts userId={userId} campaingid={champaign.id} /> */}
         </>
       ) : null}
 
@@ -354,7 +354,6 @@ const Campaigns = () => {
         ) : null}
       </div>
       <h3 className="rounded-lg shadow-lg text-center font-semibold bg-white py-2 text-3xl my-4">Snapshot</h3>
-
       {isbrand ? (
         <>
           <SnapshotChampaingAcceptRequest
@@ -417,8 +416,6 @@ const Campaigns = () => {
             ></SnapshotChampaingBidRequest>
           ) : null}
 
-
-          {/* SnapshotChampaingBidRequest */}
         </>
       )}
 
@@ -562,7 +559,7 @@ const CampaignsInfo = (props: CampaignsInfoProps) => {
         </div>
         {(props.typeid == "5" || props.typeid == "6") ? null :
           <>
-            3            <div className="bg-gray-200  rounded-md py-2 flex justify-around w-72 mt-6">
+            <div className="bg-gray-200  rounded-md py-2 flex justify-around w-72 mt-6">
               <div>
                 <p className="text-sm font-semibold">Do's</p>
                 {props.dos.split(",").map((val: any, index: number) => {
@@ -1122,6 +1119,7 @@ const SnapshotChampaingAcceptRequest: React.FC<SnapshotChampaingAcceptRequestPro
 
     if (props.isUser) {
       req.search.influencer = props.userId;
+      req.search.campaign = props.campaingid;
     } else {
       req.search.campaign = props.campaingid;
     }
@@ -1205,12 +1203,12 @@ type DraftAcceptRequestProps = {
 
 const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
   const [resinvite, setRequestinvite] = useState<any[]>([]);
-
   const [acceptbox, setAcceptbox] = useState<boolean>(false);
   const [rejectbox, setrejectbox] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const rejectiontextRef = useRef<HTMLInputElement>(null);
   const [id, setId] = useState<string | null>(null);
+
 
   const init = async () => {
     let req = {
@@ -1224,6 +1222,8 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
     if (responseData.data.status == true) {
       setRequestinvite(responseData.data.data);
     }
+
+
   };
 
   const acceptRequest = async () => {
@@ -1420,7 +1420,6 @@ const DraftAcceptRequest = (props: DraftAcceptRequestProps) => {
                         Reject
                       </button>
                     </div>
-                    <div></div>
                   </div>
                 );
               })}
@@ -1449,6 +1448,7 @@ const SnapshotDraftAcceptRequest = (props: SnapshotDraftAcceptRequestProps) => {
 
     if (props.isUser) {
       req.search.influencer = props.userId;
+      req.search.campaign = props.campaingid;
     } else {
       req.search.campaign = props.campaingid;
     }
@@ -1609,7 +1609,7 @@ const Rejected = (props: RejectedProps) => {
             </div>
           </div>
           <h1 className="text-primary text-lg font-bold text-left">Connect</h1>
-          <p className="text-lg font-normal">Subject : Aplay for campaign</p>
+          <p className="text-lg font-normal">Subject : Apply for campaign</p>
           <textarea
             ref={messageRef}
             className="p-4 w-full h-40 outline-none border-2 bg-[#EEEEEE] focus:border-gray-300 rounded-md resize-none mt-4"
@@ -2091,6 +2091,7 @@ const SnapshotChampaingPaymentRequest: React.FC<SnapshotChampaingPaymentRequestP
 
     if (props.isUser) {
       req.search.influencer = props.userid;
+      req.search.campaign = props.campaingid;
     } else {
       req.search.campaign = props.campaingid;
     }
@@ -2155,7 +2156,7 @@ const SnapshotChampaingPaymentRequest: React.FC<SnapshotChampaingPaymentRequestP
                       </p>
                     ) : (
                       <p className="py-1 px-4 text-center text-white bg-yellow-500 rounded-md my-2">
-                        Panding
+                        Pending
                       </p>
                     )}
                   </div>
@@ -2285,6 +2286,7 @@ const SnapshopCreatedDrafts: React.FC<SnapshotCreatedDraftsProps> = (props: Snap
 
     if (props.isUser) {
       req.search.influencer = props.userId;
+      req.search.campaign = props.campaingid;
     } else {
       req.search.campaign = props.campaingid;
     }
@@ -2897,7 +2899,6 @@ const SnapshotChampaingBidRequest: React.FC<SnapshotChampaingBidRequestProps> = 
                     <p className="text-md font-semibold">{val.bidamount}</p>
                     <p className="text-lg font-medium mt-2">Remark</p>
                     <p className="text-md font-semibold">{val.remark}</p>
-
                     <p className="mt-2 text-md font-medium">Status</p>
                     <p
                       className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.approved == "1"

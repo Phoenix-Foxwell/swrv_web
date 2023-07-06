@@ -1,4 +1,4 @@
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faCoins, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -58,6 +58,8 @@ const PaymentRequest: React.FC = (): JSX.Element => {
     UserDetailsType.insights
   );
 
+  const [draftdata, setDraftdata] = useState<any>("");
+
   const init = async () => {
     const req = {
       search: {
@@ -74,6 +76,23 @@ const PaymentRequest: React.FC = (): JSX.Element => {
     });
     if (apireq.data.data.length > 0) {
       setSubmit(true);
+    }
+
+    let req1 = {
+      search: {
+        status: "3",
+        campaign: campaignId,
+        toUser: userId,
+      },
+    }
+
+    const apireq1 = await axios({
+      method: "post",
+      url: `${BaseUrl}/api/search-draft`,
+      data: req1,
+    });
+    if (apireq1.data.status) {
+      setDraftdata((val: any) => apireq1.data.data[0]);
     }
   };
 
@@ -125,9 +144,50 @@ const PaymentRequest: React.FC = (): JSX.Element => {
       </div>
       <div className="flex flex-wrap gap-6 mt-6">
         {userDetails == UserDetailsType.insights ? (
-          <div></div>
+          (draftdata == null || draftdata == undefined || draftdata == "") ? null :
+            <div
+              className="p-4 bg-white rounded-lg shadow-lg"
+            >
+              <div className="flex">
+                <img
+                  src={draftdata.influencer.pic}
+                  alt="influencer pic"
+                  className="w-10 h-10 shrink-0 rounded-md object-center object-cover"
+                />
+                <div className="ml-2">
+                  <p className="text-md font-medium">
+                    {draftdata.influencer.name.split("@")[0]}
+                  </p>
+                  <p className="text-sm font-medium">
+                    {draftdata.influencer.email}
+                  </p>
+                </div>
+              </div>
+              <p className="mt-2 text-md font-medium">Description</p>
+              <p className="text-sm font-medium">{draftdata.description}</p>
+              <p className="mt-2 text-md font-medium">Handle Info</p>
+              <div className="flex gap-4">
+                <img src={draftdata.handle.platform.logo} alt="platform" className="w-14 h-14 shrink-0 rounded-md object-fill object-center" />
+                <p className="text-xl font-semibold text-center">{draftdata.handle.name}</p>
+              </div>
+              <p className="mt-2 text-md font-medium">Attachment</p>
+              <a
+                target="_blank"
+                className="mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500 w-full text-center"
+                href={draftdata.attach01}
+              >
+                View Doc
+              </a>
+              <a
+                target="_blank"
+                className="w-full mt-2 text-sm font-normal border-2 border-blue-500 inline-block my-2 py-1 px-4  text-blue-500 hover:text-white hover:bg-blue-500 text-center"
+                href={draftdata.linkCampaign}
+              >
+                View Insights
+              </a>
+            </div>
+
         ) : (
-          //   <Insights insights={userinsights}></Insights>
           <></>
         )}
         {userDetails == UserDetailsType.payments ? (
@@ -164,7 +224,7 @@ const PaymentRequest: React.FC = (): JSX.Element => {
         ) : (
           <></>
         )}
-      </div>
+      </div >
     </>
   );
 };

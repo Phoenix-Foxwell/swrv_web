@@ -341,7 +341,7 @@ const Step3 = () => {
         <h2 className="text-primary tect-xl font-medium text-left my-1">
           Remuneration  <span className="text-rose-500 text-2xl font-semibold">&#42;</span>
         </h2>
-        <select
+        {/* <select
           className="w-full p-2 bg-[#EEEEEE] rounded-lg outline-none border-none pr-6"
           onChange={(value) => {
             setRemunerationType(value.target.value);
@@ -379,16 +379,23 @@ const Step3 = () => {
           >
             Discount
           </option>
-        </select>
-        {remunerationType == "1" ? (
+        </select> */}
+        <input
+          ref={remuneration}
+          type={"text"}
+          className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md mt-4 w-full p-2"
+          placeholder="usd"
+        />
+        {/* {remunerationType == "1" ? (
           <input
             ref={remuneration}
             type={"text"}
             className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md mt-4 w-full p-2"
             placeholder="usd"
           />
-        ) : null}
-        {remunerationType == "2" ? (
+        ) : null} */}
+
+        {/* {remunerationType == "2" ? (
           <input
             ref={remuneration}
             type={"text"}
@@ -411,7 +418,7 @@ const Step3 = () => {
             className="bg-[#EEEEEE]  outline-none border-none focus:border-gray-300 rounded-md mt-4 w-full p-2"
             placeholder="Coupons"
           />
-        ) : null}
+        ) : null} */}
         {error == "" || error == null || error == undefined ? null : (
           <div className="my-4 bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-xl text-red-500 text-md font-normal text-md">
             {error}

@@ -24,7 +24,7 @@ const EditBrand = () => {
     const brandSupportContactRef = useRef<HTMLInputElement>(null);
     const brandBioInfoRef = useRef<HTMLTextAreaElement>(null);
     const comapnyBioRef = useRef<HTMLTextAreaElement>(null);
-    const brandLogoUrlRef = useRef<HTMLInputElement>(null);
+    // const brandLogoUrlRef = useRef<HTMLInputElement>(null);
     const bannerRef = useRef<HTMLInputElement>(null);
 
     const navigator = useNavigate();
@@ -38,7 +38,7 @@ const EditBrand = () => {
         brandSupportContactRef!.current!.value = brand["contact"];
         brandBioInfoRef!.current!.value = brand["info"];
         comapnyBioRef!.current!.value = brand["companyinfo"];
-        brandLogoUrlRef!.current!.value = brand["logo"];
+        // brandLogoUrlRef!.current!.value = brand["logo"];
         bannerRef!.current!.value = brand["banner"];
 
     }, []);
@@ -55,7 +55,7 @@ const EditBrand = () => {
                 brandSupportContact: brandSupportContactRef!.current!.value,
                 brandBioInfo: brandBioInfoRef!.current!.value,
                 comapnyBio: comapnyBioRef!.current!.value,
-                brandLogoUrl: brandLogoUrlRef!.current!.value,
+                // brandLogoUrl: brandLogoUrlRef!.current!.value,
                 banner: bannerRef!.current!.value,
             }
         };
@@ -115,11 +115,11 @@ const EditBrand = () => {
                 ref={comapnyBioRef}
                 className="p-2 w-96 outline-none bg-transparent text-white border-2 border-white block my-4 rounded-md resize-none h-32"
             ></textarea>
-            <p className="text-white font-semibold text-xl">Brand logo url</p>
+            {/* <p className="text-white font-semibold text-xl">Brand logo url</p>
             <input
                 ref={brandLogoUrlRef}
                 className="p-2 w-96 outline-none bg-transparent text-white border-2 border-white block my-4 rounded-md"
-            />
+            /> */}
             <p className="text-white font-semibold text-xl">Brand banner url</p>
             <input
                 ref={bannerRef}

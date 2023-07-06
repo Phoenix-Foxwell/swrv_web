@@ -21,7 +21,7 @@ const HomePage = () => {
   const navigator = useNavigate();
   useEffect(() => {
     if (userdata.user.status.code == "0" || userdata.user.status.code == 0) {
-      navigator("/sorry");
+      navigator("/sorrytwo");
     }
     if (userdata.user.emailVerified == null || userdata.user.emailVerified == undefined || userdata.user.emailVerified == "") {
       navigator("/sorry");

@@ -278,12 +278,11 @@ const MainNavRight = (props: MainNavRightProps) => {
               icon={faBell}
             ></FontAwesomeIcon>
           </div>
-          <Notification></Notification>
+          <Notification userid={props.id}></Notification>
         </div>
         <div className="h-8 mx-4 bg-primary w-[2px]"> </div>
         <Link to={`/home/profileedit/${props.id}`} className="flex items-center">
           <p className="text-left text-md text-black font-normal">{name}</p>
-          {/* <p className="text-left text-xs text-black font-normal">{role}</p> */}
           <img
             src={avatar}
             alt="user avatar"

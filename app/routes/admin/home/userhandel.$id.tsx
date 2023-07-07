@@ -20,12 +20,15 @@ export const loader: LoaderFunction = async ({
   return json({
     userplatformdata: userdata.data.data,
     user: cookie.user,
+    clientid: id
   });
 };
 
 const UserHandel = (): JSX.Element => {
-  const platformdata = useLoaderData().userplatformdata;
-  const userId = useLoaderData().user.id;
+  const loader = useLoaderData();
+  const platformdata = loader.userplatformdata;
+  const userId = loader.user.id;
+  const clientid = loader.clientid;
 
   const [platformData, setPlatformData] = useState<{ [key: string]: any }>();
 
@@ -51,7 +54,7 @@ const UserHandel = (): JSX.Element => {
     const data = modashdata.data.data;
     if (modashdata.data.status) {
       const userdata = await axios.post(`${BaseUrl}/api/add-insta-handel`, {
-        userId: userId,
+        userId: clientid,
         handleId: handle_id,
         userName: data.profile.profile.username,
         followers: data.profile.profile.followers,

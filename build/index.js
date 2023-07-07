@@ -4278,10 +4278,11 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
   });
   return (0, import_node18.json)({
     userplatformdata: userdata.data.data,
-    user: cookie.user
+    user: cookie.user,
+    clientid: id
   });
 }, UserHandel = () => {
-  let platformdata = (0, import_react22.useLoaderData)().userplatformdata, userId = (0, import_react22.useLoaderData)().user.id, [platformData, setPlatformData] = (0, import_react23.useState)(), getPlatform = async (handle_id) => {
+  let loader78 = (0, import_react22.useLoaderData)(), platformdata = loader78.userplatformdata, userId = loader78.user.id, clientid = loader78.clientid, [platformData, setPlatformData] = (0, import_react23.useState)(), getPlatform = async (handle_id) => {
     let userdata = await import_axios13.default.post(`${BaseUrl}/api/get-insta-handel-byid`, {
       userId,
       handleId: handle_id
@@ -4294,7 +4295,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
       url: `${ModeshApi}${handle_name}`
     }), data = modashdata.data.data;
     modashdata.data.status && (await import_axios13.default.post(`${BaseUrl}/api/add-insta-handel`, {
-      userId,
+      userId: clientid,
       handleId: handle_id,
       userName: data.profile.profile.username,
       followers: data.profile.profile.followers,
@@ -4377,12 +4378,12 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
   return /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_jsx_dev_runtime29.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "grow bg-[#1b2028] my-2 rounded-md p-4 w-full", children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("h1", { className: "text-white font-medium text-xl", children: "User State" }, void 0, !1, {
       fileName: "app/routes/admin/home/userhandel.$id.tsx",
-      lineNumber: 147,
+      lineNumber: 150,
       columnNumber: 9
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "w-full bg-slate-400 h-[1px] my-2" }, void 0, !1, {
       fileName: "app/routes/admin/home/userhandel.$id.tsx",
-      lineNumber: 148,
+      lineNumber: 151,
       columnNumber: 9
     }, this),
     platformdata.length == 0 || platformdata == null || platformdata == null ? /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4391,7 +4392,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
         className: "my-6 flex gap-2 items-center b  py-1 px-2 rounded-md border border-rose-400 bg-rose-500 bg-opacity-10 text-rose-500 cursor-pointer text-center text-xl",
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { children: "User does not have any channel" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 155,
+          lineNumber: 158,
           columnNumber: 13
         }, this)
       },
@@ -4399,19 +4400,19 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
       !1,
       {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 152,
+        lineNumber: 155,
         columnNumber: 11
       },
       this
     ) : /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(import_jsx_dev_runtime29.Fragment, { children: [
       sus == "" || sus == null || sus == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-green-500 bg-opacity-10 border-2 text-center border-green-500 rounded-md text-green-500 text-md font-normal text-md my-4", children: sus }, void 0, !1, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 160,
+        lineNumber: 163,
         columnNumber: 15
       }, this),
       error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 165,
+        lineNumber: 168,
         columnNumber: 15
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "flex gap-4 flex-wrap", children: platformdata.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4431,7 +4432,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
                 !1,
                 {
                   fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                  lineNumber: 177,
+                  lineNumber: 180,
                   columnNumber: 23
                 },
                 this
@@ -4439,27 +4440,27 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
               /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "text-xl", children: val.platformName }, void 0, !1, {
                   fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                  lineNumber: 183,
+                  lineNumber: 186,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "text-md", children: val.handleName }, void 0, !1, {
                   fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                  lineNumber: 184,
+                  lineNumber: 187,
                   columnNumber: 25
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                lineNumber: 182,
+                lineNumber: 185,
                 columnNumber: 23
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "grow" }, void 0, !1, {
                 fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                lineNumber: 186,
+                lineNumber: 189,
                 columnNumber: 23
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/admin/home/userhandel.$id.tsx",
-              lineNumber: 176,
+              lineNumber: 179,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4473,21 +4474,21 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
               !1,
               {
                 fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                lineNumber: 188,
+                lineNumber: 191,
                 columnNumber: 21
               },
               this
             ),
             val.lastUpdatedAt == null || val.lastUpdatedAt == null || val.lastUpdatedAt == "" ? /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "mt-2 py-1 px-2 rounded-md border border-rose-400 bg-rose-500 bg-opacity-10 text-rose-500 cursor-pointer text-center text-sm", children: "There is no record" }, void 0, !1, {
               fileName: "app/routes/admin/home/userhandel.$id.tsx",
-              lineNumber: 197,
+              lineNumber: 200,
               columnNumber: 23
             }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "mt-2 py-1 px-2 rounded-md border border-green-400 bg-green-500 bg-opacity-10 text-green-500 cursor-pointer text-center text-sm", children: [
               "Last Update : ",
               (0, import_moment.default)(val.lastUpdatedAt).fromNow()
             ] }, void 0, !0, {
               fileName: "app/routes/admin/home/userhandel.$id.tsx",
-              lineNumber: 201,
+              lineNumber: 204,
               columnNumber: 23
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4501,7 +4502,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
               !1,
               {
                 fileName: "app/routes/admin/home/userhandel.$id.tsx",
-                lineNumber: 205,
+                lineNumber: 208,
                 columnNumber: 21
               },
               this
@@ -4512,39 +4513,39 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
         !0,
         {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 172,
+          lineNumber: 175,
           columnNumber: 19
         },
         this
       )) }, void 0, !1, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 169,
+        lineNumber: 172,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/admin/home/userhandel.$id.tsx",
-      lineNumber: 158,
+      lineNumber: 161,
       columnNumber: 11
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
       fileName: "app/routes/admin/home/userhandel.$id.tsx",
-      lineNumber: 217,
+      lineNumber: 220,
       columnNumber: 9
     }, this),
     platformData == null || platformData == null ? /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "my-2 py-1 px-2 rounded-md border border-rose-400 bg-rose-500 bg-opacity-10 text-rose-500 cursor-pointer text-center text-sm", children: "There is no data from this platform" }, void 0, !1, {
       fileName: "app/routes/admin/home/userhandel.$id.tsx",
-      lineNumber: 219,
+      lineNumber: 222,
       columnNumber: 11
     }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "flex flex-wrap gap-6", children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User Info" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 225,
+          lineNumber: 228,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 226,
+          lineNumber: 229,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4558,13 +4559,13 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 228,
+            lineNumber: 231,
             columnNumber: 17
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 227,
+          lineNumber: 230,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4572,7 +4573,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.userName
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 234,
+          lineNumber: 237,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4580,7 +4581,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.language
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 237,
+          lineNumber: 240,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4588,7 +4589,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.isVerified ? "Yes" : "No"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 240,
+          lineNumber: 243,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4596,7 +4597,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.isPrivate ? "Yes" : "No"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 243,
+          lineNumber: 246,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4604,7 +4605,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.city
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 246,
+          lineNumber: 249,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4612,7 +4613,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.country
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 249,
+          lineNumber: 252,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4621,7 +4622,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.followers).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 252,
+          lineNumber: 255,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4630,7 +4631,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.postCount).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 256,
+          lineNumber: 259,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4638,7 +4639,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.engagementRate
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 260,
+          lineNumber: 263,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4646,7 +4647,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.engagements
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 263,
+          lineNumber: 266,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4654,23 +4655,23 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.paidPostPerformance
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 266,
+          lineNumber: 269,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 224,
+        lineNumber: 227,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User Average Info" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 271,
+          lineNumber: 274,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 274,
+          lineNumber: 277,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4679,7 +4680,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.avgReelsPlays).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 275,
+          lineNumber: 278,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4688,7 +4689,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.avgLikes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 279,
+          lineNumber: 282,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4697,7 +4698,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.avgViews).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 283,
+          lineNumber: 286,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4706,22 +4707,22 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.avgComments).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 287,
+          lineNumber: 290,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 291,
+          lineNumber: 294,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User interest" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 292,
+          lineNumber: 295,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 293,
+          lineNumber: 296,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4730,7 +4731,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           " %"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 294,
+          lineNumber: 297,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4740,23 +4741,23 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           "%"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 297,
+          lineNumber: 300,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 270,
+        lineNumber: 273,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User Location Info" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 303,
+          lineNumber: 306,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 306,
+          lineNumber: 309,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4764,7 +4765,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCities1
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 307,
+          lineNumber: 310,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4772,7 +4773,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCities2
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 310,
+          lineNumber: 313,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4780,7 +4781,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCities3
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 313,
+          lineNumber: 316,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4788,7 +4789,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCities4
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 316,
+          lineNumber: 319,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4796,12 +4797,12 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCities5
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 319,
+          lineNumber: 322,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 322,
+          lineNumber: 325,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4809,7 +4810,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCountries1
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 324,
+          lineNumber: 327,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4817,7 +4818,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCountries2
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 327,
+          lineNumber: 330,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4825,7 +4826,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCountries3
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 330,
+          lineNumber: 333,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4833,7 +4834,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCountries4
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 333,
+          lineNumber: 336,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4841,23 +4842,23 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           platformData.geoCountries5
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 336,
+          lineNumber: 339,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 302,
+        lineNumber: 305,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "Age base interest" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 341,
+          lineNumber: 344,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 344,
+          lineNumber: 347,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4867,7 +4868,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           "%"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 345,
+          lineNumber: 348,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4877,7 +4878,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           "%"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 349,
+          lineNumber: 352,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4887,7 +4888,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           "%"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 353,
+          lineNumber: 356,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4897,7 +4898,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           "%"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 357,
+          lineNumber: 360,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4907,7 +4908,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           "%"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 361,
+          lineNumber: 364,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4916,23 +4917,23 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           " %"
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 365,
+          lineNumber: 368,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 340,
+        lineNumber: 343,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User Likes first post details" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 370,
+          lineNumber: 373,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 373,
+          lineNumber: 376,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4947,13 +4948,13 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 375,
+            lineNumber: 378,
             columnNumber: 17
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 374,
+          lineNumber: 377,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -4968,7 +4969,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 382,
+            lineNumber: 385,
             columnNumber: 15
           },
           this
@@ -4979,7 +4980,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           new Date(platformData.likedPost1CreatedAt).toLocaleString()
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 389,
+          lineNumber: 392,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4988,7 +4989,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.likedPost1Likes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 393,
+          lineNumber: 396,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -4999,22 +5000,22 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 397,
+          lineNumber: 400,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 403,
+          lineNumber: 406,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User Likes second post details" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 404,
+          lineNumber: 407,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 407,
+          lineNumber: 410,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5029,13 +5030,13 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 410,
+            lineNumber: 413,
             columnNumber: 17
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 409,
+          lineNumber: 412,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5050,7 +5051,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 417,
+            lineNumber: 420,
             columnNumber: 15
           },
           this
@@ -5061,7 +5062,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           new Date(platformData.likedPost2CreatedAt).toLocaleString()
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 424,
+          lineNumber: 427,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5070,7 +5071,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.likedPost2Likes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 428,
+          lineNumber: 431,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5081,22 +5082,22 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 432,
+          lineNumber: 435,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 438,
+          lineNumber: 441,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "User Likes Third post details" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 439,
+          lineNumber: 442,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 442,
+          lineNumber: 445,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "mx-auto", children: /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5111,13 +5112,13 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 445,
+            lineNumber: 448,
             columnNumber: 17
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 444,
+          lineNumber: 447,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5132,7 +5133,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 452,
+            lineNumber: 455,
             columnNumber: 15
           },
           this
@@ -5143,7 +5144,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           new Date(platformData.likedPost3CreatedAt).toLocaleString()
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 459,
+          lineNumber: 462,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5152,7 +5153,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.likedPost3Likes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 463,
+          lineNumber: 466,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5163,33 +5164,33 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 467,
+          lineNumber: 470,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 473,
+          lineNumber: 476,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 475,
+          lineNumber: 478,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 369,
+        lineNumber: 372,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "Recent Post One" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 478,
+          lineNumber: 481,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 481,
+          lineNumber: 484,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5204,7 +5205,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 482,
+            lineNumber: 485,
             columnNumber: 15
           },
           this
@@ -5215,7 +5216,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           new Date(platformData.recentPost1CreatedAt).toLocaleString()
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 489,
+          lineNumber: 492,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5224,7 +5225,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.recentPost1Likes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 493,
+          lineNumber: 496,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5235,22 +5236,22 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 497,
+          lineNumber: 500,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 503,
+          lineNumber: 506,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "Recent Post Second" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 504,
+          lineNumber: 507,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 507,
+          lineNumber: 510,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5265,7 +5266,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 508,
+            lineNumber: 511,
             columnNumber: 15
           },
           this
@@ -5276,7 +5277,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           new Date(platformData.recentPost2CreatedAt).toLocaleString()
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 515,
+          lineNumber: 518,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5285,7 +5286,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.recentPost2Likes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 519,
+          lineNumber: 522,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5296,22 +5297,22 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 523,
+          lineNumber: 526,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 529,
+          lineNumber: 532,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "Recent Post Three" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 531,
+          lineNumber: 534,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 534,
+          lineNumber: 537,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)(
@@ -5326,7 +5327,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           !1,
           {
             fileName: "app/routes/admin/home/userhandel.$id.tsx",
-            lineNumber: 535,
+            lineNumber: 538,
             columnNumber: 15
           },
           this
@@ -5337,7 +5338,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           new Date(platformData.recentPost3CreatedAt).toLocaleString()
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 542,
+          lineNumber: 545,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5346,7 +5347,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           Number(platformData.recentPost3Likes).toLocaleString("en-US")
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 546,
+          lineNumber: 549,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5357,23 +5358,23 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 550,
+          lineNumber: 553,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 477,
+        lineNumber: 480,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-[#31353f] hover:bg-slate-800 rounded-md px-4 py-2 my-2 text-white font-medium text-md flex-nowrap w-80", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-center font-semibold", children: "Month wise user details" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 558,
+          lineNumber: 561,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 561,
+          lineNumber: 564,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5384,7 +5385,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 562,
+          lineNumber: 565,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5395,7 +5396,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 568,
+          lineNumber: 571,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5406,12 +5407,12 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 574,
+          lineNumber: 577,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 580,
+          lineNumber: 583,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5422,7 +5423,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 581,
+          lineNumber: 584,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5433,7 +5434,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 587,
+          lineNumber: 590,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5444,12 +5445,12 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 593,
+          lineNumber: 596,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 599,
+          lineNumber: 602,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5460,7 +5461,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 600,
+          lineNumber: 603,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5471,7 +5472,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 606,
+          lineNumber: 609,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5482,12 +5483,12 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 612,
+          lineNumber: 615,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 618,
+          lineNumber: 621,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5498,7 +5499,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 619,
+          lineNumber: 622,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5509,7 +5510,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 625,
+          lineNumber: 628,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5520,12 +5521,12 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 631,
+          lineNumber: 634,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("div", { className: "bg-gray-400 w-full h-[2px] my-4" }, void 0, !1, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 637,
+          lineNumber: 640,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5536,7 +5537,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 638,
+          lineNumber: 641,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5547,7 +5548,7 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 644,
+          lineNumber: 647,
           columnNumber: 15
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime29.jsxDEV)("p", { className: "text-lg text-left font-normal", children: [
@@ -5558,26 +5559,26 @@ var import_moment = __toESM(require("moment")), import_jsx_dev_runtime29 = requi
           )
         ] }, void 0, !0, {
           fileName: "app/routes/admin/home/userhandel.$id.tsx",
-          lineNumber: 650,
+          lineNumber: 653,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/admin/home/userhandel.$id.tsx",
-        lineNumber: 557,
+        lineNumber: 560,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/admin/home/userhandel.$id.tsx",
-      lineNumber: 223,
+      lineNumber: 226,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/admin/home/userhandel.$id.tsx",
-    lineNumber: 146,
+    lineNumber: 149,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/admin/home/userhandel.$id.tsx",
-    lineNumber: 145,
+    lineNumber: 148,
     columnNumber: 5
   }, this);
 }, userhandel_id_default = UserHandel;
@@ -38084,7 +38085,7 @@ var loader67 = async (props) => {
     columnNumber: 5
   }, this);
 }, ChampaingPaymentRequest = (props) => {
-  let [respayment, setRequestPayment] = (0, import_react137.useState)([]), [acceptbox, setAcceptbox] = (0, import_react137.useState)(!1), [rejectbox, setrejectbox] = (0, import_react137.useState)(!1), [error, setError] = (0, import_react137.useState)(null), [id, setId] = (0, import_react137.useState)(null), init = async () => {
+  let [respayment, setRequestPayment] = (0, import_react137.useState)([]), [acceptbox, setAcceptbox] = (0, import_react137.useState)(!1), [rejectbox, setrejectbox] = (0, import_react137.useState)(!1), [error, setError] = (0, import_react137.useState)(null), [id, setId] = (0, import_react137.useState)(null), navigator2 = (0, import_react138.useNavigate)(), init = async () => {
     let req = {
       search: {
         campaign: props.campaingid
@@ -38141,22 +38142,22 @@ var loader67 = async (props) => {
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-white w-72 shadow-lg p-4 rounded-lg", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-center font-medium text-2xl", children: "Accept" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1928,
+            lineNumber: 1929,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1929,
+            lineNumber: 1930,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-center font-medium text-gray-800", children: "Are you sure you want to accept this payment?" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1930,
+            lineNumber: 1931,
             columnNumber: 11
           }, this),
           error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1934,
+            lineNumber: 1935,
             columnNumber: 13
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-2", children: [
@@ -38178,7 +38179,7 @@ var loader67 = async (props) => {
                     !1,
                     {
                       fileName: "app/routes/home/campaigns.$id.tsx",
-                      lineNumber: 1945,
+                      lineNumber: 1946,
                       columnNumber: 15
                     },
                     this
@@ -38190,14 +38191,14 @@ var loader67 = async (props) => {
               !0,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 1939,
+                lineNumber: 1940,
                 columnNumber: 13
               },
               this
             ),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "grow" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 1951,
+              lineNumber: 1952,
               columnNumber: 13
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38216,7 +38217,7 @@ var loader67 = async (props) => {
                     !1,
                     {
                       fileName: "app/routes/home/campaigns.$id.tsx",
-                      lineNumber: 1956,
+                      lineNumber: 1957,
                       columnNumber: 15
                     },
                     this
@@ -38228,19 +38229,19 @@ var loader67 = async (props) => {
               !0,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 1952,
+                lineNumber: 1953,
                 columnNumber: 13
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1938,
+            lineNumber: 1939,
             columnNumber: 11
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 1927,
+          lineNumber: 1928,
           columnNumber: 9
         }, this)
       },
@@ -38248,7 +38249,7 @@ var loader67 = async (props) => {
       !1,
       {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 1923,
+        lineNumber: 1924,
         columnNumber: 7
       },
       this
@@ -38260,17 +38261,17 @@ var loader67 = async (props) => {
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-white w-72 shadow-lg p-4 rounded-lg", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-center font-medium text-2xl", children: "Reject" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1970,
+            lineNumber: 1971,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-center font-medium text-gray-800", children: "Are you sure you want to reject this payment?" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1971,
+            lineNumber: 1972,
             columnNumber: 11
           }, this),
           error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1975,
+            lineNumber: 1976,
             columnNumber: 13
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-2", children: [
@@ -38292,7 +38293,7 @@ var loader67 = async (props) => {
                     !1,
                     {
                       fileName: "app/routes/home/campaigns.$id.tsx",
-                      lineNumber: 1986,
+                      lineNumber: 1987,
                       columnNumber: 15
                     },
                     this
@@ -38304,14 +38305,14 @@ var loader67 = async (props) => {
               !0,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 1980,
+                lineNumber: 1981,
                 columnNumber: 13
               },
               this
             ),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "grow" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 1992,
+              lineNumber: 1993,
               columnNumber: 13
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38330,7 +38331,7 @@ var loader67 = async (props) => {
                     !1,
                     {
                       fileName: "app/routes/home/campaigns.$id.tsx",
-                      lineNumber: 1997,
+                      lineNumber: 1998,
                       columnNumber: 15
                     },
                     this
@@ -38342,19 +38343,19 @@ var loader67 = async (props) => {
               !0,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 1993,
+                lineNumber: 1994,
                 columnNumber: 13
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 1979,
+            lineNumber: 1980,
             columnNumber: 11
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 1969,
+          lineNumber: 1970,
           columnNumber: 9
         }, this)
       },
@@ -38362,28 +38363,28 @@ var loader67 = async (props) => {
       !1,
       {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 1965,
+        lineNumber: 1966,
         columnNumber: 7
       },
       this
     ),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "p-4 rounded-xl shadow-xl bg-white", children: respayment.length == 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: "No payment request is pending" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2009,
+      lineNumber: 2010,
       columnNumber: 13
     }, this) }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2008,
+      lineNumber: 2009,
       columnNumber: 11
     }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: "Requested Payment" }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2013,
+        lineNumber: 2014,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2014,
+        lineNumber: 2015,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex flex-wrap gap-6", children: respayment.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38393,12 +38394,12 @@ var loader67 = async (props) => {
           children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Requested by" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2022,
+              lineNumber: 2023,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full h-[2px] bg-gray-700" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2023,
+              lineNumber: 2024,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-4", children: [
@@ -38413,7 +38414,7 @@ var loader67 = async (props) => {
                 !1,
                 {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2025,
+                  lineNumber: 2026,
                   columnNumber: 23
                 },
                 this
@@ -38421,27 +38422,27 @@ var loader67 = async (props) => {
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "ml-2", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: val.influencer.name.split("@")[0] }, void 0, !1, {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2031,
+                  lineNumber: 2032,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.influencer.email }, void 0, !1, {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2034,
+                  lineNumber: 2035,
                   columnNumber: 25
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2030,
+                lineNumber: 2031,
                 columnNumber: 23
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2024,
+              lineNumber: 2025,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Amount" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2039,
+              lineNumber: 2040,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: [
@@ -38450,16 +38451,16 @@ var loader67 = async (props) => {
               props.currency
             ] }, void 0, !0, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2040,
+              lineNumber: 2041,
               columnNumber: 21
             }, this),
             parseInt(val.status.code) == 2 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "py-1 px-4 text-center text-white bg-green-500 rounded-md my-2", children: "Accepted" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2044,
+              lineNumber: 2045,
               columnNumber: 23
             }, this) : parseInt(val.status.code) == 3 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "py-1 px-4 text-center text-white bg-red-500 rounded-md my-2", children: "Rejected" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2048,
+              lineNumber: 2049,
               columnNumber: 23
             }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex gap-4 mt-2", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38480,7 +38481,7 @@ var loader67 = async (props) => {
                       !1,
                       {
                         fileName: "app/routes/home/campaigns.$id.tsx",
-                        lineNumber: 2060,
+                        lineNumber: 2061,
                         columnNumber: 27
                       },
                       this
@@ -38492,7 +38493,7 @@ var loader67 = async (props) => {
                 !0,
                 {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2053,
+                  lineNumber: 2054,
                   columnNumber: 25
                 },
                 this
@@ -38515,7 +38516,7 @@ var loader67 = async (props) => {
                       !1,
                       {
                         fileName: "app/routes/home/campaigns.$id.tsx",
-                        lineNumber: 2073,
+                        lineNumber: 2074,
                         columnNumber: 27
                       },
                       this
@@ -38527,14 +38528,14 @@ var loader67 = async (props) => {
                 !0,
                 {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2066,
+                  lineNumber: 2067,
                   columnNumber: 25
                 },
                 this
               )
             ] }, void 0, !0, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2052,
+              lineNumber: 2053,
               columnNumber: 23
             }, this)
           ]
@@ -38543,27 +38544,27 @@ var loader67 = async (props) => {
         !0,
         {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2018,
+          lineNumber: 2019,
           columnNumber: 19
         },
         this
       )) }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2015,
+        lineNumber: 2016,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2012,
+      lineNumber: 2013,
       columnNumber: 11
     }, this) }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2006,
+      lineNumber: 2007,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 1922,
+    lineNumber: 1923,
     columnNumber: 5
   }, this);
 }, SnapshotChampaingPaymentRequest = (props) => {
@@ -38579,21 +38580,21 @@ var loader67 = async (props) => {
     init();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "p-4 rounded-xl shadow-xl bg-white", children: respayment.length == 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: "No payment request is pending" }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2132,
+    lineNumber: 2133,
     columnNumber: 13
   }, this) }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2131,
+    lineNumber: 2132,
     columnNumber: 11
   }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: "Requested Payment" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2136,
+      lineNumber: 2137,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2137,
+      lineNumber: 2138,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex flex-wrap gap-6", children: respayment.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38603,12 +38604,12 @@ var loader67 = async (props) => {
         children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Requested by" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2145,
+            lineNumber: 2146,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full h-[2px] bg-gray-700" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2146,
+            lineNumber: 2147,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-4", children: [
@@ -38623,7 +38624,7 @@ var loader67 = async (props) => {
               !1,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2148,
+                lineNumber: 2149,
                 columnNumber: 23
               },
               this
@@ -38631,27 +38632,27 @@ var loader67 = async (props) => {
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "ml-2", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: val.influencer.name.split("@")[0] }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2154,
+                lineNumber: 2155,
                 columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.influencer.email }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2157,
+                lineNumber: 2158,
                 columnNumber: 25
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2153,
+              lineNumber: 2154,
               columnNumber: 23
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2147,
+            lineNumber: 2148,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Amount" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2162,
+            lineNumber: 2163,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: [
@@ -38660,20 +38661,20 @@ var loader67 = async (props) => {
             props.currency
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2163,
+            lineNumber: 2164,
             columnNumber: 21
           }, this),
           parseInt(val.status.code) == 2 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "py-1 px-4 text-center text-white bg-green-500 rounded-md my-2", children: "Accepted" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2167,
+            lineNumber: 2168,
             columnNumber: 23
           }, this) : parseInt(val.status.code) == 3 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "py-1 px-4 text-center text-white bg-red-500 rounded-md my-2", children: "Rejected" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2171,
+            lineNumber: 2172,
             columnNumber: 23
           }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "py-1 px-4 text-center text-white bg-yellow-500 rounded-md my-2", children: "Pending" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2175,
+            lineNumber: 2176,
             columnNumber: 23
           }, this)
         ]
@@ -38682,31 +38683,31 @@ var loader67 = async (props) => {
       !0,
       {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2141,
+        lineNumber: 2142,
         columnNumber: 19
       },
       this
     )) }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2138,
+      lineNumber: 2139,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2135,
+    lineNumber: 2136,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2129,
+    lineNumber: 2130,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2128,
+    lineNumber: 2129,
     columnNumber: 5
   }, this);
 };
 var SnapshopCreatedDrafts = (props) => {
-  let [resDarft, setResDarft] = (0, import_react137.useState)([]), init = async () => {
+  let [resDarft, setResDarft] = (0, import_react137.useState)([]), navigator2 = (0, import_react138.useNavigate)(), [error, setError] = (0, import_react137.useState)(""), init = async () => {
     let req = {
       search: {}
     };
@@ -38718,17 +38719,17 @@ var SnapshopCreatedDrafts = (props) => {
     init();
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "p-4 rounded-xl shadow-xl bg-white my-4", children: resDarft.length == 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: "No one created any drafts yet." }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2326,
+    lineNumber: 2329,
     columnNumber: 11
   }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: "Draft snapshot" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2329,
+      lineNumber: 2332,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2330,
+      lineNumber: 2333,
       columnNumber: 13
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex flex-wrap gap-6", children: resDarft.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38748,7 +38749,7 @@ var SnapshopCreatedDrafts = (props) => {
               !1,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2339,
+                lineNumber: 2342,
                 columnNumber: 23
               },
               this
@@ -38756,86 +38757,86 @@ var SnapshopCreatedDrafts = (props) => {
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "ml-2", children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: val.influencer.name.split("@")[0] }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2345,
+                lineNumber: 2348,
                 columnNumber: 25
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.influencer.email }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2348,
+                lineNumber: 2351,
                 columnNumber: 25
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2344,
+              lineNumber: 2347,
               columnNumber: 23
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2338,
+            lineNumber: 2341,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Description" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2353,
+            lineNumber: 2356,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.description }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2354,
+            lineNumber: 2357,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Handle Info" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2356,
+            lineNumber: 2359,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex gap-4", children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("img", { src: val.handle.platform.logo, alt: "platform", className: "w-14 h-14 shrink-0 rounded-md object-fill object-center" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2358,
+              lineNumber: 2361,
               columnNumber: 23
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-xl font-semibold text-center", children: val.handle.name }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2359,
+              lineNumber: 2362,
               columnNumber: 23
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2357,
+            lineNumber: 2360,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Publication Time" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2362,
+            lineNumber: 2365,
             columnNumber: 21
           }, this),
           val.draft_approval != null ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: new Date(val.draft_approval.toString()).toLocaleString() }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2364,
+            lineNumber: 2367,
             columnNumber: 23
           }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: "No Publication Time is set" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2365,
+            lineNumber: 2368,
             columnNumber: 23
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Campaign Link" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2368,
+            lineNumber: 2371,
             columnNumber: 21
           }, this),
           val.linkCampaign != null || val.linkCampaign != "" ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.linkCampaign }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2370,
+            lineNumber: 2373,
             columnNumber: 23
           }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: "No Campaign is Linked" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2371,
+            lineNumber: 2374,
             columnNumber: 23
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Attachment" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2374,
+            lineNumber: 2377,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38850,7 +38851,7 @@ var SnapshopCreatedDrafts = (props) => {
             !1,
             {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2375,
+              lineNumber: 2378,
               columnNumber: 21
             },
             this
@@ -38858,22 +38859,22 @@ var SnapshopCreatedDrafts = (props) => {
           val.status.name == "REJECTED" ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Rejection Reason" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2384,
+              lineNumber: 2387,
               columnNumber: 25
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.status.message }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2385,
+              lineNumber: 2388,
               columnNumber: 25
             }, this)
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2383,
+            lineNumber: 2386,
             columnNumber: 23
           }, this) : null,
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Status" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2390,
+            lineNumber: 2391,
             columnNumber: 21
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -38886,42 +38887,60 @@ var SnapshopCreatedDrafts = (props) => {
             !1,
             {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2391,
+              lineNumber: 2392,
               columnNumber: 21
             },
             this
           ),
-          val.status.name == "ACCEPTED" ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_react138.Link, { className: "text-white py-1 w-full bg-cyan-500 cursor-pointer inline-block text-center mt-4 rounded-md", to: `/home/brandpay/${props.brandid}/${props.campaingid}/${val.id}`, children: "View Details" }, void 0, !1, {
+          val.status.name == "ACCEPTED" ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
+            "button",
+            {
+              onClick: () => {
+                resDarft[0].linkCampaign == null || resDarft[0].linkCampaign == null || resDarft[0].linkCampaign == "" ? setError((val2) => "First link your campaign.") : navigator2(`/home/brandpay/${props.brandid}/${props.campaingid}/${val.id}`);
+              },
+              className: "text-white py-1 w-full bg-cyan-500 cursor-pointer inline-block text-center mt-4 rounded-md",
+              children: "View Details"
+            },
+            void 0,
+            !1,
+            {
+              fileName: "app/routes/home/campaigns.$id.tsx",
+              lineNumber: 2403,
+              columnNumber: 23
+            },
+            this
+          ) : null,
+          error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2403,
+            lineNumber: 2416,
             columnNumber: 23
-          }, this) : null
+          }, this)
         ]
       },
       index2,
       !0,
       {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2334,
+        lineNumber: 2337,
         columnNumber: 19
       },
       this
     )) }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2331,
+      lineNumber: 2334,
       columnNumber: 13
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2328,
+    lineNumber: 2331,
     columnNumber: 11
   }, this) }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2324,
+    lineNumber: 2327,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2323,
+    lineNumber: 2326,
     columnNumber: 5
   }, this);
 }, LinkCampaign = (props) => {
@@ -38966,11 +38985,11 @@ var SnapshopCreatedDrafts = (props) => {
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: [
     resDarft.length == 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-white rounded-md p-4 mt-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("h1", { className: "text-center font-semibold text-lg", children: "No campaign is live" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2493,
+      lineNumber: 2506,
       columnNumber: 11
     }, this) }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2492,
+      lineNumber: 2505,
       columnNumber: 9
     }, this) : null,
     resDarft.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-white rounded-md p-4 mt-2", children: [
@@ -38986,23 +39005,23 @@ var SnapshopCreatedDrafts = (props) => {
           !1,
           {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2502,
+            lineNumber: 2515,
             columnNumber: 15
           },
           this
         ),
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "ml-4", children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-primary text-sm font-semibold text-left", children: val.handle.name }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2508,
+          lineNumber: 2521,
           columnNumber: 17
         }, this) }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2507,
+          lineNumber: 2520,
           columnNumber: 15
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2501,
+        lineNumber: 2514,
         columnNumber: 13
       }, this),
       val.linkCampaign == null || val.linkCampaign == "" || val.linkCampaign == null ? linkBox[index2] ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: [
@@ -39019,14 +39038,14 @@ var SnapshopCreatedDrafts = (props) => {
           !1,
           {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2518,
+            lineNumber: 2531,
             columnNumber: 19
           },
           this
         ),
         errors[index2] == "" || errors[index2] == null || errors[index2] == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-2", children: errors[index2] }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2528,
+          lineNumber: 2541,
           columnNumber: 21
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39042,14 +39061,14 @@ var SnapshopCreatedDrafts = (props) => {
           !1,
           {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2532,
+            lineNumber: 2545,
             columnNumber: 19
           },
           this
         )
       ] }, void 0, !0, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2517,
+        lineNumber: 2530,
         columnNumber: 17
       }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
         "button",
@@ -39062,7 +39081,7 @@ var SnapshopCreatedDrafts = (props) => {
         !1,
         {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2542,
+          lineNumber: 2555,
           columnNumber: 17
         },
         this
@@ -39078,19 +39097,19 @@ var SnapshopCreatedDrafts = (props) => {
         !1,
         {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2550,
+          lineNumber: 2563,
           columnNumber: 15
         },
         this
       )
     ] }, index2, !0, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2500,
+      lineNumber: 2513,
       columnNumber: 11
     }, this))
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2490,
+    lineNumber: 2503,
     columnNumber: 5
   }, this);
 }, Bidding = (props) => {
@@ -39113,7 +39132,7 @@ var SnapshopCreatedDrafts = (props) => {
       setError("Fill the Bid amount.");
     else if (Number(bidamount) % 100 !== 0)
       setError("Bid amount must be a multiple of 100.");
-    else if (Number(amount) < Number(bidamount))
+    else if (Number(props.CostPerPost) * 1.25 < Number(bidamount))
       setError("Bid amount must be less then current bid amount.");
     else if (((_a = messageRef.current) == null ? void 0 : _a.value) == null || ((_b = messageRef.current) == null ? void 0 : _b.value) == null || ((_c = messageRef.current) == null ? void 0 : _c.value) == "")
       setError("Fill the remark.");
@@ -39144,12 +39163,12 @@ var SnapshopCreatedDrafts = (props) => {
   return /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md text-primary font-semibold py-1", children: "Bidding" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2645,
+      lineNumber: 2663,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full h-[1px] bg-slate-300" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2646,
+      lineNumber: 2664,
       columnNumber: 7
     }, this),
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "p-4 bg-white mt-2 rounded-md", children: [
@@ -39158,7 +39177,7 @@ var SnapshopCreatedDrafts = (props) => {
         props.CostPerPost.split(".")[0]
       ] }, void 0, !0, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2648,
+        lineNumber: 2666,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "font-semibold text-xl  text-gray-800 mt-2", children: [
@@ -39166,18 +39185,18 @@ var SnapshopCreatedDrafts = (props) => {
         amount.toString().split(".")[0]
       ] }, void 0, !0, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2651,
+        lineNumber: 2669,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "font-semibold text-xl  text-gray-700 my-2", children: "Min Bid : 100" }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2654,
+        lineNumber: 2672,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex gap-x-4", children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "font-semibold text-xl text-gray-700", children: "Enter Amount : " }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2658,
+          lineNumber: 2676,
           columnNumber: 11
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39192,18 +39211,18 @@ var SnapshopCreatedDrafts = (props) => {
           !1,
           {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2660,
+            lineNumber: 2678,
             columnNumber: 13
           },
           this
         ) }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2659,
+          lineNumber: 2677,
           columnNumber: 11
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2657,
+        lineNumber: 2675,
         columnNumber: 9
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39217,14 +39236,14 @@ var SnapshopCreatedDrafts = (props) => {
         !1,
         {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2668,
+          lineNumber: 2686,
           columnNumber: 9
         },
         this
       ),
       error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2674,
+        lineNumber: 2692,
         columnNumber: 11
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39238,19 +39257,19 @@ var SnapshopCreatedDrafts = (props) => {
         !1,
         {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2678,
+          lineNumber: 2696,
           columnNumber: 9
         },
         this
       )
     ] }, void 0, !0, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2647,
+      lineNumber: 2665,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2644,
+    lineNumber: 2662,
     columnNumber: 5
   }, this);
 }, ChampaingBidRequest = (props) => {
@@ -39282,22 +39301,22 @@ var SnapshopCreatedDrafts = (props) => {
         children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-white w-72 shadow-lg p-4 rounded-lg", children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-center font-medium text-2xl", children: "Accept" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2739,
+            lineNumber: 2757,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2740,
+            lineNumber: 2758,
             columnNumber: 11
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-center font-medium text-gray-800", children: "Are you sure you want to accept this payment?" }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2741,
+            lineNumber: 2759,
             columnNumber: 11
           }, this),
           error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2745,
+            lineNumber: 2763,
             columnNumber: 13
           }, this),
           /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-2", children: [
@@ -39319,7 +39338,7 @@ var SnapshopCreatedDrafts = (props) => {
                     !1,
                     {
                       fileName: "app/routes/home/campaigns.$id.tsx",
-                      lineNumber: 2756,
+                      lineNumber: 2774,
                       columnNumber: 15
                     },
                     this
@@ -39331,14 +39350,14 @@ var SnapshopCreatedDrafts = (props) => {
               !0,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2750,
+                lineNumber: 2768,
                 columnNumber: 13
               },
               this
             ),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "grow" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2762,
+              lineNumber: 2780,
               columnNumber: 13
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39357,7 +39376,7 @@ var SnapshopCreatedDrafts = (props) => {
                     !1,
                     {
                       fileName: "app/routes/home/campaigns.$id.tsx",
-                      lineNumber: 2767,
+                      lineNumber: 2785,
                       columnNumber: 15
                     },
                     this
@@ -39369,19 +39388,19 @@ var SnapshopCreatedDrafts = (props) => {
               !0,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2763,
+                lineNumber: 2781,
                 columnNumber: 13
               },
               this
             )
           ] }, void 0, !0, {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2749,
+            lineNumber: 2767,
             columnNumber: 11
           }, this)
         ] }, void 0, !0, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2738,
+          lineNumber: 2756,
           columnNumber: 9
         }, this)
       },
@@ -39389,7 +39408,7 @@ var SnapshopCreatedDrafts = (props) => {
       !1,
       {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2734,
+        lineNumber: 2752,
         columnNumber: 7
       },
       this
@@ -39397,21 +39416,21 @@ var SnapshopCreatedDrafts = (props) => {
     /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "p-4 rounded-xl shadow-xl bg-white mt-4", children: [
       resbid.length == 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: "No bid request is pending" }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2780,
+        lineNumber: 2798,
         columnNumber: 13
       }, this) }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2779,
+        lineNumber: 2797,
         columnNumber: 11
       }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: [
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: "Requested Bid" }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2784,
+          lineNumber: 2802,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2785,
+          lineNumber: 2803,
           columnNumber: 13
         }, this),
         /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex flex-wrap gap-6", children: resbid.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39421,12 +39440,12 @@ var SnapshopCreatedDrafts = (props) => {
             children: [
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Requested by" }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2793,
+                lineNumber: 2811,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full h-[2px] bg-gray-700" }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2794,
+                lineNumber: 2812,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-4", children: [
@@ -39441,7 +39460,7 @@ var SnapshopCreatedDrafts = (props) => {
                   !1,
                   {
                     fileName: "app/routes/home/campaigns.$id.tsx",
-                    lineNumber: 2796,
+                    lineNumber: 2814,
                     columnNumber: 23
                   },
                   this
@@ -39449,42 +39468,42 @@ var SnapshopCreatedDrafts = (props) => {
                 /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "ml-2", children: [
                   /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: val.userName.split("@")[0] }, void 0, !1, {
                     fileName: "app/routes/home/campaigns.$id.tsx",
-                    lineNumber: 2802,
+                    lineNumber: 2820,
                     columnNumber: 25
                   }, this),
                   /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.userEmail }, void 0, !1, {
                     fileName: "app/routes/home/campaigns.$id.tsx",
-                    lineNumber: 2805,
+                    lineNumber: 2823,
                     columnNumber: 25
                   }, this)
                 ] }, void 0, !0, {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2801,
+                  lineNumber: 2819,
                   columnNumber: 23
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2795,
+                lineNumber: 2813,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-lg font-medium", children: "Amount" }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2808,
+                lineNumber: 2826,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-semibold", children: val.bidamount }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2809,
+                lineNumber: 2827,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-lg font-medium mt-2", children: "Remark" }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2810,
+                lineNumber: 2828,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-semibold", children: val.remark }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2811,
+                lineNumber: 2829,
                 columnNumber: 21
               }, this),
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex gap-4 mt-2", children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39505,7 +39524,7 @@ var SnapshopCreatedDrafts = (props) => {
                       !1,
                       {
                         fileName: "app/routes/home/campaigns.$id.tsx",
-                        lineNumber: 2820,
+                        lineNumber: 2838,
                         columnNumber: 25
                       },
                       this
@@ -39517,13 +39536,13 @@ var SnapshopCreatedDrafts = (props) => {
                 !0,
                 {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2813,
+                  lineNumber: 2831,
                   columnNumber: 23
                 },
                 this
               ) }, void 0, !1, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2812,
+                lineNumber: 2830,
                 columnNumber: 21
               }, this)
             ]
@@ -39532,33 +39551,33 @@ var SnapshopCreatedDrafts = (props) => {
           !0,
           {
             fileName: "app/routes/home/campaigns.$id.tsx",
-            lineNumber: 2789,
+            lineNumber: 2807,
             columnNumber: 19
           },
           this
         )) }, void 0, !1, {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2786,
+          lineNumber: 2804,
           columnNumber: 13
         }, this)
       ] }, void 0, !0, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2783,
+        lineNumber: 2801,
         columnNumber: 11
       }, this),
       error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2834,
+        lineNumber: 2852,
         columnNumber: 11
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2777,
+      lineNumber: 2795,
       columnNumber: 7
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2733,
+    lineNumber: 2751,
     columnNumber: 5
   }, this);
 }, SnapshotChampaingBidRequest = (props) => {
@@ -39583,21 +39602,21 @@ var SnapshopCreatedDrafts = (props) => {
   }, []), /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "p-4 rounded-xl shadow-xl bg-white mt-4", children: [
     resbid.length == 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(import_jsx_dev_runtime107.Fragment, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: "No bid request is pending" }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2887,
+      lineNumber: 2905,
       columnNumber: 13
     }, this) }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2886,
+      lineNumber: 2904,
       columnNumber: 11
     }, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { children: [
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: "Requested Bid" }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2891,
+        lineNumber: 2909,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full bg-gray-400 h-[1px] my-2" }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2892,
+        lineNumber: 2910,
         columnNumber: 13
       }, this),
       /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex flex-wrap gap-6", children: resbid.map((val, index2) => /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39607,12 +39626,12 @@ var SnapshopCreatedDrafts = (props) => {
           children: [
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Requested by" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2900,
+              lineNumber: 2918,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "w-full h-[2px] bg-gray-700" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2901,
+              lineNumber: 2919,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "flex mt-4", children: [
@@ -39627,7 +39646,7 @@ var SnapshopCreatedDrafts = (props) => {
                 !1,
                 {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2903,
+                  lineNumber: 2921,
                   columnNumber: 23
                 },
                 this
@@ -39635,47 +39654,47 @@ var SnapshopCreatedDrafts = (props) => {
               /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "ml-2", children: [
                 /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-medium", children: val.userName.split("@")[0] }, void 0, !1, {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2909,
+                  lineNumber: 2927,
                   columnNumber: 25
                 }, this),
                 /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-sm font-medium", children: val.userEmail }, void 0, !1, {
                   fileName: "app/routes/home/campaigns.$id.tsx",
-                  lineNumber: 2912,
+                  lineNumber: 2930,
                   columnNumber: 25
                 }, this)
               ] }, void 0, !0, {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2908,
+                lineNumber: 2926,
                 columnNumber: 23
               }, this)
             ] }, void 0, !0, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2902,
+              lineNumber: 2920,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-lg font-medium", children: "Amount" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2915,
+              lineNumber: 2933,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-semibold", children: val.bidamount }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2916,
+              lineNumber: 2934,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-lg font-medium mt-2", children: "Remark" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2917,
+              lineNumber: 2935,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "text-md font-semibold", children: val.remark }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2918,
+              lineNumber: 2936,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("p", { className: "mt-2 text-md font-medium", children: "Status" }, void 0, !1, {
               fileName: "app/routes/home/campaigns.$id.tsx",
-              lineNumber: 2919,
+              lineNumber: 2937,
               columnNumber: 21
             }, this),
             /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)(
@@ -39688,7 +39707,7 @@ var SnapshopCreatedDrafts = (props) => {
               !1,
               {
                 fileName: "app/routes/home/campaigns.$id.tsx",
-                lineNumber: 2920,
+                lineNumber: 2938,
                 columnNumber: 21
               },
               this
@@ -39699,32 +39718,32 @@ var SnapshopCreatedDrafts = (props) => {
         !0,
         {
           fileName: "app/routes/home/campaigns.$id.tsx",
-          lineNumber: 2896,
+          lineNumber: 2914,
           columnNumber: 19
         },
         this
       )) }, void 0, !1, {
         fileName: "app/routes/home/campaigns.$id.tsx",
-        lineNumber: 2893,
+        lineNumber: 2911,
         columnNumber: 13
       }, this)
     ] }, void 0, !0, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2890,
+      lineNumber: 2908,
       columnNumber: 11
     }, this),
     error == "" || error == null || error == null ? null : /* @__PURE__ */ (0, import_jsx_dev_runtime107.jsxDEV)("div", { className: "bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4", children: error }, void 0, !1, {
       fileName: "app/routes/home/campaigns.$id.tsx",
-      lineNumber: 2935,
+      lineNumber: 2953,
       columnNumber: 11
     }, this)
   ] }, void 0, !0, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2884,
+    lineNumber: 2902,
     columnNumber: 7
   }, this) }, void 0, !1, {
     fileName: "app/routes/home/campaigns.$id.tsx",
-    lineNumber: 2883,
+    lineNumber: 2901,
     columnNumber: 5
   }, this);
 };
@@ -53116,7 +53135,7 @@ var import_jsx_dev_runtime149 = require("react/jsx-dev-runtime"), pp2 = () => /*
 }, this), pp_default2 = pp2;
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "439af0d3", entry: { module: "/build/entry.client-ZU5ENSUM.js", imports: ["/build/_shared/chunk-GXGHFQ2S.js", "/build/_shared/chunk-YSUO5XC3.js", "/build/_shared/chunk-QUEIQGSW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-WLWIT56L.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-7TIYH3RP.js", imports: ["/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home": { id: "routes/admin/home", parentId: "root", path: "admin/home", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home-ASXEQTIO.js", imports: ["/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/blognews": { id: "routes/admin/home/blognews", parentId: "routes/admin/home", path: "blognews", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/blognews-OVPNQ625.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/brand": { id: "routes/admin/home/brand", parentId: "routes/admin/home", path: "brand", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/brand-ONHP2OVT.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaign": { id: "routes/admin/home/campaign", parentId: "routes/admin/home", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaign-QCL4TH3Q.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaigntype": { id: "routes/admin/home/campaigntype", parentId: "routes/admin/home", path: "campaigntype", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaigntype-SKHOKT3F.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/category": { id: "routes/admin/home/category", parentId: "routes/admin/home", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/category-EIHXERO7.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/city": { id: "routes/admin/home/city", parentId: "routes/admin/home", path: "city", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/city-YCZWJUX3.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/contact": { id: "routes/admin/home/contact", parentId: "routes/admin/home", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/contact-T7WIVMAD.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/country": { id: "routes/admin/home/country", parentId: "routes/admin/home", path: "country", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/country-BFJYXLWV.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/currency": { id: "routes/admin/home/currency", parentId: "routes/admin/home", path: "currency", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/currency-W4YWFL7M.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/dispute": { id: "routes/admin/home/dispute", parentId: "routes/admin/home", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/dispute-575UPKO2.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/editbrand.$id": { id: "routes/admin/home/editbrand.$id", parentId: "routes/admin/home", path: "editbrand/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/editbrand.$id-RD5HUKU7.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/editcampaign.$id": { id: "routes/admin/home/editcampaign.$id", parentId: "routes/admin/home", path: "editcampaign/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/editcampaign.$id-W6QTRB6X.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/home": { id: "routes/admin/home/home", parentId: "routes/admin/home", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/home-KMHHYH5H.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/index": { id: "routes/admin/home/index", parentId: "routes/admin/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/admin/home/index-7TOWQGNS.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/language": { id: "routes/admin/home/language", parentId: "routes/admin/home", path: "language", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/language-26JGGLJT.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/market": { id: "routes/admin/home/market", parentId: "routes/admin/home", path: "market", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/market-UE5G4SFO.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/platforms": { id: "routes/admin/home/platforms", parentId: "routes/admin/home", path: "platforms", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/platforms-4T36WMA5.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/state": { id: "routes/admin/home/state", parentId: "routes/admin/home", path: "state", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/state-NCTEIMJQ.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/support": { id: "routes/admin/home/support", parentId: "routes/admin/home", path: "support", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/support-JMHUSCQY.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/team": { id: "routes/admin/home/team", parentId: "routes/admin/home", path: "team", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/team-KBP4B3JH.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/user": { id: "routes/admin/home/user", parentId: "routes/admin/home", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/user-PLWBHHHM.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/userhandel.$id": { id: "routes/admin/home/userhandel.$id", parentId: "routes/admin/home", path: "userhandel/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/userhandel.$id-MINFT5HE.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/index": { id: "routes/admin/index", parentId: "root", path: "admin", index: !0, caseSensitive: void 0, module: "/build/routes/admin/index-RYQGC7YZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogin": { id: "routes/adminlogin", parentId: "root", path: "adminlogin", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogin-Q3MI3QHS.js", imports: ["/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogout": { id: "routes/adminlogout", parentId: "root", path: "adminlogout", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogout-7UEGTPTC.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/bloginfo.$id": { id: "routes/blogs/bloginfo.$id", parentId: "root", path: "blogs/bloginfo/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/blogs/bloginfo.$id-ZAQL6O4J.js", imports: ["/build/_shared/chunk-UIJVHUWO.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/index": { id: "routes/blogs/index", parentId: "root", path: "blogs", index: !0, caseSensitive: void 0, module: "/build/routes/blogs/index-LUDBANTH.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/contact": { id: "routes/contact", parentId: "root", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/contact-X2JIACYE.js", imports: ["/build/_shared/chunk-L4A72OKS.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/createbrand": { id: "routes/createbrand", parentId: "root", path: "createbrand", index: void 0, caseSensitive: void 0, module: "/build/routes/createbrand-IUVUVRZ5.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/dispute": { id: "routes/dispute", parentId: "root", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/dispute-OEUGXWN6.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/sociallogin.$id": { id: "routes/extra/sociallogin.$id", parentId: "root", path: "extra/sociallogin/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/sociallogin.$id-XHHF22MT.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/socialregister.$id": { id: "routes/extra/socialregister.$id", parentId: "root", path: "extra/socialregister/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/socialregister.$id-EOKNY7ZN.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/faq": { id: "routes/faq", parentId: "root", path: "faq", index: void 0, caseSensitive: void 0, module: "/build/routes/faq-QAJGOJYV.js", imports: ["/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-ZMWRVDGZ.js", imports: ["/build/_shared/chunk-L4EYGIH2.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brand.$id": { id: "routes/home/brand.$id", parentId: "routes/home", path: "brand/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brand.$id-DKAZAVQJ.js", imports: ["/build/_shared/chunk-S7OFZH5O.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brandedit.$id": { id: "routes/home/brandedit.$id", parentId: "routes/home", path: "brandedit/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brandedit.$id-6GJNLH2W.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brandpay.$brandId.$camId.$draftId": { id: "routes/home/brandpay.$brandId.$camId.$draftId", parentId: "routes/home", path: "brandpay/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brandpay.$brandId.$camId.$draftId-U3E33DIY.js", imports: ["/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser": { id: "routes/home/branduser", parentId: "routes/home", path: "branduser", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser-5HVBP3TT.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/index": { id: "routes/home/branduser/index", parentId: "routes/home/branduser", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/branduser/index-ULQHWFFR.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/influencers": { id: "routes/home/branduser/influencers", parentId: "routes/home/branduser", path: "influencers", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/influencers-FEMYBCKL.js", imports: ["/build/_shared/chunk-HONKSBMW.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/payments": { id: "routes/home/branduser/payments", parentId: "routes/home/branduser", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/payments-T37WFL3I.js", imports: ["/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/campaigns.$id": { id: "routes/home/campaigns.$id", parentId: "routes/home", path: "campaigns/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/campaigns.$id-DTBBCGWS.js", imports: ["/build/_shared/chunk-S7OFZH5O.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign": { id: "routes/home/createcampaign", parentId: "routes/home", path: "createcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign-5TDDIKFM.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/index": { id: "routes/home/createcampaign/index", parentId: "routes/home/createcampaign", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/index-YUORT6Q7.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/inviteinf.$camp": { id: "routes/home/createcampaign/inviteinf.$camp", parentId: "routes/home/createcampaign", path: "inviteinf/:camp", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/inviteinf.$camp-EEAEWLBL.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/spbd": { id: "routes/home/createcampaign/spbd", parentId: "routes/home/createcampaign", path: "spbd", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/spbd-WMPEMKAZ.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step2": { id: "routes/home/createcampaign/step2", parentId: "routes/home/createcampaign", path: "step2", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step2-3OXSS7UP.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step3": { id: "routes/home/createcampaign/step3", parentId: "routes/home/createcampaign", path: "step3", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step3-RF7WJIL3.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step4": { id: "routes/home/createcampaign/step4", parentId: "routes/home/createcampaign", path: "step4", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step4-4QTUWL4G.js", imports: ["/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step5": { id: "routes/home/createcampaign/step5", parentId: "routes/home/createcampaign", path: "step5", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step5-HNKB7OUV.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step6": { id: "routes/home/createcampaign/step6", parentId: "routes/home/createcampaign", path: "step6", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step6-TVR377XG.js", imports: ["/build/_shared/chunk-WZNTS5FP.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/drafts": { id: "routes/home/drafts", parentId: "routes/home", path: "drafts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/drafts-XXGXUVX3.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/empty": { id: "routes/home/empty", parentId: "routes/home", path: "empty", index: void 0, caseSensitive: void 0, module: "/build/routes/home/empty-WTGW75L2.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/favourite": { id: "routes/home/favourite", parentId: "routes/home", path: "favourite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/favourite-3KIA5YA4.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/findcampaign": { id: "routes/home/findcampaign", parentId: "routes/home", path: "findcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/findcampaign-IPJCC2SJ.js", imports: ["/build/_shared/chunk-OI46DWYF.js", "/build/_shared/chunk-HONKSBMW.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help": { id: "routes/home/help", parentId: "routes/home", path: "help", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help-24UAEAGO.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/analytics": { id: "routes/home/help/analytics", parentId: "routes/home/help", path: "analytics", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/analytics-U4DBWR73.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/brands": { id: "routes/home/help/brands", parentId: "routes/home/help", path: "brands", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/brands-FD6RTH4J.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaign": { id: "routes/home/help/campaign", parentId: "routes/home/help", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaign-GYQ2Z34X.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaigns": { id: "routes/home/help/campaigns", parentId: "routes/home/help", path: "campaigns", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaigns-P4ELF2HJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/forgetpassword": { id: "routes/home/help/forgetpassword", parentId: "routes/home/help", path: "forgetpassword", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/forgetpassword-UFCQ2FVA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/index": { id: "routes/home/help/index", parentId: "routes/home/help", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/help/index-G5TAMEH4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/manage_your_account": { id: "routes/home/help/manage_your_account", parentId: "routes/home/help", path: "manage_your_account", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/manage_your_account-VDXDFOAB.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/payments": { id: "routes/home/help/payments", parentId: "routes/home/help", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/payments-D5LUI37I.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/registration": { id: "routes/home/help/registration", parentId: "routes/home/help", path: "registration", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/registration-UVA6R65N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/rules_and_policies": { id: "routes/home/help/rules_and_policies", parentId: "routes/home/help", path: "rules_and_policies", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/rules_and_policies-FH7KFAOX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/safety_and_security": { id: "routes/home/help/safety_and_security", parentId: "routes/home/help", path: "safety_and_security", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/safety_and_security-TEEN5TCX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/social_media_accounts": { id: "routes/home/help/social_media_accounts", parentId: "routes/home/help", path: "social_media_accounts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/social_media_accounts-VY5VME4W.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/termsandconditions": { id: "routes/home/help/termsandconditions", parentId: "routes/home/help", path: "termsandconditions", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/termsandconditions-WAPCAZMG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/verificaiton": { id: "routes/home/help/verificaiton", parentId: "routes/home/help", path: "verificaiton", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/verificaiton-CLQJJPRA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/inbox": { id: "routes/home/inbox", parentId: "routes/home", path: "inbox", index: void 0, caseSensitive: void 0, module: "/build/routes/home/inbox-QM5VOFTM.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/index": { id: "routes/home/index", parentId: "routes/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/index-W763XKD5.js", imports: ["/build/_shared/chunk-OI46DWYF.js", "/build/_shared/chunk-HONKSBMW.js", "/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/invite": { id: "routes/home/invite", parentId: "routes/home", path: "invite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/invite-WVMDUNGQ.js", imports: ["/build/_shared/chunk-Q34MRYYA.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/mycampaings": { id: "routes/home/mycampaings", parentId: "routes/home", path: "mycampaings", index: void 0, caseSensitive: void 0, module: "/build/routes/home/mycampaings-VYWBVJEU.js", imports: ["/build/_shared/chunk-XVO7H6KS.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/myuser.$id": { id: "routes/home/myuser.$id", parentId: "routes/home", path: "myuser/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/myuser.$id-7JFXLNL2.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js", "/build/_shared/chunk-QOEK7KW7.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/paymentreq.$brandId.$camId.$draftId": { id: "routes/home/paymentreq.$brandId.$camId.$draftId", parentId: "routes/home", path: "paymentreq/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/paymentreq.$brandId.$camId.$draftId-5B536IKA.js", imports: ["/build/_shared/chunk-QOEK7KW7.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete": { id: "routes/home/profilecomplete", parentId: "routes/home", path: "profilecomplete", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete-OOJJWTKP.js", imports: ["/build/_shared/chunk-RAFJ3YWD.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/extrapage": { id: "routes/home/profilecomplete/extrapage", parentId: "routes/home/profilecomplete", path: "extrapage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/extrapage-4RLMH5DA.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/fifthpage": { id: "routes/home/profilecomplete/fifthpage", parentId: "routes/home/profilecomplete", path: "fifthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/fifthpage-HQNCO2W3.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/forthpage": { id: "routes/home/profilecomplete/forthpage", parentId: "routes/home/profilecomplete", path: "forthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/forthpage-EN2QFNPK.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/index": { id: "routes/home/profilecomplete/index", parentId: "routes/home/profilecomplete", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/index-WBIZY4R4.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/secondpage": { id: "routes/home/profilecomplete/secondpage", parentId: "routes/home/profilecomplete", path: "secondpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/secondpage-Q6IMNTOG.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/thirdpage": { id: "routes/home/profilecomplete/thirdpage", parentId: "routes/home/profilecomplete", path: "thirdpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/thirdpage-BC5XDTPC.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profileedit.$id": { id: "routes/home/profileedit.$id", parentId: "routes/home", path: "profileedit/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profileedit.$id-HCJVULAH.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/revenues": { id: "routes/home/revenues", parentId: "routes/home", path: "revenues", index: void 0, caseSensitive: void 0, module: "/build/routes/home/revenues-3SCLEB3I.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/user.$id": { id: "routes/home/user.$id", parentId: "routes/home", path: "user/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/user.$id-JXTGJESB.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/howitworks": { id: "routes/howitworks", parentId: "root", path: "howitworks", index: void 0, caseSensitive: void 0, module: "/build/routes/howitworks-S23EVUZZ.js", imports: ["/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-KPQMSWYZ.js", imports: ["/build/_shared/chunk-L4A72OKS.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-EBAHRKB3.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-UXJK45NY.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/media.$id": { id: "routes/media.$id", parentId: "root", path: "media/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/media.$id-MJVDU442.js", imports: ["/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/bloginfo": { id: "routes/news/bloginfo", parentId: "root", path: "news/bloginfo", index: void 0, caseSensitive: void 0, module: "/build/routes/news/bloginfo-H4YIQNZG.js", imports: ["/build/_shared/chunk-UIJVHUWO.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/index": { id: "routes/news/index", parentId: "root", path: "news", index: !0, caseSensitive: void 0, module: "/build/routes/news/index-YRLHCAFR.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notablebrand": { id: "routes/notablebrand", parentId: "root", path: "notablebrand", index: void 0, caseSensitive: void 0, module: "/build/routes/notablebrand-5LRBH4YL.js", imports: ["/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notableinf": { id: "routes/notableinf", parentId: "root", path: "notableinf", index: void 0, caseSensitive: void 0, module: "/build/routes/notableinf-B4RK7U3H.js", imports: ["/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/pp": { id: "routes/pp", parentId: "root", path: "pp", index: void 0, caseSensitive: void 0, module: "/build/routes/pp-T7GJJQGC.js", imports: ["/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/register": { id: "routes/register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/register-KQC6MKEL.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/sorry": { id: "routes/sorry", parentId: "root", path: "sorry", index: void 0, caseSensitive: void 0, module: "/build/routes/sorry-HNK6ZXYT.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/sorrytwo": { id: "routes/sorrytwo", parentId: "root", path: "sorrytwo", index: void 0, caseSensitive: void 0, module: "/build/routes/sorrytwo-232UVZPK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tos": { id: "routes/tos", parentId: "root", path: "tos", index: void 0, caseSensitive: void 0, module: "/build/routes/tos-EHJWNMFN.js", imports: ["/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/index": { id: "routes/users/index", parentId: "root", path: "users", index: !0, caseSensitive: void 0, module: "/build/routes/users/index-34D53BHS.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/instagrams": { id: "routes/users/instagrams", parentId: "root", path: "users/instagrams", index: void 0, caseSensitive: void 0, module: "/build/routes/users/instagrams-YN6GM7EC.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/youtubers": { id: "routes/users/youtubers", parentId: "root", path: "users/youtubers", index: void 0, caseSensitive: void 0, module: "/build/routes/users/youtubers-QEZZPRKY.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-LH6OWQHU.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/verifyuser.$mail": { id: "routes/verifyuser.$mail", parentId: "root", path: "verifyuser/:mail", index: void 0, caseSensitive: void 0, module: "/build/routes/verifyuser.$mail-4BXOKF5E.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/welcome.$email": { id: "routes/welcome.$email", parentId: "root", path: "welcome/:email", index: void 0, caseSensitive: void 0, module: "/build/routes/welcome.$email-DJH2EUKY.js", imports: ["/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/whatyouget": { id: "routes/whatyouget", parentId: "root", path: "whatyouget", index: void 0, caseSensitive: void 0, module: "/build/routes/whatyouget-K2MZQ6ER.js", imports: ["/build/_shared/chunk-JK4HYEAQ.js", "/build/_shared/chunk-WNLW2SIK.js", "/build/_shared/chunk-333JUQ2I.js", "/build/_shared/chunk-WML2SMV7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-439AF0D3.js" };
+var assets_manifest_default = { version: "838180e7", entry: { module: "/build/entry.client-RNLIXFOM.js", imports: ["/build/_shared/chunk-GXGHFQ2S.js", "/build/_shared/chunk-5CHSURAX.js", "/build/_shared/chunk-QUEIQGSW.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-EN6MBMIJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !0, hasErrorBoundary: !0 }, "routes/about": { id: "routes/about", parentId: "root", path: "about", index: void 0, caseSensitive: void 0, module: "/build/routes/about-V3RZYAYB.js", imports: ["/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home": { id: "routes/admin/home", parentId: "root", path: "admin/home", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home-2M374JBO.js", imports: ["/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/blognews": { id: "routes/admin/home/blognews", parentId: "routes/admin/home", path: "blognews", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/blognews-LRQIHRYN.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/brand": { id: "routes/admin/home/brand", parentId: "routes/admin/home", path: "brand", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/brand-HVPBSYX2.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaign": { id: "routes/admin/home/campaign", parentId: "routes/admin/home", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaign-HW6ETTGB.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/campaigntype": { id: "routes/admin/home/campaigntype", parentId: "routes/admin/home", path: "campaigntype", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/campaigntype-T75RCHAQ.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/category": { id: "routes/admin/home/category", parentId: "routes/admin/home", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/category-57AHEKES.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/city": { id: "routes/admin/home/city", parentId: "routes/admin/home", path: "city", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/city-TAYZQWQW.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/contact": { id: "routes/admin/home/contact", parentId: "routes/admin/home", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/contact-H75YEJET.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/country": { id: "routes/admin/home/country", parentId: "routes/admin/home", path: "country", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/country-VAB7QLG2.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/currency": { id: "routes/admin/home/currency", parentId: "routes/admin/home", path: "currency", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/currency-RO72GSEB.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/dispute": { id: "routes/admin/home/dispute", parentId: "routes/admin/home", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/dispute-LT7ULHQD.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/editbrand.$id": { id: "routes/admin/home/editbrand.$id", parentId: "routes/admin/home", path: "editbrand/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/editbrand.$id-O2MMRB5B.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/editcampaign.$id": { id: "routes/admin/home/editcampaign.$id", parentId: "routes/admin/home", path: "editcampaign/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/editcampaign.$id-YGCWD7UF.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/home": { id: "routes/admin/home/home", parentId: "routes/admin/home", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/home-MRJGD2EI.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/index": { id: "routes/admin/home/index", parentId: "routes/admin/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/admin/home/index-7TOWQGNS.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/language": { id: "routes/admin/home/language", parentId: "routes/admin/home", path: "language", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/language-MEWC3J6C.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/market": { id: "routes/admin/home/market", parentId: "routes/admin/home", path: "market", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/market-GNL7TFZY.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/platforms": { id: "routes/admin/home/platforms", parentId: "routes/admin/home", path: "platforms", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/platforms-KORHWKTX.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/state": { id: "routes/admin/home/state", parentId: "routes/admin/home", path: "state", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/state-6QTK6O6W.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/support": { id: "routes/admin/home/support", parentId: "routes/admin/home", path: "support", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/support-MSWIU2IW.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/team": { id: "routes/admin/home/team", parentId: "routes/admin/home", path: "team", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/team-5AQXICZP.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/user": { id: "routes/admin/home/user", parentId: "routes/admin/home", path: "user", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/user-Z55B6ZAB.js", imports: ["/build/_shared/chunk-3ZBFQDQ5.js", "/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/home/userhandel.$id": { id: "routes/admin/home/userhandel.$id", parentId: "routes/admin/home", path: "userhandel/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/admin/home/userhandel.$id-TOJSYYKP.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/admin/index": { id: "routes/admin/index", parentId: "root", path: "admin", index: !0, caseSensitive: void 0, module: "/build/routes/admin/index-RYQGC7YZ.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogin": { id: "routes/adminlogin", parentId: "root", path: "adminlogin", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogin-VCAMQE6E.js", imports: ["/build/_shared/chunk-5SSIYQM7.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/adminlogout": { id: "routes/adminlogout", parentId: "root", path: "adminlogout", index: void 0, caseSensitive: void 0, module: "/build/routes/adminlogout-7UEGTPTC.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/bloginfo.$id": { id: "routes/blogs/bloginfo.$id", parentId: "root", path: "blogs/bloginfo/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/blogs/bloginfo.$id-AHOJFLRC.js", imports: ["/build/_shared/chunk-UQPKXHCM.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/blogs/index": { id: "routes/blogs/index", parentId: "root", path: "blogs", index: !0, caseSensitive: void 0, module: "/build/routes/blogs/index-RBLORTD2.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/contact": { id: "routes/contact", parentId: "root", path: "contact", index: void 0, caseSensitive: void 0, module: "/build/routes/contact-AZIWN2Z3.js", imports: ["/build/_shared/chunk-J76DZPO4.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/createbrand": { id: "routes/createbrand", parentId: "root", path: "createbrand", index: void 0, caseSensitive: void 0, module: "/build/routes/createbrand-OJVJII3A.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/dispute": { id: "routes/dispute", parentId: "root", path: "dispute", index: void 0, caseSensitive: void 0, module: "/build/routes/dispute-N7GNXNSQ.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/sociallogin.$id": { id: "routes/extra/sociallogin.$id", parentId: "root", path: "extra/sociallogin/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/sociallogin.$id-XHHF22MT.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/extra/socialregister.$id": { id: "routes/extra/socialregister.$id", parentId: "root", path: "extra/socialregister/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/extra/socialregister.$id-EOKNY7ZN.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/faq": { id: "routes/faq", parentId: "root", path: "faq", index: void 0, caseSensitive: void 0, module: "/build/routes/faq-OTCFX7EL.js", imports: ["/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home": { id: "routes/home", parentId: "root", path: "home", index: void 0, caseSensitive: void 0, module: "/build/routes/home-WIUDGRXC.js", imports: ["/build/_shared/chunk-5P2FELRT.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brand.$id": { id: "routes/home/brand.$id", parentId: "routes/home", path: "brand/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brand.$id-5X3MIPZU.js", imports: ["/build/_shared/chunk-ZCZIAV77.js", "/build/_shared/chunk-VYXXCYSJ.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brandedit.$id": { id: "routes/home/brandedit.$id", parentId: "routes/home", path: "brandedit/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brandedit.$id-IBXPEB6Z.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/brandpay.$brandId.$camId.$draftId": { id: "routes/home/brandpay.$brandId.$camId.$draftId", parentId: "routes/home", path: "brandpay/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/brandpay.$brandId.$camId.$draftId-Q42SIFJD.js", imports: ["/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser": { id: "routes/home/branduser", parentId: "routes/home", path: "branduser", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser-DRKIJJ2G.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/index": { id: "routes/home/branduser/index", parentId: "routes/home/branduser", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/branduser/index-FZTA3W4C.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/influencers": { id: "routes/home/branduser/influencers", parentId: "routes/home/branduser", path: "influencers", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/influencers-OJSEWKBS.js", imports: ["/build/_shared/chunk-ZGSMKTST.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/branduser/payments": { id: "routes/home/branduser/payments", parentId: "routes/home/branduser", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/branduser/payments-J3A2APCO.js", imports: ["/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/campaigns.$id": { id: "routes/home/campaigns.$id", parentId: "routes/home", path: "campaigns/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/campaigns.$id-EE3E3DPV.js", imports: ["/build/_shared/chunk-ZCZIAV77.js", "/build/_shared/chunk-VYXXCYSJ.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-P4HVA5I3.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign": { id: "routes/home/createcampaign", parentId: "routes/home", path: "createcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign-OQEVYFVA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/index": { id: "routes/home/createcampaign/index", parentId: "routes/home/createcampaign", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/index-BL7MDUJB.js", imports: ["/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/inviteinf.$camp": { id: "routes/home/createcampaign/inviteinf.$camp", parentId: "routes/home/createcampaign", path: "inviteinf/:camp", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/inviteinf.$camp-SYWNS72K.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/spbd": { id: "routes/home/createcampaign/spbd", parentId: "routes/home/createcampaign", path: "spbd", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/spbd-C6LZSQRG.js", imports: ["/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step2": { id: "routes/home/createcampaign/step2", parentId: "routes/home/createcampaign", path: "step2", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step2-QW6IJBQS.js", imports: ["/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step3": { id: "routes/home/createcampaign/step3", parentId: "routes/home/createcampaign", path: "step3", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step3-EQK5J7NC.js", imports: ["/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step4": { id: "routes/home/createcampaign/step4", parentId: "routes/home/createcampaign", path: "step4", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step4-GHFFZWMO.js", imports: ["/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step5": { id: "routes/home/createcampaign/step5", parentId: "routes/home/createcampaign", path: "step5", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step5-7LNG2JT6.js", imports: ["/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/createcampaign/step6": { id: "routes/home/createcampaign/step6", parentId: "routes/home/createcampaign", path: "step6", index: void 0, caseSensitive: void 0, module: "/build/routes/home/createcampaign/step6-KLHLV2FG.js", imports: ["/build/_shared/chunk-XEOMBC3Z.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/drafts": { id: "routes/home/drafts", parentId: "routes/home", path: "drafts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/drafts-GPVRCEZG.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/empty": { id: "routes/home/empty", parentId: "routes/home", path: "empty", index: void 0, caseSensitive: void 0, module: "/build/routes/home/empty-WTGW75L2.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/favourite": { id: "routes/home/favourite", parentId: "routes/home", path: "favourite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/favourite-AIQ6SL2Z.js", imports: ["/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/findcampaign": { id: "routes/home/findcampaign", parentId: "routes/home", path: "findcampaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/findcampaign-F2FKMC7J.js", imports: ["/build/_shared/chunk-NOVVXXKQ.js", "/build/_shared/chunk-ZGSMKTST.js", "/build/_shared/chunk-VYXXCYSJ.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help": { id: "routes/home/help", parentId: "routes/home", path: "help", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help-TN726JDP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/analytics": { id: "routes/home/help/analytics", parentId: "routes/home/help", path: "analytics", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/analytics-U4DBWR73.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/brands": { id: "routes/home/help/brands", parentId: "routes/home/help", path: "brands", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/brands-FD6RTH4J.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaign": { id: "routes/home/help/campaign", parentId: "routes/home/help", path: "campaign", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaign-GYQ2Z34X.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/campaigns": { id: "routes/home/help/campaigns", parentId: "routes/home/help", path: "campaigns", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/campaigns-P4ELF2HJ.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/forgetpassword": { id: "routes/home/help/forgetpassword", parentId: "routes/home/help", path: "forgetpassword", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/forgetpassword-UFCQ2FVA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/index": { id: "routes/home/help/index", parentId: "routes/home/help", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/help/index-YHLWVHG4.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/manage_your_account": { id: "routes/home/help/manage_your_account", parentId: "routes/home/help", path: "manage_your_account", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/manage_your_account-VDXDFOAB.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/payments": { id: "routes/home/help/payments", parentId: "routes/home/help", path: "payments", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/payments-D5LUI37I.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/registration": { id: "routes/home/help/registration", parentId: "routes/home/help", path: "registration", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/registration-UVA6R65N.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/rules_and_policies": { id: "routes/home/help/rules_and_policies", parentId: "routes/home/help", path: "rules_and_policies", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/rules_and_policies-FH7KFAOX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/safety_and_security": { id: "routes/home/help/safety_and_security", parentId: "routes/home/help", path: "safety_and_security", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/safety_and_security-TEEN5TCX.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/social_media_accounts": { id: "routes/home/help/social_media_accounts", parentId: "routes/home/help", path: "social_media_accounts", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/social_media_accounts-VY5VME4W.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/termsandconditions": { id: "routes/home/help/termsandconditions", parentId: "routes/home/help", path: "termsandconditions", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/termsandconditions-WAPCAZMG.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/help/verificaiton": { id: "routes/home/help/verificaiton", parentId: "routes/home/help", path: "verificaiton", index: void 0, caseSensitive: void 0, module: "/build/routes/home/help/verificaiton-CLQJJPRA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/inbox": { id: "routes/home/inbox", parentId: "routes/home", path: "inbox", index: void 0, caseSensitive: void 0, module: "/build/routes/home/inbox-2X44DJDS.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/index": { id: "routes/home/index", parentId: "routes/home", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/index-ZSDWOU7E.js", imports: ["/build/_shared/chunk-NOVVXXKQ.js", "/build/_shared/chunk-ZGSMKTST.js", "/build/_shared/chunk-VYXXCYSJ.js", "/build/_shared/chunk-2QADXOD2.js", "/build/_shared/chunk-IUMXW2I4.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/invite": { id: "routes/home/invite", parentId: "routes/home", path: "invite", index: void 0, caseSensitive: void 0, module: "/build/routes/home/invite-F422YKEJ.js", imports: ["/build/_shared/chunk-Q34MRYYA.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/mycampaings": { id: "routes/home/mycampaings", parentId: "routes/home", path: "mycampaings", index: void 0, caseSensitive: void 0, module: "/build/routes/home/mycampaings-SDTE7ME5.js", imports: ["/build/_shared/chunk-VYXXCYSJ.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/myuser.$id": { id: "routes/home/myuser.$id", parentId: "routes/home", path: "myuser/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/myuser.$id-2IL5XJE5.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js", "/build/_shared/chunk-QOEK7KW7.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/paymentreq.$brandId.$camId.$draftId": { id: "routes/home/paymentreq.$brandId.$camId.$draftId", parentId: "routes/home", path: "paymentreq/:brandId/:camId/:draftId", index: void 0, caseSensitive: void 0, module: "/build/routes/home/paymentreq.$brandId.$camId.$draftId-E54ZU4XH.js", imports: ["/build/_shared/chunk-QOEK7KW7.js", "/build/_shared/chunk-7HWNPYKE.js", "/build/_shared/chunk-C3FEWCCA.js", "/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete": { id: "routes/home/profilecomplete", parentId: "routes/home", path: "profilecomplete", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete-U3H3BAGS.js", imports: ["/build/_shared/chunk-HFV4KY2K.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/extrapage": { id: "routes/home/profilecomplete/extrapage", parentId: "routes/home/profilecomplete", path: "extrapage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/extrapage-S2WZKER2.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/fifthpage": { id: "routes/home/profilecomplete/fifthpage", parentId: "routes/home/profilecomplete", path: "fifthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/fifthpage-6MPK7X4V.js", imports: ["/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/forthpage": { id: "routes/home/profilecomplete/forthpage", parentId: "routes/home/profilecomplete", path: "forthpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/forthpage-URWSSZZG.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/index": { id: "routes/home/profilecomplete/index", parentId: "routes/home/profilecomplete", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/index-FIWZ4DPV.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-PDFW6BIG.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/secondpage": { id: "routes/home/profilecomplete/secondpage", parentId: "routes/home/profilecomplete", path: "secondpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/secondpage-DIZFU6DB.js", imports: ["/build/_shared/chunk-ZST3SBXF.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profilecomplete/thirdpage": { id: "routes/home/profilecomplete/thirdpage", parentId: "routes/home/profilecomplete", path: "thirdpage", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profilecomplete/thirdpage-QVZ5BY77.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/profileedit.$id": { id: "routes/home/profileedit.$id", parentId: "routes/home", path: "profileedit/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/profileedit.$id-XFDLVOUN.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/revenues": { id: "routes/home/revenues", parentId: "routes/home", path: "revenues", index: void 0, caseSensitive: void 0, module: "/build/routes/home/revenues-KPJ7DCXW.js", imports: ["/build/_shared/chunk-Z5KJWFQJ.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/home/user.$id": { id: "routes/home/user.$id", parentId: "routes/home", path: "user/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/home/user.$id-XS4AU4KC.js", imports: ["/build/_shared/chunk-RSD5VZ6D.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/howitworks": { id: "routes/howitworks", parentId: "root", path: "howitworks", index: void 0, caseSensitive: void 0, module: "/build/routes/howitworks-LDIM3WEL.js", imports: ["/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-F3GKHOZY.js", imports: ["/build/_shared/chunk-J76DZPO4.js", "/build/_shared/chunk-COPH3TPG.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-KMT47T4Z.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-Q34MRYYA.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/logout": { id: "routes/logout", parentId: "root", path: "logout", index: void 0, caseSensitive: void 0, module: "/build/routes/logout-UXJK45NY.js", imports: void 0, hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/media.$id": { id: "routes/media.$id", parentId: "root", path: "media/:id", index: void 0, caseSensitive: void 0, module: "/build/routes/media.$id-FNWPJW2M.js", imports: ["/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/bloginfo": { id: "routes/news/bloginfo", parentId: "root", path: "news/bloginfo", index: void 0, caseSensitive: void 0, module: "/build/routes/news/bloginfo-H67BP7F6.js", imports: ["/build/_shared/chunk-UQPKXHCM.js", "/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/news/index": { id: "routes/news/index", parentId: "root", path: "news", index: !0, caseSensitive: void 0, module: "/build/routes/news/index-IIZAQAHD.js", imports: ["/build/_shared/chunk-YG3AGZIF.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notablebrand": { id: "routes/notablebrand", parentId: "root", path: "notablebrand", index: void 0, caseSensitive: void 0, module: "/build/routes/notablebrand-Z6PT7T3L.js", imports: ["/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/notableinf": { id: "routes/notableinf", parentId: "root", path: "notableinf", index: void 0, caseSensitive: void 0, module: "/build/routes/notableinf-QEV4AYPO.js", imports: ["/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/pp": { id: "routes/pp", parentId: "root", path: "pp", index: void 0, caseSensitive: void 0, module: "/build/routes/pp-5NZXXQVZ.js", imports: ["/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/register": { id: "routes/register", parentId: "root", path: "register", index: void 0, caseSensitive: void 0, module: "/build/routes/register-BCQ2KCF6.js", imports: ["/build/_shared/chunk-IZVZA2LJ.js", "/build/_shared/chunk-RSD5VZ6D.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !0, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/sorry": { id: "routes/sorry", parentId: "root", path: "sorry", index: void 0, caseSensitive: void 0, module: "/build/routes/sorry-YCRSDJBI.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/sorrytwo": { id: "routes/sorrytwo", parentId: "root", path: "sorrytwo", index: void 0, caseSensitive: void 0, module: "/build/routes/sorrytwo-EBGKVOQB.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/tos": { id: "routes/tos", parentId: "root", path: "tos", index: void 0, caseSensitive: void 0, module: "/build/routes/tos-BMTPQN54.js", imports: ["/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/index": { id: "routes/users/index", parentId: "root", path: "users", index: !0, caseSensitive: void 0, module: "/build/routes/users/index-6ZWQSPNB.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/instagrams": { id: "routes/users/instagrams", parentId: "root", path: "users/instagrams", index: void 0, caseSensitive: void 0, module: "/build/routes/users/instagrams-SWPGM5GR.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/users/youtubers": { id: "routes/users/youtubers", parentId: "root", path: "users/youtubers", index: void 0, caseSensitive: void 0, module: "/build/routes/users/youtubers-SHA23OZB.js", imports: ["/build/_shared/chunk-7EZZKFIU.js", "/build/_shared/chunk-OBK3AXB3.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js", "/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/verifyuser.$mail": { id: "routes/verifyuser.$mail", parentId: "root", path: "verifyuser/:mail", index: void 0, caseSensitive: void 0, module: "/build/routes/verifyuser.$mail-ZCM2UX43.js", imports: ["/build/_shared/chunk-Z6G3P7XF.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/welcome.$email": { id: "routes/welcome.$email", parentId: "root", path: "welcome/:email", index: void 0, caseSensitive: void 0, module: "/build/routes/welcome.$email-IL7HE6Q5.js", imports: ["/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/whatyouget": { id: "routes/whatyouget", parentId: "root", path: "whatyouget", index: void 0, caseSensitive: void 0, module: "/build/routes/whatyouget-ITKNIV3Z.js", imports: ["/build/_shared/chunk-ZNAHR6JM.js", "/build/_shared/chunk-527BM5RX.js", "/build/_shared/chunk-3F3TBTM2.js", "/build/_shared/chunk-CNTCBH2R.js", "/build/_shared/chunk-UBTZ3VBL.js", "/build/_shared/chunk-FAKKKSA7.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-838180E7.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public\\build", future = { v2_meta: !1 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

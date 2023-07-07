@@ -12,7 +12,7 @@ import { Completed, Connection, Rating } from "./brand.$id";
 import { LoaderArgs, LoaderFunction, json } from "@remix-run/node";
 import axios from "axios";
 import { BaseUrl } from "~/const";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useNavigate } from "@remix-run/react";
 import { UploadFile, getCampaignType } from "~/utils";
 import { userPrefs } from "~/cookies";
 
@@ -1851,6 +1851,7 @@ const ChampaingPaymentRequest = (props: ChampaingPaymentRequestProps) => {
 
   const [error, setError] = useState<string | null>(null);
   const [id, setId] = useState<string | null>(null);
+  const navigator = useNavigate();
 
   const init = async () => {
     let req = {
@@ -2293,7 +2294,9 @@ type SnapshotCreatedDraftsProps = {
 
 const SnapshopCreatedDrafts: React.FC<SnapshotCreatedDraftsProps> = (props: SnapshotCreatedDraftsProps) => {
   const [resDarft, setResDarft] = useState<any[]>([]);
+  const navigator = useNavigate();
 
+  const [error, setError] = useState<String>("");
   const init = async () => {
     let req: any = {
       search: {
@@ -2385,8 +2388,6 @@ const SnapshopCreatedDrafts: React.FC<SnapshotCreatedDraftsProps> = (props: Snap
                         <p className="text-sm font-medium">{val.status.message}</p>
                       </>
                       : null}
-
-
                     <p className="mt-2 text-md font-medium">Status</p>
                     <p
                       className={`mt-2 text-md text-white font-medium text-center rounded-md ${val.status.name == "ACCEPTED"
@@ -2398,12 +2399,24 @@ const SnapshopCreatedDrafts: React.FC<SnapshotCreatedDraftsProps> = (props: Snap
                     >
                       {val.status.name}
                     </p>
-
                     {val.status.name == "ACCEPTED" ?
-                      <Link className="text-white py-1 w-full bg-cyan-500 cursor-pointer inline-block text-center mt-4 rounded-md" to={`/home/brandpay/${props.brandid}/${props.campaingid}/${val.id}`}>View Details</Link>
-                      : null}
-
-
+                      <button
+                        onClick={() => {
+                          if (resDarft[0].linkCampaign == null || resDarft[0].linkCampaign == undefined || resDarft[0].linkCampaign == "") {
+                            setError((val) => "First link your campaign.");
+                          } else {
+                            navigator(`/home/brandpay/${props.brandid}/${props.campaingid}/${val.id}`);
+                          }
+                        }}
+                        className="text-white py-1 w-full bg-cyan-500 cursor-pointer inline-block text-center mt-4 rounded-md">View Details</button>
+                      :
+                      null
+                    }
+                    {error == "" || error == null || error == undefined ? null : (
+                      <div className="bg-red-500 bg-opacity-10 border-2 text-center border-red-500 rounded-md text-red-500 text-md font-normal text-md my-4">
+                        {error}
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -2600,9 +2613,14 @@ const Bidding: React.FC<BiddingProps> = (props: BiddingProps): JSX.Element => {
       setError("Fill the Bid amount.");
     } else if (Number(bidamount) % 100 !== 0) {
       setError("Bid amount must be a multiple of 100.");
-    } else if (Number(amount) < Number(bidamount)) {
+    }
+    else if (Number(props.CostPerPost) * 1.25 < Number(bidamount)) {
       setError("Bid amount must be less then current bid amount.");
-    } else if (
+    }
+    // else if (Number(amount) < Number(bidamount)) {
+    //   setError("Bid amount must be less then current bid amount.");
+    // }
+    else if (
       messageRef.current?.value == null ||
       messageRef.current?.value == undefined ||
       messageRef.current?.value == ""
